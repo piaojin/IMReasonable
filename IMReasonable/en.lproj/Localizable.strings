@@ -9,7 +9,10 @@
 "lab"="I love you";
 "demo" = "this is a demo";
 
-
+//通讯录
+"INVITE_ALL_FRIENDS_COMPLETE"="Invite all friends complete";
+"lbinvitation"="Invitation All";
+"lbissureinvitation"="Invite all friends";
 /////////////////////////////////////////////////////////////////////////////////
 //ALl
 "msgInternet"="Network is not connected";

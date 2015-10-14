@@ -1,4 +1,4 @@
-//
+
 //  FavoritesViewController.m
 //  IMReasonable
 //
@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 Reasonable. All rights reserved.
 //
 
+#import "PJSendInviteHttpTool.h"
+#import "ContactsTool.h"
 #import "ContactsViewController.h"
 #import "AppDelegate.h"
 #import "ChatUserTableViewCell.h"
@@ -20,6 +22,9 @@
 #import "AnimationHelper.h"
 #import <MessageUI/MessageUI.h>
 
+#define INVITE 0//确定群邀
+#define INVITE_ALL_FRIENDS_COMPLETE @"INVITE_ALL_FRIENDS_COMPLETE"
+
 @interface ContactsViewController ()
 {
     UITableView *tableview;
@@ -31,7 +36,6 @@
      UISearchDisplayController *searchDisplayController;
     UIActivityIndicatorView * at;
 }
-
 @end
 
 @implementation ContactsViewController
@@ -118,10 +122,59 @@
     UIBarButtonItem* leftitem=[[UIBarButtonItem alloc]initWithCustomView:at];
     self.navigationItem.leftBarButtonItem=leftitem;
     self.navigationItem.title=NSLocalizedString(@"lbcontacts",nil);
+    //添加群邀按钮
+    UIBarButtonItem *contactsRightBarButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(Invitation)];
+    self.navigationItem.rightBarButtonItem=contactsRightBarButton;
     
     
 //    UIBarButtonItem * right=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addpeople:)];
 //    self.navigationItem.rightBarButtonItem=right;
+}
+
+//群邀
+-(void)Invitation{
+    if(iOS(8)){
+        
+        [self InvitationFriendsForHeightSys];
+    }else{
+        
+        [self InvitationFriends];
+    }
+}
+
+-(void)InvitationFriendsForHeightSys{
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"lbinvitation",nil)
+                                                                             message:NSLocalizedString(@"lbissureinvitation",nil) preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"btnDone",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        //确定群邀
+        
+        [self didInvitationAllFriends];
+    }]];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+-(void)InvitationFriends{
+    UIAlertView* myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbinvitation",nil) message:NSLocalizedString(@"lbissureinvitation",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btnDone",nil) otherButtonTitles:NSLocalizedString(@"lbTCancle",nil), nil];
+    [myAlertView show];
+}
+
+#pragma mark -uialertview代理
+- (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    //确定群邀
+    if(buttonIndex==INVITE){
+        
+        [self didInvitationAllFriends];
+    }
+}
+
+//发送群邀
+-(void)didInvitationAllFriends{
+     [ContactsTool DidInviteAllFriends];
 }
 
 - (void)addpeople:(UIBarButtonItem*) btn
@@ -253,11 +306,6 @@
         
     }
 }
-
-
-
-
-
 
 
 #pragma mark-系统联系人回调
@@ -431,15 +479,10 @@
     }else{
        cell.invite.hidden=YES;
     }
-
-    
     return cell;
     }
     
 }
-
-
-
 
 #pragma mark - searchdelegate
 
@@ -463,8 +506,6 @@
          chatuserlist=[IMReasonableDao getFavoriteslistModle];
          [tableview reloadData];
     }
-    
-
 }
 
 - (BOOL) searchDisplayController:(UISearchDisplayController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption
@@ -497,7 +538,7 @@
 
 - (void)SendInvite:(NSMutableArray *)alluser
 {
-    
+ 
     NSString* phone= [[[[NSUserDefaults standardUserDefaults] objectForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
     
     NSURL *url = [NSURL URLWithString:  [Tool Append:IMReasonableAPP witnstring:@"SendInvitationSMS"]];
@@ -519,7 +560,6 @@
         [request setDidFailSelector:@selector(sendInviteFaied:)];
         [request startAsynchronous];
     }
-    
 }
 
 - (void) sendInviteSuc:(ASIHTTPRequest *) req{
@@ -552,28 +592,13 @@
                 [IMReasonableDao  updateUserIsLocal:indata];
                 
             }
-            
-            
         }
-       
-        
          [self initData];
-        
     }
-
-    
-    
 }
+
 - (void) sendInviteFaied:(ASIHTTPRequest *) req{
     [AnimationHelper removeHUD];
-    //[Tool alert:NSLocalizedString(@"lbfasendfaildinvite", nil)];
-    
-//  UIActionSheet * action =  [[UIActionSheet alloc]initWithTitle:nil delegate:(id)self cancelButtonTitle:NSLocalizedString(@"lbTCancle", nil) destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"lbfsms", nil), nil];
-//    
-//    action.tag = 255;
-//    action.actionSheetStyle=UIActionSheetStyleAutomatic;
-//    [action showInView:self.view];
-    
     IMChatListModle *temp=[chatuserlist objectAtIndex:index];
     [self showMessageView:[NSArray arrayWithObjects:temp.phonenumber, nil] title:@"123" body:[self getSMSContent]];
 }
@@ -628,11 +653,6 @@
 
 }
 
-//- (NSString *)getPhoneFaormart:(NSString *)phonenumber{
-//    
-//    
-//}
-
 -(void)showMessageView:(NSArray *)phones title:(NSString *)title body:(NSString *)body
 {
     if( [MFMessageComposeViewController canSendText] )
@@ -680,19 +700,12 @@
 -(void)newMucChat:(UIButton*)btn
 {
 
-//    [[XMPPRoomDao sharedXMPPManager]createRoom:@"VBN"];
-//    [[XMPPRoomDao sharedXMPPManager]InviteUser:@"admin@talk-king.net"];
-//   // [[XMPPRoomDao sharedXMPPManager].xmppRoom fetchMembersList];
-    
     UINavigationController *nav=[[UINavigationController alloc]init];
     NewGroupViewController * newgroup=[[NewGroupViewController alloc]init];
     [nav addChildViewController:newgroup];
     [self presentViewController:nav animated:YES completion:nil];
     
 }
-
-
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -774,23 +787,14 @@
                 
                 }
             }
-            
-            
-            
-            
           }
             
             if (person != NULL) {
                 ABPersonViewController * personViewController = [[ABPersonViewController alloc]init];
                 [personViewController setDisplayedPerson:person];
                 personViewController.allowsEditing =NO;
-                //[self.view addSubview:personViewController.view];
                 [self.navigationController pushViewController:personViewController animated:YES];
-                
             }
-            
-
-    
     }
         
 }

@@ -240,7 +240,11 @@
     NSString* phone = [dict objectForKey:@"phone"];
     NSString* password;
     @try {
-        password = [DesHelper textFromBase64String:[dict objectForKey:@"password"] withKey:IMReasonableDESKey];
+        password=[dict objectForKey:@"password"];
+        if(password!=nil&&![password isEqual:[NSNull null]]&&![password isEqualToString:@""]){
+            
+            password = [DesHelper textFromBase64String:password withKey:IMReasonableDESKey];
+        }
     }
     @catch (NSException* exception) {
         errcode = @"-2";

@@ -14,7 +14,7 @@
 
 @interface ChatViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,WeChatKeyBoardDelegate,WeChatTableViewCellDelegate,ChatHelerpDelegate,FriendreceivemsgDelegate,AuthloginDelegate>
 
-@property (nonatomic,copy) IMChatListModle * from;
+@property (nonatomic,strong) IMChatListModle * from;
 @property (nonatomic,copy) NSString * myjibstr;
 
 @property (nonatomic,copy) NSString * forwardmssage;//转发的信息内容

@@ -8,7 +8,10 @@
 "lab"="我還是很愛你";
 
 
-
+//通讯录
+"INVITE_ALL_FRIENDS_COMPLETE"="群邀完成";
+"lbinvitation"="群邀";
+"lbissureinvitation"="確定邀請所有好友";
 /////////////////////////////////////////////////////////////////////////////////
 //ALl
 "msgInternet"="網絡未連接";

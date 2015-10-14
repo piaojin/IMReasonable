@@ -11,6 +11,6 @@
 #import <AddressBookUI/AddressBookUI.h>
 #import <MessageUI/MessageUI.h>
 
-@interface ContactsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ChatHelerpDelegate,ABPeoplePickerNavigationControllerDelegate,UIActionSheetDelegate,MFMessageComposeViewControllerDelegate,UISearchDisplayDelegate,UISearchBarDelegate>
+@interface ContactsViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,ChatHelerpDelegate,ABPeoplePickerNavigationControllerDelegate,UIActionSheetDelegate,MFMessageComposeViewControllerDelegate,UISearchDisplayDelegate,UISearchBarDelegate,UIAlertViewDelegate>
 
 @end
