@@ -33,7 +33,6 @@
 		18CE61C31A677B1900E45D36 /* CountryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18CE61C21A677B1900E45D36 /* CountryList.plist */; };
 		CA64A5A81BCCB58400DA4ED7 /* ContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5AD1BCD0F8600DA4ED7 /* PJBaseHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5AC1BCD0F8600DA4ED7 /* PJBaseHttpTool.m */; settings = {ASSET_TAGS = (); }; };
-		CA64A5B01BCD10AB00DA4ED7 /* PJHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5AF1BCD10AB00DA4ED7 /* PJHttpTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5B31BCD126200DA4ED7 /* PJSendInviteHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5B21BCD126200DA4ED7 /* PJSendInviteHttpTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5C81BCD190000DA4ED7 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5B61BCD190000DA4ED7 /* AFHTTPRequestOperation.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5C91BCD190000DA4ED7 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5B81BCD190000DA4ED7 /* AFHTTPRequestOperationManager.m */; settings = {ASSET_TAGS = (); }; };
@@ -539,6 +538,7 @@
 		CAB997B51BB3A8B900661AB7 /* loginUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997AF1BB3A8B900661AB7 /* loginUserData.m */; settings = {ASSET_TAGS = (); }; };
 		CAB997B61BB3A8B900661AB7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B11BB3A8B900661AB7 /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAB997BA1BB3A8D000661AB7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B91BB3A8D000661AB7 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CAE272891BCF516800D619D8 /* SendEmailInvitationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -594,8 +594,6 @@
 		CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTool.m; path = Main/Tools/ContactsTool.m; sourceTree = "<group>"; };
 		CA64A5AB1BCD0F8600DA4ED7 /* PJBaseHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJBaseHttpTool.h; path = Main/Tools/PJBaseHttpTool.h; sourceTree = "<group>"; };
 		CA64A5AC1BCD0F8600DA4ED7 /* PJBaseHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJBaseHttpTool.m; path = Main/Tools/PJBaseHttpTool.m; sourceTree = "<group>"; };
-		CA64A5AE1BCD10AB00DA4ED7 /* PJHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJHttpTool.h; path = Main/Tools/PJHttpTool.h; sourceTree = "<group>"; };
-		CA64A5AF1BCD10AB00DA4ED7 /* PJHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJHttpTool.m; path = Main/Tools/PJHttpTool.m; sourceTree = "<group>"; };
 		CA64A5B11BCD126200DA4ED7 /* PJSendInviteHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJSendInviteHttpTool.h; path = Main/Tools/PJSendInviteHttpTool.h; sourceTree = "<group>"; };
 		CA64A5B21BCD126200DA4ED7 /* PJSendInviteHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJSendInviteHttpTool.m; path = Main/Tools/PJSendInviteHttpTool.m; sourceTree = "<group>"; };
 		CA64A5B51BCD190000DA4ED7 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFHTTPRequestOperation.h; path = Main/Libs/AFNetworking/AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -1404,6 +1402,8 @@
 		CAB997B11BB3A8B900661AB7 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Message.m; path = Main/Model/Message.m; sourceTree = "<group>"; };
 		CAB997B81BB3A8D000661AB7 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Main/Control/MainViewController.h; sourceTree = "<group>"; };
 		CAB997B91BB3A8D000661AB7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Main/Control/MainViewController.m; sourceTree = "<group>"; };
+		CAE272871BCF516800D619D8 /* SendEmailInvitationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendEmailInvitationEntity.h; path = Main/Model/SendEmailInvitationEntity.h; sourceTree = "<group>"; };
+		CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendEmailInvitationEntity.m; path = Main/Model/SendEmailInvitationEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -3162,6 +3162,8 @@
 				CAB997AF1BB3A8B900661AB7 /* loginUserData.m */,
 				CAB997B01BB3A8B900661AB7 /* Message.h */,
 				CAB997B11BB3A8B900661AB7 /* Message.m */,
+				CAE272871BCF516800D619D8 /* SendEmailInvitationEntity.h */,
+				CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3202,8 +3204,6 @@
 		CAB0DA571BB2824200518F0F /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				CA64A5AE1BCD10AB00DA4ED7 /* PJHttpTool.h */,
-				CA64A5AF1BCD10AB00DA4ED7 /* PJHttpTool.m */,
 				CA64A5AB1BCD0F8600DA4ED7 /* PJBaseHttpTool.h */,
 				CA64A5AC1BCD0F8600DA4ED7 /* PJBaseHttpTool.m */,
 				CAB994451BB39A9900661AB7 /* DesHelper.h */,
@@ -4270,6 +4270,7 @@
 				CAB994F01BB39DC300661AB7 /* XMPPResourceCoreDataStorageObject.m in Sources */,
 				CAB9937D1BB3970F00661AB7 /* SelectCountryTableViewCell.m in Sources */,
 				CAB994F31BB39DC300661AB7 /* XMPPUserCoreDataStorageObject.m in Sources */,
+				CAE272891BCF516800D619D8 /* SendEmailInvitationEntity.m in Sources */,
 				CAB996A51BB3A2C300661AB7 /* ASIS3Bucket.m in Sources */,
 				CAB994BD1BB39C3B00661AB7 /* DDContextFilterLogFormatter.m in Sources */,
 				CAB995791BB39F5F00661AB7 /* TURNSocket.m in Sources */,
@@ -4514,7 +4515,6 @@
 				CAB996961BB3A2B600661AB7 /* ASICloudFilesObjectRequest.m in Sources */,
 				CAB996471BB3A22F00661AB7 /* SDWebImageDownloaderOperation.m in Sources */,
 				CAB993271BB3954400661AB7 /* Mp3Recorder.m in Sources */,
-				CA64A5B01BCD10AB00DA4ED7 /* PJHttpTool.m in Sources */,
 				CAB997A61BB3A3C300661AB7 /* RichTextEmojiRun.m in Sources */,
 				CAB993621BB395A800661AB7 /* DetailKeyBoard.m in Sources */,
 				CAB9957E1BB39F6D00661AB7 /* XMPPIQ+XEP_0066.m in Sources */,

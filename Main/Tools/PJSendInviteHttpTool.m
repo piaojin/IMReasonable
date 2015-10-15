@@ -6,6 +6,7 @@
 //  Copyright © 2015年 Reasonable. All rights reserved.
 //
 
+#import "SendEmailInvitationEntity.h"
 #import "PJSendInviteHttpTool.h"
 #import "AFHTTPRequestOperationManager.h"
 #import "PJBaseHttpTool.h"
@@ -29,6 +30,34 @@
 
 //发送邀请短信
 @implementation PJSendInviteHttpTool
+
++(void)SendEmailInviteByPostWithParam:(SendEmailInvitationEntity *)param success:(void (^)(id))success failure:(void (^)(NSError *))failure{
+    if(param){
+        
+        NSString *params=[NSString stringWithFormat:SEND_EMAIL_INVITATION_PARAM,param.LoginEmail,param.Password,param.From,param.FromName,param.To,param.Subject,param.Body];
+        NSLog(@"%@",params);
+            [PJBaseHttpTool Post:SEND_EMAIL_INVITATION_URL WithParam:params success:^(id responseObject) {
+                if(success){
+                    
+                    NSLog(@"responseObject:%@",responseObject);
+                    success(responseObject);
+                }
+            } failure:^(NSError * error) {
+                if(failure){
+                    
+                    failure(error);
+                }
+            }];
+    }else{
+        
+        if(failure){
+            
+            failure([NSError errorWithDomain:PARAMNULLERROR code:CODE userInfo:[NSDictionary dictionaryWithObject:PARAMNULLERROR forKey:ERROR]]
+                    );
+        }
+    }
+}
+
 +(void)SendInviteByPostWithParam:(NSDictionary *)param success:(void (^)(id))success failure:(void (^)(NSError *))failure{
     if(param){
         
@@ -43,6 +72,7 @@
             [PJBaseHttpTool PostWithJson:[Tool Append:IMReasonableAPP witnstring:@"SendInvitationSMS"] WithParam:parameters success:^(id responseObject) {
                 if(success){
                     
+                    NSLog(@"responseObject:%@",responseObject);
                     success(responseObject);
                 }
             } failure:^(NSError * error) {

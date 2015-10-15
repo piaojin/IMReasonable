@@ -6,8 +6,11 @@
 //  Copyright (c) 2014年 Reasonable. All rights reserved.
 //
 
+#import "SendEmailInvitationEntity.h"
+#import "PJSendInviteHttpTool.h"
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "IMReasonable.pch"
 
 @interface IMReasonableTests : XCTestCase
 
@@ -27,13 +30,26 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+    SendEmailInvitationEntity *entity=[[SendEmailInvitationEntity alloc] init];
+    entity.LoginEmail=LOGINEMAIL;
+    entity.Password=PASSWORD;
+    entity.From=FROM;
+    entity.FromName=FROMNAME;
+    entity.To=@"13666902838@163.com";
+    entity.Subject=@"piaojinxgz";
+    entity.Body=@"piaojinxgz";
+    [PJSendInviteHttpTool SendEmailInviteByPostWithParam:entity success:^(id requestObject) {
+        NSLog(@"success");
+    } failure:^(NSError * error) {
+        NSLog(@"NSError:%@",error);
+    }];
+    NSLog(@"piaojinxgz");
 }
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
-        // Put the code you want to measure the time of here.
+        
     }];
 }
 
