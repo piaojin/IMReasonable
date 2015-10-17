@@ -25,6 +25,9 @@
 
 #import "ImgShowViewController.h"
 
+#import "MJPhotoBrowser.h"
+#import "MJPhoto.h"
+
 @implementation ChatViewController {
     //页面需要的控件
     WeChatKeyBoard* key;
@@ -717,6 +720,7 @@
 
 - (void)SelectImage:(NSUInteger)type
 {
+    NSLog(@"SelectImage");
     UIImagePickerController* imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = (id)self;
     imagePickerController.allowsEditing = YES;
@@ -919,19 +923,47 @@
     }
 }
 
+//点击图片事件
 - (void)touchPictureContent:(MessageModel*)modle tableviewcell:(UITableViewCell*)cell
 {
 
+    [key hideKeyboard];
     NSPredicate* pre = [NSPredicate predicateWithFormat:@"type==1"];
 
     NSArray* temp = [[NSArray alloc] initWithArray:messageList copyItems:NO];
+    //获取到所有的图片
     NSArray* arrayPre = [temp filteredArrayUsingPredicate:pre];
+    //被点击的图片的位置
     NSInteger index = [arrayPre indexOfObject:modle];
-    ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
-
-    [self.navigationController pushViewController:imgShow animated:NO];
-    [key hideKeyboard];
+//    ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
+//
+//    [self.navigationController pushViewController:imgShow animated:NO];
+//    [key hideKeyboard];
+    [self ImageBrowser:arrayPre WithShowIndex:index];
 }
+
+//图片浏览器
+-(void)ImageBrowser:(NSArray *)MessageModelArray WithShowIndex:(NSInteger)index{
+//    UIImageView *imageview=[[UIImageView alloc] init];
+//    imageview.frame=CGRectMake(self.view.center.x,self.view.center.y, 0, 0);
+    NSMutableArray *photoarray=[NSMutableArray array];
+    for(MessageModel *photoModel in MessageModelArray){
+        NSString *  imagePath = [photoModel.content stringByReplacingOccurrencesOfString:@"Small" withString:@""];
+        NSString *imageURL=[Tool Append:IMReasonableAPPImagePath witnstring:imagePath];
+        UIImage * image=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:photoModel.content]];
+        MJPhoto *photo=[[MJPhoto alloc] init];
+//        photo.srcImageView=imageview;
+        photo.url=[NSURL URLWithString:imageURL];
+        photo.image=image;
+        [photoarray addObject:photo];
+    }
+    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = index; // 弹出相册时显示的第一张图片是？
+    browser.photos = photoarray; // 设置所有的图片
+    [browser show];
+
+}
+
 //处理重发事件代理
 - (void)reSendMessage:(MessageModel*)message
 {

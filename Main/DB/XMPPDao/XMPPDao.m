@@ -108,7 +108,7 @@
 {
     XMPPPresence *presence = [XMPPPresence presence]; // type="available" is implicit
     [[self xmppStream] sendElement:presence];
-    NSLog(@"-------%@",presence);
+//    NSLog(@"-------%@",presence);
     [self SendDevicetoken];
     NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
    
@@ -269,7 +269,7 @@
 //获取查询结果的
 - (BOOL)xmppStream:(XMPPStream *)sender didReceiveIQ:(XMPPIQ *)iq
 {
-    NSLog(@"didReceiveIQ ==%@",iq);
+    //NSLog(@"didReceiveIQ ==%@",iq);
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
         [self doIQ:iq];
     });
@@ -441,9 +441,9 @@
 - (void)xmppStream:(XMPPStream *)sender didReceiveMessage:(XMPPMessage *)message
 {
     
-    NSLog(@"%@",message.fromStr);
+    //NSLog(@"%@",message.fromStr);
     
-    NSLog(@"收到好友消息***************************************%@",message);
+    //NSLog(@"收到好友消息***************************************%@",message);
     
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
          [self doMessage:message];
@@ -959,7 +959,7 @@
 {
     
     //NSLog(@"didReceivePresence 收到状态消息");
-    NSLog(@"%@----------------------------%@-------------------------------%@",presence,presence.fromStr,presence.type);
+//    NSLog(@"%@----------------------------%@-------------------------------%@",presence,presence.fromStr,presence.type);
     
     // NSAssert(![presence.fromStr isEqualToString: @"8613428680545@talk-king.net"], @"b 是 零");
     

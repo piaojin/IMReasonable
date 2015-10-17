@@ -30,19 +30,8 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    SendEmailInvitationEntity *entity=[[SendEmailInvitationEntity alloc] init];
-    entity.LoginEmail=LOGINEMAIL;
-    entity.Password=PASSWORD;
-    entity.From=FROM;
-    entity.FromName=FROMNAME;
-    entity.To=@"13666902838@163.com";
-    entity.Subject=@"piaojinxgz";
-    entity.Body=@"piaojinxgz";
-    [PJSendInviteHttpTool SendEmailInviteByPostWithParam:entity success:^(id requestObject) {
-        NSLog(@"success");
-    } failure:^(NSError * error) {
-        NSLog(@"NSError:%@",error);
-    }];
+//    NSArray *array=[IMReasonableDao getAllactiveUser];
+//    NSLog(@"*************%@**************",array);
     NSLog(@"piaojinxgz");
 }
 

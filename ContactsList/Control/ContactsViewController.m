@@ -104,7 +104,7 @@
 - (void) initData
 {
 
-         chatuserlist=[IMReasonableDao getFavoriteslistModle];
+         chatuserlist=[IMReasonableDao getContactsListModle];
         [self getfilterData];
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -473,7 +473,7 @@
     cell.invite.hidden=YES;
     cell.invite.tag=[indexPath row];
         
-    if (![temp.isloc isEqual:@"1"]) {
+    if (![temp.isloc isEqual:@"1"]) {//显示邀请
             cell.invite.hidden=NO;
         [cell.invite addTarget:self action:@selector(inviteUser:) forControlEvents:UIControlEventTouchUpInside];
     }else{
@@ -503,7 +503,7 @@
         chatuserlist = [NSMutableArray arrayWithArray:[chatuserlist filteredArrayUsingPredicate:predicate]];
     }
     else{
-         chatuserlist=[IMReasonableDao getFavoriteslistModle];
+         chatuserlist=[IMReasonableDao getContactsListModle];
          [tableview reloadData];
     }
 }
@@ -516,7 +516,7 @@
 
 -(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar{
    
-    chatuserlist=[IMReasonableDao getFavoriteslistModle];
+    chatuserlist=[IMReasonableDao getContactsListModle];
     [tableview reloadData];
 }
 

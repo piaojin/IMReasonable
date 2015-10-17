@@ -15,7 +15,7 @@
 		18111EBC1A1E13EE00762075 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18111EBE1A1E13EE00762075 /* InfoPlist.strings */; };
 		18111EC41A1E161500762075 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18111EC61A1E161500762075 /* Localizable.strings */; };
 		181121F31A1EDE9F00762075 /* libresolv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181121F21A1EDE9F00762075 /* libresolv.dylib */; };
-		181121F51A1EDEAA00762075 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181121F41A1EDEAA00762075 /* libxml2.dylib */; };
+		181121F51A1EDEAA00762075 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 181121F41A1EDEAA00762075 /* libxml2.dylib */; settings = {ATTRIBUTES = (Required, ); }; };
 		181121F71A1EDEB200762075 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181121F61A1EDEB200762075 /* Security.framework */; };
 		181121F91A1EDEBE00762075 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181121F81A1EDEBE00762075 /* SystemConfiguration.framework */; };
 		181121FB1A1EDECB00762075 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 181121FA1A1EDECB00762075 /* CoreData.framework */; };
@@ -538,6 +538,14 @@
 		CAB997B51BB3A8B900661AB7 /* loginUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997AF1BB3A8B900661AB7 /* loginUserData.m */; settings = {ASSET_TAGS = (); }; };
 		CAB997B61BB3A8B900661AB7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B11BB3A8B900661AB7 /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAB997BA1BB3A8D000661AB7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B91BB3A8D000661AB7 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010AB1BD10B67000470B3 /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE0109F1BD10B67000470B3 /* MJPhoto.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010AC1BD10B67000470B3 /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CAE010A01BD10B67000470B3 /* MJPhotoBrowser.bundle */; settings = {ASSET_TAGS = (); }; };
+		CAE010AD1BD10B67000470B3 /* MJPhotoBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE010A21BD10B67000470B3 /* MJPhotoBrowser.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010AE1BD10B67000470B3 /* MJPhotoLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE010A41BD10B67000470B3 /* MJPhotoLoadingView.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010AF1BD10B67000470B3 /* MJPhotoProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE010A61BD10B67000470B3 /* MJPhotoProgressView.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010B01BD10B67000470B3 /* MJPhotoToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE010A81BD10B67000470B3 /* MJPhotoToolbar.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010B11BD10B67000470B3 /* MJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE010AA1BD10B67000470B3 /* MJPhotoView.m */; settings = {ASSET_TAGS = (); }; };
+		CAE010BD1BD10EA3000470B3 /* SDWebImageManager+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE010BC1BD10EA3000470B3 /* SDWebImageManager+MJ.m */; settings = {ASSET_TAGS = (); }; };
 		CAE272891BCF516800D619D8 /* SendEmailInvitationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -1402,6 +1410,21 @@
 		CAB997B11BB3A8B900661AB7 /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Message.m; path = Main/Model/Message.m; sourceTree = "<group>"; };
 		CAB997B81BB3A8D000661AB7 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Main/Control/MainViewController.h; sourceTree = "<group>"; };
 		CAB997B91BB3A8D000661AB7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Main/Control/MainViewController.m; sourceTree = "<group>"; };
+		CAE0109E1BD10B67000470B3 /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPhoto.h; path = Main/Libs/MJPhotoBrowser/MJPhoto.h; sourceTree = "<group>"; };
+		CAE0109F1BD10B67000470B3 /* MJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhoto.m; path = Main/Libs/MJPhotoBrowser/MJPhoto.m; sourceTree = "<group>"; };
+		CAE010A01BD10B67000470B3 /* MJPhotoBrowser.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MJPhotoBrowser.bundle; path = Main/Libs/MJPhotoBrowser/MJPhotoBrowser.bundle; sourceTree = "<group>"; };
+		CAE010A11BD10B67000470B3 /* MJPhotoBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPhotoBrowser.h; path = Main/Libs/MJPhotoBrowser/MJPhotoBrowser.h; sourceTree = "<group>"; };
+		CAE010A21BD10B67000470B3 /* MJPhotoBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhotoBrowser.m; path = Main/Libs/MJPhotoBrowser/MJPhotoBrowser.m; sourceTree = "<group>"; };
+		CAE010A31BD10B67000470B3 /* MJPhotoLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPhotoLoadingView.h; path = Main/Libs/MJPhotoBrowser/MJPhotoLoadingView.h; sourceTree = "<group>"; };
+		CAE010A41BD10B67000470B3 /* MJPhotoLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhotoLoadingView.m; path = Main/Libs/MJPhotoBrowser/MJPhotoLoadingView.m; sourceTree = "<group>"; };
+		CAE010A51BD10B67000470B3 /* MJPhotoProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPhotoProgressView.h; path = Main/Libs/MJPhotoBrowser/MJPhotoProgressView.h; sourceTree = "<group>"; };
+		CAE010A61BD10B67000470B3 /* MJPhotoProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhotoProgressView.m; path = Main/Libs/MJPhotoBrowser/MJPhotoProgressView.m; sourceTree = "<group>"; };
+		CAE010A71BD10B67000470B3 /* MJPhotoToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPhotoToolbar.h; path = Main/Libs/MJPhotoBrowser/MJPhotoToolbar.h; sourceTree = "<group>"; };
+		CAE010A81BD10B67000470B3 /* MJPhotoToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhotoToolbar.m; path = Main/Libs/MJPhotoBrowser/MJPhotoToolbar.m; sourceTree = "<group>"; };
+		CAE010A91BD10B67000470B3 /* MJPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJPhotoView.h; path = Main/Libs/MJPhotoBrowser/MJPhotoView.h; sourceTree = "<group>"; };
+		CAE010AA1BD10B67000470B3 /* MJPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhotoView.m; path = Main/Libs/MJPhotoBrowser/MJPhotoView.m; sourceTree = "<group>"; };
+		CAE010BB1BD10EA3000470B3 /* SDWebImageManager+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SDWebImageManager+MJ.h"; path = "Main/Libs/MJPhotoBrowser/SDWebImageManager+MJ.h"; sourceTree = "<group>"; };
+		CAE010BC1BD10EA3000470B3 /* SDWebImageManager+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SDWebImageManager+MJ.m"; path = "Main/Libs/MJPhotoBrowser/SDWebImageManager+MJ.m"; sourceTree = "<group>"; };
 		CAE272871BCF516800D619D8 /* SendEmailInvitationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendEmailInvitationEntity.h; path = Main/Model/SendEmailInvitationEntity.h; sourceTree = "<group>"; };
 		CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendEmailInvitationEntity.m; path = Main/Model/SendEmailInvitationEntity.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -3187,6 +3210,7 @@
 		CAB0DA561BB2823B00518F0F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				CAE0109C1BD10AF0000470B3 /* MJPhotoBrowser */,
 				CA64A5B41BCD18C500DA4ED7 /* AFNetworking */,
 				18111F521A1EDE1B00762075 /* XMPP */,
 				18EBAC521B841FF2002FF1DE /* MRImgShowView */,
@@ -3901,6 +3925,28 @@
 			name = temp;
 			sourceTree = "<group>";
 		};
+		CAE0109C1BD10AF0000470B3 /* MJPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				CAE010BB1BD10EA3000470B3 /* SDWebImageManager+MJ.h */,
+				CAE010BC1BD10EA3000470B3 /* SDWebImageManager+MJ.m */,
+				CAE0109E1BD10B67000470B3 /* MJPhoto.h */,
+				CAE0109F1BD10B67000470B3 /* MJPhoto.m */,
+				CAE010A01BD10B67000470B3 /* MJPhotoBrowser.bundle */,
+				CAE010A11BD10B67000470B3 /* MJPhotoBrowser.h */,
+				CAE010A21BD10B67000470B3 /* MJPhotoBrowser.m */,
+				CAE010A31BD10B67000470B3 /* MJPhotoLoadingView.h */,
+				CAE010A41BD10B67000470B3 /* MJPhotoLoadingView.m */,
+				CAE010A51BD10B67000470B3 /* MJPhotoProgressView.h */,
+				CAE010A61BD10B67000470B3 /* MJPhotoProgressView.m */,
+				CAE010A71BD10B67000470B3 /* MJPhotoToolbar.h */,
+				CAE010A81BD10B67000470B3 /* MJPhotoToolbar.m */,
+				CAE010A91BD10B67000470B3 /* MJPhotoView.h */,
+				CAE010AA1BD10B67000470B3 /* MJPhotoView.m */,
+			);
+			name = MJPhotoBrowser;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4037,6 +4083,7 @@
 				CAB994081BB3988900661AB7 /* wp_13.jpg in Resources */,
 				CAB993451BB3956F00661AB7 /* Chat_record_circle.png in Resources */,
 				CAB997611BB3A35500661AB7 /* Expression_51@2x.png in Resources */,
+				CAE010AC1BD10B67000470B3 /* MJPhotoBrowser.bundle in Resources */,
 				CAB993851BB3972F00661AB7 /* SelectCountryTableViewCell.xib in Resources */,
 				CAB994041BB3988900661AB7 /* wp_9.jpg in Resources */,
 				CAB9940D1BB3988900661AB7 /* wp_18.jpg in Resources */,
@@ -4236,6 +4283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAE010B11BD10B67000470B3 /* MJPhotoView.m in Sources */,
 				CAB996481BB3A22F00661AB7 /* SDWebImageManager.m in Sources */,
 				CA64A5CB1BCD190000DA4ED7 /* AFNetworkReachabilityManager.m in Sources */,
 				CAB995D11BB3A13300661AB7 /* XMPPPing.m in Sources */,
@@ -4250,6 +4298,7 @@
 				CAB994371BB39A2100661AB7 /* XMPPRoomDao.m in Sources */,
 				CAB0DABC1BB2B66200518F0F /* GroupSetViewController.m in Sources */,
 				CAB995A21BB3A00800661AB7 /* XMPPCapabilities.m in Sources */,
+				CAE010BD1BD10EA3000470B3 /* SDWebImageManager+MJ.m in Sources */,
 				CAB996921BB3A2B600661AB7 /* ASICloudFilesContainer.m in Sources */,
 				CAB996461BB3A22F00661AB7 /* SDWebImageDownloader.m in Sources */,
 				CAB994EF1BB39DC300661AB7 /* XMPPGroupCoreDataStorageObject.m in Sources */,
@@ -4289,6 +4338,7 @@
 				CA64A5C81BCD190000DA4ED7 /* AFHTTPRequestOperation.m in Sources */,
 				CAB994441BB39A8A00661AB7 /* DeviceHard.m in Sources */,
 				CAB995C51BB3A0F100661AB7 /* XMPPStreamManagementMemoryStorage.m in Sources */,
+				CAE010AE1BD10B67000470B3 /* MJPhotoLoadingView.m in Sources */,
 				CAB994881BB39BDB00661AB7 /* XMPPJID.m in Sources */,
 				CAB996191BB3A21100661AB7 /* MJRefreshGifHeader.m in Sources */,
 				CAB996971BB3A2B600661AB7 /* ASICloudFilesRequest.m in Sources */,
@@ -4301,6 +4351,7 @@
 				CAB994521BB39B2100661AB7 /* XMPPAnonymousAuthentication.m in Sources */,
 				CAB995751BB39F5400661AB7 /* XMPPIQ+XEP_0060.m in Sources */,
 				CAB9952E1BB39E8E00661AB7 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
+				CAE010B01BD10B67000470B3 /* MJPhotoToolbar.m in Sources */,
 				CAB995FB1BB3A1F600661AB7 /* MRImgShowView.m in Sources */,
 				CAB995061BB39E1100661AB7 /* XMPPSystemInputActivityMonitor.m in Sources */,
 				CA64A5CD1BCD190000DA4ED7 /* AFURLConnectionOperation.m in Sources */,
@@ -4364,6 +4415,7 @@
 				CAB993681BB395C200661AB7 /* ChatViewController.m in Sources */,
 				CAB994A01BB39BFC00661AB7 /* XMPPSRVResolver.m in Sources */,
 				CAB9967E1BB3A28400661AB7 /* ASIInputStream.m in Sources */,
+				CAE010AF1BD10B67000470B3 /* MJPhotoProgressView.m in Sources */,
 				CAB0DAC51BB2B67600518F0F /* AddGroupUserTableViewCell.m in Sources */,
 				CAB997A71BB3A3C300661AB7 /* RichTextImageRun.m in Sources */,
 				CAB994581BB39B3B00661AB7 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
@@ -4492,6 +4544,7 @@
 				CAB992E11BB3939800661AB7 /* ContactsViewController.m in Sources */,
 				CAB995381BB39EA700661AB7 /* XMPPRoomHybrid.xcdatamodeld in Sources */,
 				CAB995E91BB3A17200661AB7 /* XMPPMessageCarbons.m in Sources */,
+				CAE010AB1BD10B67000470B3 /* MJPhoto.m in Sources */,
 				CAB995631BB39F0900661AB7 /* XMPPvCardTemp.m in Sources */,
 				CA64A5A81BCCB58400DA4ED7 /* ContactsTool.m in Sources */,
 				CAB994B21BB39C2C00661AB7 /* DDASLLogger.m in Sources */,
@@ -4517,6 +4570,7 @@
 				CAB993271BB3954400661AB7 /* Mp3Recorder.m in Sources */,
 				CAB997A61BB3A3C300661AB7 /* RichTextEmojiRun.m in Sources */,
 				CAB993621BB395A800661AB7 /* DetailKeyBoard.m in Sources */,
+				CAE010AD1BD10B67000470B3 /* MJPhotoBrowser.m in Sources */,
 				CAB9957E1BB39F6D00661AB7 /* XMPPIQ+XEP_0066.m in Sources */,
 				CA64A5C91BCD190000DA4ED7 /* AFHTTPRequestOperationManager.m in Sources */,
 				CAB994D81BB39D3F00661AB7 /* XMPPBandwidthMonitor.m in Sources */,
@@ -4663,6 +4717,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /usr/lib/libxml2.dylib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/IMReasonable/IMReasonable.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4670,6 +4725,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = IMReasonable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4680,9 +4736,11 @@
 					"$(PROJECT_DIR)/ChatList/Chat/WeChatKeyBoard/Libs/VoiceLib",
 					"$(PROJECT_DIR)/Main/Libs/XMPP/Vendor/libidn",
 				);
+				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Debug;
 		};
@@ -4694,6 +4752,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
+				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /usr/lib/libxml2.dylib;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "$(PROJECT_DIR)/IMReasonable/IMReasonable.pch";
 				HEADER_SEARCH_PATHS = (
@@ -4701,6 +4760,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					/usr/include/libxml2,
 				);
+				"HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 				INFOPLIST_FILE = IMReasonable/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -4711,9 +4771,11 @@
 					"$(PROJECT_DIR)/ChatList/Chat/WeChatKeyBoard/Libs/VoiceLib",
 					"$(PROJECT_DIR)/Main/Libs/XMPP/Vendor/libidn",
 				);
+				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Release;
 		};

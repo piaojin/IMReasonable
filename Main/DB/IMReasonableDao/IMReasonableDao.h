@@ -36,7 +36,7 @@
 + (int)getUnreadMessageCount;
 +  (void) saveUserLocalNick:(NSString *) jibstr image:(NSString *) nickname addid:(NSString *)addid;
 +(NSMutableArray*)getChatlistModle;
-+(NSMutableArray*)getFavoriteslistModle;
++(NSMutableArray*)getContactsListModle;
 +(NSMutableArray*)getAllUserbyUpdateDesc;
 +  (void) saveUserLocalNick:(NSString *) jibstr  isImrea:(NSString *) isrea;
 +  (void) saveUserLocalNick:(NSString *) phone image:(NSString *) nickname addid:(NSString *)addid  isImrea:(NSString *) isrea phonetitle:(NSString *)title;

@@ -12,6 +12,7 @@
 #import <AddressBook/AddressBook.h>
 #import "AnimationHelper.h"
 #import "XMPPDao.h"
+#import "IMReasonableDao.h"
 
 #define USETALKING @"Use Talkking"
 #define GETALLPHONE 0//获取所有的手机号码
@@ -21,7 +22,7 @@
 #define LENGTH8 8
 #define INVITE_ALL_FRIENDS_COMPLETE @"INVITE_ALL_FRIENDS_COMPLETE"
 #define INVITEBODY @"InvitationBody"
-#define BODY @"<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN'><html><body><div align='center'><a href='https://app.rspread.com/' target='_blank' title='Spread' style='text-decoration: none;'><img src='http://app.rspread.com/images/spreadlogocn.jpg' height='87' width='105' style='border: 0 none;color: #6dc6dd !important;font-family: Helvetica,Arial,sans-serif;font-size: 60px;font-weight: bold;height: auto !important;letter-spacing: -4px;line-height: 100%;outline: medium none;text-align: center;text-decoration: none;'></a></div><div align='center'><h1 style='color: #606060 !important; font-family: Helvetica, Arial,    sans-serif; font-size: 32px; font-weight: bold; letter-spacing: -1px; line-height: 115%; margin: 0; padding: 0; text-align: center;'>%@</h1><br><font style='color: #606060;font-family: Helvetica, Arial, sans-serif; font-size: 15px;text-align: center;'>Click and DownLoad Talkking.</font></div><br><div align='center'><div align='center'  style='background-color: #6DC6DD;width:100px;height:60px;line-height:60px;'><a href='' target='_blank' style='color: #FFFFFF; text-decoration: none;'>DownLoad Talkking</a></div></div><br><div align='center'><font align='center'  class='footerContent' style='color: #606060; font-family: Helvetica, Arial, sans-serif; font-size: 13px; line-height: 125%;'>Copyright<span style='border-bottom:1px dashed #ccc;z-index:1' onclick='return false;' data='2006-2015'>2006-2015</span><br>Reasonable Software House Limited. All Rights Reserved.</font></div></body></html>"
+#define BODY @"<!DOCTYPE HTML PUBLIC \'-//W3C//DTD HTML 4.01 Transitional//EN\'><html><body><div align=\'center\'><a href=\'https://app.rspread.com/\' target=\'_blank\' title=\'Spread\' style=\'text-decoration: none;\'><img src=\'http://app.rspread.com/images/spreadlogocn.jpg\' height=\'87\' width=\'105\' style=\'border: 0 none;color: #6dc6dd !important;font-family: Helvetica,Arial,sans-serif;font-size: 60px;font-weight: bold;height: auto !important;letter-spacing: -4px;line-height: 100%;outline: medium none;text-align: center;text-decoration: none;\'></a></div><div align=\'center\'><h1 style=\'color: #606060 !important; font-family: Helvetica, Arial,    sans-serif; font-size: 32px; font-weight: bold; letter-spacing: -1px; line-height: 115%; margin: 0; padding: 0; text-align: center;\'>%@</h1><br><font style=\'color: #606060;font-family: Helvetica, Arial, sans-serif; font-size: 15px;text-align: center;\'>Click and DownLoad Talkking.</font></div><br><div align=\'center\'><div align=\'center\'  style=\'background-color: #6DC6DD;width:100px;height:60px;line-height:60px;\'><a href=\'http://talk-king.net/d\' target=\'_blank\' style=\'color: #FFFFFF; text-decoration: none;\'>DownLoad Talkking</a></div></div><br><div align=\'center\'><font align=\'center\'  class=\'footerContent\' style=\'color: #606060; font-family: Helvetica, Arial, sans-serif; font-size: 13px; line-height: 125%;\'>Copyright<span style=\'border-bottom:1px dashed #ccc;z-index:1\' onclick=\'return false;\' data=\'2006-2015\'>2006-2015</span><br>Reasonable Software House Limited. All Rights Reserved.</font></div></body></html>"
 
 @interface ContactsTool()
 /**
@@ -41,6 +42,11 @@
 @property(nonatomic,assign)int invitationemailindex;
 //待群邀的邮箱数量
 @property(nonatomic,assign)int invitationemailcount;
+
+//所有的talkking用户
+@property(nonatomic,copy)NSArray *talkkingUserArray;
+//所有的talkking用户字典
+@property(nonatomic,copy)NSMutableDictionary *talkkingUserDic;
 @end
 @implementation ContactsTool
 
@@ -87,6 +93,30 @@
     return _invitationemailarray;
 }
 
+-(NSArray *)talkkingUserArray{
+    if(!_talkkingUserArray){
+        
+        _talkkingUserArray=[IMReasonableDao getAllactiveUser];
+    }
+    return _talkkingUserArray;
+}
+
+-(NSDictionary *)talkkingUserDic{
+    if(!_talkkingUserDic){
+        
+        _talkkingUserDic=[[NSMutableDictionary alloc] init];
+        for(int i=0;i<self.talkkingUserArray.count;i++){
+            //key=phone;value=phone
+            IMChatListModle *model=_talkkingUserArray[i];
+            if(model.phonenumber){
+                
+                [_talkkingUserDic setObject:model.phonenumber forKey:model.phonenumber];
+            }
+        }
+    }
+    return _talkkingUserDic;
+}
+
 //获取所有的手机号码和邮箱地址
 -(NSArray *)GetAllPhoneAndAllEmail{
    __block NSMutableArray *array=[NSMutableArray array];
@@ -100,6 +130,44 @@
     return array;
 }
 
+//判断并修改手机号码
+NSString *(^ForMatPhone_Block)(NSString *)=^(NSString *personPhone){
+    NSString *phone;
+    if(personPhone!=nil&&![personPhone isEqualToString:@""]){
+        
+        personPhone = [personPhone stringByReplacingOccurrencesOfString:@" " withString:@""];
+        personPhone = [personPhone stringByReplacingOccurrencesOfString:@"+" withString:@""];
+        personPhone = [personPhone stringByReplacingOccurrencesOfString:@"-" withString:@""];
+        //手机号码位数判断(香港的手机号码位数比大陆的少)
+        if(personPhone.length>=8){
+            
+            //这边只判断大陆手机号码与香港手机号码
+            if([personPhone hasPrefix:STARTWITHONE]){//以1开头的手机号码
+                
+                if(personPhone.length==LENGTH11){//大陆未加86的手机号码
+                    
+                    personPhone = [@"" stringByAppendingFormat:@"%@%@",@"86", personPhone];
+                }
+            }else{
+                
+                if(personPhone.length==LENGTH8){//香港未加前缀的手机号码
+                    
+                    personPhone = [@"" stringByAppendingFormat:@"%@%@",@"00852", personPhone];
+                }
+            }
+            phone=personPhone;
+        }
+    }
+    return phone;
+};
+
+/**
+ *  群邀说明:一个用户可能含有多个手机号码和多个邮箱，邀请时如果该用户只有一个手机号码则如果该用户已经是talkking用户则不发邮箱邀请，如果该用户含有多个手机号码并且其中有一个手机号码是talkking则发邀请到该用户的邮箱，不管其邮箱有多少个
+ *
+ *  @param CFArrayRef <#CFArrayRef description#>
+ *
+ *  @return <#return value description#>
+ */
 NSMutableArray *(^GetPhoneAndEmail_Block)(CFArrayRef)=^(CFArrayRef results){
     NSMutableArray *array=[NSMutableArray array];
     NSMutableArray *phonearray=[NSMutableArray array];
@@ -109,50 +177,64 @@ NSMutableArray *(^GetPhoneAndEmail_Block)(CFArrayRef)=^(CFArrayRef results){
         ABRecordRef person = CFArrayGetValueAtIndex(results, i);
         //读取电话多值
         ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
-        for (int k = 0; k<ABMultiValueGetCount(phone); k++)
-        {
+        int phonecount=ABMultiValueGetCount(phone);
+        //标志是否是talkking用户
+        BOOL isTalkkingUser=false;
+        //当只有一个手机号码的情况
+        if(phonecount==1){
+            
             //获取該Label下的电话值
-            NSString * personPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phone, k);
-            if(personPhone!=nil&&![personPhone isEqualToString:@""]){
+            NSString * personPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phone, 0);
+            NSString *phonestring=ForMatPhone_Block(personPhone);
+            if(phonestring){
                 
-                personPhone = [personPhone stringByReplacingOccurrencesOfString:@" " withString:@""];
-                personPhone = [personPhone stringByReplacingOccurrencesOfString:@"+" withString:@""];
-                personPhone = [personPhone stringByReplacingOccurrencesOfString:@"-" withString:@""];
-                //手机号码位数判断(香港的手机号码位数比大陆的少)
-                if(personPhone.length>=8){
+                if(![[[ContactsTool alloc] init].talkkingUserDic objectForKey:phonestring]){
                     
-                    //这边只判断大陆手机号码与香港手机号码
-                    if([personPhone hasPrefix:STARTWITHONE]){//以1开头的手机号码
-                        
-                        if(personPhone.length==LENGTH11){//大陆未加86的手机号码
-                            
-                            personPhone = [@"" stringByAppendingFormat:@"%@%@",@"86", personPhone];
-                        }
-                    }else{
-                        
-                        if(personPhone.length==LENGTH8){//香港未加前缀的手机号码
-                            
-                            personPhone = [@"" stringByAppendingFormat:@"%@%@",@"00852", personPhone];
-                        }
-                    }
-                    [phonearray addObject:personPhone];
+                    [phonearray addObject:phonestring];
+                }else{
+                    
+                    isTalkkingUser=true;
                 }
             }
-        }
-        //获取email多值
-        ABMultiValueRef email = ABRecordCopyValue(person, kABPersonEmailProperty);
-        int emailcount = ABMultiValueGetCount(email);
-        //获取邮件
-        for (int x = 0; x < emailcount; x++)
-        {
-            //获取email值
-            NSString* emailContent = (__bridge NSString*)ABMultiValueCopyValueAtIndex(email, x);
-            //邮箱格式验证
-            if([Tool isValidateEmail:emailContent]){
-                
-                [emailarray addObject:emailContent];
+        }else{
+            
+            for (int k = 0; k<phonecount; k++)
+            {
+                //获取該Label下的电话值
+                NSString * personPhone = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phone, k);
+                NSString *phonestring=ForMatPhone_Block(personPhone);
+                if(phonestring){
+                    
+                    if(![[[ContactsTool alloc] init].talkkingUserDic objectForKey:phonestring]){
+                        
+                        [phonearray addObject:phonestring];
+                    }
+                }
             }
+
         }
+        
+        if(!isTalkkingUser){
+            
+            //获取email多值
+            ABMultiValueRef email = ABRecordCopyValue(person, kABPersonEmailProperty);
+            int emailcount = ABMultiValueGetCount(email);
+            //获取邮件
+            for (int x = 0; x < emailcount; x++)
+            {
+                //获取email值
+                NSString* emailContent = (__bridge NSString*)ABMultiValueCopyValueAtIndex(email, x);
+                //邮箱格式验证
+                if([Tool isValidateEmail:emailContent]){
+                    
+                    [emailarray addObject:emailContent];
+                }
+            }
+        }else{
+            
+            isTalkkingUser=false;
+        }
+        
     }
     [array addObject:phonearray];
     [array addObject:emailarray];

@@ -6,7 +6,7 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
-"InvitationBody"="您的好友(%@)邀请您使用齐聊";
+"InvitationBody"="您好，您的朋友（电话号码是:%@）邀请您使用「齐聊」方便你们联系彼此:http://talk-king.net/d  ";
 
 /////////////////////////////////////////////////////////////////////////////////
 //通讯录

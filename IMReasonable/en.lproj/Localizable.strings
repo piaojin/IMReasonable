@@ -6,8 +6,7 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
-"InvitationBody"="your friend(%@) invite you to use Talking";
-"lab"="I love you";
+"InvitationBody"="Hello, Your friend (phone number is: %@) invites you to use TalkKing, TalkKing will facilitate you to contact each other:http://talk-king.net/d  ";
 "demo" = "this is a demo";
 
 //通讯录

@@ -338,7 +338,7 @@
     return chatuserlist;
 }
 
-+(NSMutableArray*)getFavoriteslistModle
++(NSMutableArray*)getContactsListModle
 {
     
   //  [self sharedFMDBManager];
@@ -595,6 +595,7 @@
         [FMDBDao executeUpdate:sql];
 }
 
+//获取所有已经是talkking的用户(已经加了国家代码前缀)
 +(NSMutableArray*)getAllactiveUser
 {
     

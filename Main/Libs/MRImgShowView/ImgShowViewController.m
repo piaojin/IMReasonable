@@ -75,7 +75,7 @@
     CGFloat height = self.view.frame.size.height;
     UILabel * indexnumber=[[UILabel alloc] initWithFrame:CGRectMake((width-80)/2, height-40, 80, 40)];
     indexnumber.tag=989;
-    [indexnumber setText:[NSString stringWithFormat:@"%ld/%lu",(_index+1)>_data.count?1:(_index+1),(unsigned long)_data.count]];
+    [indexnumber setText:[NSString stringWithFormat:@"%d/%lu",(_index+1)>_data.count?1:(_index+1),(unsigned long)_data.count]];
     [indexnumber setTextColor:[UIColor whiteColor]];
     [indexnumber setTextAlignment:NSTextAlignmentCenter];
     [self.view addSubview:indexnumber];

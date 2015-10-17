@@ -24,7 +24,7 @@
 @property (nonatomic, copy) NSString *state;//暂时没用
 @property (nonatomic, copy) NSString *isactive;//是否认证
 @property (nonatomic, copy) NSString *isimrea;//是否认证(在群的时候表示是否被移除群或自己退出群即是否是合法用户)
-@property (nonatomic, copy) NSString *isloc;
+@property (nonatomic, copy) NSString *isloc;//本地的手机号码是否为talkking用户(1:不是,0:是)
 @property (nonatomic, copy) NSString *device;
 @property (nonatomic, copy) NSString *update;//最后一次登入时间
 @property (nonatomic, copy) NSString *unreadcount;

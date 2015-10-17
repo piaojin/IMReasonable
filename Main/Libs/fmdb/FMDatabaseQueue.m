@@ -156,7 +156,7 @@ static const void * const kDispatchQueueSpecificKey = &kDispatchQueueSpecificKey
             NSSet *openSetCopy = FMDBReturnAutoreleased([[db valueForKey:@"_openResultSets"] copy]);
             for (NSValue *rsInWrappedInATastyValueMeal in openSetCopy) {
                 FMResultSet *rs = (FMResultSet *)[rsInWrappedInATastyValueMeal pointerValue];
-                NSLog(@"query: '%@'", [rs query]);
+//                NSLog(@"query: '%@'", [rs query]);
             }
 #endif
         }
