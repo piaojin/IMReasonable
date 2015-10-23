@@ -370,6 +370,7 @@
     
     
 }
+
 //获取总代理
 - (AppDelegate *)appDelegate
 {
@@ -382,6 +383,7 @@
     NSString *localname=self.txtName.text;
     if (localname&&localname.length>0) {
         NSUserDefaults *defaults =[NSUserDefaults standardUserDefaults];
+        [defaults setBool:false forKey:ISSIGN_OUT];
         [defaults setValue:self.txtName.text forKey:MyLOCALNICKNAME];
         [defaults setObject:@"0" forKey:CHATWALLPAPER];
         [defaults setBool:true forKey:@"FIRSTLOGIN"];

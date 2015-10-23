@@ -6,6 +6,14 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"SIGN_OUT"="Sign out";
+"INVITE_ALL_PEOPLE"="invite all people";
+"INVITE_MANY_PEOPLE"="invite many people";
+"INVITE_FRIENDS"="invite friends";
+"START_INVITE"="start invite";
+"UNKNOW"="unknow";
+"CHECK_NET_WORK"="Please check network";
+"NONETWORK"="No Network";
 "InvitationBody"="Hello, Your friend (phone number is: %@) invites you to use TalkKing, TalkKing will facilitate you to contact each other:http://talk-king.net/d  ";
 "demo" = "this is a demo";
 

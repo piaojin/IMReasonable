@@ -532,7 +532,7 @@
         
     }else{
         
-        return [NSString stringWithFormat:@"%ld/%ld/%ld",(long)datemonth,dateday,dateyear];
+        return [NSString stringWithFormat:@"%ld/%ld/%ld",(long)datemonth,(long)dateday,(long)dateyear];
         
     }
     //

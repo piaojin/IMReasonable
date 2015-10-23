@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 Reasonable. All rights reserved.
 //
 
+#import "PJNetWorkHelper.h"
+#import "InviteAllFriendsController.h"
 #import "PJSendInviteHttpTool.h"
 #import "ContactsTool.h"
 #import "ContactsViewController.h"
@@ -22,6 +24,9 @@
 #import "AnimationHelper.h"
 #import <MessageUI/MessageUI.h>
 
+#define INVITE_MANY_PEOPLE 0//邀请多人
+#define INVITE_ALL 1//一键邀请
+#define INVITE_SHEET 1//邀请弹出框
 #define INVITE 0//确定群邀
 #define INVITE_ALL_FRIENDS_COMPLETE @"INVITE_ALL_FRIENDS_COMPLETE"
 
@@ -133,26 +138,27 @@
 
 //群邀
 -(void)Invitation{
-    if(iOS(8)){
-        
-        [self InvitationFriendsForHeightSys];
-    }else{
-        
-        [self InvitationFriends];
-    }
+    UIActionSheet* inviteSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"INVITE_FRIENDS", nil)
+                                                            delegate:(id)self
+                                                   cancelButtonTitle:NSLocalizedString(@"lbsuvcancel", nil)
+                                              destructiveButtonTitle:nil
+                                                   otherButtonTitles:NSLocalizedString(@"INVITE_MANY_PEOPLE", nil),NSLocalizedString(@"INVITE_ALL_PEOPLE", nil),
+                                 nil];
+    inviteSheet.tag=INVITE_SHEET;
+    [inviteSheet showInView:self.view];
 }
 
 -(void)InvitationFriendsForHeightSys{
     UIAlertController* alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"lbinvitation",nil)
                                                                              message:NSLocalizedString(@"lbissureinvitation",nil) preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        
+        
+    }]];
     [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"btnDone",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         //确定群邀
         
         [self didInvitationAllFriends];
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        
-        
     }]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
@@ -174,7 +180,8 @@
 
 //发送群邀
 -(void)didInvitationAllFriends{
-     [ContactsTool DidInviteAllFriends];
+        [AnimationHelper show:NSLocalizedString(@"START_INVITE",nil) InView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+        [ContactsTool DidInviteAllFriends:[ContactsTool AllPhoneAndEmail]];
 }
 
 - (void)addpeople:(UIBarButtonItem*) btn
@@ -605,20 +612,57 @@
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch (buttonIndex)
-    {
-        case 0:
+    //邀请sheet
+    if(actionSheet.tag==INVITE_SHEET){
+        
+        switch (buttonIndex)
         {
-              IMChatListModle *temp=[chatuserlist objectAtIndex:index];
-            [self showMessageView:[NSArray arrayWithObjects:temp.phonenumber, nil] title:@"123" body:[self getSMSContent]];
+            case INVITE_MANY_PEOPLE:
+            {
+                if(![PJNetWorkHelper isNetWorkAvailable]){
+                    
+                    [PJNetWorkHelper NoNetWork];
+                }else{
+                    
+                    [AnimationHelper showHUD:LOADING];
+                    InviteAllFriendsController *inviteAllFriendsController=[[InviteAllFriendsController alloc] init];
+                    UINavigationController * nvisecond=[[UINavigationController alloc] init];
+                    [nvisecond addChildViewController:inviteAllFriendsController];
+                    [self presentViewController:nvisecond animated:YES completion:nil];
+                }
+            }
+                break;
+            case INVITE_ALL:
+                if(![PJNetWorkHelper isNetWorkAvailable]){
+                    
+                    [PJNetWorkHelper NoNetWork];
+                }else{
+                    
+                    if(iOS(8)){
+                        
+                        [self InvitationFriendsForHeightSys];
+                    }else{
+                        
+                        [self InvitationFriends];
+                    }
+                }
+                break;
         }
-            break;
-        case 1:
-            // 取消 不需要做任何操作
-            break;
+    }else{
+        
+        switch (buttonIndex)
+        {
+            case 0:
+            {
+                IMChatListModle *temp=[chatuserlist objectAtIndex:index];
+                [self showMessageView:[NSArray arrayWithObjects:temp.phonenumber, nil] title:@"123" body:[self getSMSContent]];
+            }
+                break;
+            case 1:
+                // 取消 不需要做任何操作
+                break;
+        }
     }
-
-    
 }
 
 - (NSString *)getSMSContent{
@@ -629,16 +673,16 @@
     NSString * name=[defaults objectForKey:MyLOCALNICKNAME];
     NSString *jidstr=[[[defaults stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
     
-     NSRange range = [temp.phonenumber rangeOfString:@"86"];
+     NSRange range = [temp.phonenumber rangeOfString:CH];
     if (range.location==0 &&range.length>0) {
         
-        NSString *phone=[NSString stringWithFormat:@"+86 %@",[jidstr substringFromIndex:2]];
+        NSString *phone=[temp.phonenumber substringFromIndex:range.length];
         return [NSString stringWithFormat:InvitationSms86,temp.localname,name,phone];
         
     }
-    range = [temp.phonenumber rangeOfString:@"852"];
+    range = [temp.phonenumber rangeOfString:HK];
     if (range.location==0 &&range.length>0) {
-        NSString *phone=[NSString stringWithFormat:@"+852 %@",[jidstr substringFromIndex:3]];
+        NSString *phone=[temp.phonenumber substringFromIndex:range.length];
         return [NSString stringWithFormat:InvitationSms852,temp.localname,name,phone];
     }
     range = [temp.phonenumber rangeOfString:@"1"];

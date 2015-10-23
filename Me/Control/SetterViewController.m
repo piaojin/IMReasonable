@@ -10,6 +10,10 @@
 #import "XMPPDao.h"
 #import "ThirdViewController.h"
 #import "WallPaperViewController.h"
+#import "UIColor+Hex.h"
+#import "FirstViewController.h"
+
+#define FOOTERVIEW_HEIGTH 44
 
 @interface SetterViewController ()
 {
@@ -73,11 +77,34 @@
     _tableview =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT-49-64)];
     _tableview.delegate=self;
     _tableview.dataSource=self;
-    _tableview.tableFooterView = [[UIView alloc]init];//设置不要显示多余的行;
+    //退出按钮
+    UIButton *footerButton=[[UIButton alloc] init];
+    footerButton.titleLabel.font=[UIFont systemFontOfSize:20.0];
+    [footerButton setTitle:NSLocalizedString(@"SIGN_OUT", nil) forState:UIControlStateNormal];
+    footerButton.frame=CGRectMake(0, 0, 0, FOOTERVIEW_HEIGTH);
+    [footerButton addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchDown];
+    [footerButton setBackgroundImage:[UIImage imageNamed:@"red_1"] forState:UIControlStateNormal];
+    [footerButton setBackgroundImage:[UIImage imageNamed:@"red_2"] forState:UIControlStateHighlighted];
+    _tableview.tableFooterView = footerButton;
+//    _tableview.tableFooterView = [[UIView alloc]init];//设置不要显示多余的行;
     
     [self.view addSubview:_tableview];
 }
 
+//退出登录
+-(void)logout:(UIButton *)button{
+    //清除用户数据
+    NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
+    //设置退出登录为真
+    [userDefaults setBool:true forKey:ISSIGN_OUT];
+    //清除手机号码和密码
+    [userDefaults removeObjectForKey:XMPPREASONABLEJID];
+    [userDefaults removeObjectForKey:XMPPREASONABLEPWD];
+    [userDefaults setBool:false forKey:@"FIRSTLOGIN"];
+    [userDefaults synchronize];
+    FirstViewController* firstViewController=[[FirstViewController alloc] init];
+    [self presentViewController:firstViewController animated:YES completion:nil];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return _datalist.count;

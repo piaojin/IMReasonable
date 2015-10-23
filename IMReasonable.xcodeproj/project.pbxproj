@@ -43,6 +43,12 @@
 		CA64A5CE1BCD190000DA4ED7 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5C31BCD190000DA4ED7 /* AFURLRequestSerialization.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5CF1BCD190000DA4ED7 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5C51BCD190000DA4ED7 /* AFURLResponseSerialization.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5D01BCD190000DA4ED7 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5C71BCD190000DA4ED7 /* AFURLSessionManager.m */; settings = {ASSET_TAGS = (); }; };
+		CA821F951BD63D0E0072F7DA /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = CA821F941BD63D0E0072F7DA /* Person.m */; settings = {ASSET_TAGS = (); }; };
+		CA821F981BD6450C0072F7DA /* InviteAllFriendsController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA821F971BD6450C0072F7DA /* InviteAllFriendsController.m */; settings = {ASSET_TAGS = (); }; };
+		CA821F9B1BD7735C0072F7DA /* PJNetWorkHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CA821F9A1BD7735C0072F7DA /* PJNetWorkHelper.m */; settings = {ASSET_TAGS = (); }; };
+		CA821F9F1BD88EAB0072F7DA /* UIColor+Hex.m in Sources */ = {isa = PBXBuildFile; fileRef = CA821F9E1BD88EAB0072F7DA /* UIColor+Hex.m */; settings = {ASSET_TAGS = (); }; };
+		CA821FA21BD895E20072F7DA /* red_1.png in Resources */ = {isa = PBXBuildFile; fileRef = CA821FA01BD895E20072F7DA /* red_1.png */; settings = {ASSET_TAGS = (); }; };
+		CA821FA31BD895E20072F7DA /* red_2.png in Resources */ = {isa = PBXBuildFile; fileRef = CA821FA11BD895E20072F7DA /* red_2.png */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAA51BB2B5AB00518F0F /* GroupAddUserUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAA21BB2B5AB00518F0F /* GroupAddUserUIViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAA61BB2B5AB00518F0F /* NewGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAA41BB2B5AB00518F0F /* NewGroupViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAAD1BB2B5D500518F0F /* AddUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAA81BB2B5D500518F0F /* AddUserTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -623,6 +629,16 @@
 		CA64A5C51BCD190000DA4ED7 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = Main/Libs/AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		CA64A5C61BCD190000DA4ED7 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = Main/Libs/AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 		CA64A5C71BCD190000DA4ED7 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = Main/Libs/AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
+		CA821F931BD63D0E0072F7DA /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Person.h; path = Main/Model/Person.h; sourceTree = "<group>"; };
+		CA821F941BD63D0E0072F7DA /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Person.m; path = Main/Model/Person.m; sourceTree = "<group>"; };
+		CA821F961BD6450C0072F7DA /* InviteAllFriendsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InviteAllFriendsController.h; path = ContactsList/Control/InviteAllFriendsController.h; sourceTree = "<group>"; };
+		CA821F971BD6450C0072F7DA /* InviteAllFriendsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InviteAllFriendsController.m; path = ContactsList/Control/InviteAllFriendsController.m; sourceTree = "<group>"; };
+		CA821F991BD7735C0072F7DA /* PJNetWorkHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJNetWorkHelper.h; path = Main/Tools/PJNetWorkHelper.h; sourceTree = "<group>"; };
+		CA821F9A1BD7735C0072F7DA /* PJNetWorkHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJNetWorkHelper.m; path = Main/Tools/PJNetWorkHelper.m; sourceTree = "<group>"; };
+		CA821F9D1BD88EAB0072F7DA /* UIColor+Hex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+Hex.h"; path = "Main/Category/UIColor+Hex.h"; sourceTree = "<group>"; };
+		CA821F9E1BD88EAB0072F7DA /* UIColor+Hex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+Hex.m"; path = "Main/Category/UIColor+Hex.m"; sourceTree = "<group>"; };
+		CA821FA01BD895E20072F7DA /* red_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red_1.png; path = Main/Resources/Image/red_1.png; sourceTree = SOURCE_ROOT; };
+		CA821FA11BD895E20072F7DA /* red_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = red_2.png; path = Main/Resources/Image/red_2.png; sourceTree = SOURCE_ROOT; };
 		CAB0DAA11BB2B5AB00518F0F /* GroupAddUserUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupAddUserUIViewController.h; path = CreateGroup/Control/GroupAddUserUIViewController.h; sourceTree = SOURCE_ROOT; };
 		CAB0DAA21BB2B5AB00518F0F /* GroupAddUserUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupAddUserUIViewController.m; path = CreateGroup/Control/GroupAddUserUIViewController.m; sourceTree = SOURCE_ROOT; };
 		CAB0DAA31BB2B5AB00518F0F /* NewGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewGroupViewController.h; path = CreateGroup/Control/NewGroupViewController.h; sourceTree = SOURCE_ROOT; };
@@ -1478,7 +1494,6 @@
 				CAB0DA4E1BB2802700518F0F /* ChatList */,
 				CAB0DA4D1BB27FF600518F0F /* Login */,
 				18111E911A1E12AD00762075 /* IMReasonable */,
-				181121F11A1EDE3A00762075 /* Framework */,
 				18111EAB1A1E12AD00762075 /* IMReasonableTests */,
 				18111E901A1E12AD00762075 /* Products */,
 			);
@@ -1515,6 +1530,7 @@
 				18111E941A1E12AD00762075 /* main.m */,
 				18111EBE1A1E13EE00762075 /* InfoPlist.strings */,
 				18111EC61A1E161500762075 /* Localizable.strings */,
+				181121F11A1EDE3A00762075 /* Framework */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2564,6 +2580,8 @@
 		181120BB1A1EDE1B00762075 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CA821FA01BD895E20072F7DA /* red_1.png */,
+				CA821FA11BD895E20072F7DA /* red_2.png */,
 				CAB993B01BB3981500661AB7 /* default@2x.png */,
 				CAB993B11BB3981500661AB7 /* default@3x.png */,
 				CAB993B21BB3981500661AB7 /* GroupChatRound@2x.png */,
@@ -2599,6 +2617,7 @@
 				181121F21A1EDE9F00762075 /* libresolv.dylib */,
 			);
 			name = Framework;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		181122071A1EE12C00762075 /* ASIHTTPRequest */ = {
@@ -3105,6 +3124,15 @@
 			name = AFNetworking;
 			sourceTree = "<group>";
 		};
+		CA821F9C1BD88E3B0072F7DA /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				CA821F9D1BD88EAB0072F7DA /* UIColor+Hex.h */,
+				CA821F9E1BD88EAB0072F7DA /* UIColor+Hex.m */,
+			);
+			name = Category;
+			sourceTree = "<group>";
+		};
 		CAB0DA4D1BB27FF600518F0F /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -3164,6 +3192,7 @@
 		CAB0DA521BB2820C00518F0F /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				CA821F9C1BD88E3B0072F7DA /* Category */,
 				CAB0DAA01BB29CB800518F0F /* Resources */,
 				CAB0DA591BB2825B00518F0F /* Other */,
 				CAB0DA581BB2825400518F0F /* DB */,
@@ -3187,6 +3216,8 @@
 				CAB997B11BB3A8B900661AB7 /* Message.m */,
 				CAE272871BCF516800D619D8 /* SendEmailInvitationEntity.h */,
 				CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */,
+				CA821F931BD63D0E0072F7DA /* Person.h */,
+				CA821F941BD63D0E0072F7DA /* Person.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -3239,6 +3270,8 @@
 				CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */,
 				CA64A5B11BCD126200DA4ED7 /* PJSendInviteHttpTool.h */,
 				CA64A5B21BCD126200DA4ED7 /* PJSendInviteHttpTool.m */,
+				CA821F991BD7735C0072F7DA /* PJNetWorkHelper.h */,
+				CA821F9A1BD7735C0072F7DA /* PJNetWorkHelper.m */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -3306,6 +3339,8 @@
 			children = (
 				CAB992DF1BB3939800661AB7 /* ContactsViewController.h */,
 				CAB992E01BB3939800661AB7 /* ContactsViewController.m */,
+				CA821F961BD6450C0072F7DA /* InviteAllFriendsController.h */,
+				CA821F971BD6450C0072F7DA /* InviteAllFriendsController.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -3996,7 +4031,7 @@
 				TargetAttributes = {
 					18111E8E1A1E12AD00762075 = {
 						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 53R24255NY;
+						DevelopmentTeam = K882SLJN5W;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 0;
@@ -4146,6 +4181,7 @@
 				CAB993831BB3972F00661AB7 /* CountryTableViewCell.xib in Resources */,
 				CAB993991BB3978400661AB7 /* ThirdViewController.xib in Resources */,
 				CAB997731BB3A35500661AB7 /* Expression_69@2x.png in Resources */,
+				CA821FA21BD895E20072F7DA /* red_1.png in Resources */,
 				CAB993C71BB3984000661AB7 /* tab_3@3x.png in Resources */,
 				CAB9978F1BB3A35500661AB7 /* Expression_97@2x.png in Resources */,
 				CAB994211BB3988900661AB7 /* wp_38.jpg in Resources */,
@@ -4254,6 +4290,7 @@
 				CAB993421BB3956F00661AB7 /* chat_animation1.png in Resources */,
 				CAB9972F1BB3A35500661AB7 /* Expression_1@2x.png in Resources */,
 				CAB9976E1BB3A35500661AB7 /* Expression_64@2x.png in Resources */,
+				CA821FA31BD895E20072F7DA /* red_2.png in Resources */,
 				CAB9941C1BB3988900661AB7 /* wp_33.jpg in Resources */,
 				CAB993B71BB3981500661AB7 /* default@3x.png in Resources */,
 				CAB9974E1BB3A35500661AB7 /* Expression_32@2x.png in Resources */,
@@ -4432,6 +4469,7 @@
 				CAB997BA1BB3A8D000661AB7 /* MainViewController.m in Sources */,
 				CAB9936E1BB395CF00661AB7 /* TitleView.m in Sources */,
 				CAB995231BB39E7400661AB7 /* XMPPMUC.m in Sources */,
+				CA821F981BD6450C0072F7DA /* InviteAllFriendsController.m in Sources */,
 				18111E981A1E12AD00762075 /* AppDelegate.m in Sources */,
 				CAB0DAD41BB2B6D800518F0F /* FriendsCircleViewController.m in Sources */,
 				CAB9949F1BB39BFC00661AB7 /* XMPPIDTracker.m in Sources */,
@@ -4458,6 +4496,7 @@
 				CAB9943A1BB39A2C00661AB7 /* IMReasonableDao.m in Sources */,
 				CAB994CC1BB39C8600661AB7 /* DDXMLElement.m in Sources */,
 				CAB9967B1BB3A28400661AB7 /* ASIDownloadCache.m in Sources */,
+				CA821F9F1BD88EAB0072F7DA /* UIColor+Hex.m in Sources */,
 				CAB997A51BB3A3C300661AB7 /* RichTextBaseRun.m in Sources */,
 				CAB995AC1BB3A01900661AB7 /* XMPPMessageArchiving.xcdatamodeld in Sources */,
 				CAB996941BB3A2B600661AB7 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
@@ -4497,6 +4536,7 @@
 				CAB995BE1BB3A0B600661AB7 /* XMPPMessage+XEP_0184.m in Sources */,
 				CAB9950F1BB39E2900661AB7 /* XMPPJabberRPCModule.m in Sources */,
 				CAB995691BB39F0900661AB7 /* XMPPvCardTempModule.m in Sources */,
+				CA821F951BD63D0E0072F7DA /* Person.m in Sources */,
 				CAB994FB1BB39DE600661AB7 /* XMPPResourceMemoryStorageObject.m in Sources */,
 				CAB994B11BB39C2C00661AB7 /* DDAbstractDatabaseLogger.m in Sources */,
 				CAB995671BB39F0900661AB7 /* XMPPvCardTempEmail.m in Sources */,
@@ -4573,6 +4613,7 @@
 				CAE010AD1BD10B67000470B3 /* MJPhotoBrowser.m in Sources */,
 				CAB9957E1BB39F6D00661AB7 /* XMPPIQ+XEP_0066.m in Sources */,
 				CA64A5C91BCD190000DA4ED7 /* AFHTTPRequestOperationManager.m in Sources */,
+				CA821F9B1BD7735C0072F7DA /* PJNetWorkHelper.m in Sources */,
 				CAB994D81BB39D3F00661AB7 /* XMPPBandwidthMonitor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4737,7 +4778,7 @@
 					"$(PROJECT_DIR)/Main/Libs/XMPP/Vendor/libidn",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.piaojin.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
@@ -4772,7 +4813,7 @@
 					"$(PROJECT_DIR)/Main/Libs/XMPP/Vendor/libidn",
 				);
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
-				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
+				PRODUCT_BUNDLE_IDENTIFIER = cn.piaojin.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";

@@ -9,7 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface ContactsTool : NSObject
++(NSString *)DidCutPhoneArea:(NSString *)phone;
++ (NSArray*)AllPerson;
++(NSArray *)AllPhoneAndEmail;
 -(NSArray *)GetAllPhoneAndAllEmail;
 //群邀
-+(void)DidInviteAllFriends;
++(void)DidInviteAllFriends:(NSArray *)phoneAndemailArray;
 @end

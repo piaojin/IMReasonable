@@ -147,6 +147,7 @@
 
     [tableview.header endRefreshing];
 }
+
 //初始化界面控件
 - (void)initViewControl
 {
@@ -157,8 +158,8 @@
     tableview.backgroundColor = [UIColor whiteColor];
     tableview.separatorStyle = UITableViewCellSelectionStyleNone;
     tableview.tableFooterView = [[UIView alloc] init];
-    NSString* chatwallpaper = [NSString stringWithFormat:@"wp_%@.jpg", [[NSUserDefaults standardUserDefaults] stringForKey:CHATWALLPAPER]];
-    tableview.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:chatwallpaper]];
+//    NSString* chatwallpaper = [NSString stringWithFormat:@"wp_%@.jpg", [[NSUserDefaults standardUserDefaults] stringForKey:CHATWALLPAPER]];
+//    tableview.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:chatwallpaper]];
 
     [self.view addSubview:tableview];
 
@@ -720,7 +721,6 @@
 
 - (void)SelectImage:(NSUInteger)type
 {
-    NSLog(@"SelectImage");
     UIImagePickerController* imagePickerController = [[UIImagePickerController alloc] init];
     imagePickerController.delegate = (id)self;
     imagePickerController.allowsEditing = YES;
@@ -936,9 +936,7 @@
     //被点击的图片的位置
     NSInteger index = [arrayPre indexOfObject:modle];
 //    ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
-//
 //    [self.navigationController pushViewController:imgShow animated:NO];
-//    [key hideKeyboard];
     [self ImageBrowser:arrayPre WithShowIndex:index];
 }
 
@@ -952,7 +950,6 @@
         NSString *imageURL=[Tool Append:IMReasonableAPPImagePath witnstring:imagePath];
         UIImage * image=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:photoModel.content]];
         MJPhoto *photo=[[MJPhoto alloc] init];
-//        photo.srcImageView=imageview;
         photo.url=[NSURL URLWithString:imageURL];
         photo.image=image;
         [photoarray addObject:photo];

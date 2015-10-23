@@ -273,6 +273,7 @@
         }
     }
 }
+
 - (BOOL)isRegToOpenfire:(NSString*)phone
 {
     NSURL* url = [NSURL URLWithString:[Tool Append:IMReasonableAPP witnstring:@"UserIsReg"]];
@@ -319,7 +320,13 @@
     [[NSUserDefaults standardUserDefaults] setObject:userdata.countrycode forKey:XMPPUSERCOUNTRYCODE];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [AnimationHelper showHUD:@""];
-    [[XMPPDao sharedXMPPManager] connect]; //登陆或者注册到服务器
+    BOOL result=[[XMPPDao sharedXMPPManager] connect]; //登陆或者注册到服务器
+    //如果是退出登录，则下次登录成功时无需再次创建数据库，表(即无需调用isSuccLogin方法)
+    if(result&&[[NSUserDefaults standardUserDefaults] boolForKey:ISSIGN_OUT]){
+        
+        [AnimationHelper removeHUD];
+        [self isneedgonext];
+    }
 }
 
 - (void)isSuccLogin:(BOOL)flag

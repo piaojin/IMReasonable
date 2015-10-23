@@ -42,6 +42,10 @@
 // 随机色
 #define PJRandomColor PJColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
 
+#define CH @"86"
+#define HK @"852"
+
+#define  ISSIGN_OUT          @"ISSIGN_OUT"//是否退出登录
 #define  XMPPREASONABLEJID   @"xmppreasonablejid"
 #define  XMPPREASONABLEFULLJID   @"xmppreasonablefulljid"
 #define  XMPPREASONABLEPWD   @"xmppreasonablepwd"
@@ -89,6 +93,11 @@
 #define SCREENWIHEIGHT [UIScreen mainScreen].bounds.size.height
 #define ratioW (SCREENWIDTH/320)
 #define ratioH (SCREENWIHEIGHT/ 480)
+
+#define LOADING @"loading"
+
+//判断当前系统版本是否大于version
+#define iOS(version) (([[[UIDevice currentDevice] systemVersion] intValue] >= version)? 1 : 0 )
 
 // 2.判断是否为iOS7以上
 #define iOS8 ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)

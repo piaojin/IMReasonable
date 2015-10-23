@@ -27,7 +27,7 @@
 @implementation SelectUserViewController
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    NSLog(@"SelectUserViewController");
     [super viewWillAppear:NO];
     if (self.flag) {
         [self dismissViewControllerAnimated:NO completion:nil];

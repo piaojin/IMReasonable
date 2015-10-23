@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface AnimationHelper : NSObject
++(void)show:(NSString *)msg InView:(UIView *)view;
 + (void)showHUD:(NSString *)msg;
 + (void)removeHUD;
 @end

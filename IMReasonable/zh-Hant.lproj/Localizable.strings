@@ -6,6 +6,14 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"SIGN_OUT"="退出";
+"INVITE_ALL_PEOPLE"="壹鍵邀請";
+"INVITE_MANY_PEOPLE"="邀請多人";
+"INVITE_FRIENDS"="邀請好友";
+"START_INVITE"="開始邀請";
+"UNKNOW"="未知";
+"CHECK_NET_WORK"="請檢查網絡";
+"NONETWORK"="沒有網絡";
 "InvitationBody"="您好，您的朋友（電話號碼是:%@）邀請您使用「乜都傾」將方便你們聯繫彼此 :http://talk-king.net/d  ";
 "lab"="我還是很愛你";
 
