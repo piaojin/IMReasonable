@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+
+
 #import "IMReasonableDao.h"
 #import "OneRoomUser.h"
 #import "MessageModel.h"
@@ -13,12 +15,18 @@
 #define GROUP_CHAT 0 //群聊
 @implementation IMReasonableDao
 
++(BOOL)clearAllChatMessage:(NSString *)myjidstr{
+    NSString *sql=[NSString stringWithFormat:@"delete from Message where ([from]=\"%@\" or [to]=\"%@\")",myjidstr,myjidstr];
+    NSLog(@"%@",sql);
+    return [FMDBDao executeUpdate:sql];
+}
+
 ///初始化App的用户表和历史消息表
 +(void)initIMReasonableTable
 {
     //[self sharedFMDBManager];
     //创建[User]
-    [FMDBDao executeUpdate:@"CREATE  TABLE [User] ([jidstr] TEXT PRIMARY KEY  NOT NULL ,[nick] TEXT,[localname] TEXT,[addrefID] TEXT,[faceurl] TEXT DEFAULT \"default.png\",[photo] TEXT,[hash]  TEXT,[group] TEXT,[state] TEXT DEFAULT \"unavailable\" ,[isactive] TEXT DEFAULT \"0\",[isimrea] TEXT DEFAULT \"0\",[isloc] TEXT DEFAULT \"0\",[device] TEXT ,[update] DATETIME default (datetime('now', 'localtime')),[unreadcount] TEXT,[msgID]       TEXT)"];
+    [FMDBDao executeUpdate:@"CREATE  TABLE IF NOT EXISTS [User] ([jidstr] TEXT PRIMARY KEY  NOT NULL ,[nick] TEXT,[localname] TEXT,[addrefID] TEXT,[faceurl] TEXT DEFAULT \"default.png\",[photo] TEXT,[hash]  TEXT,[group] TEXT,[state] TEXT DEFAULT \"unavailable\" ,[isactive] TEXT DEFAULT \"0\",[isimrea] TEXT DEFAULT \"0\",[isloc] TEXT DEFAULT \"0\",[device] TEXT ,[update] DATETIME default (datetime('now', 'localtime')),[unreadcount] TEXT,[msgID]       TEXT)"];
     
     [FMDBDao executeUpdate:@"alter table User add isRoom text default '0'"]; //增加一个字段  判断是不是房间
     [FMDBDao executeUpdate:@"alter table User add phonenumber text "]; //增加一个字段       保存用户的电话号码
@@ -38,14 +46,14 @@
     [self clearRoomUser];
     
     //创建本地消息表
-    [FMDBDao executeUpdate:@"CREATE  TABLE [Message] ([msgID] TEXT PRIMARY KEY  NOT NULL,[from] TEXT,[to] TEXT,[body] TEXT,[type] TEXT,[groupfrom] TEXT,[date] DATETIME default (datetime('now', 'localtime')),[isneedsend] TEXT DEFAULT \"0\",[isaccpet] TEXT DEFAULT \"0\")"];
+    [FMDBDao executeUpdate:@"CREATE  TABLE IF NOT EXISTS [Message] ([msgID] TEXT PRIMARY KEY  NOT NULL,[from] TEXT,[to] TEXT,[body] TEXT,[type] TEXT,[groupfrom] TEXT,[date] DATETIME default (datetime('now', 'localtime')),[isneedsend] TEXT DEFAULT \"0\",[isaccpet] TEXT DEFAULT \"0\")"];
      [FMDBDao executeUpdate:@"alter table Message add voicelenth text default '0'"]; //增加一个字段
      [FMDBDao executeUpdate:@"alter table Message add markdelete text default '0'"]; //增加一个字段 钟对群消息的删除问题 折中方案
     
     
-    [FMDBDao executeUpdate:@"create table RoomList ([roomjidstr] TEXT,[userjidstr] TEXT,[role] TEXT, primary key ([roomjidstr],[userjidstr]))"];
+    [FMDBDao executeUpdate:@"create table IF NOT EXISTS RoomList ([roomjidstr] TEXT,[userjidstr] TEXT,[role] TEXT, primary key ([roomjidstr],[userjidstr]))"];
     //创建群主列表
-    [FMDBDao executeUpdate:@"CREATE  TABLE [ChatRoom] ([roomjidstr] TEXT PRIMARY KEY  NOT NULL ,[nick] TEXT,[subject] TEXT,[faceurl] TEXT DEFAULT \"default.png\",[photo] TEXT,[hash]  TEXT,[update] DATETIME default (datetime('now', 'localtime')),[unreadcount] TEXT,[msgID]       TEXT)"];
+    [FMDBDao executeUpdate:@"CREATE  TABLE IF NOT EXISTS [ChatRoom] ([roomjidstr] TEXT PRIMARY KEY  NOT NULL ,[nick] TEXT,[subject] TEXT,[faceurl] TEXT DEFAULT \"default.png\",[photo] TEXT,[hash]  TEXT,[update] DATETIME default (datetime('now', 'localtime')),[unreadcount] TEXT,[msgID]       TEXT)"];
     
     
 }
@@ -82,14 +90,18 @@
 }
 
 
-#pragma mark-存储用户
+
+#pragma 保存聊天记录
 +  (BOOL) saveMessage:(NSString *) from to:(NSString *) to body:(NSString *) body type:(NSString *) type date:(NSString *)date
            voicelenth:(NSString *)voicelenth msgID:(NSString *) msgID
 {
-        NSString * sql=[NSString stringWithFormat:@"insert into Message([msgID],[from],[to],[body],[type],[date],[isneedsend],[isaccpet],[voicelenth]) values(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",msgID,from,to,body,type,date,@"1",@"1",voicelenth];
-        [FMDBDao executeUpdate:sql];
+    NSLog(@"body:%@",body);
+    NSString * sql=[NSString stringWithFormat:@"insert into Message([msgID],[from],[to],[body],[type],[date],[isneedsend],[isaccpet],[voicelenth]) values(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",msgID,from,to,[type isEqualToString:EMAIL]?[body stringByReplacingOccurrencesOfString:@"\"" withString:@"'"]:body,type,date,@"1",@"1",voicelenth];
+        BOOL result=[FMDBDao executeUpdate:sql];
+    NSLog(@"sql1:%@",sql);
+    NSLog(@"result:%d",result);
     sql=[NSString stringWithFormat:@"insert into [User](jidstr,[msgID],[isactive],[isloc],[unreadcount]) values(\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",from,msgID,@"1",@"1",@"1"];
-    
+    NSLog(@"sql2:%@",sql);
         BOOL flag= [FMDBDao executeUpdate:sql];
         if (!flag) {
              sql=[NSString stringWithFormat:@"update [User] set msgID=\"%@\" ,[isloc]=\"1\"  where jidstr= \"%@\"  ",msgID,from];
@@ -287,6 +299,53 @@
     
 }
 
+//获取邮件数量
++(int)getEmailCount{
+    FMResultSet *rs=[FMDBDao executeQuery:@"select count(*) as a from [Message]"];
+    int count=0;
+    if([rs next]){
+        
+        count=[rs intForColumn:@"a"];
+    }
+    [rs close];
+    rs=nil;
+    return count;
+}
+
+//获取邮件(jid中包含特殊字符所以不能用于sql语句)
++(NSMutableArray *)getEmailArray:(NSString *)jid WithPagerNumber:(long)pagerNumber AndCount:(long)count{
+    NSMutableArray *array=[NSMutableArray array];
+//    [to]=\"%@\"
+    FMResultSet *rs=[FMDBDao executeQuery:[NSString stringWithFormat:@"select * from [Message]  where [to]=\"%@\" order by date limit %ld,%ld",jid,pagerNumber,count]];
+    while([rs next]){
+        NSString *to=[rs stringForColumn:@"to"];
+        IMMessage * message=[[IMMessage alloc] init];
+//        if([jid isEqualToString:to]){
+//            
+//            message.ID=[rs stringForColumn:@"msgID"];
+//            message.from=[rs stringForColumn:@"from"];
+//            message.to=to;
+//            message.body=[rs stringForColumn:@"body"];
+//            message.type=[rs stringForColumn:@"type"];
+//            message.date=[Tool getDisplayTime:[rs stringForColumn:@"date"]];
+//            message.isneedsend=[rs stringForColumn:@"isneedsend"];
+//        }
+        message.ID=[rs stringForColumn:@"msgID"];
+        message.from=[rs stringForColumn:@"from"];
+        message.to=to;
+        message.body=[rs stringForColumn:@"body"];
+        message.type=[rs stringForColumn:@"type"];
+        message.date=[Tool getDisplayTime:[rs stringForColumn:@"date"]];
+        NSLog(@"%@",[rs stringForColumn:@"date"]);
+        message.isneedsend=[rs stringForColumn:@"isneedsend"];
+        [array addObject:message];
+    }
+    [rs close];
+    rs=nil;
+    return array;
+}
+
+//聊天列表
 +(NSMutableArray*)getChatlistModle
 {
 
@@ -485,6 +544,8 @@
     [messagelist autorelease];
     return messagelist;
 }
+
+#pragma 获取聊天记录
 //为第二套聊天界面做的修改
 +(NSMutableArray*)getMessageByFormAndToJidstr2:(NSString *)fromjidstr Tojidstr:(NSString*)tojidstr withRowCount:(NSString *)rowcount
 {
@@ -523,7 +584,12 @@
         temp.username=localname?localname:[[from componentsSeparatedByString:@"@"] objectAtIndex:0];
         NSString * type=[rs stringForColumn:@"type"];
         
-        if ([type isEqualToString:@"chat"]) {
+        if([type isEqualToString:EMAIL]){
+            
+            NSLog(@"%@",[rs stringForColumn:@"body"]);
+            temp.content=[rs stringForColumn:@"body"];
+            temp.type=MessageTypeEmail;
+        }else if ([type isEqualToString:@"chat"]) {
              temp.content=[rs stringForColumn:@"body"];
             temp.type=MessageTypeText;
         }else if([type isEqualToString:@"img"]){

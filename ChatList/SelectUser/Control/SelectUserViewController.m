@@ -6,25 +6,89 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+
+
+#import "MessageModel.h"
 #import "SelectUserViewController.h"
 #import "AppDelegate.h"
 #import "Tool.h"
 #import "ChatViewController.h"
 #import "GroupAddUserUIViewController.h"
 #import "XMPPRoomDao.h"
+#import "ChineseString.h"
 
-@interface SelectUserViewController (){
-    
-    
-   // UITableView *tableview;
-    NSMutableArray * chatuserlist;
-    
-    
-}
+@interface SelectUserViewController ()
+//存放拼音排序后的名字
+@property(nonatomic,strong)NSMutableArray *letterNameArray;
+//存放未排序的名字
+@property(nonatomic,strong)NSMutableArray *localNameArray;
+//******key=localname,value=IMChatListModle
+@property(nonatomic,strong)NSMutableDictionary *talKingUserDic;
+//******value=IMChatListModle
+@property(nonatomic,strong)NSMutableArray * chatuserlist;
 
 @end
 
 @implementation SelectUserViewController
+
+-(NSMutableArray *)letterNameArray{
+    if(_letterNameArray==nil){
+        
+        NSMutableArray *tempLetterArray=[NSMutableArray array];
+        _letterNameArray=[ChineseString LetterSortArray:self.localNameArray];
+        for(NSArray * temparray in _letterNameArray){
+            for(NSString *name in temparray){
+                [tempLetterArray addObject:name];
+            }
+        }
+        _letterNameArray=tempLetterArray;
+    }
+    return _letterNameArray;
+}
+
+-(NSMutableArray *)localNameArray{
+    if(_localNameArray==nil){
+        
+        _localNameArray=[NSMutableArray array];
+        for(int i=0;i<_chatuserlist.count;i++){
+            
+            NSString *name=((IMChatListModle*)_chatuserlist[i]).localname;
+            //名字为空则用其jid代替
+            if([Tool isBlankString:name]){
+                
+                name=((IMChatListModle*)_chatuserlist[i]).jidstr;
+                //去除@及其后面
+                name=[name substringToIndex:[name rangeOfString:@"@"].location];
+            }
+            [_localNameArray addObject:[name stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+        }
+    }
+    return _localNameArray;
+}
+
+-(NSMutableDictionary *)talKingUserDic{
+    if(_talKingUserDic==nil){
+        
+        if(_chatuserlist.count>0){
+            
+            _talKingUserDic=[[NSMutableDictionary alloc] init];
+            for(int i=0;i<_chatuserlist.count;i++){
+                IMChatListModle *model=_chatuserlist[i];
+                [_talKingUserDic setValue:model forKey:_localNameArray[i]];
+            }
+        }
+    }
+    return _talKingUserDic;
+}
+
+-(NSMutableArray *)chatuserlist{
+    if(_chatuserlist==nil){
+        
+        _chatuserlist=[IMReasonableDao getAllactiveUser];
+    }
+    return _chatuserlist;
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     NSLog(@"SelectUserViewController");
@@ -58,12 +122,16 @@
 - (void) initData
 {
     
-     // [chatuserlist removeAllObjects];
-    chatuserlist=[IMReasonableDao getAllactiveUser];
-
-    [self.tableview reloadData];
-
-
+    if(self.chatuserlist.count<=0){
+        
+        UILabel *label=[[UILabel alloc] init];
+        label.text=NSLocalizedString(@"GO_AND_INVITE_FRIENDS", nil);
+        CGRect labelRect=CGRectMake(0, 0, self.view.bounds.size.width, 16);
+        label.frame=labelRect;
+        [self.view addSubview:label];
+        label.center=self.view.center;
+        label.textAlignment=UITextAlignmentCenter;
+    }
     
 }
 - (void) initNavbutton
@@ -112,7 +180,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return chatuserlist.count;
+    return self.chatuserlist.count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -133,8 +201,8 @@
         }
     }
     
-    
-    IMChatListModle *temp=[chatuserlist objectAtIndex:[indexPath row]];
+    NSString *localName=[self.letterNameArray objectAtIndex:[indexPath row]];
+    IMChatListModle *temp=[self.talKingUserDic objectForKey:localName];
     if (!self.isGroup) {
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
@@ -153,12 +221,12 @@
     
 }
 
-
+//确定转发
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
    
     
-    
+    NSLog(@"确定转发");
     if (!self.isGroup) {
         
         if (self.isAddGroupUser) {
@@ -175,15 +243,17 @@
             
         }else{
         
-        IMChatListModle * temp=[chatuserlist objectAtIndex:[indexPath row]];
+        NSString *localName=[self.letterNameArray objectAtIndex:[indexPath row]];
+        IMChatListModle *temp=[self.talKingUserDic objectForKey:localName];
             
         ChatViewController *Cannotview=[[ChatViewController alloc] init];
+        Cannotview.forwardMessageModel=self.messageModel;
         Cannotview.from=temp;
         Cannotview.isforward=self.isforward;
         Cannotview.forwardmssage=self.forwardmessage;
             
         temp.unreadcount=@"0";
-        [chatuserlist replaceObjectAtIndex:[indexPath row] withObject:temp];
+        [_chatuserlist replaceObjectAtIndex:[indexPath row] withObject:temp];
         Cannotview.hidesBottomBarWhenPushed=YES;
         self.flag=true;
         
@@ -212,7 +282,7 @@
         {
            // [Tool alert:@"添加成功"];
             
-            IMChatListModle * temp=[chatuserlist objectAtIndex:actionSheet.tag];
+            IMChatListModle * temp=[_chatuserlist objectAtIndex:actionSheet.tag];
            // [[XMPPRoomDao sharedXMPPManager] InviteUser:temp.jidstr subject:self.from.localname];//邀请好友加入群里
             [[XMPPDao sharedXMPPManager] addUserToRoom:self.from.jidstr userjidstr:temp.jidstr roomname:self.from.localname];
             [IMReasonableDao addRoomUser:self.from.jidstr userjidstr:temp.jidstr role:@"0"];//把人员添加到数据库
@@ -273,7 +343,8 @@
     NSArray *selectRow=[self.tableview indexPathsForSelectedRows];
     for (NSIndexPath *index in selectRow) {
         
-          IMChatListModle * temp=[chatuserlist objectAtIndex:[index row]];
+        NSString *localName=[self.letterNameArray objectAtIndex:[index row]];
+        IMChatListModle *temp=[self.talKingUserDic objectForKey:localName];
         [selectUser addObject:temp];
         
     }

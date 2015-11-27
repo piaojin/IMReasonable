@@ -6,13 +6,19 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+@class IMChatListModle;
 #import <UIKit/UIKit.h>
-#import "BorderView.h"
 
 @interface MailTableViewCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet BorderView *borderview;
-@property (weak, nonatomic) IBOutlet UILabel *mailsendername;
-@property (weak, nonatomic) IBOutlet UILabel *mailtitle;
-@property (weak, nonatomic) IBOutlet UILabel *mailcontent;
++(instancetype)MailCell;
++(instancetype)cellWithTableView:(UITableView *)tableView;
+@property (weak, nonatomic) IBOutlet UILabel *spreadTitle;
+@property (weak, nonatomic) IBOutlet UILabel *sendName;
+@property (weak, nonatomic) IBOutlet UILabel *sendTime;
+@property (weak, nonatomic) IBOutlet UILabel *emailCount;
+@property (weak, nonatomic) IBOutlet UIImageView *emailImage;
+@property(nonatomic,strong)IMChatListModle *chatListModle;
+
+
 @end

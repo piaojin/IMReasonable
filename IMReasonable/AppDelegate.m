@@ -93,6 +93,7 @@
     NSLog(@"执行拉函数");
 
     NSString* token = [NSString stringWithFormat:@"%@", deviceToken];
+    NSLog(@"token:%@",token);
     token = [token substringFromIndex:1];
     token = [token substringToIndex:token.length - 1];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -107,10 +108,14 @@
 
     NSLog(@"%@", error);
 }
+
 ///应用程序处在打开状态，且服务器有推送消息过来时，以及通过推送打开应用程序，走的是这个方法
 - (void)application:(UIApplication*)application didReceiveRemoteNotification:(NSDictionary*)userInfo
 {
 
+//    UIAlertView *alert=[[UIAlertView alloc] initWithTitle:@"提示" message:@"推送" delegate:nil cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+//    [alert show];
+    NSLog(@"didReceiveRemoteNotification");
     NSLog(@"%@", userInfo);
 
     if ([[userInfo objectForKey:@"aps"] objectForKey:@"alert"] != NULL) {

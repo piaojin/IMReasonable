@@ -41,7 +41,6 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [AnimationHelper removeHUD];
-    NSLog(@"viewWillAppear");
 }
 
 - (void)initTableView
@@ -122,9 +121,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)tableView:(UITableView *)tableView didEndDisplayingCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
-    NSLog(@"didEndDisplayingCell");
-}
 
 #pragma mark - Table view data source
 
@@ -160,6 +156,7 @@
         cell.detailTextLabel.text=per.emailArray[0];
     }
     cell.textLabel.text = per.name;
+    cell.textLabel.lineBreakMode=NSLineBreakByTruncatingTail;
     return cell;
 }
 

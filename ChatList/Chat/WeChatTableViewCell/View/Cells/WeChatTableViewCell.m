@@ -148,12 +148,13 @@
 {
     NSString *message = @"呵呵";
     if (!error) {
-        message = @"成功保存到相册";
+        message = NSLocalizedString(@"SAVE_TO_ALBUM", nil);
     }else
     {
         message = [error description];
     }
     
+    [Tool alert:message];
     NSLog(@"%@",message);
 
 }
@@ -207,62 +208,12 @@
 
 //文本处理
 -(void)initTxtViewControl{
-    //_userPhoto = [[UIImageView alloc]init];
- //   _userPhoto.layer.masksToBounds = YES;
-//    _userPhoto.layer.cornerRadius = 25;
- //   [self.contentView addSubview:_userPhoto];
     _messageContent=[[MessageContent alloc] init];
     _messageContent.delegate=self;
     [self.contentView addSubview:_messageContent];
 }
 - (void)dealwithText{
-//    if (!_messagemode.content) {
-//        return ;
-//    }
-//        [self SetPohoto];
-//    
-//    CGRect rect = [TQRichTextView boundingRectWithSize:CGSizeMake(_ScreenWidth-120, MAXFLOAT) font:[UIFont systemFontOfSize:MESSAGECONNECTSIZE] string:self.messagemode.content lineSpace:2.0f];
-//    
-//    if (self.messagemode.isFromMe) {
-//        _userPhoto.frame=CGRectMake(_ScreenWidth-USERPHOTOOFFSET-USERPHOTOSIZE, USERPHOTOOFFSET, USERPHOTOSIZE, USERPHOTOSIZE);
-//        CGFloat width=rect.size.width>45?rect.size.width:45;
-//        
-//        width+=15+2;
-//        _messageContent.frame=CGRectMake(_ScreenWidth-USERPHOTOOFFSET-USERPHOTOSIZE-width-5, USERPHOTOOFFSET/2, width, rect.size.height+10+2);
-//        
-//        if ([_messagemode.isNeedSend isEqualToString:@"0"]&&[_messagemode.isReceived  isEqualToString:@"0"]) {
-//            reSend=[[UIImageView alloc] init];
-//            [self setGesRec];
-//            reSend.frame=CGRectMake(_messageContent.frame.origin.x-25, _messageContent.frame.size.height-20, 20, 20);
-//
-//        }
-//        
-//    }else{
-//        //计算名字的宽度
-//        UIFont *font = [UIFont fontWithName:@"Helvetica-Bold" size:17];//[UIFont systemFontOfSize:MESSAGECONNECTSIZE];
-//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
-//        paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
-//        NSDictionary *attributes = @{NSFontAttributeName:font, NSParagraphStyleAttributeName:paragraphStyle.copy};
-//        CGSize namesize = [self.messagemode.username boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
-//        
-//        
-//        CGFloat width=namesize.width>rect.size.width?namesize.width:rect.size.width+10;
-//        
-//        width+=15;
-//        
-//        _userPhoto.frame=CGRectMake(USERPHOTOOFFSET, USERPHOTOOFFSET, USERPHOTOSIZE, USERPHOTOSIZE);
-//        
-//        _messageContent.frame=CGRectMake(USERPHOTOOFFSET+USERPHOTOSIZE+5, USERPHOTOOFFSET/2, width>45?width:45, rect.size.height+20+10+2);
-//       
-//        
-//    }
-//    
-//   
-//    
-//    [_messageContent setMessagemode:self.messagemode];
-    
-    
-    
+
     if (!_messagemode.content) {
         return ;
     }

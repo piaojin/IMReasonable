@@ -6,13 +6,24 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"EMAIL_PROMPT_ERROR"="Email format is not correct";
+"REQUIRED"="Required";
+"EMAIL_PROMPT"="Fill in your email, so your friends can find you!";
+"LOGIN_ERROR"="login error";
+"SPREAD_EMAIL_PROMPT"="Spread Email Alert";
+"GO_AND_INVITE_FRIENDS"="invite your friends!";
+"BACK_CHATLIST"="back chatlist";
+"SAVE_TO_ALBUM" = "successfully saved to the album!";
+"CLEAR_PROMPT"="Chat records will be deleted";
+"CLEAR_DATA"="clear data";
+"SEND_SMS_FAILD"="SMS verification for more than 30 minutes or more than 3 times the number of log";
 "SIGN_OUT"="Sign out";
 "INVITE_ALL_PEOPLE"="invite all people";
 "INVITE_MANY_PEOPLE"="invite many people";
 "INVITE_FRIENDS"="invite friends";
 "START_INVITE"="start invite";
 "UNKNOW"="unknow";
-"CHECK_NET_WORK"="Please check network";
+"CHECK_NET_WORK"="Network is not available";
 "NONETWORK"="No Network";
 "InvitationBody"="Hello, Your friend (phone number is: %@) invites you to use TalkKing, TalkKing will facilitate you to contact each other:http://talk-king.net/d  ";
 "demo" = "this is a demo";
@@ -82,7 +93,7 @@
 
 
 
-"lbclvNoMan"="No man is an island.You are alone at TalkKing, invite your friends to connect at TalkKing?";
+"lbclvNoMan"="Your friends may also be using TalkKing, a free invitation!";
 
 /////////////////////////////////////////////////////////////////////////////////
 

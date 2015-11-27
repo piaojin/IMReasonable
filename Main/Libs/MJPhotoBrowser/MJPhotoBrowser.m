@@ -32,53 +32,6 @@
 
 @implementation MJPhotoBrowser
 
-//禁止横竖屏
--(BOOL)shouldAutorotate{
-    return YES;
-}
-
-//-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
-//    NSLog(@"supportedInterfaceOrientations");
-//    return UIInterfaceOrientationMaskAll;
-//}
-//
-//-(BOOL)shouldAutorotate{
-//    NSLog(@"shouldAutorotate");
-//    return YES;
-//}
-//
-//-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
-//    NSLog(@"shouldAutorotateToInterfaceOrientation");
-//    CGAffineTransform affineTransform;
-//    UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
-//    CGRect frame = [UIScreen mainScreen].applicationFrame;
-//    CGPoint center = CGPointMake(frame.origin.x + ceil(frame.size.width/2), frame.origin.y + ceil(frame.size.height/2));
-//    if (orientation == UIInterfaceOrientationLandscapeLeft) {
-//        affineTransform=CGAffineTransformMakeRotation(M_PI*1.5);
-//    } else if (orientation == UIInterfaceOrientationLandscapeRight) {
-//        affineTransform=CGAffineTransformMakeRotation(M_PI*2);
-//    } else if (orientation == UIInterfaceOrientationPortraitUpsideDown) {
-//        affineTransform=CGAffineTransformMakeRotation(-M_PI);
-//    } else {
-//        affineTransform=CGAffineTransformIdentity;
-//    }
-////    [[UIApplication sharedApplication] setStatusBarOrientation:UIDeviceOrientationLandscapeRight animated:YES];
-//    
-//    CGFloat duration = [UIApplication sharedApplication].statusBarOrientationAnimationDuration;
-//    [UIView beginAnimations:nil context:nil];
-//    [UIView setAnimationDuration:duration];
-//    
-//    //在这里设置view.transform需要匹配的旋转角度的大小就可以了。
-//    self.view.center=center;
-//    self.view.transform=affineTransform;
-//    
-//    [UIView commitAnimations];
-//    return (toInterfaceOrientation == UIInterfaceOrientationPortrait
-//            || toInterfaceOrientation == UIInterfaceOrientationLandscapeLeft
-//            || toInterfaceOrientation == UIInterfaceOrientationLandscapeRight);
-//    
-//}
-
 #pragma mark - Lifecycle
 - (void)loadView
 {

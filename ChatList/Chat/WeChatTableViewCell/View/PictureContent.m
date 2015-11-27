@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+
+
 #import "PictureContent.h"
 #import "StateView.h"
 #import "UUImageAvatarBrowser.h"
@@ -51,6 +53,8 @@
     
     return self;
 }
+
+
 
 - (void)setMessagemode:(MessageModel *)messagemode isNeedName:(BOOL)isName
 {

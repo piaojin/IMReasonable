@@ -6,13 +6,24 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"EMAIL_PROMPT_ERROR"="邮箱格式不正确";
+"REQUIRED"="必填";
+"EMAIL_PROMPT"="填写你的邮箱，让你的好友可以找到你!";
+"LOGIN_ERROR"="登录出错";
+"SPREAD_EMAIL_PROMPT"="Spread邮箱提醒";
+"GO_AND_INVITE_FRIENDS"="快去邀请好友吧!";
+"BACK_CHATLIST"="返回齐聊";
+"SAVE_TO_ALBUM"="成功保存到相册!";
+"CLEAR_PROMPT"="聊天记录将会被删除";
+"CLEAR_DATA"="清除数据";
+"SEND_SMS_FAILD"="短信验证超过30分钟或登录次数大于3";
 "SIGN_OUT"="退出";
 "INVITE_ALL_PEOPLE"="一键邀请";
 "INVITE_MANY_PEOPLE"="邀请多人";
 "INVITE_FRIENDS"="邀请好友";
 "START_INVITE"="开始邀请";
 "UNKNOW"="未知";
-"CHECK_NET_WORK"="请检查网络";
+"CHECK_NET_WORK"="网络不可用";
 "NONETWORK"="没有网络";
 "InvitationBody"="您好，您的朋友（电话号码是:%@）邀请您使用「齐聊」方便你们联系彼此:http://talk-king.net/d  ";
 
@@ -80,7 +91,7 @@
 "lbclvok"="OK";
 "lbclvdelete"="移出";
 
-"lbclvNoMan"="有朋至远方来，不亦说乎.您在齐聊好孤单哦, 邀请您的好朋友一起来使用齐聊吧！";
+"lbclvNoMan"="您的好友可能也在使用TalkKing,快免费邀请吧!";
 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -90,6 +101,7 @@
 "lbshoot"="拍摄";
 "lblocation"="位置";
 /////////////////////////////////////////////////////////////////////////////////
+
 
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *labName;
 @property (weak, nonatomic) IBOutlet UILabel *lbEmail;
 @property (weak, nonatomic) IBOutlet UITextField *email;
+@property (weak, nonatomic) IBOutlet UILabel *emailPrompt;
 
 @property  BOOL isSetting;
 @end

@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 @interface Tool : NSObject
++(NSString *)getDateWithFormatString:(NSString *)dateString;
++(NSDictionary *)JsonStrngToDictionary:(NSString *)json;
++ (UIImage *)imageWithColor:(UIColor *)color;
++(void)removeVoiceAndImg;
 + (id)StringTojosn:(NSString *)stringdata;
 + (NSString *) GetDate:(NSString *) femate;
 + (NSData *) NSDataToBS64Data:(NSData *) data;

@@ -10,7 +10,7 @@
 
 @interface IMMessage : NSObject
 //消息的Modles
-@property (nonatomic, copy)NSString * ID;
+@property (nonatomic, copy)NSString *ID;
 @property (nonatomic, copy)NSString *from;
 @property (nonatomic, copy)NSString *to;
 @property (nonatomic, copy)NSString *body;

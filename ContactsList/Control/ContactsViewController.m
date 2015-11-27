@@ -24,12 +24,6 @@
 #import "AnimationHelper.h"
 #import <MessageUI/MessageUI.h>
 
-#define INVITE_MANY_PEOPLE 0//邀请多人
-#define INVITE_ALL 1//一键邀请
-#define INVITE_SHEET 1//邀请弹出框
-#define INVITE 0//确定群邀
-#define INVITE_ALL_FRIENDS_COMPLETE @"INVITE_ALL_FRIENDS_COMPLETE"
-
 @interface ContactsViewController ()
 {
     UITableView *tableview;
@@ -55,7 +49,6 @@
                                                  name:@"CONNECTSCHANGE"
                                                object:nil];
 
-    
     //chatuserlist=[[NSMutableArray alloc] init];
     
     [self initData];
@@ -90,7 +83,6 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"favorites");
     [super viewWillAppear:animated];
 //    [self initData];
 }
@@ -128,7 +120,10 @@
     self.navigationItem.leftBarButtonItem=leftitem;
     self.navigationItem.title=NSLocalizedString(@"lbcontacts",nil);
     //添加群邀按钮
-    UIBarButtonItem *contactsRightBarButton=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(Invitation)];
+    UIBarButtonItem *contactsRightBarButton=[[UIBarButtonItem alloc] init];
+    [contactsRightBarButton setTarget:self];
+    [contactsRightBarButton setAction:@selector(Invitation)];
+    contactsRightBarButton.title=NSLocalizedString(@"lbinvitation",nil);
     self.navigationItem.rightBarButtonItem=contactsRightBarButton;
     
     
@@ -145,7 +140,7 @@
                                                    otherButtonTitles:NSLocalizedString(@"INVITE_MANY_PEOPLE", nil),NSLocalizedString(@"INVITE_ALL_PEOPLE", nil),
                                  nil];
     inviteSheet.tag=INVITE_SHEET;
-    [inviteSheet showInView:self.view];
+    [inviteSheet showInView:[UIApplication sharedApplication].keyWindow];
 }
 
 -(void)InvitationFriendsForHeightSys{

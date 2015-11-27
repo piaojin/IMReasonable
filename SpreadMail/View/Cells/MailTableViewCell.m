@@ -6,23 +6,96 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+#define SPREAD_EMAIL @"SPREAD_EMAIL"
+#define SPREAD_EMAIL_PROMPT @"SPREAD_EMAIL_PROMPT"
+#define EMAIL_IMAGE_R 25//由xib中邮件的图标的宽的大小(为其一半)决定(图标为正方形)
+#define EMAIL_MESSAGE_COUNT_R 13//与上面同理
+
+#import "SPreadMailModel.h"
 #import "MailTableViewCell.h"
+#import "Tool.h"
+#import "IMChatListModle.h"
+#import "MJExtension.h"
 
 @implementation MailTableViewCell
+
++(instancetype)MailCell{
+    return [[[NSBundle mainBundle] loadNibNamed:@"MailTableViewCell" owner:nil options:nil] lastObject];
+}
+
+-(void)setChatListModle:(IMChatListModle *)chatListModle{
+    NSString *emailJson=chatListModle.messagebody.body;
+    SpreadMailModel *emailModel=[SpreadMailModel mj_objectWithKeyValues:[emailJson stringByReplacingOccurrencesOfString:@"'" withString:@"\""]];
+    self.sendName.text=[NSString stringWithFormat:@"%@:%@",emailModel.campaign_from,emailModel.campaign_subject];
+    self.sendTime.text=NSLocalizedString(chatListModle.messagebody.date, chatListModle.messagebody.date);
+    self.sendTime.font=[UIFont systemFontOfSize:11];
+    self.sendTime.textColor=[UIColor grayColor];
+    self.sendTime.textAlignment=NSTextAlignmentRight;
+    self.spreadTitle.text=NSLocalizedString(SPREAD_EMAIL_PROMPT, nil);
+    self.emailCount.font=[UIFont systemFontOfSize:14];
+    self.emailCount.backgroundColor=[UIColor colorWithRed:0 green:0.47 blue:1 alpha:1];
+    self.emailCount.textColor=[UIColor orangeColor];
+    self.emailCount.textAlignment=NSTextAlignmentCenter;
+    self.emailCount.layer.masksToBounds=YES;
+    self.emailCount.layer.cornerRadius=EMAIL_MESSAGE_COUNT_R;
+    self.emailImage.layer.masksToBounds=YES;
+    self.emailImage.layer.cornerRadius=EMAIL_IMAGE_R;
+    if([chatListModle.messageCount intValue]>0){
+        
+        self.emailCount.hidden=NO;
+        self.emailCount.text=[chatListModle.messageCount intValue]>99?@"99":chatListModle.messageCount;
+    }else{
+        
+        self.emailCount.hidden=YES;
+    }
+}
+
++(instancetype)cellWithTableView:(UITableView *)tableView{
+  static NSString *ID=SPREAD_EMAIL;
+    MailTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:ID];
+    if(!cell){
+        
+        [tableView registerNib:[UINib nibWithNibName:@"MailTableViewCell" bundle:nil] forCellReuseIdentifier:ID];
+        cell=[tableView dequeueReusableCellWithIdentifier:ID];
+    }
+    return cell;
+}
+
+- (CGSize)boundingRectWithSize:(CGSize)size WithLabel:(UILabel *)label
+{
+    NSDictionary *attribute = @{NSFontAttributeName: label.font};
+    
+    CGSize retSize = [label.text boundingRectWithSize:size
+                                             options:\
+                      NSStringDrawingTruncatesLastVisibleLine |
+                      NSStringDrawingUsesLineFragmentOrigin |
+                      NSStringDrawingUsesFontLeading
+                                          attributes:attribute
+                                             context:nil].size;
+    
+    return retSize;
+}
+
+-(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if(self){
+        
+        self.spreadTitle.text=NSLocalizedString(SPREAD_EMAIL_PROMPT, nil);
+        self.emailCount.font=[UIFont systemFontOfSize:14];
+        self.emailCount.backgroundColor=[UIColor colorWithRed:0 green:0.47 blue:1 alpha:1];
+        self.emailCount.textColor=[UIColor whiteColor];
+        self.emailCount.textAlignment=NSTextAlignmentCenter;
+        self.emailCount.layer.masksToBounds=YES;
+        self.emailCount.layer.cornerRadius=13;
+        self.emailCount.hidden=YES;
+    }
+    return self;
+}
 
 - (void)awakeFromNib {
     // Initialization code
 }
 
-
-- (id)initWithCoder:(NSCoder*)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        self.backgroundColor=[UIColor colorWithRed:193 green:193 blue:193 alpha:1];
-    }
-    return self;
-}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

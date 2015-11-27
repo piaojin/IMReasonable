@@ -6,13 +6,24 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"EMAIL_PROMPT_ERROR"="郵箱格式不正確";
+"REQUIRED"="必填";
+"EMAIL_PROMPT"="填寫妳的郵箱，讓妳的好友可以找到妳!";
+"LOGIN_ERROR"="登錄出錯";
+"SPREAD_EMAIL_PROMPT"="Spread郵箱提醒";
+"GO_AND_INVITE_FRIENDS"="快去邀請好友吧!";
+"BACK_CHATLIST"="返回齊聊";
+"SAVE_TO_ALBUM"="成功保存到相冊!";
+"CLEAR_PROMPT"="聊天記錄將會被刪除";
+"CLEAR_DATA"="清除數據";
+"SEND_SMS_FAILD"="短信驗證超過30分鐘或登錄次數大於3";
 "SIGN_OUT"="退出";
 "INVITE_ALL_PEOPLE"="壹鍵邀請";
 "INVITE_MANY_PEOPLE"="邀請多人";
 "INVITE_FRIENDS"="邀請好友";
 "START_INVITE"="開始邀請";
 "UNKNOW"="未知";
-"CHECK_NET_WORK"="請檢查網絡";
+"CHECK_NET_WORK"="網絡不可用";
 "NONETWORK"="沒有網絡";
 "InvitationBody"="您好，您的朋友（電話號碼是:%@）邀請您使用「乜都傾」將方便你們聯繫彼此 :http://talk-king.net/d  ";
 "lab"="我還是很愛你";
@@ -81,7 +92,7 @@
 "lbclvdelete"="移出";
 
 
-"lbclvNoMan"="有朋自遠方來,不亦樂乎.您在乜都傾好孤單哦, 邀請您的好朋友一起来使用乜都傾吧！";
+"lbclvNoMan"="您的好友可能也在使用TalkKing,快免費邀請吧!";
 /////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////

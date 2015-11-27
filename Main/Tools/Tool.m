@@ -5,13 +5,64 @@
 //  Created by apple on 14-9-3.
 //  Copyright (c) 2014年 Reasonable. All rights reserved.
 //
+
+
+
 #import <CommonCrypto/CommonDigest.h>
 #import <UIKit/UIKit.h>
 
 #import "Tool.h"
 
+#define VOICE @"voice"
+#define ALLUSERFILE @"AllUserFile"
 
 @implementation Tool
+
++(NSDictionary *)JsonStrngToDictionary:(NSString *)json{
+    if(json==nil){
+        
+        return nil;
+    }
+    NSData *jsonData=[json dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dictionary=[NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:&err];
+    if(err){
+        
+        return nil;
+    }
+    return dictionary;
+}
+
+//  颜色转换为背景图片
++ (UIImage *)imageWithColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+//删除文件夹及文件夹下的文件
++(void)removeVoiceAndImg{
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    //语音存放的路径
+    NSString *AllvoicePath=[NSString stringWithFormat:@"%@/%@",documentsDirectory,VOICE];
+    NSLog(@"%@",AllvoicePath);
+    //图片存放的路径
+    NSString *AllimgPath=[NSString stringWithFormat:@"%@/%@",documentsDirectory,ALLUSERFILE];
+    //删除语音
+    [fileManager removeItemAtPath:AllvoicePath error:nil];
+    //删除图片
+    [fileManager removeItemAtPath:AllimgPath error:nil];
+}
 
 + (id)StringTojosn:(NSString *)stringdata
 {
@@ -319,6 +370,7 @@
     return fullPathToFile;
 }
 
+//语音保存的路径
 + (NSString *) getVoicePath:(NSString *) filename
 {
     NSString *fullPathToFile;
@@ -349,6 +401,7 @@
      */
     
 }
+
 //存储图片到Doc文件夹里面
 + (void) saveImageToDoc:(NSString*) imagename image:(UIImage*) img
 {
@@ -551,6 +604,14 @@
     //        return [NSString stringWithFormat:@"%ld/%ld/%ld",datemonth,dateday,dateyear];
     //    }
     return @"";
+}
+
++(NSString *)getDateWithFormatString:(NSString *)dateString{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:dateString];
+    NSDate *date=[NSDate date];
+    NSString *formatDate = [dateFormatter stringFromDate:date];
+    return formatDate;
 }
 
 //////////////////
@@ -854,6 +915,9 @@
     }
     return 0;
 }
+
+
+
 //遍历文件夹获得文件夹大小，返回多少M
 + (float ) folderSizeAtPath:(NSString*) folderPath{
     NSFileManager* manager = [NSFileManager defaultManager];

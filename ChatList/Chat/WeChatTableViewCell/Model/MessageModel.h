@@ -10,6 +10,7 @@
 
 
 typedef NS_ENUM(NSInteger, MessageType) {
+    MessageTypeEmail    =5,//邮箱
     MessageTypeText     = 0 , // 文字
     MessageTypePicture  = 1 , // 图片
     MessageTypeVoice    = 2 ,  // 语音
@@ -19,7 +20,7 @@ typedef NS_ENUM(NSInteger, MessageType) {
 
 
 @interface MessageModel : NSObject
-@property (nonatomic, copy)NSString * ID;//保存到数据库的id
+@property (nonatomic, copy)NSString *ID;//保存到数据库的id
 @property (nonatomic, copy) NSString *faceurl;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *content;

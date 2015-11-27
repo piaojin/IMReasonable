@@ -6,12 +6,15 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+#import "IMReasonableDao.h"
 #import "SetterViewController.h"
 #import "XMPPDao.h"
 #import "ThirdViewController.h"
 #import "WallPaperViewController.h"
 #import "UIColor+Hex.h"
 #import "FirstViewController.h"
+
+#define CLEAR 0//确定清除数据
 
 #define FOOTERVIEW_HEIGTH 44
 
@@ -29,8 +32,18 @@
 
 @implementation SetterViewController
 
+-(void)reloadCache:(NSNotification *)notification{
+    _docSize =[Tool getDocSize];
+    [_tableview reloadData];
+    NSLog(@"reloadCache");
+}
+
 - (void)viewDidLoad {
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadCache:)
+                                                 name:RELOAD_CACHE
+                                               object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadtableview)
                                                  name:@"NETCHANGE"
@@ -63,11 +76,12 @@
 
 - (void)initData{
  
+    NSArray * section0=[[NSArray alloc] initWithObjects:@"CLEAR_DATA", nil];
     NSArray * section1=[[NSArray alloc] initWithObjects:@"lbsabout", nil];
     NSArray * section2=[[NSArray alloc] initWithObjects:@"lbsprofile", @"lbwallpaper",nil];
     NSArray * section3=[[NSArray alloc] initWithObjects:@"lbsnetstate", nil];
     NSArray * section4=[[NSArray alloc] initWithObjects:@"lbsusage", nil];
-    _datalist=[[NSMutableArray alloc] initWithObjects:section1,section2,section3,section4, nil];
+    _datalist=[[NSMutableArray alloc] initWithObjects:section1,section2,section3,section4, section0,nil];
 
 }
 
@@ -93,17 +107,22 @@
 
 //退出登录
 -(void)logout:(UIButton *)button{
-    //清除用户数据
-    NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
-    //设置退出登录为真
-    [userDefaults setBool:true forKey:ISSIGN_OUT];
-    //清除手机号码和密码
-    [userDefaults removeObjectForKey:XMPPREASONABLEJID];
-    [userDefaults removeObjectForKey:XMPPREASONABLEPWD];
-    [userDefaults setBool:false forKey:@"FIRSTLOGIN"];
-    [userDefaults synchronize];
     FirstViewController* firstViewController=[[FirstViewController alloc] init];
     [self presentViewController:firstViewController animated:YES completion:nil];
+    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+        //清除用户数据
+        NSUserDefaults* userDefaults=[NSUserDefaults standardUserDefaults];
+        //设置退出登录为真
+        [userDefaults setBool:true forKey:ISSIGN_OUT];
+        //清除手机号码和密码
+        [userDefaults removeObjectForKey:XMPPREASONABLEJID];
+        [userDefaults removeObjectForKey:XMPPREASONABLEPWD];
+        [userDefaults setBool:false forKey:@"FIRSTLOGIN"];
+        [userDefaults synchronize];
+        //发出下线通知
+        [[XMPPDao sharedXMPPManager] disconnect];
+        [[XMPPDao sharedXMPPManager] goOffline];
+    });
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -146,13 +165,16 @@
         cell= [tableView dequeueReusableCellWithIdentifier:@"NETWORK"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"NETWORK"];
-           // cell.selectionStyle=UITableViewCellAccessoryNone;
         }
         
-        cell.detailTextLabel.text=_docSize;
         
-        
-    
+        if(indexPath.section==3){
+            
+            cell.detailTextLabel.text=_docSize;
+        }else{
+            
+            cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
+        }
     }
    
      cell.selectionStyle=UITableViewCellAccessoryNone;
@@ -170,6 +192,44 @@
 {
     return 20;
     
+}
+
+//发出清除数据通知更新聊天列表
+-(void)PostReLoadChatListNotification{
+    NSUserDefaults* defaults=[NSUserDefaults standardUserDefaults];
+    NSString* myJID = [defaults stringForKey:XMPPREASONABLEJID];
+    if([IMReasonableDao clearAllChatMessage:myJID]){
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:RELOAD_CHETLIST object:nil];
+    }
+}
+
+-(void)ClearAlert{
+    if(iOS(8)){
+        
+        UIAlertController* alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"lbttitle",nil)
+                                                                                 message:NSLocalizedString(@"CLEAR_PROMPT",nil) preferredStyle:UIAlertControllerStyleAlert];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"btnDone",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+                [self PostReLoadChatListNotification];
+        }]];
+        [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            
+            
+        }]];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }else{
+        
+        UIAlertView* myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbttitle",nil) message:NSLocalizedString(@"CLEAR_PROMPT",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btnDone",nil) otherButtonTitles:NSLocalizedString(@"lbTCancle",nil), nil];
+        [myAlertView show];
+    }
+}
+
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
+    if(buttonIndex==CLEAR){
+        
+        [self PostReLoadChatListNotification];
+    }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -193,6 +253,11 @@
         }
        
     }
+    //清除数据
+    else if(section==4){
+        
+        [self ClearAlert];
+    }
     
 }
 
@@ -208,8 +273,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+
 -(void)dealloc{
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NETCHANGE" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NETCHANGE" object:nil];
 }
 @end

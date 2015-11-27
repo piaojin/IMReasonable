@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "XMPPDao.h"
 
-@interface SetterViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface SetterViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIAlertViewDelegate>
 
 @end

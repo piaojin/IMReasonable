@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+#import "SpreadMailModel.h"
+#import "MailTableViewCell.h"
+#import "MessageModel.h"
 #import "ChatViewController.h"
 #import "WeChatKeyBoard.h"
 #import "WeChatTableViewCell.h"
@@ -27,6 +30,9 @@
 
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
+#import "UIImageView+WebCache.h"
+
+#define ALLUSERFILE @"AllUserFile"
 
 @implementation ChatViewController {
     //页面需要的控件
@@ -45,6 +51,18 @@
     NSInteger rommusercount;
 }
 
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+-(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath{
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -54,8 +72,35 @@
 
     //    //初始化界面需要的控件
     [self initViewControl];
+    //是否是通过转发信息跳转进来的
     if (self.isforward) {
-        [self sendMessage:self.forwardmssage type:@"chat" voicelenth:@"0" voicepath:@""];
+        if(self.forwardMessageModel.type==MESSAGE_TYPE_TEXT){
+            
+            [self sendMessage:self.forwardmssage type:@"chat" voicelenth:@"0" voicepath:@""];
+
+        }else{
+            
+            UIImage *image;
+            NSString *imageURL=self.forwardMessageModel.content;
+            NSFileManager *fileManager=[NSFileManager defaultManager];
+            //转发自己的图片
+            if([fileManager fileExistsAtPath:FULLPATHTOFILE(imageURL) isDirectory:false]){
+                
+                //从本地加载图片
+                image=[UIImage imageWithContentsOfFile:FULLPATHTOFILE(imageURL)];
+                [self didSendImage:image];
+            }else if([imageURL rangeOfString:ALLUSERFILE].length>0){
+                
+                //转发别人的图片
+                UIImageView *imageView=[[UIImageView alloc] initWithImage:image];
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMReasonableAPPImagePath,imageURL]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                    if(image!=nil){
+                        
+                        [self didSendImage:image];
+                    }
+                }];
+            }
+        }
     }
 
     [self initData:YES];
@@ -85,6 +130,9 @@
     [self setDelegate];
     [tableview reloadData];
 }
+
+
+
 //设置聊天页面需要的代理事件
 - (void)setDelegate
 {
@@ -158,8 +206,8 @@
     tableview.backgroundColor = [UIColor whiteColor];
     tableview.separatorStyle = UITableViewCellSelectionStyleNone;
     tableview.tableFooterView = [[UIView alloc] init];
-//    NSString* chatwallpaper = [NSString stringWithFormat:@"wp_%@.jpg", [[NSUserDefaults standardUserDefaults] stringForKey:CHATWALLPAPER]];
-//    tableview.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:chatwallpaper]];
+    //    NSString* chatwallpaper = [NSString stringWithFormat:@"wp_%@.jpg", [[NSUserDefaults standardUserDefaults] stringForKey:CHATWALLPAPER]];
+    //    tableview.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:chatwallpaper]];
 
     [self.view addSubview:tableview];
 
@@ -297,6 +345,8 @@
     [UUImageAvatarBrowser showImage:userinterface data:nil];
 }
 
+
+
 // 初始化导航栏
 - (void)initNav
 {
@@ -366,6 +416,18 @@
 
     self.navigationItem.titleView = view;
 
+    if(self.isforward){
+        
+        
+        UIButton* backButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        backButton.frame = CGRectMake(0, 0, 36, 30.0f);
+        backButton.titleLabel.font=[UIFont systemFontOfSize:18.0];
+        [backButton setTitle:NSLocalizedString(@"lbchats", nil) forState:normal];
+        [backButton addTarget:self action:@selector(goRootView:) forControlEvents:UIControlEventTouchUpInside];
+        UIBarButtonItem* backButtonItem = [[UIBarButtonItem alloc] initWithCustomView:backButton];
+        backButtonItem.style=UIBarButtonItemStyleBordered;
+        self.navigationItem.leftBarButtonItem = backButtonItem;
+    }
     if (self.isNeedCustom) {
         UIButton* releaseButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         releaseButton.frame = CGRectMake(0, 0, 44, 30.0f);
@@ -595,20 +657,20 @@
 
     static NSString* Idetify = @"WECHATCELL";
     MessageModel* mode = [messageList objectAtIndex:[indexPath row]];
-    WeChatTableViewCell* cell = [tableview dequeueReusableCellWithIdentifier:Idetify];
-    if (!cell) {
-
-        cell = [[WeChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Idetify];
-        cell.delegate = self;
-    }
-    else {
-        for (UIView* subView in cell.contentView.subviews) {
-            [subView removeFromSuperview];
+        WeChatTableViewCell* cell = [tableview dequeueReusableCellWithIdentifier:Idetify];
+        if (!cell) {
+            
+            cell = [[WeChatTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:Idetify];
+            cell.delegate = self;
         }
-    }
-
-    [cell setMessagemode:mode isNeedName:isRoom];
-    return cell;
+        else {
+            for (UIView* subView in cell.contentView.subviews) {
+                [subView removeFromSuperview];
+            }
+        }
+        
+        [cell setMessagemode:mode isNeedName:isRoom];
+        return cell;
 }
 - (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath
 {
@@ -751,21 +813,14 @@
     }
 }
 
-#pragma mark -把选择的图片发送到服务器
-- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
-{
-    [key hideKeyboard];
-    [picker dismissViewControllerAnimated:YES
-                               completion:^{
-                               }];
-    UIImage* image = [Tool fixOrientation:[info objectForKey:UIImagePickerControllerOriginalImage]];
-
+//发送图片
+-(void)didSendImage:(UIImage *)image{
     NSData* dataimg = UIImageJPEGRepresentation(image, 0.01);
-
+    
     //缓存到本地  针对图片这一块设计的
     NSString* filename = [Tool GetOnlyString];
     [Tool saveFileToDoc:filename fileData:dataimg];
-
+    
     MessageModel* tempmeseage = [[MessageModel alloc] init];
     tempmeseage.ID = [Tool GetOnlyString];
     //    tempmeseage.from=[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID];
@@ -778,16 +833,16 @@
     //
     //
     oneimgmessage = tempmeseage; //保存这一条图片消息的ID
-
+    
     [IMReasonableDao saveMessage2:myjidstr to:self.from.jidstr body:tempmeseage.content type:@"img" date:tempmeseage.time voicelenth:@"0" msgID:tempmeseage.ID]; //纯入本地数据库
     [self initData:YES];
-
+    
     NSString* datastring1 = [Tool NSdatatoBSString:dataimg]; //压缩编码发送
     NSURL* url = [NSURL URLWithString:[Tool Append:IMReasonableAPP witnstring:@"Upload"]];
-
-    NSString* jidstr = [[[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
+    
+    NSString* jidstr = MJID;
     NSString* appendfilename = [Tool GetOnlyString];
-
+    
     NSDictionary* usert = [[NSDictionary alloc] initWithObjectsAndKeys:@"0", @"type", jidstr, @"username", datastring1, @"base64Content", appendfilename, @"filename", nil];
     NSDictionary* user = [[NSDictionary alloc] initWithObjectsAndKeys:usert, @"file", nil];
     if ([NSJSONSerialization isValidJSONObject:user]) {
@@ -800,13 +855,26 @@
         [request setRequestMethod:@"POST"];
         [request setPostBody:tempJsonData];
         request.tag = [tempmeseage.ID integerValue];
-
+        
         [request setDelegate:self];
         [request setDidFinishSelector:@selector(sendImageSuc:)];
         [request setDidFailSelector:@selector(sendImageFaied:)];
         [request startAsynchronous];
     }
 }
+
+#pragma mark -把选择的图片发送到服务器
+- (void)imagePickerController:(UIImagePickerController*)picker didFinishPickingMediaWithInfo:(NSDictionary*)info
+{
+    [key hideKeyboard];
+    [picker dismissViewControllerAnimated:YES
+                               completion:^{
+                               }];
+    UIImage* image = [Tool fixOrientation:[info objectForKey:UIImagePickerControllerOriginalImage]];
+    [self didSendImage:image];
+}
+
+
 
 - (void)sendImageSuc:(ASIHTTPRequest*)req
 {
@@ -816,6 +884,8 @@
     NSString* path = [dict objectForKey:@"UploadFileResult"];
     [self sendMessage:path type:@"img" voicelenth:@"0" voicepath:@""];
 }
+
+
 
 - (void)sendImageFaied:(ASIHTTPRequest*)req
 {
@@ -866,6 +936,7 @@
 #pragma mark -ChatHelegate代理实现
 - (void)receiveNewMessage:(IMMessage*)message isFwd:(BOOL)isfwd
 {
+    NSLog(@"message:%@",message);
     if ([message.from isEqualToString:self.from.jidstr]) {
         [self initData:YES];
     }
@@ -935,30 +1006,31 @@
     NSArray* arrayPre = [temp filteredArrayUsingPredicate:pre];
     //被点击的图片的位置
     NSInteger index = [arrayPre indexOfObject:modle];
-//    ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
-//    [self.navigationController pushViewController:imgShow animated:NO];
+    //    ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
+    //    [self.navigationController pushViewController:imgShow animated:NO];
     [self ImageBrowser:arrayPre WithShowIndex:index];
 }
 
 //图片浏览器
--(void)ImageBrowser:(NSArray *)MessageModelArray WithShowIndex:(NSInteger)index{
-//    UIImageView *imageview=[[UIImageView alloc] init];
-//    imageview.frame=CGRectMake(self.view.center.x,self.view.center.y, 0, 0);
-    NSMutableArray *photoarray=[NSMutableArray array];
-    for(MessageModel *photoModel in MessageModelArray){
-        NSString *  imagePath = [photoModel.content stringByReplacingOccurrencesOfString:@"Small" withString:@""];
-        NSString *imageURL=[Tool Append:IMReasonableAPPImagePath witnstring:imagePath];
-        UIImage * image=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:photoModel.content]];
-        MJPhoto *photo=[[MJPhoto alloc] init];
-        photo.url=[NSURL URLWithString:imageURL];
-        photo.image=image;
+- (void)ImageBrowser:(NSArray*)messageModelArray WithShowIndex:(NSInteger)index
+{
+
+    NSMutableArray* photoarray = [NSMutableArray array];
+    for (MessageModel* photoModel in messageModelArray) {
+        NSString* imagePath = [photoModel.content stringByReplacingOccurrencesOfString:@"Small" withString:@""];
+        NSLog(@"%@",imagePath);
+        NSString* imageURL = [Tool Append:IMReasonableAPPImagePath witnstring:imagePath];
+        UIImage* image = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:photoModel.content]];
+        NSLog(@"%@",[Tool getFilePathFromDoc:photoModel.content]);
+        MJPhoto* photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:imageURL];
+        photo.image = image;
         [photoarray addObject:photo];
     }
-    MJPhotoBrowser *browser = [[MJPhotoBrowser alloc] init];
+    MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
     browser.currentPhotoIndex = index; // 弹出相册时显示的第一张图片是？
     browser.photos = photoarray; // 设置所有的图片
     [browser show];
-
 }
 
 //处理重发事件代理
@@ -983,6 +1055,7 @@
 - (void)reSendPicture:(MessageModel*)message
 {
 
+    NSLog(@"reSendPicture");
     NSData* data = [NSData dataWithContentsOfFile:[Tool getFilePathFromDoc:message.content]];
     NSString* datastring1 = [Tool NSdatatoBSString:data]; //压缩编码发送
     NSURL* url = [NSURL URLWithString:[Tool Append:IMReasonableAPP witnstring:@"Upload"]];
@@ -1060,8 +1133,10 @@
 //处理转发事件
 - (void)acForwardMessage:(MessageModel*)message
 {
+    NSLog(@"转发");
     // SelectUserViewController * selectview=[[SelectUserViewController alloc] init];
     SelectUserViewController* selectview = [[SelectUserViewController alloc] initWithNibName:@"SelectUserViewController" bundle:nil];
+    selectview.messageModel=message;
     selectview.flag = false;
     selectview.isforward = true;
     selectview.forwardmessage = message.content;

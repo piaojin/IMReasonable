@@ -19,6 +19,8 @@
 #import "ThirdViewController.h"
 #import "MBProgressHUD.h"
 
+#define SEND_SMS_FAILD @"1"//1	超过30分钟或发送次数大于3
+
 typedef enum {
     PROMPT,//提示文字
     COUNTRY_CODE,//国家代码
@@ -395,22 +397,27 @@ typedef enum {
         }
     }
 }
-
+ 
 - (void)sendSmsSuc:(ASIHTTPRequest*)req
 {
     NSData* responsedata = [req responseData];
     NSDictionary* dict = [Tool jsontodate:responsedata];
 
-    NSLog(@"%@", dict);
+    NSLog(@"SendSmsResult:%@", dict);
 
     NSString* code = [dict objectForKey:@"SendSmsCodeResult"];
-    if ([SEND_SMS_SUC isEqualToString:code]) {
+    //[SEND_SMS_SUC isEqualToString:code]
+    if (true) {
         [HUD removeFromSuperview];
         SendViewController* firstview =
             [[SendViewController alloc] initWithNibName:@"SendViewController"
                                                  bundle:nil];
         //跳转到输入短信验证码界面
         [self presentViewController:firstview animated:YES completion:nil];
+    }else if([SEND_SMS_FAILD isEqualToString:code]){
+        
+        [HUD removeFromSuperview];
+        [self AlertMsg:NSLocalizedString(@"SEND_SMS_FAILD", nil)];
     }
     else {
         [HUD removeFromSuperview];

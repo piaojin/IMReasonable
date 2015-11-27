@@ -18,7 +18,11 @@
 
 @interface IMReasonableDao : NSObject
 
-
++(int)getEmailCount;
+//获取邮件
++(NSMutableArray *)getEmailArray:(NSString *)jid WithPagerNumber:(long)pagerNumber  AndCount:(long)count;
+//清除聊天记录
++(BOOL)clearAllChatMessage:(NSString *)myjidstr;
 
 +(NSString *)GetUserLocalNameByjidstr:(NSString *)jidstr;
 +(void)initIMReasonableTable;

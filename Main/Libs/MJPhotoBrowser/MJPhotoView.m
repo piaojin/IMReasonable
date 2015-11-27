@@ -72,12 +72,20 @@
         if (![_photo.url.absoluteString hasSuffix:@"gif"]) {
             __unsafe_unretained MJPhotoView *photoView = self;
             __unsafe_unretained MJPhoto *photo = _photo;
-            [_imageView setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                photo.image = image;
+            if(!photo.image){
                 
-                // 调整frame参数
-                [photoView adjustFrame];
-            }];
+                [_imageView setImageWithURL:_photo.url placeholderImage:_photo.placeholder options:SDWebImageRetryFailed|SDWebImageLowPriority completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                    photo.image = image;
+                    
+                    // 调整frame参数
+                    [photoView adjustFrame];
+                }];
+            }
+            //飘金:修复bug
+            else{
+                
+                [_imageView setImage:photo.image];
+            }
         }
     } else {
         [self photoStartLoad];
@@ -130,6 +138,7 @@
     // 设置缩放比例
     [self adjustFrame];
 }
+
 #pragma mark 调整frame
 - (void)adjustFrame
 {
@@ -157,7 +166,17 @@
 	self.minimumZoomScale = minScale;
 	self.zoomScale = minScale;
     
-    CGRect imageFrame = CGRectMake(0, 0, boundsWidth, imageHeight * boundsWidth / imageWidth);
+    CGRect imageFrame;
+    CGRect screenSize=[UIScreen mainScreen].bounds;
+    //图片小于屏幕的大小
+    if(screenSize.size.height>=imageSize.height&&screenSize.size.width>=imageSize.width){
+        
+       imageFrame = CGRectMake(0, 0, imageSize.width,imageSize.height);
+    }else{
+        
+//       imageFrame = CGRectMake(0, 0, imageSize.width*minScale, imageSize.height*minScale);
+       imageFrame = CGRectMake(0, 0, boundsWidth, imageHeight * boundsWidth / imageWidth);
+    }
     // 内容尺寸
     self.contentSize = CGSizeMake(0, imageFrame.size.height);
     

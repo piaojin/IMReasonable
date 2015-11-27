@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "IMChatListModle.h"
 #import "WeChatTableViewCell.h"
+#import "IMDelegate.h"
 
-@interface SpreadMailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,WeChatTableViewCellDelegate>
-@property (nonatomic,weak) IMChatListModle * from;
+
+
+@interface SpreadMailViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,WeChatTableViewCellDelegate,ChatHelerpDelegate>
+
 @end
