@@ -417,7 +417,7 @@ typedef enum {
     }else if([SEND_SMS_FAILD isEqualToString:code]){
         
         [HUD removeFromSuperview];
-        [self AlertMsg:NSLocalizedString(@"SEND_SMS_FAILD", nil)];
+        [self AlertMsg2:NSLocalizedString(@"SEND_SMS_FAILD", nil)];
     }
     else {
         [HUD removeFromSuperview];
@@ -437,6 +437,18 @@ typedef enum {
         [self AlertMsg:NSLocalizedString(@"msgInternet", nil)];
     }
 }
+
+- (void)AlertMsg2:(NSString*)msg
+{
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.removeFromSuperViewOnHide = YES;
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = msg;
+    hud.minSize = CGSizeMake(200.f, 108.0f);
+    [hud hide:YES afterDelay:2];
+}
+
+
 //在屏幕上显示两秒的提示信息
 - (void)AlertMsg:(NSString*)msg
 {

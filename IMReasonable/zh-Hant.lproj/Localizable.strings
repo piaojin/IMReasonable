@@ -6,6 +6,7 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"INVITE_FOR_FREE"="免費邀請好友";
 "EMAIL_PROMPT_ERROR"="郵箱格式不正確";
 "REQUIRED"="必填";
 "EMAIL_PROMPT"="填寫妳的郵箱，讓妳的好友可以找到妳!";

@@ -103,6 +103,17 @@
 //    _tableview.tableFooterView = [[UIView alloc]init];//设置不要显示多余的行;
     
     [self.view addSubview:_tableview];
+    [self AlertMsg2:NSLocalizedString(@"SEND_SMS_FAILD", nil)];
+}
+
+- (void)AlertMsg2:(NSString*)msg
+{
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.removeFromSuperViewOnHide = YES;
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = msg;
+    hud.minSize = CGSizeMake(200.0f, 200.0f);
+    [hud hide:YES afterDelay:2];
 }
 
 //退出登录

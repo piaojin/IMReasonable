@@ -56,6 +56,73 @@
 
 
 
+//- (void)setMessagemode:(MessageModel *)messagemode isNeedName:(BOOL)isName
+//{
+//    _messagemode=messagemode;
+//    _username.text=messagemode.username;
+//    
+//    [_stateview setStateviewData:messagemode];
+//    
+//   
+//  
+//    _imageview.userInteractionEnabled = YES;
+//    UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fangda:)];
+//    [_imageview addGestureRecognizer:singleTap];
+//    
+//    
+//    CGRect rect=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+//    self.backgroundImage.frame=rect;
+//    if (messagemode.isFromMe) {
+//        
+//        //要显示的图片
+//        UIImage * tempimg=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:messagemode.content]];
+//        _imageview.image=tempimg;
+//        
+//        //聊天背景图片(气泡)
+//        UIImage *bubble =[UIImage imageNamed:@"BubbleOutgoing"] ;
+//        CGFloat top =10; // 顶端盖高度
+//        CGFloat left = bubble.size.width/2 ; // 底端盖高度
+//        CGFloat bottom = bubble.size.height - top + 1; // 左端盖宽度
+//        CGFloat right = bubble.size.width - left - 1; // 右端盖宽度
+//        UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+//        self.backgroundImage.image=[bubble resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+//        
+//        _imageview.frame=CGRectMake(2.5, 1, self.frame.size.width-15, self.frame.size.height-2);
+//        _stateview.frame=CGRectMake(_imageview.frame.size.width-45, _imageview.frame.size.height-10, 45, 10);
+//        
+//        
+//        
+//    }else{
+//        
+//        //设置背景气泡
+//        UIImage *bubble =[UIImage imageNamed:@"BubbleIncoming"];
+//        CGFloat top =10; // 顶端盖高度
+//        CGFloat left = bubble.size.width/2 ; // 底端盖高度
+//        CGFloat bottom = bubble.size.height - top + 1; // 左端盖宽度
+//        CGFloat right = bubble.size.width - left - 1; // 右端盖宽度
+//        UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+//        self.backgroundImage.image=[bubble resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+//        
+//        CGFloat offset=0;
+//        if (isName) {
+//            offset=20;
+//            _username.hidden=NO;
+//        }else{
+//            _username.hidden=YES;
+//            offset=2;
+//         
+//        }
+//
+//        //设置聊天的内容
+//        _imageview.frame=CGRectMake(13, offset, 140-2, 140-2);//设置图片的尺寸
+//        _username.frame=CGRectMake(15, 0, self.frame.size.width-15, offset); //设置显示用户的名字
+//        
+//        NSString *path=[Tool Append:IMReasonableAPPImagePath witnstring:messagemode.content];
+//          [_imageview sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"loading.png"]];
+//        _stateview.frame=CGRectMake(self.frame.size.width-30, self.frame.size.height-15, 25, 10);
+//    }
+//}
+
 - (void)setMessagemode:(MessageModel *)messagemode isNeedName:(BOOL)isName
 {
     _messagemode=messagemode;
@@ -63,8 +130,8 @@
     
     [_stateview setStateviewData:messagemode];
     
-   
-  
+    
+    
     _imageview.userInteractionEnabled = YES;
     UITapGestureRecognizer *singleTap =[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fangda:)];
     [_imageview addGestureRecognizer:singleTap];
@@ -74,9 +141,11 @@
     self.backgroundImage.frame=rect;
     if (messagemode.isFromMe) {
         
+        //要显示的图片
         UIImage * tempimg=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:messagemode.content]];
-        _imageview.image=tempimg;
+        _imageview.image=[self cutImage:tempimg];
         
+        //聊天背景图片(气泡)
         UIImage *bubble =[UIImage imageNamed:@"BubbleOutgoing"] ;
         CGFloat top =10; // 顶端盖高度
         CGFloat left = bubble.size.width/2 ; // 底端盖高度
@@ -85,7 +154,7 @@
         UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
         self.backgroundImage.image=[bubble resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
         
-        _imageview.frame=CGRectMake(2.5, 1, self.frame.size.width-15, self.frame.size.height-2);
+        _imageview.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
         _stateview.frame=CGRectMake(_imageview.frame.size.width-45, _imageview.frame.size.height-10, 45, 10);
         
         
@@ -108,26 +177,51 @@
         }else{
             _username.hidden=YES;
             offset=2;
-         
+            
         }
-
+        
         //设置聊天的内容
         _imageview.frame=CGRectMake(13, offset, 140-2, 140-2);//设置图片的尺寸
         _username.frame=CGRectMake(15, 0, self.frame.size.width-15, offset); //设置显示用户的名字
         
         NSString *path=[Tool Append:IMReasonableAPPImagePath witnstring:messagemode.content];
-          [_imageview sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"loading.png"]];
+        [_imageview sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"loading.png"]];
         _stateview.frame=CGRectMake(self.frame.size.width-30, self.frame.size.height-15, 25, 10);
+    }
+}
+
+-(UIImage *)cutImage:(UIImage *)image{
+    CGSize imageSize=image.size;
+    long x,y,c;
+    long width=imageSize.width;
+    long heigth=imageSize.height;
+    if(width>=heigth){
         
+        x=(width-heigth)/2;
+        y=0;
+        c=heigth;
+    }else{
         
-        
+        x=0;
+        y=(heigth-width)/2;
+        c=width;
         
     }
-    
-    
-    
-    
-    
+    return [self getImageFromImage:image subImageSize:CGSizeMake(c, c) subImageRect:CGRectMake(x, y, c, c)];
+}
+
+//图片裁剪
+-(UIImage *)getImageFromImage:(UIImage*) superImage subImageSize:(CGSize)subImageSize subImageRect:(CGRect)subImageRect {
+     //    CGSize subImageSize = CGSizeMake(WIDTH, HEIGHT); //定义裁剪的区域相对于原图片的位置
+     //    CGRect subImageRect = CGRectMake(START_X, START_Y, WIDTH, HEIGHT);
+         CGImageRef imageRef = superImage.CGImage;
+         CGImageRef subImageRef = CGImageCreateWithImageInRect(imageRef, subImageRect);
+         UIGraphicsBeginImageContext(subImageSize);
+         CGContextRef context = UIGraphicsGetCurrentContext();
+         CGContextDrawImage(context, subImageRect, subImageRef);
+         UIImage* returnImage = [UIImage imageWithCGImage:subImageRef];
+         UIGraphicsEndImageContext(); //返回裁剪的部分图像
+         return returnImage;
 }
 
 - (void)fangda:(id)sender{

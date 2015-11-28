@@ -18,6 +18,12 @@
 
 @implementation Tool
 
+//切割图片
++(UIImage *)CuttingImage:(UIImage *)image WitnRect:(CGRect)rect{
+    
+    return image;
+}
+
 +(NSDictionary *)JsonStrngToDictionary:(NSString *)json{
     if(json==nil){
         

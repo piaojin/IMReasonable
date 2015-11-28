@@ -65,7 +65,7 @@
 {
     if (_inviteButton == nil) {
 
-        NSString* inviteText = @"免费邀请好友";
+        NSString* inviteText = NSLocalizedString(@"INVITE_FOR_FREE", nil);
         CGSize titleSize = [inviteText sizeWithFont:[UIFont systemFontOfSize:18.0] constrainedToSize:CGSizeMake(MAXFLOAT, MAXFLOAT)];
         _inviteButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [_inviteButton.layer setMasksToBounds:YES];

@@ -1433,7 +1433,7 @@ static NSMutableArray* allRoom;
 
     [iq addChild:query];
 
-    NSLog(@"%@", iq);
+    NSLog(@"checkUser:%@", iq);
     [xmppStream sendElement:iq];
 }
 

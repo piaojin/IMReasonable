@@ -183,16 +183,22 @@
 {
     dispatch_async(dispatch_get_global_queue(2, 0), ^{
           NSMutableArray * allLacalUser=[IMReasonableDao getAllLocalUser];
-        
-        for (int i=0; i<allLacalUser.count; i++) {
-            IMChatListModle * tempuser=[allLacalUser objectAtIndex:i];
-            [[XMPPDao sharedXMPPManager] XMPPAddFriendSubscribe2:tempuser.jidstr];
-            [[XMPPDao sharedXMPPManager] queryOneRoster:tempuser.jidstr];
+        if(allLacalUser.count<=0){
+            
+            [self GetContacts];
+        }else{
+            
+            for (int i=0; i<allLacalUser.count; i++) {
+                IMChatListModle * tempuser=[allLacalUser objectAtIndex:i];
+                [[XMPPDao sharedXMPPManager] XMPPAddFriendSubscribe2:tempuser.jidstr];
+                [[XMPPDao sharedXMPPManager] queryOneRoster:tempuser.jidstr];
+            }
         }
     });
 
 
     [self GetAllRegUser];//把不是好友的人
+    [tableview reloadData];
     
 }
 
@@ -915,4 +921,85 @@
     
      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CONNECTSCHANGE" object:nil];
 }
+
+//在这个函数里面创建数据库并获取扫描联系人
+- (void)GetContacts
+{
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+        // [AnimationHelper showHUD:NSLocalizedString(@"lblookforfriend",nil)];
+        
+        ABAddressBookRef tmpAddressBook = nil;
+        //根据系统版本不同，调用不同方法获取通讯录
+        if ([[UIDevice currentDevice].systemVersion floatValue] >= 6.0) {
+            tmpAddressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+            dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+            ABAddressBookRequestAccessWithCompletion(tmpAddressBook, ^(bool greanted, CFErrorRef error) {
+                dispatch_semaphore_signal(sema);
+            });
+            dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+        }
+        if (tmpAddressBook == nil) {
+            return;
+        };
+        
+        CFArrayRef results = ABAddressBookCopyArrayOfAllPeople(tmpAddressBook);
+        
+        NSString* myphone = [[[[NSUserDefaults standardUserDefaults] objectForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
+        
+        //在这里边获取所有的联系人
+        for (int i = 0; i < CFArrayGetCount(results); i++) {
+            ABRecordRef person = CFArrayGetValueAtIndex(results, i);
+            //读取firstname
+            NSString* firstname = (__bridge NSString*)ABRecordCopyValue(person, kABPersonFirstNameProperty);
+            //读取lastname
+            NSString* lastname = (__bridge NSString*)ABRecordCopyValue(person, kABPersonLastNameProperty);
+            
+            NSString* fullname;
+            
+            NSInteger personID = ABRecordGetRecordID(person);
+            
+            if ([Tool isHaveChinese:firstname]) {
+                fullname = [NSString stringWithFormat:@"%@%@", lastname ? lastname : @"", firstname ? firstname : @""];
+            }
+            else {
+                fullname = [NSString stringWithFormat:@"%@ %@", firstname ? firstname : @"", lastname ? lastname : @""];
+            }
+            
+            //读取电话多值
+            ABMultiValueRef phone = ABRecordCopyValue(person, kABPersonPhoneProperty);
+            for (int k = 0; k < ABMultiValueGetCount(phone); k++) {
+                NSString* personPhoneLabel = (__bridge NSString*)ABAddressBookCopyLocalizedLabel(ABMultiValueCopyLabelAtIndex(phone, k));
+                //  获取該Label下的电话值
+                NSString* tmpPhoneIndex = (__bridge NSString*)ABMultiValueCopyValueAtIndex(phone, k);
+                
+                NSString* unknowphone = [tmpPhoneIndex substringWithRange:NSMakeRange(0, 1)];
+                tmpPhoneIndex = [Tool getPhoneNumber:tmpPhoneIndex];
+                NSString* flag = @"0";
+                if (![tmpPhoneIndex isEqualToString:@""]) {
+                    
+                    if (![unknowphone isEqualToString:@"+"]) { //需要当前用户的国家代码
+                        NSString* countrycode = [[NSUserDefaults standardUserDefaults] objectForKey:XMPPUSERCOUNTRYCODE];
+                        tmpPhoneIndex = [NSString stringWithFormat:@"%@%@", countrycode, tmpPhoneIndex];
+                    }
+                    
+                    if (![tmpPhoneIndex isEqualToString:myphone]) { //过滤掉自己的电话号码
+                        [[XMPPDao sharedXMPPManager] XMPPAddFriendSubscribe:tmpPhoneIndex]; //不管是不是openfire的用户得发送邀请
+                        [IMReasonableDao saveUserLocalNick:tmpPhoneIndex image:fullname addid:[NSString stringWithFormat:@"%ld", (long)personID] isImrea:flag phonetitle:personPhoneLabel]; // 保存到本地数据库
+                    }
+                }
+            }
+        }
+        
+        CFRelease(results);
+        CFRelease(tmpAddressBook);
+        
+        [AnimationHelper removeHUD];
+        
+        [self GetAllRegUser];
+        
+    });
+}
+
 @end
