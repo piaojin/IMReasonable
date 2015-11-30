@@ -622,6 +622,9 @@
         [self goLastMessage];
     });
 }
+
+
+
 //滚动到最后一行消息
 - (void)goLastMessage
 {
@@ -1114,6 +1117,9 @@
     hud.minSize = CGSizeMake(132.f, 108.0f);
     [hud hide:YES afterDelay:2];
 }
+
+
+
 //处理删除代理事件
 - (void)acDeteleMessage:(MessageModel*)message
 {

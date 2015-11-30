@@ -8,6 +8,9 @@
 
 
 
+#define CELL_HEIGTH 186
+#define OFFSET 20
+
 #import "WeChatTableViewCell.h"
 #import "MessageContent.h"
 #import "VoiceContent.h"
@@ -238,7 +241,7 @@
         CGFloat offset = 0;
         if (isRoom) {
             offset = 20;
-            UIFont* font = [UIFont fontWithName:@"Helvetica-Bold" size:17]; //[UIFont systemFontOfSize:MESSAGECONNECTSIZE];
+            UIFont* font = [UIFont fontWithName:@"Helvetica-Bold" size:17];
             NSMutableParagraphStyle* paragraphStyle = [[NSMutableParagraphStyle alloc] init];
             paragraphStyle.lineBreakMode = NSLineBreakByWordWrapping;
             NSDictionary* attributes = @{ NSFontAttributeName : font, NSParagraphStyleAttributeName : paragraphStyle.copy };
@@ -265,7 +268,6 @@
     CGFloat width = timeSize.width < 100 ? 100 : timeSize.width;
 
     CGRect rect = CGRectMake((_ScreenWidth - width) / 2, 0, width, timeSize.height);
-    // NSLog(@"%@",NSStringFromCGRect(rect));
     _timeAndTips = [[UILabel alloc] initWithFrame:rect];
     _timeAndTips.backgroundColor = [UIColor colorWithRed:232.0 / 255 green:225.0 / 255 blue:215.0 / 255 alpha:1];
     _timeAndTips.textAlignment = NSTextAlignmentCenter;
@@ -279,46 +281,12 @@
 //处理语音消息
 - (void)initVoiceViewControl
 {
-    //    _userPhoto = [[UIImageView alloc]init];
-    //    _userPhoto.layer.masksToBounds = YES;
-    //    _userPhoto.layer.cornerRadius = 25;
-    //    [self.contentView addSubview:_userPhoto];
     _voiceContent = [[VoiceContent alloc] init];
     [self.contentView addSubview:_voiceContent];
 }
 - (void)dealwithVoice
 {
-
-    //        [self SetPohoto];
-    //    if (self.messagemode.isFromMe) {
-    //        _userPhoto.frame=CGRectMake(_ScreenWidth-USERPHOTOOFFSET-USERPHOTOSIZE, USERPHOTOOFFSET, USERPHOTOSIZE, USERPHOTOSIZE);
-    //        //_userPhoto.image =[UIImage imageNamed:@"default"];
-    //
-    //
-    //        _voiceContent.frame=CGRectMake(_ScreenWidth-USERPHOTOOFFSET-USERPHOTOSIZE-120-5, 15, 120, 40);
-    //        if ([_messagemode.isNeedSend isEqualToString:@"0"]&&[_messagemode.isReceived  isEqualToString:@"0"]) {
-    //            reSend=[[UIImageView alloc] init];
-    //            [self setGesRec];
-    //            reSend.frame=CGRectMake(_voiceContent.frame.origin.x-25, _voiceContent.frame.size.height-20, 20, 20);
-    //
-    //        }
-    //
-    //    }else{
-    //
-    //        _userPhoto.frame=CGRectMake(USERPHOTOOFFSET, USERPHOTOOFFSET, USERPHOTOSIZE, USERPHOTOSIZE);
-    //       // _userPhoto.image =[UIImage imageNamed:@"default"];
-    //
-    //        _voiceContent.frame=CGRectMake(USERPHOTOOFFSET+USERPHOTOSIZE+5, 15, 120, 40);
-    //
-    //    }
-    //
-    //    [_voiceContent setMessagemode:self.messagemode];
-
-    // [self SetPohoto];
     if (self.messagemode.isFromMe) {
-        //  _userPhoto.frame=CGRectMake(_ScreenWidth-USERPHOTOOFFSET-USERPHOTOSIZE, USERPHOTOOFFSET, USERPHOTOSIZE, USERPHOTOSIZE);
-        //_userPhoto.image =[UIImage imageNamed:@"default"];
-
         _voiceContent.frame = CGRectMake(_ScreenWidth - USERPHOTOOFFSET - 120 - 5, 15, 120, 40);
         if ([_messagemode.isNeedSend isEqualToString:@"0"] && [_messagemode.isReceived isEqualToString:@"0"]) {
             reSend = [[UIImageView alloc] init];
@@ -327,10 +295,6 @@
         }
     }
     else {
-
-        // _userPhoto.frame=CGRectMake(USERPHOTOOFFSET, USERPHOTOOFFSET, USERPHOTOSIZE, USERPHOTOSIZE);
-        // _userPhoto.image =[UIImage imageNamed:@"default"];
-
         _voiceContent.frame = CGRectMake(USERPHOTOOFFSET + 5, 15, 120, 40);
     }
 
@@ -340,63 +304,10 @@
 //处理图片消息
 - (void)initPictureViewControl
 {
-    //    _userPhoto = [[UIImageView alloc]init];
-    //    _userPhoto.layer.masksToBounds = YES;
-    //    _userPhoto.layer.cornerRadius = 25;
-    //    [self.contentView addSubview:_userPhoto];
     _pictureContent = [[PictureContent alloc] init];
     _pictureContent.delegate = self;
     [self.contentView addSubview:_pictureContent];
 }
-
-//- (void)dealwithPicture
-//{
-//
-//    if (self.messagemode.isFromMe) {
-//        UIImage* tempimg = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:_messagemode.content]];
-//        //自己发送的就是本地图片
-//        if (tempimg) {
-//            float imagewidth = 140;
-//            float imageheight = 140;
-//            float tempwidth = tempimg.size.width;
-//            float tempheight = tempimg.size.height;
-//            if (tempwidth > tempheight) {
-//
-//                BOOL flag = tempwidth > (_ScreenWidth - 150) ? true : false;
-//                imagewidth = flag ? (_ScreenWidth - 150) : tempwidth;
-//                imageheight = flag ? ((_ScreenWidth - 100) / tempwidth) * tempimg.size.height : tempimg.size.height;
-//            }
-//            else {
-//
-//                float zh = tempimg.size.width / tempimg.size.height;
-//                imagewidth = 140 * zh > (_ScreenWidth - 150) ? 140.0 : 140 * zh;
-//            }
-//            _pictureContent.frame = CGRectMake(_ScreenWidth - USERPHOTOOFFSET - imagewidth - 15 - 2.5 - 5, USERPHOTOOFFSET / 2, imagewidth + 15 + 2.5, imageheight + 2);
-//
-//            if ([_messagemode.isNeedSend isEqualToString:@"0"] && [_messagemode.isReceived isEqualToString:@"0"]) {
-//                reSend = [[UIImageView alloc] init];
-//                [self setGesRec];
-//                reSend.frame = CGRectMake(_pictureContent.frame.origin.x - 25, _pictureContent.frame.size.height - 20, 20, 20);
-//            }
-//        }
-//        else {
-//            _pictureContent.hidden = YES;
-//        }
-//    }
-//    else {
-//        //计算名字的宽度
-//        CGFloat offset = 0;
-//        if (isRoom) {
-//            offset = 20;
-//        }
-//
-//        CGFloat width = 140;
-//
-//        width += 15;
-//        _pictureContent.frame = CGRectMake(USERPHOTOOFFSET + 5, USERPHOTOOFFSET / 2, width, 140 + offset + 5);
-//    }
-//    [_pictureContent setMessagemode:self.messagemode isNeedName:isRoom];
-//}
 
 
 - (void)dealwithPicture
@@ -443,7 +354,7 @@
         CGFloat width = 140;
         
         width += 15;
-        _pictureContent.frame = CGRectMake(USERPHOTOOFFSET + 5, USERPHOTOOFFSET / 2, width, 140 + offset + 5);
+        _pictureContent.frame = CGRectMake(MARGEN, USERPHOTOOFFSET / 2, IMAGE_WIDTH, IMAGE_HEIGHT+OFFSET);
     }
     [_pictureContent setMessagemode:self.messagemode isNeedName:isRoom];
 }
@@ -487,7 +398,7 @@
     CGFloat cellheight = 0;
     switch (messagemode.type) {
     case MessageTypeTime: { //当要显示时间
-        cellheight = 20;
+        cellheight = 26;
     } break;
     case MessageTypePicture: { //图片消息
         return [WeChatTableViewCell getPictureHeight:messagemode];
@@ -508,40 +419,12 @@
     return cellheight;
 }
 
-//+ (CGFloat)getPictureHeight:(MessageModel*)messagemode
-//{
-//
-//    if (messagemode.isFromMe) {
-//        UIImage* tempimg = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:messagemode.content]];
-//
-//        //自己发送的就是本地图片
-//        if (tempimg) {
-//            // float imagewidth=140;
-//            float imageheight = 140;
-//            float tempwidth = tempimg.size.width;
-//            float tempheight = tempimg.size.height;
-//            if (tempwidth > tempheight) {
-//
-//                BOOL flag = tempwidth > (_ScreenWidth - 100) ? true : false;
-//                imageheight = flag ? ((_ScreenWidth - 100) / tempwidth) * tempimg.size.height : tempimg.size.height;
-//            }
-//
-//            return (imageheight + 12) < 100 ? 100 : (imageheight + 12);
-//        }
-//        else {
-//            return 140 + 20;
-//        }
-//    }
-//    else {
-//        return 140 + 20 + 10;
-//    }
-//
-//    return 0;
-//}
+
 
 + (CGFloat)getPictureHeight:(MessageModel*)messagemode
 {
-    return IMAGE_HEIGHT;
+    
+    return messagemode.isFromMe?CELL_HEIGTH:CELL_HEIGTH+20;
 }
 
 + (CGFloat)getTextHeight:(MessageModel*)messagemode isNeedName:(BOOL)isName

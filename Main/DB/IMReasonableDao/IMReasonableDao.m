@@ -301,7 +301,7 @@
 
 //获取邮件数量
 +(int)getEmailCount{
-    FMResultSet *rs=[FMDBDao executeQuery:@"select count(*) as a from [Message]"];
+    FMResultSet *rs=[FMDBDao executeQuery:@"select count(*) as a from [Message] where type=\"email\""];
     int count=0;
     if([rs next]){
         
@@ -315,8 +315,9 @@
 //获取邮件(jid中包含特殊字符所以不能用于sql语句)
 +(NSMutableArray *)getEmailArray:(NSString *)jid WithPagerNumber:(long)pagerNumber AndCount:(long)count{
     NSMutableArray *array=[NSMutableArray array];
-//    [to]=\"%@\"
-    FMResultSet *rs=[FMDBDao executeQuery:[NSString stringWithFormat:@"select * from [Message]  where [to]=\"%@\" order by date limit %ld,%ld",jid,pagerNumber,count]];
+    NSString *sql=[NSString stringWithFormat:@"select * from [Message] where ([to]=\"%@\" and [type]=\"email\") order by date limit %ld,%ld",jid,pagerNumber,count];
+//    ([to]=\"%@\" and [type]=\"email\")
+    FMResultSet *rs=[FMDBDao executeQuery:sql];
     while([rs next]){
         NSString *to=[rs stringForColumn:@"to"];
         IMMessage * message=[[IMMessage alloc] init];

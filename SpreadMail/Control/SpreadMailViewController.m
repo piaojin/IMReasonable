@@ -11,7 +11,9 @@
 #define IDENTIFIER @"SpreadEmailPreviewCell"
 #define CELL_HEIGHT 125//根据xib中视图的高度来定
 #define EMAIL_COUNT 6
+#define TABLEVIEW_COLOR @"#DEDEDE"
 
+#import "PJNetWorkHelper.h"
 #import "PJBaseHttpTool.h"
 #import "EmailDetailViewController.h"
 #import "SpreadMailModel.h"
@@ -159,10 +161,14 @@
     [self.view addSubview:_tableview];
     _tableview.separatorStyle=UITableViewCellAccessoryNone;
     UIView *footerView=[[UIView alloc] init];
-    footerView.backgroundColor=[UIColor colorWithHexString:@"#DEDEDE"];
+    footerView.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
     _tableview.tableFooterView=footerView;
-    _tableview.backgroundColor=[UIColor colorWithHexString:@"#DEDEDE"];
-//    [_tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.totalCount>EMAIL_COUNT?EMAIL_COUNT-1:self.totalCount-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    _tableview.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
+//    [self goLastMessage];
+    //滚到最后一页
+    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+       [_tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.totalCount>EMAIL_COUNT?EMAIL_COUNT-1:self.totalCount-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    });
 }
 
 -(void)LoadData{
@@ -209,12 +215,38 @@
     });
 }
 
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    return true;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    if(editingStyle==UITableViewCellEditingStyleDelete){
+        
+        NSLog(@"%ld",(long)indexPath.row);
+        if(indexPath.row<self.emailArray.count){
+            
+            [self.emailArray removeObjectAtIndex:indexPath.row];
+            [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+        }
+    }
+}
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleDelete;
+}
+
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [self.tableview deselectRowAtIndexPath:indexPath animated:YES];
-    EmailDetailViewController *emailDetailViewController=[[EmailDetailViewController alloc] init];
-    emailDetailViewController.hidesBottomBarWhenPushed=YES;
-    emailDetailViewController.model=[self.spreadEmailArray objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:emailDetailViewController animated:YES];
+    if([PJNetWorkHelper isNetWorkAvailable]){
+        
+        EmailDetailViewController *emailDetailViewController=[[EmailDetailViewController alloc] init];
+        emailDetailViewController.hidesBottomBarWhenPushed=YES;
+        emailDetailViewController.model=[self.spreadEmailArray objectAtIndex:indexPath.row];
+        [self.navigationController pushViewController:emailDetailViewController animated:YES];
+    }else{
+        
+        [PJNetWorkHelper NoNetWork];
+    }
 }
 
 #pragma mark--表格代理
@@ -231,13 +263,33 @@
     SpreadEmailPreviewCell *cell=[SpreadEmailPreviewCell cellWithTableView:tableView];
     cell.message=message;
     [self.spreadEmailArray addObject:cell.emailModel];
-    cell.backgroundColor=[UIColor colorWithHexString:@"#DEDEDE"];
+    cell.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     return CELL_HEIGHT;
+}
+
+
+
+//滚到最后一页
+- (void)goLastMessage
+{
+    
+    double offset = self.view.frame.size.height - (self.tableview.frame.origin.y + self.tableview.contentSize.height);
+    if (offset < 0) {
+        
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             self.tableview.contentOffset = CGPointMake(0, -offset);
+                         }];
+    }
+    else {
+        self.tableview.contentOffset = CGPointMake(0, -64);
+    }
+    [self.tableview.header endRefreshing];
 }
 
 //收到邮件消息代理回调方法

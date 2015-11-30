@@ -8,6 +8,7 @@
 
 #import "SpreadMailModel.h"
 #import "EmailDetailViewController.h"
+#import "AnimationHelper.h"
 
 @interface EmailDetailViewController ()
 
@@ -41,14 +42,17 @@
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
+    [AnimationHelper showHUD:@"load......"];
     NSLog(@"webViewDidStartLoad");
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
+    [AnimationHelper removeHUD];
     NSLog(@"webViewDidFinishLoad");
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
+    [AnimationHelper removeHUD];
     NSLog(@"didFailLoadWithError");
 }
 

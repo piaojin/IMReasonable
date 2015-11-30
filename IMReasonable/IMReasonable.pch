@@ -111,8 +111,8 @@
 //soap调用xml参数(调用方法addSubscriberByInfo)
 #define ADD_EMAIL_PARAM @"<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body><addSubscriberByInfo xmlns=\"http://service.reasonablespread.com/\"><loginEmail>%@</loginEmail><password>%@</password><subscriberArgs><email>%@</email><firstName></firstName><middleName></middleName><lastName></lastName><jobTitle></jobTitle><company></company><homePhone>%@</homePhone><address1></address1><address2></address2><address3></address3><city></city><state></state><country></country><postalCode></postalCode><subPostalCode></subPostalCode><fax></fax><webUrl></webUrl><title></title><gender></gender><date1>%@</date1><date2>%@</date2><customField1></customField1><customField2></customField2><customField3></customField3><customField4></customField4><customField5></customField5><customField6></customField6><customField7></customField7><customField8></customField8><customField9></customField9><customField10></customField10><customField11></customField11><customField12></customField12><customField13></customField13><customField14></customField14><customField15></customField15></subscriberArgs><subscription>%@</subscription><optInType>Off</optInType></addSubscriberByInfo></soap12:Body></soap12:Envelope>"
 
-#define IMAGE_WIDTH 200
-#define IMAGE_HEIGHT 200
+#define IMAGE_WIDTH 160
+#define IMAGE_HEIGHT 160
 #define MARGEN 10
 
 //发送邮件地址

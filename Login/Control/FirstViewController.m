@@ -407,7 +407,7 @@ typedef enum {
 
     NSString* code = [dict objectForKey:@"SendSmsCodeResult"];
     //[SEND_SMS_SUC isEqualToString:code]
-    if (true) {
+    if ([SEND_SMS_SUC isEqualToString:code]) {
         [HUD removeFromSuperview];
         SendViewController* firstview =
             [[SendViewController alloc] initWithNibName:@"SendViewController"
@@ -443,8 +443,9 @@ typedef enum {
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.removeFromSuperViewOnHide = YES;
     hud.mode = MBProgressHUDModeText;
-    hud.labelText = msg;
-    hud.minSize = CGSizeMake(200.f, 108.0f);
+    hud.detailsLabelText=msg;
+    hud.labelFont=[UIFont systemFontOfSize:12];
+    hud.minSize = CGSizeMake(100.0f, 100.0f);
     [hud hide:YES afterDelay:2];
 }
 
