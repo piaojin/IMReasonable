@@ -1508,7 +1508,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMReasonable/AppDelegate.m"
-            timestampString = "467274140.791078"
+            timestampString = "470634042.904238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "79"
@@ -2292,11 +2292,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMReasonable/AppDelegate.m"
-            timestampString = "467811170.922399"
+            timestampString = "470634042.904238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2500,11 +2500,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMReasonable/AppDelegate.m"
-            timestampString = "467811317.33602"
+            timestampString = "470634042.904238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "88"
-            endingLineNumber = "88"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "-application:didRegisterUserNotificationSettings:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2516,11 +2516,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMReasonable/AppDelegate.m"
-            timestampString = "467811323.213527"
+            timestampString = "470634042.904238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
             landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2532,11 +2532,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "IMReasonable/AppDelegate.m"
-            timestampString = "467811366.345103"
+            timestampString = "470634042.904238"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3219,11 +3219,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469424867.231121"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "412"
-            endingLineNumber = "412"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3235,11 +3235,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469424885.434455"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "450"
-            endingLineNumber = "450"
+            startingLineNumber = "457"
+            endingLineNumber = "457"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3251,11 +3251,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469424889.052704"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "454"
-            endingLineNumber = "454"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3267,11 +3267,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469424892.005648"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "456"
-            endingLineNumber = "456"
+            startingLineNumber = "463"
+            endingLineNumber = "463"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3283,11 +3283,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469424896.319146"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "460"
-            endingLineNumber = "460"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3299,11 +3299,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469424913.814981"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3315,11 +3315,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469425307.007679"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479"
+            startingLineNumber = "486"
+            endingLineNumber = "486"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3443,11 +3443,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469444598.524632"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
             landmarkName = "-doMessage:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3459,11 +3459,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469685526.867493"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "770"
-            endingLineNumber = "770"
+            startingLineNumber = "777"
+            endingLineNumber = "777"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3475,11 +3475,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469685526.867493"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "771"
-            endingLineNumber = "771"
+            startingLineNumber = "778"
+            endingLineNumber = "778"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3491,11 +3491,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469685526.867493"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "792"
-            endingLineNumber = "792"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3507,11 +3507,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469685526.867493"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "777"
-            endingLineNumber = "777"
+            startingLineNumber = "784"
+            endingLineNumber = "784"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3891,11 +3891,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469684217.272501"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "752"
-            endingLineNumber = "752"
+            startingLineNumber = "759"
+            endingLineNumber = "759"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3907,11 +3907,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469684218.376252"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "753"
-            endingLineNumber = "753"
+            startingLineNumber = "760"
+            endingLineNumber = "760"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3939,11 +3939,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469685526.867493"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "772"
-            endingLineNumber = "772"
+            startingLineNumber = "779"
+            endingLineNumber = "779"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3955,11 +3955,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469685547.047729"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "766"
-            endingLineNumber = "766"
+            startingLineNumber = "773"
+            endingLineNumber = "773"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4163,11 +4163,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "469959161.612715"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "768"
-            endingLineNumber = "768"
+            startingLineNumber = "775"
+            endingLineNumber = "775"
             landmarkName = "-TipMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4387,12 +4387,12 @@
                   moduleName = "IMReasonable"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/piaojin/Desktop/IMReasonable/Login/Control/ThirdViewController.m"
-                  timestampString = "470574186.61109"
+                  timestampString = "470634325.500813"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "407"
                   endingLineNumber = "407"
-                  offsetFromSymbolStart = "1630">
+                  offsetFromSymbolStart = "1488">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -4402,12 +4402,12 @@
                   moduleName = "IMReasonable"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/piaojin/Desktop/IMReasonable/Login/Control/ThirdViewController.m"
-                  timestampString = "470574186.6115"
+                  timestampString = "470634325.501015"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "407"
                   endingLineNumber = "407"
-                  offsetFromSymbolStart = "1676">
+                  offsetFromSymbolStart = "1604">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -4515,11 +4515,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Main/DB/XMPPDao/XMPPDao.m"
-            timestampString = "470299670.377634"
+            timestampString = "470634279.423032"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1436"
-            endingLineNumber = "1436"
+            startingLineNumber = "1443"
+            endingLineNumber = "1443"
             landmarkName = "-checkUser:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4841,6 +4841,54 @@
             startingLineNumber = "225"
             endingLineNumber = "225"
             landmarkName = "-tableView:commitEditingStyle:forRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Main/DB/XMPPDao/XMPPDao.m"
+            timestampString = "470634279.423032"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-xmppStreamDidDisconnect:withError:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Main/DB/XMPPDao/XMPPDao.m"
+            timestampString = "470634279.423032"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-xmppStreamDidDisconnect:withError:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Main/Libs/XMPP/Extensions/Reconnect/XMPPReconnect.m"
+            timestampString = "470633448.772825"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "322"
+            endingLineNumber = "322"
+            landmarkName = "-xmppStreamDidDisconnect:withError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

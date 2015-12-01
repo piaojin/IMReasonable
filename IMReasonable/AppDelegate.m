@@ -77,7 +77,6 @@
         FirstViewController* first = [[FirstViewController alloc] init];
         self.window.rootViewController = first;
     }
-
     [self.window makeKeyAndVisible];
     return YES;
 }

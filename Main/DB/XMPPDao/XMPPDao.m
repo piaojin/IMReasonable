@@ -34,6 +34,9 @@ static NSMutableArray* allRoom;
     });
     return sharedXMPPManager;
 }
+
+
+
 - (id)init
 {
     self = [super init];
@@ -199,6 +202,9 @@ static NSMutableArray* allRoom;
         }
     }
 }
+
+
+
 - (void)xmppStreamDidDisconnect:(XMPPStream*)sender withError:(NSError*)error
 {
     NSLog(@"连接出错%@", error);

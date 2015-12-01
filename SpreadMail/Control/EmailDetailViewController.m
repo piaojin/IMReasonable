@@ -53,7 +53,7 @@
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     [AnimationHelper removeHUD];
-    NSLog(@"didFailLoadWithError");
+    NSLog(@"didFailLoadWithError:%ld",(long)error.code);
 }
 
 @end
