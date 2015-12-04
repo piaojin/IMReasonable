@@ -115,6 +115,11 @@
 #define IMAGE_HEIGHT 160
 #define MARGEN 10
 
+//导航栏高度
+#define NAVIGATION_HEIGHT self.navigationController.navigationBar.frame.size.height
+//状态栏高度
+#define STATUSBAR_HEIGHT [[UIApplication sharedApplication] statusBarFrame].size.height
+
 //发送邮件地址
 #define SEND_EMAIL_INVITATION_URL @"http://service.rspread.com/service.asmx/Send"
 //发送邮箱邀请的参数格式

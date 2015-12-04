@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 Reasonable. All rights reserved.
 //
 
+
+
 #import "ChatListTableViewCell.h"
 
 @implementation ChatListTableViewCell

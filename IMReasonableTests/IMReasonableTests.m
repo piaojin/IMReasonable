@@ -50,14 +50,14 @@
 //    SpreadMailModel *emailModel=[SpreadMailModel mj_objectWithKeyValues:dictionary];
 //    NSLog(@"%@",emailModel);
 //    [IMReasonableDao getEmailArray:@""];
-    NSString *param=@"<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body><addSubscriberByInfo xmlns=\"http://service.reasonablespread.com/\"><loginEmail>804488815@qq.com</loginEmail><password>804488815</password><subscriberArgs><email>13666902838@163.com</email><firstName>firstName</firstName><middleName>middleName</middleName><lastName>lastName</lastName><jobTitle>string</jobTitle><company>string</company><homePhone>13666902838</homePhone><address1>string</address1><address2>string</address2><address3>string</address3><city>string</city><state>string</state><country>string</country><postalCode>string</postalCode><subPostalCode>string</subPostalCode><fax>string</fax><webUrl>string</webUrl><title>string</title><gender>string</gender><date1>%@</date1><date2>%@</date2><customField1>string</customField1><customField2>string</customField2><customField3>string</customField3><customField4>string</customField4><customField5>string</customField5><customField6>string</customField6><customField7>string</customField7><customField8>string</customField8><customField9>string</customField9><customField10>string</customField10><customField11>string</customField11><customField12>string</customField12><customField13>string</customField13><customField14>string</customField14><customField15>string</customField15></subscriberArgs><subscription>string</subscription><optInType>On</optInType></addSubscriberByInfo></soap12:Body></soap12:Envelope>";
-    NSDate *date=[NSDate date];
-    param=[NSString stringWithFormat:param,date,date];
-    [PJBaseHttpTool Soap:WSDL_URL WithParam:param success:^(id success){
-        NSLog(@"%@",success);
-    } failure:^(NSError * failure){
-        NSLog(@"%@",failure);
-    }];
+//    NSString *param=@"<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body><addSubscriberByInfo xmlns=\"http://service.reasonablespread.com/\"><loginEmail>804488815@qq.com</loginEmail><password>804488815</password><subscriberArgs><email>13666902838@163.com</email><firstName>firstName</firstName><middleName>middleName</middleName><lastName>lastName</lastName><jobTitle>string</jobTitle><company>string</company><homePhone>13666902838</homePhone><address1>string</address1><address2>string</address2><address3>string</address3><city>string</city><state>string</state><country>string</country><postalCode>string</postalCode><subPostalCode>string</subPostalCode><fax>string</fax><webUrl>string</webUrl><title>string</title><gender>string</gender><date1>%@</date1><date2>%@</date2><customField1>string</customField1><customField2>string</customField2><customField3>string</customField3><customField4>string</customField4><customField5>string</customField5><customField6>string</customField6><customField7>string</customField7><customField8>string</customField8><customField9>string</customField9><customField10>string</customField10><customField11>string</customField11><customField12>string</customField12><customField13>string</customField13><customField14>string</customField14><customField15>string</customField15></subscriberArgs><subscription>string</subscription><optInType>On</optInType></addSubscriberByInfo></soap12:Body></soap12:Envelope>";
+//    NSDate *date=[NSDate date];
+//    param=[NSString stringWithFormat:param,date,date];
+//    [PJBaseHttpTool Soap:WSDL_URL WithParam:param success:^(id success){
+//        NSLog(@"%@",success);
+//    } failure:^(NSError * failure){
+//        NSLog(@"%@",failure);
+//    }];
     NSLog(@"piaojinxgz");
 }
 

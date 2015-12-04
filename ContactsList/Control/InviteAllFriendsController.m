@@ -24,9 +24,7 @@
 -(NSArray *)personArray{
     if(!_personArray){
         
-        dispatch_sync(dispatch_get_global_queue(0, 0), ^{
-             _personArray=[ContactsTool AllPerson];
-        });
+        _personArray=[ContactsTool AllPerson];
     }
     return _personArray;
 }

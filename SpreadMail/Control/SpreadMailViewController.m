@@ -166,13 +166,13 @@
     _tableview.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
 //    [self goLastMessage];
     //滚到最后一页
-    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
        [_tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.totalCount>EMAIL_COUNT?EMAIL_COUNT-1:self.totalCount-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     });
 }
 
 -(void)LoadData{
-    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         
         NSArray *tempArray;
         if(_pagerNumber>=0){
@@ -219,14 +219,27 @@
     return true;
 }
 
+//删除邮件
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
     if(editingStyle==UITableViewCellEditingStyleDelete){
         
         NSLog(@"%ld",(long)indexPath.row);
         if(indexPath.row<self.emailArray.count){
             
+            //修复当删除最后一条邮件的时候返回聊天列表的时候邮件item消失
+            if(indexPath.row==self.emailArray.count-1&&(indexPath.row-1)>=0){
+                
+                IMMessage *message=[self.emailArray objectAtIndex:indexPath.row-1];
+                [IMReasonableDao updateEmailID:message.ID WithJID:message.from];
+            }
+            IMMessage *message=[self.emailArray objectAtIndex:indexPath.row];
             [self.emailArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+            [self.spreadEmailArray removeObjectAtIndex:indexPath.row];
+            self.totalCount--;
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [IMReasonableDao removeEmail:message.ID];
+            });
         }
     }
 }

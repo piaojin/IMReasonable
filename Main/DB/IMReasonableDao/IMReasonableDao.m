@@ -15,6 +15,19 @@
 #define GROUP_CHAT 0 //群聊
 @implementation IMReasonableDao
 
+//删除邮件
++(BOOL)removeEmail:(NSString *)msgID{
+    if(![Tool isBlankString:msgID]){
+        
+        NSString *sql=[NSString stringWithFormat:@"delete from Message where [type]=\"email\" and [msgID]=\"%@\"",msgID];
+        return [FMDBDao executeUpdate:sql];
+    }else{
+        
+        return false;
+    }
+}
+
+
 +(BOOL)clearAllChatMessage:(NSString *)myjidstr{
     NSString *sql=[NSString stringWithFormat:@"delete from Message where ([from]=\"%@\" or [to]=\"%@\")",myjidstr,myjidstr];
     NSLog(@"%@",sql);
@@ -350,6 +363,7 @@
 +(NSMutableArray*)getChatlistModle
 {
 
+    BOOL flag=false;
      NSMutableArray* chatuserlist=[[NSMutableArray alloc] init];
      NSString * sql=@"select * from  (select *from [User]  where isactive=\"1\"  ) as b left join [Message] as s ON b.msgID=s.msgID order by [date] desc";
     FMResultSet *rs=[FMDBDao executeQuery:sql] ;
@@ -376,7 +390,8 @@
         temp.from=[rs stringForColumn:@"from"];
         temp.to=[rs stringForColumn:@"to"];
         temp.body=[rs stringForColumn:@"body"];
-        temp.type=[rs stringForColumn:@"type"];
+        NSString *type=[rs stringForColumn:@"type"];
+        temp.type=type;
         temp.date=[Tool getDisplayTime:[rs stringForColumn:@"date"]];//[rs stringForColumn:@"date"];
         // temp.isread=[rs stringForColumn:@"isread"];
         temp.isneedsend=[rs stringForColumn:@"isneedsend"];
@@ -385,6 +400,7 @@
         tempuser.messagebody=temp;
         [temp autorelease];
         tempuser.messageCount=[rs stringForColumn:@"unreadcount"];
+        tempuser.unreadcount=[rs stringForColumn:@"unreadcount"];
         if (tempuser) {
             [chatuserlist addObject:tempuser];
         }
@@ -631,6 +647,15 @@
     rs=nil;
     [messagelist autorelease];
     return messagelist;
+}
+
++(void)updateEmailID:(NSString *)msgID WithJID:(NSString *)jid{
+    NSString *sql=[NSString stringWithFormat:@"update [User] set msgID=\"%@\" where jidstr= \"%@\" ",msgID,jid];
+    BOOL flag= [FMDBDao executeUpdate:sql];
+    if (!flag) {
+        sql=[NSString stringWithFormat:@"insert into [User](jidstr,[msgID]) values(\"%@\",\"%@\")",msgID,jid];
+        [FMDBDao executeUpdate:sql];
+    }
 }
 
 + (void) saveMessage2:(NSString *) from to:(NSString *) to body:(NSString *) body type:(NSString *) type date:(NSString *)date voicelenth:(NSString *)lenth msgID:(NSString *) msgID

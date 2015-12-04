@@ -56,7 +56,7 @@
 -(MailTableViewCell *)eMailCell{
     if(_eMailCell==nil){
         
-        _eMailCell=[MailTableViewCell MailCell];
+        _eMailCell=[[MailTableViewCell alloc] init];
     }
     return _eMailCell;
 }
@@ -363,6 +363,7 @@
 - (void)InvitationFriends
 {
     UIAlertView* myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbinvitation", nil) message:NSLocalizedString(@"lbissureinvitation", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btnDone", nil) otherButtonTitles:NSLocalizedString(@"lbTCancle", nil), nil];
+    myAlertView.tag=INVITE+1;
     [myAlertView show];
 }
 
@@ -370,7 +371,7 @@
 - (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
     //确定群邀
-    if (buttonIndex == INVITE) {
+    if (buttonIndex == INVITE&&alertView.tag==INVITE+1) {
 
         [self didInvitationAllFriends];
     }

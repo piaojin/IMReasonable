@@ -6,6 +6,9 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"IDEA"="The idea of this moment...";
+"FRIENDS_CIRCLE"="Circle";
+"FOUND"="Found";
 "INVITE_FOR_FREE"="Free invite friends";
 "EMAIL_PROMPT_ERROR"="Email format is not correct";
 "REQUIRED"="Required";

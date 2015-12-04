@@ -91,6 +91,11 @@
 		CA9C98221BFC733D0050323F /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9C98171BFC733D0050323F /* NSString+MJExtension.m */; settings = {ASSET_TAGS = (); }; };
 		CA9C98251BFD76C20050323F /* SpreadEmailPreviewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9C98241BFD76C20050323F /* SpreadEmailPreviewCell.m */; settings = {ASSET_TAGS = (); }; };
 		CA9C98281BFDC9680050323F /* EmailDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9C98271BFDC9680050323F /* EmailDetailViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CAAA3FD71C0D95C6003D4A12 /* FriendsCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAA3FD61C0D95C6003D4A12 /* FriendsCircleViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CAAA3FDA1C0D9FDE003D4A12 /* PostTalkkingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAA3FD91C0D9FDE003D4A12 /* PostTalkkingViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CAAA3FE31C0EA8B2003D4A12 /* addpic_focused.png in Resources */ = {isa = PBXBuildFile; fileRef = CAAA3FE11C0EA8B2003D4A12 /* addpic_focused.png */; settings = {ASSET_TAGS = (); }; };
+		CAAA3FE41C0EA8B2003D4A12 /* addpic_unfocused.png in Resources */ = {isa = PBXBuildFile; fileRef = CAAA3FE21C0EA8B2003D4A12 /* addpic_unfocused.png */; settings = {ASSET_TAGS = (); }; };
+		CAAA3FE71C0ED66B003D4A12 /* PJTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAA3FE61C0ED66B003D4A12 /* PJTextView.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAA51BB2B5AB00518F0F /* GroupAddUserUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAA21BB2B5AB00518F0F /* GroupAddUserUIViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAA61BB2B5AB00518F0F /* NewGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAA41BB2B5AB00518F0F /* NewGroupViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAAD1BB2B5D500518F0F /* AddUserTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAA81BB2B5D500518F0F /* AddUserTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -109,7 +114,6 @@
 		CAB0DACB1BB2B68A00518F0F /* OneRoomUser.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DACA1BB2B68A00518F0F /* OneRoomUser.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DACE1BB2B6A600518F0F /* WallPaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DACD1BB2B6A600518F0F /* WallPaperViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAD11BB2B6B800518F0F /* WallpaperCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAD01BB2B6B800518F0F /* WallpaperCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		CAB0DAD41BB2B6D800518F0F /* FriendsCircleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAD31BB2B6D800518F0F /* FriendsCircleViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAD71BB2B6F300518F0F /* SpreadMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAD61BB2B6F300518F0F /* SpreadMailViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAD91BB2B70400518F0F /* MailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB0DAD81BB2B70400518F0F /* MailTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CAB0DADC1BB2B70D00518F0F /* MailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DADB1BB2B70D00518F0F /* MailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
@@ -742,6 +746,14 @@
 		CA9C98241BFD76C20050323F /* SpreadEmailPreviewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpreadEmailPreviewCell.m; path = SpreadMail/View/Cells/SpreadEmailPreviewCell.m; sourceTree = SOURCE_ROOT; };
 		CA9C98261BFDC9680050323F /* EmailDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmailDetailViewController.h; path = SpreadMail/Control/EmailDetailViewController.h; sourceTree = SOURCE_ROOT; };
 		CA9C98271BFDC9680050323F /* EmailDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmailDetailViewController.m; path = SpreadMail/Control/EmailDetailViewController.m; sourceTree = SOURCE_ROOT; };
+		CAAA3FD51C0D95C6003D4A12 /* FriendsCircleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendsCircleViewController.h; path = FriendsCircle/Control/FriendsCircleViewController.h; sourceTree = SOURCE_ROOT; };
+		CAAA3FD61C0D95C6003D4A12 /* FriendsCircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendsCircleViewController.m; path = FriendsCircle/Control/FriendsCircleViewController.m; sourceTree = SOURCE_ROOT; };
+		CAAA3FD81C0D9FDE003D4A12 /* PostTalkkingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PostTalkkingViewController.h; path = FriendsCircle/Control/PostTalkkingViewController.h; sourceTree = SOURCE_ROOT; };
+		CAAA3FD91C0D9FDE003D4A12 /* PostTalkkingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PostTalkkingViewController.m; path = FriendsCircle/Control/PostTalkkingViewController.m; sourceTree = SOURCE_ROOT; };
+		CAAA3FE11C0EA8B2003D4A12 /* addpic_focused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addpic_focused.png; path = Main/Resources/Image/addpic_focused.png; sourceTree = SOURCE_ROOT; };
+		CAAA3FE21C0EA8B2003D4A12 /* addpic_unfocused.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = addpic_unfocused.png; path = Main/Resources/Image/addpic_unfocused.png; sourceTree = SOURCE_ROOT; };
+		CAAA3FE51C0ED66B003D4A12 /* PJTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJTextView.h; path = FriendsCircle/View/PJTextView.h; sourceTree = SOURCE_ROOT; };
+		CAAA3FE61C0ED66B003D4A12 /* PJTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJTextView.m; path = FriendsCircle/View/PJTextView.m; sourceTree = SOURCE_ROOT; };
 		CAB0DAA11BB2B5AB00518F0F /* GroupAddUserUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupAddUserUIViewController.h; path = CreateGroup/Control/GroupAddUserUIViewController.h; sourceTree = SOURCE_ROOT; };
 		CAB0DAA21BB2B5AB00518F0F /* GroupAddUserUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupAddUserUIViewController.m; path = CreateGroup/Control/GroupAddUserUIViewController.m; sourceTree = SOURCE_ROOT; };
 		CAB0DAA31BB2B5AB00518F0F /* NewGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewGroupViewController.h; path = CreateGroup/Control/NewGroupViewController.h; sourceTree = SOURCE_ROOT; };
@@ -773,8 +785,6 @@
 		CAB0DACD1BB2B6A600518F0F /* WallPaperViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WallPaperViewController.m; path = Wallpaper/Control/WallPaperViewController.m; sourceTree = SOURCE_ROOT; };
 		CAB0DACF1BB2B6B800518F0F /* WallpaperCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WallpaperCollectionViewCell.h; path = Wallpaper/View/Cell/WallpaperCollectionViewCell.h; sourceTree = SOURCE_ROOT; };
 		CAB0DAD01BB2B6B800518F0F /* WallpaperCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WallpaperCollectionViewCell.m; path = Wallpaper/View/Cell/WallpaperCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
-		CAB0DAD21BB2B6D800518F0F /* FriendsCircleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendsCircleViewController.h; path = FriendsCircle/Control/FriendsCircleViewController.h; sourceTree = SOURCE_ROOT; };
-		CAB0DAD31BB2B6D800518F0F /* FriendsCircleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendsCircleViewController.m; path = FriendsCircle/Control/FriendsCircleViewController.m; sourceTree = SOURCE_ROOT; };
 		CAB0DAD51BB2B6F300518F0F /* SpreadMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpreadMailViewController.h; path = SpreadMail/Control/SpreadMailViewController.h; sourceTree = SOURCE_ROOT; };
 		CAB0DAD61BB2B6F300518F0F /* SpreadMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpreadMailViewController.m; path = SpreadMail/Control/SpreadMailViewController.m; sourceTree = SOURCE_ROOT; };
 		CAB0DAD81BB2B70400518F0F /* MailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MailTableViewCell.xib; path = SpreadMail/View/Xibs/MailTableViewCell.xib; sourceTree = SOURCE_ROOT; };
@@ -2639,6 +2649,8 @@
 		181120BB1A1EDE1B00762075 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CAAA3FE11C0EA8B2003D4A12 /* addpic_focused.png */,
+				CAAA3FE21C0EA8B2003D4A12 /* addpic_unfocused.png */,
 				CA9C97FA1BF988390050323F /* spread_email.png */,
 				CA821FA01BD895E20072F7DA /* red_1.png */,
 				CA821FA11BD895E20072F7DA /* red_2.png */,
@@ -3607,6 +3619,8 @@
 		CAB0DA741BB28DFF00518F0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CAAA3FE51C0ED66B003D4A12 /* PJTextView.h */,
+				CAAA3FE61C0ED66B003D4A12 /* PJTextView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3614,8 +3628,10 @@
 		CAB0DA751BB28E0600518F0F /* Control */ = {
 			isa = PBXGroup;
 			children = (
-				CAB0DAD21BB2B6D800518F0F /* FriendsCircleViewController.h */,
-				CAB0DAD31BB2B6D800518F0F /* FriendsCircleViewController.m */,
+				CAAA3FD51C0D95C6003D4A12 /* FriendsCircleViewController.h */,
+				CAAA3FD61C0D95C6003D4A12 /* FriendsCircleViewController.m */,
+				CAAA3FD81C0D9FDE003D4A12 /* PostTalkkingViewController.h */,
+				CAAA3FD91C0D9FDE003D4A12 /* PostTalkkingViewController.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -4185,6 +4201,7 @@
 				CAB993AA1BB397F600661AB7 /* CheckDoubleDark.png in Resources */,
 				CAB997621BB3A35500661AB7 /* Expression_52@2x.png in Resources */,
 				CAB997391BB3A35500661AB7 /* Expression_11@2x.png in Resources */,
+				CAAA3FE41C0EA8B2003D4A12 /* addpic_unfocused.png in Resources */,
 				CAB993961BB3978400661AB7 /* FirstViewController.xib in Resources */,
 				CAB9973F1BB3A35500661AB7 /* Expression_17@2x.png in Resources */,
 				CAB993C61BB3984000661AB7 /* tab_3@2x.png in Resources */,
@@ -4348,6 +4365,7 @@
 				CAB993FE1BB3988900661AB7 /* wp_3.jpg in Resources */,
 				CAB9974F1BB3A35500661AB7 /* Expression_33@2x.png in Resources */,
 				CAB9977B1BB3A35500661AB7 /* Expression_77@2x.png in Resources */,
+				CAAA3FE31C0EA8B2003D4A12 /* addpic_focused.png in Resources */,
 				CAB9934E1BB3956F00661AB7 /* ToolViewInputVoice@2x.png in Resources */,
 				CAB994161BB3988900661AB7 /* wp_27.jpg in Resources */,
 				CAB997341BB3A35500661AB7 /* Expression_6@2x.png in Resources */,
@@ -4507,6 +4525,7 @@
 				CAB996611BB3A25900661AB7 /* FMDatabasePool.m in Sources */,
 				CAB995701BB39F3B00661AB7 /* XMPPResultSet.m in Sources */,
 				CAB992F71BB3949300661AB7 /* UUImageAvatarBrowser.m in Sources */,
+				CAAA3FD71C0D95C6003D4A12 /* FriendsCircleViewController.m in Sources */,
 				CAB995B01BB3A02700661AB7 /* XMPPMessageArchiving.m in Sources */,
 				CAB996531BB3A24F00661AB7 /* DBHelper.m in Sources */,
 				CAB994B51BB39C2C00661AB7 /* DDTTYLogger.m in Sources */,
@@ -4557,6 +4576,7 @@
 				CAB994E51BB39D8000661AB7 /* XMPPReconnect.m in Sources */,
 				CAB0DAC71BB2B67600518F0F /* GroupUserTableViewCell.m in Sources */,
 				CAB994A11BB39BFC00661AB7 /* XMPPStringPrep.m in Sources */,
+				CAAA3FDA1C0D9FDE003D4A12 /* PostTalkkingViewController.m in Sources */,
 				CAB996A91BB3A2C300661AB7 /* ASIS3Request.m in Sources */,
 				CA82201C1BDA11ED0072F7DA /* SDWebImageDecoder.m in Sources */,
 				CAB997B61BB3A8B900661AB7 /* Message.m in Sources */,
@@ -4578,6 +4598,7 @@
 				CA64A5AD1BCD0F8600DA4ED7 /* PJBaseHttpTool.m in Sources */,
 				CAB992E71BB393BF00661AB7 /* FunctionTableViewCell.m in Sources */,
 				CA9C98181BFC733D0050323F /* MJDictionaryCache.m in Sources */,
+				CAAA3FE71C0ED66B003D4A12 /* PJTextView.m in Sources */,
 				CAB994641BB39B6500661AB7 /* XMPPXFacebookPlatformAuthentication.m in Sources */,
 				CAB9958B1BB39FC300661AB7 /* XMPPMessage+XEP_0085.m in Sources */,
 				CAB997BA1BB3A8D000661AB7 /* MainViewController.m in Sources */,
@@ -4586,7 +4607,6 @@
 				CAB995231BB39E7400661AB7 /* XMPPMUC.m in Sources */,
 				CA821F981BD6450C0072F7DA /* InviteAllFriendsController.m in Sources */,
 				18111E981A1E12AD00762075 /* AppDelegate.m in Sources */,
-				CAB0DAD41BB2B6D800518F0F /* FriendsCircleViewController.m in Sources */,
 				CAB9949F1BB39BFC00661AB7 /* XMPPIDTracker.m in Sources */,
 				CAB996161BB3A21100661AB7 /* MJRefreshConst.m in Sources */,
 				CAB994A21BB39BFC00661AB7 /* XMPPTimer.m in Sources */,

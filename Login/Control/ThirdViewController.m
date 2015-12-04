@@ -369,7 +369,7 @@
             [AnimationHelper showHUD:@"please wait!"];
             NSString* phone = [[[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
             NSString* param = [NSString stringWithFormat:ADD_EMAIL_PARAM, RESPREAD_EMAIL, RESPREAD_PASSWORD, inputemail, phone, [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], CONTACTS];
-            dispatch_sync(dispatch_get_global_queue(0, 0), ^{
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 [RespreadSoapTool Soap:WSDL_URL
                     WithParam:param
                     success:^(id success) {

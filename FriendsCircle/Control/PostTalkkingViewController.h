@@ -1,5 +1,5 @@
 //
-//  FriendsCircleViewController.h
+//  PostTalkkingViewController.h
 //  IMReasonable
 //
 //  Created by 翁金闪 on 15/12/1.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FriendsCircleViewController : UIViewController
+@interface PostTalkkingViewController : UIViewController<UIActionSheetDelegate>
 
 @end

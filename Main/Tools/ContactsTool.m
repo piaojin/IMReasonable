@@ -135,6 +135,7 @@
 //判断并修改手机号码
 NSString* (^ForMatPhone_Block)(NSString*) = ^(NSString* personPhone) {
     NSString* phone;
+    personPhone=[personPhone stringByReplacingOccurrencesOfString:@" " withString:@""];
     if (personPhone != nil && ![personPhone isEqualToString:@""]) {
 
         personPhone = [personPhone stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -254,7 +255,7 @@ NSMutableArray* (^GetAllPerson_Block)(CFArrayRef) = ^(CFArrayRef results) {
 
             isTalkkingUser = false;
         }
-        if (per.phoneArray.count || per.emailArray.count > 0) {
+        if (per.phoneArray.count>0 || per.emailArray.count > 0) {
 
             [array addObject:per];
         }

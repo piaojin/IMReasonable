@@ -17,7 +17,9 @@
 
 
 @interface IMReasonableDao : NSObject
-
++(void)updateEmailID:(NSString *)msgID WithJID:(NSString *)jid;
+//删除邮件
++(BOOL)removeEmail:(NSString *)msgID;
 +(int)getEmailCount;
 //获取邮件
 +(NSMutableArray *)getEmailArray:(NSString *)jid WithPagerNumber:(long)pagerNumber  AndCount:(long)count;

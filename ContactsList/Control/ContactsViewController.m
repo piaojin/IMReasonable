@@ -917,7 +917,6 @@
 
 -(void)dealloc
 {
- // [[NSNotificationCenter defaultCenter] removeObserver:self];
     
      [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CONNECTSCHANGE" object:nil];
 }

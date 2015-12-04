@@ -6,6 +6,9 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"IDEA"="這壹刻的想法...";
+"FRIENDS_CIRCLE"="朋友圈";
+"FOUND"="發現";
 "INVITE_FOR_FREE"="免費邀請好友";
 "EMAIL_PROMPT_ERROR"="郵箱格式不正確";
 "REQUIRED"="必填";

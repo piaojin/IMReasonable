@@ -307,18 +307,12 @@ void addressCallback(ABAddressBookRef addressBook, CFDictionaryRef info, void *c
     UINavigationController * nvisecond=[[UINavigationController alloc] init];
     [nvisecond addChildViewController:chatListViewController];
     
-    /**
-     暂时没有
-     
-     - returns: <#return value description#>
-     */
     //朋友圈数据
-    /**FriendsCircleViewController * friendscircle=[[FriendsCircleViewController alloc] init];
+    FriendsCircleViewController * friendscircle=[[FriendsCircleViewController alloc] init];
     friendscircle.tabBarItem.image=[UIImage imageNamed:@"tab_3.png"];
-    friendscircle.tabBarItem.title=NSLocalizedString(@"lbcontacts",nil);  //通讯录
+    friendscircle.tabBarItem.title=NSLocalizedString(@"FOUND",nil);//朋友圈
     UINavigationController * four=[[UINavigationController alloc] init];
     [four addChildViewController:friendscircle];
-     */
     
     //我
     SetterViewController * chatroomlist=[[SetterViewController alloc] init];
@@ -329,8 +323,7 @@ void addressCallback(ABAddressBookRef addressBook, CFDictionaryRef info, void *c
 
     
     
-    NSArray * controls=[NSArray arrayWithObjects:nvisecond,nvifirst, third,nil];
-//    NSArray * controls=[NSArray arrayWithObjects:nvisecond,nvifirst,four, third,nil];
+    NSArray * controls=[NSArray arrayWithObjects:nvisecond,nvifirst,four, third,nil];
     self.viewControllers=controls;
     
    self.view.frame = CGRectMake(0, 64, self.view.frame.size.width, self.view.frame.size.height-49);

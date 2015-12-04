@@ -9,6 +9,7 @@
 #import "SpreadMailModel.h"
 #import "EmailDetailViewController.h"
 #import "AnimationHelper.h"
+#import "MBProgressHUD.h"
 
 @interface EmailDetailViewController ()
 
@@ -55,5 +56,20 @@
     [AnimationHelper removeHUD];
     NSLog(@"didFailLoadWithError:%ld",(long)error.code);
 }
+
+//+ (void)showHUD:(NSString *)msg{
+//    
+//    MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+//    [[UIApplication sharedApplication].keyWindow addSubview:HUD];
+//    HUD.dimBackground = YES;
+//    HUD.labelText = msg;
+//    [HUD show:YES];
+//}
+//+ (void)removeHUD{
+//    
+//    [HUD hide:YES];
+//    [HUD removeFromSuperViewOnHide];
+//    
+//}
 
 @end
