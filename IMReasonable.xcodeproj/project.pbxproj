@@ -74,6 +74,14 @@
 		CA82203D1BDA15970072F7DA /* MJPhotoToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8220331BDA15970072F7DA /* MJPhotoToolbar.m */; settings = {ASSET_TAGS = (); }; };
 		CA82203E1BDA15970072F7DA /* MJPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8220351BDA15970072F7DA /* MJPhotoView.m */; settings = {ASSET_TAGS = (); }; };
 		CA82203F1BDA15970072F7DA /* SDWebImageManager+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8220371BDA15970072F7DA /* SDWebImageManager+MJ.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E88F1C152CA4001897D6 /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E8811C152CA4001897D6 /* SCLAlertView.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8901C152CA4001897D6 /* SCLAlertViewResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E8831C152CA4001897D6 /* SCLAlertViewResponder.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8911C152CA4001897D6 /* SCLAlertViewStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E8851C152CA4001897D6 /* SCLAlertViewStyleKit.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8921C152CA4001897D6 /* SCLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E8871C152CA4001897D6 /* SCLButton.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8931C152CA4001897D6 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E88A1C152CA4001897D6 /* SCLTextView.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8941C152CA4001897D6 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E88C1C152CA4001897D6 /* SCLTimerDisplay.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8951C152CA4001897D6 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E88E1C152CA4001897D6 /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
+		CA92E8971C16EC2A001897D6 /* network_error.png in Resources */ = {isa = PBXBuildFile; fileRef = CA92E8961C16EC2A001897D6 /* network_error.png */; settings = {ASSET_TAGS = (); }; };
 		CA9A089D1C05A84D007EB565 /* RespreadSoapTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9A089C1C05A84C007EB565 /* RespreadSoapTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA9C97F91BF976FA0050323F /* SpreadMailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9C97F81BF976FA0050323F /* SpreadMailModel.m */; settings = {ASSET_TAGS = (); }; };
 		CA9C97FB1BF988390050323F /* spread_email.png in Resources */ = {isa = PBXBuildFile; fileRef = CA9C97FA1BF988390050323F /* spread_email.png */; settings = {ASSET_TAGS = (); }; };
@@ -713,6 +721,22 @@
 		CA8220351BDA15970072F7DA /* MJPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MJPhotoView.m; path = Main/Libs/MJPhotoBrowser/MJPhotoView.m; sourceTree = "<group>"; };
 		CA8220361BDA15970072F7DA /* SDWebImageManager+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "SDWebImageManager+MJ.h"; path = "Main/Libs/MJPhotoBrowser/SDWebImageManager+MJ.h"; sourceTree = "<group>"; };
 		CA8220371BDA15970072F7DA /* SDWebImageManager+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "SDWebImageManager+MJ.m"; path = "Main/Libs/MJPhotoBrowser/SDWebImageManager+MJ.m"; sourceTree = "<group>"; };
+		CA92E8801C152CA4001897D6 /* SCLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLAlertView.h; path = Main/Libs/SCLAlertView/SCLAlertView.h; sourceTree = "<group>"; };
+		CA92E8811C152CA4001897D6 /* SCLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLAlertView.m; path = Main/Libs/SCLAlertView/SCLAlertView.m; sourceTree = "<group>"; };
+		CA92E8821C152CA4001897D6 /* SCLAlertViewResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLAlertViewResponder.h; path = Main/Libs/SCLAlertView/SCLAlertViewResponder.h; sourceTree = "<group>"; };
+		CA92E8831C152CA4001897D6 /* SCLAlertViewResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLAlertViewResponder.m; path = Main/Libs/SCLAlertView/SCLAlertViewResponder.m; sourceTree = "<group>"; };
+		CA92E8841C152CA4001897D6 /* SCLAlertViewStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLAlertViewStyleKit.h; path = Main/Libs/SCLAlertView/SCLAlertViewStyleKit.h; sourceTree = "<group>"; };
+		CA92E8851C152CA4001897D6 /* SCLAlertViewStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLAlertViewStyleKit.m; path = Main/Libs/SCLAlertView/SCLAlertViewStyleKit.m; sourceTree = "<group>"; };
+		CA92E8861C152CA4001897D6 /* SCLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLButton.h; path = Main/Libs/SCLAlertView/SCLButton.h; sourceTree = "<group>"; };
+		CA92E8871C152CA4001897D6 /* SCLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLButton.m; path = Main/Libs/SCLAlertView/SCLButton.m; sourceTree = "<group>"; };
+		CA92E8881C152CA4001897D6 /* SCLMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLMacros.h; path = Main/Libs/SCLAlertView/SCLMacros.h; sourceTree = "<group>"; };
+		CA92E8891C152CA4001897D6 /* SCLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLTextView.h; path = Main/Libs/SCLAlertView/SCLTextView.h; sourceTree = "<group>"; };
+		CA92E88A1C152CA4001897D6 /* SCLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLTextView.m; path = Main/Libs/SCLAlertView/SCLTextView.m; sourceTree = "<group>"; };
+		CA92E88B1C152CA4001897D6 /* SCLTimerDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SCLTimerDisplay.h; path = Main/Libs/SCLAlertView/SCLTimerDisplay.h; sourceTree = "<group>"; };
+		CA92E88C1C152CA4001897D6 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLTimerDisplay.m; path = Main/Libs/SCLAlertView/SCLTimerDisplay.m; sourceTree = "<group>"; };
+		CA92E88D1C152CA4001897D6 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Main/Libs/SCLAlertView/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		CA92E88E1C152CA4001897D6 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Main/Libs/SCLAlertView/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		CA92E8961C16EC2A001897D6 /* network_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = network_error.png; path = Main/Resources/Image/network_error.png; sourceTree = SOURCE_ROOT; };
 		CA9A089B1C05A84C007EB565 /* RespreadSoapTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RespreadSoapTool.h; path = Main/Tools/RespreadSoapTool.h; sourceTree = "<group>"; };
 		CA9A089C1C05A84C007EB565 /* RespreadSoapTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RespreadSoapTool.m; path = Main/Tools/RespreadSoapTool.m; sourceTree = "<group>"; };
 		CA9C97F71BF976FA0050323F /* SpreadMailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpreadMailModel.h; path = SpreadMail/Model/SpreadMailModel.h; sourceTree = SOURCE_ROOT; };
@@ -2649,6 +2673,7 @@
 		181120BB1A1EDE1B00762075 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CA92E8961C16EC2A001897D6 /* network_error.png */,
 				CAAA3FE11C0EA8B2003D4A12 /* addpic_focused.png */,
 				CAAA3FE21C0EA8B2003D4A12 /* addpic_unfocused.png */,
 				CA9C97FA1BF988390050323F /* spread_email.png */,
@@ -3207,6 +3232,28 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		CA92E87F1C152C5B001897D6 /* SCLAlertView */ = {
+			isa = PBXGroup;
+			children = (
+				CA92E8801C152CA4001897D6 /* SCLAlertView.h */,
+				CA92E8811C152CA4001897D6 /* SCLAlertView.m */,
+				CA92E8821C152CA4001897D6 /* SCLAlertViewResponder.h */,
+				CA92E8831C152CA4001897D6 /* SCLAlertViewResponder.m */,
+				CA92E8841C152CA4001897D6 /* SCLAlertViewStyleKit.h */,
+				CA92E8851C152CA4001897D6 /* SCLAlertViewStyleKit.m */,
+				CA92E8861C152CA4001897D6 /* SCLButton.h */,
+				CA92E8871C152CA4001897D6 /* SCLButton.m */,
+				CA92E8881C152CA4001897D6 /* SCLMacros.h */,
+				CA92E8891C152CA4001897D6 /* SCLTextView.h */,
+				CA92E88A1C152CA4001897D6 /* SCLTextView.m */,
+				CA92E88B1C152CA4001897D6 /* SCLTimerDisplay.h */,
+				CA92E88C1C152CA4001897D6 /* SCLTimerDisplay.m */,
+				CA92E88D1C152CA4001897D6 /* UIImage+ImageEffects.h */,
+				CA92E88E1C152CA4001897D6 /* UIImage+ImageEffects.m */,
+			);
+			name = SCLAlertView;
+			sourceTree = "<group>";
+		};
 		CA9C98001BFC73150050323F /* MJExtension */ = {
 			isa = PBXGroup;
 			children = (
@@ -3345,6 +3392,7 @@
 		CAB0DA561BB2823B00518F0F /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				CA92E87F1C152C5B001897D6 /* SCLAlertView */,
 				CA9C98001BFC73150050323F /* MJExtension */,
 				CAE0109C1BD10AF0000470B3 /* MJPhotoBrowser */,
 				CA64A5B41BCD18C500DA4ED7 /* AFNetworking */,
@@ -4228,6 +4276,7 @@
 				CAB997721BB3A35500661AB7 /* Expression_68@2x.png in Resources */,
 				CAB9978C1BB3A35500661AB7 /* Expression_94@2x.png in Resources */,
 				CAB997361BB3A35500661AB7 /* Expression_8@2x.png in Resources */,
+				CA92E8971C16EC2A001897D6 /* network_error.png in Resources */,
 				CAB9977E1BB3A35500661AB7 /* Expression_80@2x.png in Resources */,
 				CAB9940C1BB3988900661AB7 /* wp_17.jpg in Resources */,
 				CAB993431BB3956F00661AB7 /* chat_animation2.png in Resources */,
@@ -4490,6 +4539,7 @@
 				CAB995791BB39F5F00661AB7 /* TURNSocket.m in Sources */,
 				CAB9956A1BB39F0900661AB7 /* XMPPvCardTempTel.m in Sources */,
 				CA8220201BDA11ED0072F7DA /* SDWebImageManager+MJ.m in Sources */,
+				CA92E8921C152CA4001897D6 /* SCLButton.m in Sources */,
 				CAB9952D1BB39E8E00661AB7 /* XMPPRoomCoreDataStorage.m in Sources */,
 				CAB995AD1BB3A01900661AB7 /* XMPPMessageArchivingCoreDataStorage.m in Sources */,
 				CAB994F11BB39DC300661AB7 /* XMPPRoster.xcdatamodel in Sources */,
@@ -4522,6 +4572,7 @@
 				CAB9948A1BB39BDB00661AB7 /* XMPPModule.m in Sources */,
 				CAB995C21BB3A0C500661AB7 /* XMPPBlocking.m in Sources */,
 				CAB9938E1BB3974F00661AB7 /* ThirdViewController.m in Sources */,
+				CA92E8931C152CA4001897D6 /* SCLTextView.m in Sources */,
 				CAB996611BB3A25900661AB7 /* FMDatabasePool.m in Sources */,
 				CAB995701BB39F3B00661AB7 /* XMPPResultSet.m in Sources */,
 				CAB992F71BB3949300661AB7 /* UUImageAvatarBrowser.m in Sources */,
@@ -4541,6 +4592,7 @@
 				CA82201F1BDA11ED0072F7DA /* SDWebImageManager.m in Sources */,
 				CAB992DC1BB3933400661AB7 /* SelectUserViewController.m in Sources */,
 				CAB994BE1BB39C3B00661AB7 /* DDDispatchQueueLogFormatter.m in Sources */,
+				CA92E8941C152CA4001897D6 /* SCLTimerDisplay.m in Sources */,
 				CAB0DACE1BB2B6A600518F0F /* WallPaperViewController.m in Sources */,
 				CAB9931B1BB394D600661AB7 /* VoiceContent.m in Sources */,
 				CA8220211BDA11ED0072F7DA /* SDWebImagePrefetcher.m in Sources */,
@@ -4562,6 +4614,7 @@
 				CAB995E31BB3A16700661AB7 /* XMPPMessage+XEP_0224.m in Sources */,
 				CAB995141BB39E3400661AB7 /* XMPPIQ+LastActivity.m in Sources */,
 				CAB995EF1BB3A1B500661AB7 /* XMPPMessage+XEP_0308.m in Sources */,
+				CA92E8911C152CA4001897D6 /* SCLAlertViewStyleKit.m in Sources */,
 				CAB9953B1BB39EA700661AB7 /* XMPPRoomOccupantHybridMemoryStorageObject.m in Sources */,
 				CAB9961C1BB3A21100661AB7 /* MJRefreshLegendHeader.m in Sources */,
 				CAB0DAAD1BB2B5D500518F0F /* AddUserTableViewCell.m in Sources */,
@@ -4651,6 +4704,7 @@
 				CAB995511BB39EE900661AB7 /* XMPPvCardCoreDataStorageObject.m in Sources */,
 				CAB997B41BB3A8B900661AB7 /* IMChatListModle.m in Sources */,
 				CAB9954F1BB39EE900661AB7 /* XMPPvCardAvatarCoreDataStorageObject.m in Sources */,
+				CA92E88F1C152CA4001897D6 /* SCLAlertView.m in Sources */,
 				CA9C98221BFC733D0050323F /* NSString+MJExtension.m in Sources */,
 				CAB0DAAF1BB2B5D500518F0F /* GroupSubTitleTableViewCell.m in Sources */,
 				CAB9959D1BB39FFA00661AB7 /* XMPPCapabilitiesCoreDataStorage.m in Sources */,
@@ -4662,6 +4716,7 @@
 				CAB9936D1BB395CF00661AB7 /* BorderView.m in Sources */,
 				CAB994DF1BB39D6600661AB7 /* XMPPGoogleSharedStatus.m in Sources */,
 				CAB994B41BB39C2C00661AB7 /* DDLog.m in Sources */,
+				CA92E8901C152CA4001897D6 /* SCLAlertViewResponder.m in Sources */,
 				CAB993211BB3951E00661AB7 /* MessageModel.m in Sources */,
 				CA8220181BDA11ED0072F7DA /* MKAnnotationView+WebCache.m in Sources */,
 				CAB9967D1BB3A28400661AB7 /* ASIHTTPRequest.m in Sources */,
@@ -4711,6 +4766,7 @@
 				CAB995F51BB3A1C700661AB7 /* NSXMLElement+XEP_0335.m in Sources */,
 				CAB9954E1BB39EE900661AB7 /* XMPPvCard.xcdatamodeld in Sources */,
 				CAB995D71BB3A13F00661AB7 /* XMPPTime.m in Sources */,
+				CA92E8951C152CA4001897D6 /* UIImage+ImageEffects.m in Sources */,
 				CAB994891BB39BDB00661AB7 /* XMPPMessage.m in Sources */,
 				CAB994671BB39B7100661AB7 /* XMPPXOAuth2Google.m in Sources */,
 				CA9C981C1BFC733D0050323F /* MJPropertyKey.m in Sources */,

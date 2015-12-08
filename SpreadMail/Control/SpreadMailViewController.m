@@ -31,17 +31,10 @@
 #import "XMPPDao.h"
 
 @interface SpreadMailViewController ()
-{
-//    UITableView * _tableview;
-//     long pagenumber;
-    NSMutableArray *messageList;
-}
 
 @property(nonatomic,strong)UITableView *tableview;
 //存放所有IMMessage(其中的body中包含邮件json)
 @property(nonatomic,strong)NSMutableArray *emailArray;
-//邮件模型
-@property(nonatomic,strong)NSMutableArray *spreadEmailArray;
 //总页码
 @property(nonatomic,assign)long totalCount;
 //邮件的页码是否到头了
@@ -52,14 +45,6 @@
 @end
 
 @implementation SpreadMailViewController
-
--(NSMutableArray *)spreadEmailArray{
-    if(_spreadEmailArray==nil){
-        
-        _spreadEmailArray=[NSMutableArray array];
-    }
-    return _spreadEmailArray;
-}
 
 -(NSMutableArray *)emailArray{
     if(_emailArray==nil){
@@ -127,7 +112,7 @@
 
 - (void)initNavTitle{
 
-    self.navigationItem.title=NSLocalizedString(@"lbtspreadname",nil);//lbtspreadname@"Spread邮件提醒";
+    self.navigationItem.title=NSLocalizedString(@"lbtspreadname",nil);
 }
 
 //初始化页面控件
@@ -164,7 +149,6 @@
     footerView.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
     _tableview.tableFooterView=footerView;
     _tableview.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
-//    [self goLastMessage];
     //滚到最后一页
     dispatch_async(dispatch_get_main_queue(), ^{
        [_tableview scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:self.totalCount>EMAIL_COUNT?EMAIL_COUNT-1:self.totalCount-1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
@@ -235,7 +219,6 @@
             IMMessage *message=[self.emailArray objectAtIndex:indexPath.row];
             [self.emailArray removeObjectAtIndex:indexPath.row];
             [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationLeft];
-            [self.spreadEmailArray removeObjectAtIndex:indexPath.row];
             self.totalCount--;
             dispatch_async(dispatch_get_global_queue(0, 0), ^{
                 [IMReasonableDao removeEmail:message.ID];
@@ -254,7 +237,7 @@
         
         EmailDetailViewController *emailDetailViewController=[[EmailDetailViewController alloc] init];
         emailDetailViewController.hidesBottomBarWhenPushed=YES;
-        emailDetailViewController.model=[self.spreadEmailArray objectAtIndex:indexPath.row];
+        emailDetailViewController.model=((SpreadEmailPreviewCell *)[tableView cellForRowAtIndexPath:indexPath]).emailModel;
         [self.navigationController pushViewController:emailDetailViewController animated:YES];
     }else{
         
@@ -275,7 +258,6 @@
     IMMessage *message=[self.emailArray objectAtIndex:indexPath.row];
     SpreadEmailPreviewCell *cell=[SpreadEmailPreviewCell cellWithTableView:tableView];
     cell.message=message;
-    [self.spreadEmailArray addObject:cell.emailModel];
     cell.backgroundColor=[UIColor colorWithHexString:TABLEVIEW_COLOR];
     return cell;
 }
@@ -285,26 +267,6 @@
     return CELL_HEIGHT;
 }
 
-
-
-//滚到最后一页
-- (void)goLastMessage
-{
-    
-    double offset = self.view.frame.size.height - (self.tableview.frame.origin.y + self.tableview.contentSize.height);
-    if (offset < 0) {
-        
-        [UIView animateWithDuration:0.5
-                         animations:^{
-                             self.tableview.contentOffset = CGPointMake(0, -offset);
-                         }];
-    }
-    else {
-        self.tableview.contentOffset = CGPointMake(0, -64);
-    }
-    [self.tableview.header endRefreshing];
-}
-
 //收到邮件消息代理回调方法
 -(void)receiveNewMessage:(IMMessage *)message isFwd:(BOOL)isfwd{
     //时间设置成今天，昨天等等
@@ -312,7 +274,6 @@
     [self.emailArray addObject:message];
     NSString *emailJson=message.body;
     SpreadMailModel *model=[SpreadMailModel mj_objectWithKeyValues:[emailJson stringByReplacingOccurrencesOfString:@"'" withString:@"\""]];
-    [self.spreadEmailArray addObject:model];
     [self.tableview reloadData];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
             [IMReasonableDao setMessageRead:message.from needactive:YES];

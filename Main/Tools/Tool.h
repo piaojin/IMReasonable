@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 @interface Tool : NSObject
++(int)intervalSinceNow: (NSString *) theDate;
 +(NSString *)getDateWithFormatString:(NSString *)dateString;
 +(NSDictionary *)JsonStrngToDictionary:(NSString *)json;
 + (UIImage *)imageWithColor:(UIColor *)color;

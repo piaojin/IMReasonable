@@ -6,6 +6,10 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"BACK"="返回";
+"EMAIL_CANNOT_EMPTY"="郵箱不能為空";
+"LATER"="稍後";
+"NO_LONGER_TIPS"="不再提示";
 "IDEA"="這壹刻的想法...";
 "FRIENDS_CIRCLE"="朋友圈";
 "FOUND"="發現";

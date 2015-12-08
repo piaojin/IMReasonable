@@ -8,6 +8,7 @@
 
 #import "PostTalkkingViewController.h"
 #import "PJTextView.h"
+#import "SCLAlertView.h"
 
 #define MARGEN_X 8
 #define MARGEN_Y 8
@@ -48,6 +49,20 @@
     [super viewDidLoad];
     [self initController];
     [self initView];
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    //Dismiss on tap outside (Default is NO)
+    alert.shouldDismissOnTapOutside = YES;
+    
+    //Hide animation type (Default is FadeOut)
+    alert.hideAnimationType = SlideOutToBottom;
+    
+    //Show animation type (Default is SlideInFromTop)
+    alert.showAnimationType = SlideInFromTop;
+    [alert addTextField:@"email"];
+    [alert addButton:@"ok" actionBlock:^{
+        
+    }];
+    [alert showEdit:self title:@"Hello Edit" subTitle:@"This is a more descriptive info text with a edit textbox" closeButtonTitle:@"Done" duration:0.0f];
 }
 
 -(void)initController{

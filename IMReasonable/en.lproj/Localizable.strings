@@ -6,6 +6,10 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"BACK"="back";
+"EMAIL_CANNOT_EMPTY"="Email cannot be empty";
+"LATER"="Later";
+"NO_LONGER_TIPS"="No longer tips";
 "IDEA"="The idea of this moment...";
 "FRIENDS_CIRCLE"="Circle";
 "FOUND"="Found";

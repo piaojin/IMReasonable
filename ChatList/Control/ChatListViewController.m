@@ -24,6 +24,7 @@
 #import "SpreadMailViewController.h"
 #import "AnimationHelper.h"
 #import "ContactsTool.h"
+#import "SCLAlertView.H"
 
 @interface ChatListViewController () {
     UITableView* tableview;
@@ -52,6 +53,67 @@
 @end
 
 @implementation ChatListViewController
+
+//判断是否弹出邮箱填写提示框
+-(void)showFillEmail{
+    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+    BOOL enableEmailPrompt=[userdefault boolForKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
+    if(enableEmailPrompt){
+        
+        BOOL has_fill_out_email=[userdefault boolForKey:HAS_FILL_OUT_EMAIL];
+        if(!has_fill_out_email){
+            
+            NSString *last_date_of_email_prompt=[userdefault stringForKey:LAST_DATE_OF_EMAIL_PROMPT];
+            if([Tool intervalSinceNow:@"2015-12-1"]>=INTERVAL_OF_EMAIL_PROMPT){
+                
+                //没有填写邮箱，提示填写邮箱
+                [self show];
+            }else if([Tool isBlankString:last_date_of_email_prompt]){
+                
+                NSString *currentDate=[Tool GetDate:@"yyyy-hh-dd"];
+                [userdefault setObject:currentDate forKey:LAST_DATE_OF_EMAIL_PROMPT];
+                [userdefault synchronize];
+            }
+        }
+    }
+}
+
+-(void)show{
+     NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
+    SCLAlertView *alert = [[SCLAlertView alloc] init];
+    __weak typeof(SCLAlertView) *weakAlert = alert;
+    alert.hideAlert=NO;
+    alert.editing=YES;
+    [alert setShouldDismissOnTapOutside:NO];
+    alert.shouldDismissOnTapOutside = YES;
+    alert.hideAnimationType = SlideOutToBottom;
+    alert.showAnimationType = SlideInFromTop;
+    UITextField *textField = [alert addTextField:@"edit email"];
+    [alert addButton:NSLocalizedString(@"btnDone", nil) actionBlock:^{
+        NSString *email=textField.text;
+        if([Tool isBlankString:email]){
+            
+            [AnimationHelper show:NSLocalizedString(@"EMAIL_CANNOT_EMPTY", nil) InView:self.view];
+        }else if([Tool isValidateEmail:email]){
+            
+            //提交邮箱
+            [weakAlert hideView];
+        }else{
+            
+            [AnimationHelper show:NSLocalizedString(@"EMAIL_PROMPT_ERROR", nil) InView:self.view];
+        }
+    }];
+    [alert addButton:NSLocalizedString(@"NO_LONGER_TIPS", nil) actionBlock:^{
+        [userdefault setBool:NO forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
+        [userdefault synchronize];
+    }];
+    [alert addButton:NSLocalizedString(@"LATER", nil) actionBlock:^{
+        NSString *currentDate=[Tool GetDate:@"yyyy-hh-dd"];
+        [userdefault setObject:currentDate forKey:LAST_DATE_OF_EMAIL_PROMPT];
+        [userdefault synchronize];
+    }];
+    [alert showEdit:self title:nil subTitle:NSLocalizedString(@"EMAIL_PROMPT", nil) closeButtonTitle:NSLocalizedString(@"lbTCancle", nil) duration:0.0f];
+}
 
 -(MailTableViewCell *)eMailCell{
     if(_eMailCell==nil){
@@ -153,6 +215,8 @@
                                              selector:@selector(localUserChange:)
                                                  name:@"CONNECTSCHANGE"
                                                object:nil];
+    [self showFillEmail];
+//    [self show];
 }
 
 - (void)localUserChange:(NSNotification*)nt

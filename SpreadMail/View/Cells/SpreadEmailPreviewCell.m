@@ -18,6 +18,7 @@
 -(void)setMessage:(IMMessage *)message{
     NSString *emailJson=message.body;
     SpreadMailModel *model=[SpreadMailModel mj_objectWithKeyValues:[emailJson stringByReplacingOccurrencesOfString:@"'" withString:@"\""]];
+    self.emailModel=model;
     self.emailSender.text=model.campaign_from;
     self.emailSubject.text=model.campaign_subject;
     self.emailReceiveTime.text=NSLocalizedString(message.date, message.date);

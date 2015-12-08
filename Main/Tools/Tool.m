@@ -18,6 +18,29 @@
 
 @implementation Tool
 
+//判断日期是否超过若干天
++(int)intervalSinceNow: (NSString *) theDate
+{
+    
+    NSDateFormatter *date=[[NSDateFormatter alloc] init];
+    [date setDateFormat:@"yyyy-MM-dd"];
+    NSDate *d=[date dateFromString:theDate];
+    
+    NSTimeInterval late=[d timeIntervalSince1970]*1;
+    
+    NSDate* dat = [NSDate dateWithTimeIntervalSinceNow:0];
+    NSTimeInterval now=[dat timeIntervalSince1970]*1;
+    NSString *timeString=@"";
+    NSTimeInterval cha=now-late;
+    if (cha/86400>1)
+    {
+        timeString = [NSString stringWithFormat:@"%f", cha/86400];
+        timeString = [timeString substringToIndex:timeString.length-7];
+        return [timeString intValue];
+    }
+    return -1;
+}
+
 //切割图片
 +(UIImage *)CuttingImage:(UIImage *)image WitnRect:(CGRect)rect{
     

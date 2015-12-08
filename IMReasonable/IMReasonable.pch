@@ -107,6 +107,16 @@
 #define RESPREAD_PASSWORD @"804488815"
 //联系人列表
 #define CONTACTS @"piaojin6"
+//是否填写了邮箱
+#define HAS_FILL_OUT_EMAIL @"has_fill_out_email"
+//用户填写的spread邮箱
+#define USER_SPREAD_EMAIL @"user_spread_email"
+//是否开启邮箱填写提示
+#define ENABLE_FILL_OUT_EMAIL_PROMPT @"enable_fill_out_email_prompt"
+//最后一次提示填写邮箱的日期(yyyy-hh-dd)
+#define LAST_DATE_OF_EMAIL_PROMPT @"last_date_of_email_prompt"
+//提示填写邮箱时间间隔(天为单位)
+#define INTERVAL_OF_EMAIL_PROMPT 3
 
 //soap调用xml参数(调用方法addSubscriberByInfo)
 #define ADD_EMAIL_PARAM @"<?xml version=\"1.0\" encoding=\"utf-8\"?><soap12:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\"><soap12:Body><addSubscriberByInfo xmlns=\"http://service.reasonablespread.com/\"><loginEmail>%@</loginEmail><password>%@</password><subscriberArgs><email>%@</email><firstName></firstName><middleName></middleName><lastName></lastName><jobTitle></jobTitle><company></company><homePhone>%@</homePhone><address1></address1><address2></address2><address3></address3><city></city><state></state><country></country><postalCode></postalCode><subPostalCode></subPostalCode><fax></fax><webUrl></webUrl><title></title><gender></gender><date1>%@</date1><date2>%@</date2><customField1></customField1><customField2></customField2><customField3></customField3><customField4></customField4><customField5></customField5><customField6></customField6><customField7></customField7><customField8></customField8><customField9></customField9><customField10></customField10><customField11></customField11><customField12></customField12><customField13></customField13><customField14></customField14><customField15></customField15></subscriberArgs><subscription>%@</subscription><optInType>Off</optInType></addSubscriberByInfo></soap12:Body></soap12:Envelope>"

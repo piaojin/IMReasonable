@@ -247,6 +247,7 @@
         if (indexPath.row==0) {
             ThirdViewController *firstview = [[ThirdViewController alloc]initWithNibName:@"ThirdViewController" bundle:nil];
             firstview.isSetting=true;
+            firstview.hidesBottomBarWhenPushed=YES;
             [self.navigationController pushViewController:firstview animated:YES];
         }else {
             WallPaperViewController * wallpaper=[[WallPaperViewController alloc] init];

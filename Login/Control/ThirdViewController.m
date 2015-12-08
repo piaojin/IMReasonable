@@ -358,6 +358,9 @@
     NSString* myPassword;
     if (localname && localname.length > 0) {
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        NSString *date=[Tool GetDate:@"yyyy-hh-dd"];
+        //默认开启填写邮箱提示(如果用户没有填写邮箱的话)
+        [defaults setBool:YES forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
         myPassword = [defaults stringForKey:XMPPREASONABLEPWD];
         [defaults setBool:false forKey:ISSIGN_OUT];
         [defaults setValue:self.txtName.text forKey:MyLOCALNICKNAME];
@@ -391,12 +394,17 @@
                                 [[XMPPDao sharedXMPPManager] SetUserPhoto:jidstr photo:base64data];
                             }
                         }
+                        [defaults setBool:YES forKey:HAS_FILL_OUT_EMAIL];
+                        //保存用户填写的邮箱
+                        [defaults setObject:inputemail forKey:USER_SPREAD_EMAIL];
                         [defaults setObject:myPassword forKey:XMPPREASONABLEPWD];
                         [defaults synchronize];
                         [AnimationHelper removeHUD];
                         [self goNext];
                     }
                     failure:^(NSError* error) {
+                        [defaults setObject:date forKey:LAST_DATE_OF_EMAIL_PROMPT];
+                        [defaults setBool:NO forKey:HAS_FILL_OUT_EMAIL];
                         [defaults removeObjectForKey:XMPPREASONABLEPWD];
                         [defaults synchronize];
                         [AnimationHelper removeHUD];
@@ -406,8 +414,14 @@
             [self goNext];
         }else if(![Tool isBlankString:inputemail]&&![Tool isValidateEmail:inputemail]){
             
+            [defaults setBool:NO forKey:HAS_FILL_OUT_EMAIL];
             [self tipsMsg:NSLocalizedString(@"EMAIL_PROMPT_ERROR", nil) time:2];
             return;
+        }else if([Tool isBlankString:inputemail]){
+            
+            [defaults setObject:date forKey:LAST_DATE_OF_EMAIL_PROMPT];
+            [defaults setBool:NO forKey:HAS_FILL_OUT_EMAIL];
+            [defaults synchronize];
         }
         
             [self goNext];
@@ -431,7 +445,7 @@
 
 - (void)goNext
 {
-    //   [AnimationHelper removeHUD];
+    
     self.navigationItem.title = NSLocalizedString(@"lbTStile", nil);
     if (!self.isSetting) {
         MainViewController* mainview = [[MainViewController alloc] init];
