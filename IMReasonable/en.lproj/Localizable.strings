@@ -6,6 +6,13 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"SAVE_FAILED"="Save failed";
+"SAVE_SUCCESS"="Save success";
+"FAILED_TO_LOAD"="Failed to load";
+"LOAD_COMPLETION"="Load completion";
+"LOADING"="Loading";
+"SUBMISSION_FAILURE"="Submission failure";
+"RELOAD"="reload";
 "BACK"="back";
 "EMAIL_CANNOT_EMPTY"="Email cannot be empty";
 "LATER"="Later";

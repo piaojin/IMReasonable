@@ -19,9 +19,23 @@
     NSString *emailJson=message.body;
     SpreadMailModel *model=[SpreadMailModel mj_objectWithKeyValues:[emailJson stringByReplacingOccurrencesOfString:@"'" withString:@"\""]];
     self.emailModel=model;
-    self.emailSender.text=model.campaign_from;
+    self.emailSender.text=[NSString stringWithFormat:@"%@:",model.campaign_from];
     self.emailSubject.text=model.campaign_subject;
-    self.emailReceiveTime.text=NSLocalizedString(message.date, message.date);
+    NSString *temptime=message.date;
+    NSString *displaytime=[Tool getDisplayTime:message.date];
+    NSString *time=NSLocalizedString(displaytime, displaytime);
+    //添加小时和分钟
+        NSDate *  date=[NSDate date];
+        NSDateFormatter  *dateformatter=[[NSDateFormatter alloc] init];
+        [dateformatter setDateFormat:@"yyyy-mm-dd HH:mm:ss"];
+        date=[dateformatter dateFromString:temptime];
+        NSCalendar *cal = [NSCalendar currentCalendar];
+        NSDateComponents *componentsH = [cal components:NSHourCalendarUnit fromDate:date];
+        NSString *H = [NSString stringWithFormat:@"%ld", (long)[componentsH hour]];
+        NSDateComponents *componentsM = [cal components:NSMinuteCalendarUnit fromDate:date];
+        NSString *M = [NSString stringWithFormat:@"%ld", (long)[componentsM minute]];
+        time=[NSString stringWithFormat:@"%@ %@:%@",time,H,M];
+    self.emailReceiveTime.text=time;
     self.emailReceiveTime.font=[UIFont systemFontOfSize:11];
     self.emailReceiveTime.textColor=[UIColor grayColor];
     self.emailContent.text=model.CampaignContent;

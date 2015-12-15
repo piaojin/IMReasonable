@@ -32,19 +32,33 @@
 @implementation SelectUserViewController
 
 -(NSMutableArray *)letterNameArray{
-    if(_letterNameArray==nil){
-        
-        NSMutableArray *tempLetterArray=[NSMutableArray array];
-        _letterNameArray=[ChineseString LetterSortArray:self.localNameArray];
-        for(NSArray * temparray in _letterNameArray){
-            for(NSString *name in temparray){
-                [tempLetterArray addObject:name];
-            }
-        }
-        _letterNameArray=tempLetterArray;
-    }
+    _letterNameArray=[NSMutableArray arrayWithArray:[self.localNameArray sortedArrayUsingFunction:nickNameSort context:NULL]];
     return _letterNameArray;
 }
+
+NSInteger nickNameSort(id user1, id user2, void *context){
+    NSString *u1,*u2;
+    //类型转换
+    u1 = (NSString*)user1;
+    u2 = (NSString*)user2;
+    return  [u1 localizedCompare:u2
+             ];
+}
+
+//-(NSMutableArray *)letterNameArray{
+//    if(_letterNameArray==nil){
+//        
+//        NSMutableArray *tempLetterArray=[NSMutableArray array];
+//        _letterNameArray=[ChineseString LetterSortArray:self.localNameArray];
+//        for(NSArray * temparray in _letterNameArray){
+//            for(NSString *name in temparray){
+//                [tempLetterArray addObject:name];
+//            }
+//        }
+//        _letterNameArray=tempLetterArray;
+//    }
+//    return _letterNameArray;
+//}
 
 -(NSMutableArray *)localNameArray{
     if(_localNameArray==nil){

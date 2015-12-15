@@ -349,7 +349,8 @@
         message.to=to;
         message.body=[rs stringForColumn:@"body"];
         message.type=[rs stringForColumn:@"type"];
-        message.date=[Tool getDisplayTime:[rs stringForColumn:@"date"]];
+//        message.date=[Tool getDisplayTime:[rs stringForColumn:@"date"]];
+        message.date=[rs stringForColumn:@"date"];
         NSLog(@"%@",[rs stringForColumn:@"date"]);
         message.isneedsend=[rs stringForColumn:@"isneedsend"];
         [array addObject:message];

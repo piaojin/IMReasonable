@@ -26,6 +26,15 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
+NSInteger nickNameSort(id user1, id user2, void *context){
+    NSString *u1,*u2;
+    //类型转换
+    u1 = (NSString*)user1;
+    u2 = (NSString*)user2;
+    return  [u1 localizedCompare:u2
+             ];
+}
+
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
@@ -58,6 +67,26 @@
 //    } failure:^(NSError * failure){
 //        NSLog(@"%@",failure);
 //    }];
+    NSMutableArray *arr=[NSMutableArray array];
+    [arr addObject:@"电脑"];
+    [arr addObject:@"显示器"];
+    [arr addObject:@"你好"];
+    [arr addObject:@"推特"];
+    [arr addObject:@"乔布斯"];
+    [arr addObject:@"再见"];
+    [arr addObject:@"暑假作业"];
+    [arr addObject:@"键盘"];
+    [arr addObject:@"鼠标"];
+    [arr addObject:@"谷歌"];
+    [arr addObject:@"苹果"];
+    [arr addObject:@"l"];
+    [arr addObject:@"a"];
+    [arr addObject:@"l"];
+    NSArray *sortArr = [arr sortedArrayUsingFunction:nickNameSort context:NULL];
+    for(int i=0;i<sortArr.count;i++){
+        
+        NSLog(@"%@",sortArr[i]);
+    }
     NSLog(@"piaojinxgz");
 }
 

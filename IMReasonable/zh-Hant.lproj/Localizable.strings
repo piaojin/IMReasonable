@@ -6,6 +6,13 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"SAVE_FAILED"="保存失敗";
+"SAVE_SUCCESS"="保存成功";
+"FAILED_TO_LOAD"="加載失敗";
+"LOAD_COMPLETION"="加載完成";
+"LOADING"="加載中...";
+"SUBMISSION_FAILURE"="提交失敗";
+"RELOAD"="重新加載";
 "BACK"="返回";
 "EMAIL_CANNOT_EMPTY"="郵箱不能為空";
 "LATER"="稍後";

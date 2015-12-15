@@ -6,6 +6,7 @@
 //  Copyright (c) 2014年 Reasonable. All rights reserved.
 //
 
+#import "RespreadSoapTool.h"
 #import "MailTableViewCell.h"
 #import "SpreadMailModel.h"
 #import "InviteAllFriendsController.h"
@@ -78,6 +79,7 @@
     }
 }
 
+//显示编辑邮箱对话框
 -(void)show{
      NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
     SCLAlertView *alert = [[SCLAlertView alloc] init];
@@ -96,8 +98,32 @@
             [AnimationHelper show:NSLocalizedString(@"EMAIL_CANNOT_EMPTY", nil) InView:self.view];
         }else if([Tool isValidateEmail:email]){
             
+            [AnimationHelper showHUD:@"load......"];
             //提交邮箱
-            [weakAlert hideView];
+            NSString* phone = [[[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
+            NSString* param = [NSString stringWithFormat:ADD_EMAIL_PARAM, RESPREAD_EMAIL, RESPREAD_PASSWORD, email, phone, [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], CONTACTS];
+            dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                [RespreadSoapTool Soap:WSDL_URL
+                             WithParam:param
+                               success:^(id success) {
+                                   
+                                   [userdefault setBool:YES forKey:HAS_FILL_OUT_EMAIL];
+                                   //保存用户填写的邮箱
+                                   [userdefault setObject:email forKey:USER_SPREAD_EMAIL];
+                                   [userdefault setObject:email forKey:MyEmail];
+                                   [userdefault setBool:NO forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
+                                   [userdefault synchronize];
+                                   [AnimationHelper removeHUD];
+                                   [weakAlert hideView];
+                               }
+                               failure:^(NSError* error) {
+                                   [userdefault setObject:[Tool GetDate:@"yyyy-hh-dd"] forKey:LAST_DATE_OF_EMAIL_PROMPT];
+                                   [userdefault setBool:NO forKey:HAS_FILL_OUT_EMAIL];
+                                   [userdefault synchronize];
+                                   [AnimationHelper removeHUD];
+                                   [Tool alert:NSLocalizedString(@"SUBMISSION_FAILURE", nil)];
+                               }];
+            });
         }else{
             
             [AnimationHelper show:NSLocalizedString(@"EMAIL_PROMPT_ERROR", nil) InView:self.view];

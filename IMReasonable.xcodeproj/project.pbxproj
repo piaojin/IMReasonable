@@ -31,6 +31,8 @@
 		18414ED11A2483D600994AEA /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18414ED01A2483D600994AEA /* libsqlite3.dylib */; };
 		18B908A61A81FFB000E6B02D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B908A51A81FFAF00E6B02D /* MessageUI.framework */; };
 		18CE61C31A677B1900E45D36 /* CountryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18CE61C21A677B1900E45D36 /* CountryList.plist */; };
+		CA10F0401C19599800D65086 /* PJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA10F03F1C19599800D65086 /* PJButton.m */; settings = {ASSET_TAGS = (); }; };
+		CA10F0471C19649600D65086 /* PJImageBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA10F0451C19649600D65086 /* PJImageBrowserController.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5A81BCCB58400DA4ED7 /* ContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5AD1BCD0F8600DA4ED7 /* PJBaseHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5AC1BCD0F8600DA4ED7 /* PJBaseHttpTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5B31BCD126200DA4ED7 /* PJSendInviteHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5B21BCD126200DA4ED7 /* PJSendInviteHttpTool.m */; settings = {ASSET_TAGS = (); }; };
@@ -81,7 +83,6 @@
 		CA92E8931C152CA4001897D6 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E88A1C152CA4001897D6 /* SCLTextView.m */; settings = {ASSET_TAGS = (); }; };
 		CA92E8941C152CA4001897D6 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E88C1C152CA4001897D6 /* SCLTimerDisplay.m */; settings = {ASSET_TAGS = (); }; };
 		CA92E8951C152CA4001897D6 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = CA92E88E1C152CA4001897D6 /* UIImage+ImageEffects.m */; settings = {ASSET_TAGS = (); }; };
-		CA92E8971C16EC2A001897D6 /* network_error.png in Resources */ = {isa = PBXBuildFile; fileRef = CA92E8961C16EC2A001897D6 /* network_error.png */; settings = {ASSET_TAGS = (); }; };
 		CA9A089D1C05A84D007EB565 /* RespreadSoapTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9A089C1C05A84C007EB565 /* RespreadSoapTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA9C97F91BF976FA0050323F /* SpreadMailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CA9C97F81BF976FA0050323F /* SpreadMailModel.m */; settings = {ASSET_TAGS = (); }; };
 		CA9C97FB1BF988390050323F /* spread_email.png in Resources */ = {isa = PBXBuildFile; fileRef = CA9C97FA1BF988390050323F /* spread_email.png */; settings = {ASSET_TAGS = (); }; };
@@ -636,6 +637,10 @@
 		18C0CE171A2036BD00BF8C0E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		18C0CE181A2036BD00BF8C0E /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		18CE61C21A677B1900E45D36 /* CountryList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CountryList.plist; sourceTree = "<group>"; };
+		CA10F03E1C19599800D65086 /* PJButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJButton.h; path = FriendsCircle/View/PJButton.h; sourceTree = SOURCE_ROOT; };
+		CA10F03F1C19599800D65086 /* PJButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJButton.m; path = FriendsCircle/View/PJButton.m; sourceTree = SOURCE_ROOT; };
+		CA10F0441C19649600D65086 /* PJImageBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJImageBrowserController.h; path = FriendsCircle/Control/PJImageBrowserController.h; sourceTree = SOURCE_ROOT; };
+		CA10F0451C19649600D65086 /* PJImageBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJImageBrowserController.m; path = FriendsCircle/Control/PJImageBrowserController.m; sourceTree = SOURCE_ROOT; };
 		CA64A5A61BCCB58400DA4ED7 /* ContactsTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTool.h; path = Main/Tools/ContactsTool.h; sourceTree = "<group>"; };
 		CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTool.m; path = Main/Tools/ContactsTool.m; sourceTree = "<group>"; };
 		CA64A5AB1BCD0F8600DA4ED7 /* PJBaseHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJBaseHttpTool.h; path = Main/Tools/PJBaseHttpTool.h; sourceTree = "<group>"; };
@@ -736,7 +741,6 @@
 		CA92E88C1C152CA4001897D6 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SCLTimerDisplay.m; path = Main/Libs/SCLAlertView/SCLTimerDisplay.m; sourceTree = "<group>"; };
 		CA92E88D1C152CA4001897D6 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Main/Libs/SCLAlertView/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		CA92E88E1C152CA4001897D6 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Main/Libs/SCLAlertView/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
-		CA92E8961C16EC2A001897D6 /* network_error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = network_error.png; path = Main/Resources/Image/network_error.png; sourceTree = SOURCE_ROOT; };
 		CA9A089B1C05A84C007EB565 /* RespreadSoapTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RespreadSoapTool.h; path = Main/Tools/RespreadSoapTool.h; sourceTree = "<group>"; };
 		CA9A089C1C05A84C007EB565 /* RespreadSoapTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RespreadSoapTool.m; path = Main/Tools/RespreadSoapTool.m; sourceTree = "<group>"; };
 		CA9C97F71BF976FA0050323F /* SpreadMailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpreadMailModel.h; path = SpreadMail/Model/SpreadMailModel.h; sourceTree = SOURCE_ROOT; };
@@ -2673,7 +2677,6 @@
 		181120BB1A1EDE1B00762075 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				CA92E8961C16EC2A001897D6 /* network_error.png */,
 				CAAA3FE11C0EA8B2003D4A12 /* addpic_focused.png */,
 				CAAA3FE21C0EA8B2003D4A12 /* addpic_unfocused.png */,
 				CA9C97FA1BF988390050323F /* spread_email.png */,
@@ -3669,6 +3672,8 @@
 			children = (
 				CAAA3FE51C0ED66B003D4A12 /* PJTextView.h */,
 				CAAA3FE61C0ED66B003D4A12 /* PJTextView.m */,
+				CA10F03E1C19599800D65086 /* PJButton.h */,
+				CA10F03F1C19599800D65086 /* PJButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3680,6 +3685,8 @@
 				CAAA3FD61C0D95C6003D4A12 /* FriendsCircleViewController.m */,
 				CAAA3FD81C0D9FDE003D4A12 /* PostTalkkingViewController.h */,
 				CAAA3FD91C0D9FDE003D4A12 /* PostTalkkingViewController.m */,
+				CA10F0441C19649600D65086 /* PJImageBrowserController.h */,
+				CA10F0451C19649600D65086 /* PJImageBrowserController.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -4276,7 +4283,6 @@
 				CAB997721BB3A35500661AB7 /* Expression_68@2x.png in Resources */,
 				CAB9978C1BB3A35500661AB7 /* Expression_94@2x.png in Resources */,
 				CAB997361BB3A35500661AB7 /* Expression_8@2x.png in Resources */,
-				CA92E8971C16EC2A001897D6 /* network_error.png in Resources */,
 				CAB9977E1BB3A35500661AB7 /* Expression_80@2x.png in Resources */,
 				CAB9940C1BB3988900661AB7 /* wp_17.jpg in Resources */,
 				CAB993431BB3956F00661AB7 /* chat_animation2.png in Resources */,
@@ -4687,6 +4693,7 @@
 				CA821F9F1BD88EAB0072F7DA /* UIColor+Hex.m in Sources */,
 				CAB997A51BB3A3C300661AB7 /* RichTextBaseRun.m in Sources */,
 				CAB995AC1BB3A01900661AB7 /* XMPPMessageArchiving.xcdatamodeld in Sources */,
+				CA10F0401C19599800D65086 /* PJButton.m in Sources */,
 				CAB996941BB3A2B600661AB7 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
 				CA9C981B1BFC733D0050323F /* MJProperty.m in Sources */,
 				CAB996791BB3A28400661AB7 /* ASIDataCompressor.m in Sources */,
@@ -4711,6 +4718,7 @@
 				CAB995B31BB3A09900661AB7 /* XMPPvCardAvatarModule.m in Sources */,
 				CAB996171BB3A21100661AB7 /* MJRefreshFooter.m in Sources */,
 				CAB9931E1BB3950200661AB7 /* WeChatTableViewCell.m in Sources */,
+				CA10F0471C19649600D65086 /* PJImageBrowserController.m in Sources */,
 				CAB9944D1BB39A9900661AB7 /* Tool.m in Sources */,
 				CA9C981F1BFC733D0050323F /* NSObject+MJCoding.m in Sources */,
 				CAB9936D1BB395CF00661AB7 /* BorderView.m in Sources */,

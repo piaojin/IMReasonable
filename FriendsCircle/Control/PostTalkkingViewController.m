@@ -6,14 +6,16 @@
 //  Copyright © 2015年 Reasonable. All rights reserved.
 //
 
+#import "PJImageBrowserController.h"
+#import "PJButton.h"
 #import "PostTalkkingViewController.h"
 #import "PJTextView.h"
-#import "SCLAlertView.h"
 
 #define MARGEN_X 8
 #define MARGEN_Y 8
 #define HEIGHT 128
-#define ADDPHOTO_COUNT 3
+#define ADDPHOTO_COUNT 4
+#define ROW_COUNT 2
 
 @interface PostTalkkingViewController()
 
@@ -22,9 +24,11 @@
 @property(nonatomic,assign)int index_x;
 @property(nonatomic,assign)int index_y;
 //当前未添加图片的按钮
-@property(nonatomic,weak)UIButton *currentAddPhotoButton;
+@property(nonatomic,weak)PJButton *currentAddPhotoButton;
 //存放有所有的按钮(即存放所有的图片)
 @property(nonatomic,strong)NSMutableArray *addPhotoButtonArray;
+//存放所有的图片
+@property(nonatomic,strong)NSMutableArray *addPhotoArray;
 //按钮的大小
 @property(nonatomic,assign)int addPhotoWidth;
 @property(nonatomic,assign)int maxYoftalkContent;
@@ -44,25 +48,19 @@
     return _addPhotoButtonArray;
 }
 
+-(NSMutableArray *)addPhotoArray{
+    if(_addPhotoArray==nil){
+        
+        _addPhotoArray=[NSMutableArray array];
+    }
+    return _addPhotoArray;
+}
+
 -(void)viewDidLoad{
     
     [super viewDidLoad];
     [self initController];
     [self initView];
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    //Dismiss on tap outside (Default is NO)
-    alert.shouldDismissOnTapOutside = YES;
-    
-    //Hide animation type (Default is FadeOut)
-    alert.hideAnimationType = SlideOutToBottom;
-    
-    //Show animation type (Default is SlideInFromTop)
-    alert.showAnimationType = SlideInFromTop;
-    [alert addTextField:@"email"];
-    [alert addButton:@"ok" actionBlock:^{
-        
-    }];
-    [alert showEdit:self title:@"Hello Edit" subTitle:@"This is a more descriptive info text with a edit textbox" closeButtonTitle:@"Done" duration:0.0f];
 }
 
 -(void)initController{
@@ -82,25 +80,31 @@
     talkContent.alwaysBounceVertical=YES;
     self.addPhotoWidth=(SCREENWIDTH-((1+ADDPHOTO_COUNT)*MARGEN_X))/ADDPHOTO_COUNT;
     self.maxYoftalkContent=CGRectGetMaxY(self.talkContent.frame);
-    [self addButton];
-//    for(int i=0;i<ADDPHOTO_COUNT;i++){
-//        UIButton *addPhoto=[[UIButton alloc] init];
-//        [addPhoto setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
-//        [addPhoto setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
-//        [self.view addSubview:addPhoto];
-//        addPhoto.frame=CGRectMake(i*addPhotoWidth+(i+1)*MARGEN_X, y+MARGEN_Y, addPhotoWidth, addPhotoWidth);
-//    }
+    for(int p=0;p<ROW_COUNT;p++){
+        for(int i=0;i<ADDPHOTO_COUNT;i++){
+            PJButton *addPhoto=[[PJButton alloc] init];
+            [addPhoto setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
+            [addPhoto setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
+            [self.view addSubview:addPhoto];
+            addPhoto.frame=CGRectMake(i*self.addPhotoWidth+(i+1)*MARGEN_X, self.maxYoftalkContent+p*self.addPhotoWidth+((p+1)*MARGEN_Y), self.addPhotoWidth, self.addPhotoWidth);
+            [self.addPhotoButtonArray setValue:addPhoto forKey:[NSString stringWithFormat:@"%d",self.buttonCount]];
+            addPhoto.tag=self.buttonCount;
+            addPhoto.index=self.buttonCount;
+            self.buttonCount++;
+            [addPhoto addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
+        }
+    }
 }
 
--(void)addButton{
-    UIButton *addPhoto=[[UIButton alloc] init];
-    [addPhoto setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
-    [addPhoto setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
-    [self.view addSubview:addPhoto];
-    addPhoto.frame=CGRectMake(self.index_x*self.addPhotoWidth+(self.index_x+1)*MARGEN_X, self.maxYoftalkContent+self.index_y*self.addPhotoWidth+(self.index_y+1)*MARGEN_Y, self.addPhotoWidth, self.addPhotoWidth);
-    [addPhoto addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
-    self.currentAddPhotoButton=addPhoto;
-}
+//-(void)addButton{
+//    UIButton *addPhoto=[[UIButton alloc] init];
+//    [addPhoto setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
+//    [addPhoto setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
+//    [self.view addSubview:addPhoto];
+//    addPhoto.frame=CGRectMake(self.index_x*self.addPhotoWidth+(self.index_x+1)*MARGEN_X, self.maxYoftalkContent+self.index_y*self.addPhotoWidth+(self.index_y+1)*MARGEN_Y, self.addPhotoWidth, self.addPhotoWidth);
+//    [addPhoto addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
+//    self.currentAddPhotoButton=addPhoto;
+//}
 
 -(void)send{
     
@@ -111,7 +115,18 @@
 }
 
 -(void)addPhoto:(id)button{
-    [self imagefromwhere];
+    PJButton *tempbutton=button;
+    if(tempbutton.hasAddPhoto){
+        
+        //已经添加完图片
+        PJImageBrowserController *pjImageBrowserController=[PJImageBrowserController getInstanceWithImageArray:self.addPhotoArray AndCurrentIndex:0];
+        [self.navigationController pushViewController:pjImageBrowserController animated:YES];
+    }else{
+        
+        //未添加图片
+        self.currentAddPhotoButton=button;
+        [self imagefromwhere];
+    }
 }
 
 #pragma mark -图片源函数
@@ -175,28 +190,10 @@
                                }];
     
     UIImage* image = [info objectForKey:UIImagePickerControllerEditedImage];
+
+    [self.currentAddPhotoButton setTalkkingImage:image];
+    [self.addPhotoArray addObject:image];
     
-    [self.currentAddPhotoButton setImage:image forState:UIControlStateNormal];
-    self.buttonCount++;
-    if((self.index_x+1)==ADDPHOTO_COUNT){
-        
-        self.index_x=0;
-        if(self.index_y==1){
-            
-            self.index_y=0;
-        }else{
-            
-            self.index_y++;
-        }
-    }else{
-        
-        self.index_x++;
-    }
-    
-    if((self.buttonCount+1)<=2*ADDPHOTO_COUNT){
-        
-        [self addButton];
-    }
     /* 此处info 有六个值
      * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
      * UIImagePickerControllerOriginalImage;  // a UIImage 原始图片

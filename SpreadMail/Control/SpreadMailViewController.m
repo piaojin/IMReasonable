@@ -9,7 +9,7 @@
 
 
 #define IDENTIFIER @"SpreadEmailPreviewCell"
-#define CELL_HEIGHT 125//根据xib中视图的高度来定
+#define CELL_HEIGHT 97//根据xib中视图的高度来定
 #define EMAIL_COUNT 6
 #define TABLEVIEW_COLOR @"#DEDEDE"
 

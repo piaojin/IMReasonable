@@ -19,6 +19,8 @@
 @property(nonatomic,assign)BOOL hasLoadSucOnce;
 //是否是返回上一个网页
 @property(nonatomic,assign)BOOL isGoBack;
+//重新加载
+@property(nonatomic,strong)UIButton *reLoadButton;
 
 @end
 
@@ -38,6 +40,27 @@
     NSURLRequest *request=[NSURLRequest requestWithURL:[NSURL URLWithString:self.model.newsletterLinkUrl] cachePolicy:NSURLRequestReloadRevalidatingCacheData timeoutInterval:16.0];
     NSLog(@"%@",self.model.newsletterLinkUrl);
     [self.webView loadRequest:request];
+    [self initView];
+}
+
+-(void)initView{
+    [self.view addSubview:self.reLoadButton];
+}
+
+-(UIButton *)reLoadButton{
+    if(_reLoadButton==nil){
+        
+        _reLoadButton=[[UIButton alloc]init];
+        [_reLoadButton setTitle:NSLocalizedString(@"RELOAD", nil) forState:UIControlStateNormal];
+        [_reLoadButton addTarget:self action:@selector(reLoad) forControlEvents:UIControlEventTouchUpInside];
+        _reLoadButton.frame=CGRectMake(0, 0, 100, 100);
+        _reLoadButton.center=self.view.center;
+        _reLoadButton.titleLabel.textColor=[UIColor blackColor];
+        [_reLoadButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_reLoadButton setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+        _reLoadButton.hidden=YES;
+    }
+    return _reLoadButton;
 }
 
 - (void)viewDidLoad {
@@ -53,27 +76,32 @@
 }
 
 -(void)webViewDidStartLoad:(UIWebView *)webView{
-    [AnimationHelper showHUD:@"load......"];
+//    [AnimationHelper showHUD:@"load......"];
+    self.navigationItem.title=NSLocalizedString(@"LOADING", nil);
     NSLog(@"webViewDidStartLoad");
 }
 
 -(void)webViewDidFinishLoad:(UIWebView *)webView{
     self.hasLoadSucOnce=true;
-    [AnimationHelper removeHUD];
+//    [AnimationHelper removeHUD];
+    self.navigationItem.title=NSLocalizedString(@"LOAD_COMPLETION", nil);
     NSLog(@"webViewDidFinishLoad");
 }
 
 -(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error{
     if(!self.hasLoadSucOnce){
         
-        UIButton *button=[[UIButton alloc]init];
-        [button setImage:[UIImage imageNamed:@"network_error"] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(reLoad) forControlEvents:UIControlEventTouchUpInside];
-        button.frame=CGRectMake(0, 0, 100, 100);
-        [self.view addSubview:button];
-        button.center=self.view.center;
+        self.reLoadButton.hidden=NO;
+    }else{
+        
+        self.reLoadButton.hidden=YES;
     }
-    [AnimationHelper removeHUD];
+//    [AnimationHelper removeHUD];
+    self.navigationItem.title=NSLocalizedString(@"FAILED_TO_LOAD", nil);
+    if([PJNetWorkHelper isNetWorkAvailable]){
+        
+        [AnimationHelper show:NSLocalizedString(@"FAILED_TO_LOAD", nil) InView:self.view];
+    }
     NSLog(@"didFailLoadWithError:%ld",(long)error.code);
 }
 
@@ -88,7 +116,7 @@
     if([PJNetWorkHelper isNetWorkAvailable]){
         
         return true;
-    }else if(self.isGoBack){
+    }else if(self.isGoBack&&navigationType!=UIWebViewNavigationTypeLinkClicked){
         
         return true;
     }

@@ -30,6 +30,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.hidesBottomBarWhenPushed=YES;
     self.emailPrompt.text=NSLocalizedString(@"EMAIL_PROMPT", nil);
     self.txtName.placeholder=NSLocalizedString(@"REQUIRED", nil);
     self.email.placeholder=NSLocalizedString(@"REQUIRED", nil);

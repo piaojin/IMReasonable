@@ -6,6 +6,7 @@
 //  Copyright (c) 2013年 itcast. All rights reserved.
 //
 
+#import "AnimationHelper.h"
 #import "MJPhotoToolbar.h"
 #import "MJPhoto.h"
 //#import "MBProgressHUD+Add.h"
@@ -66,12 +67,12 @@
 - (void)image:(UIImage *)image didFinishSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
 {
     if (error) {
-//        [MBProgressHUD showSuccess:@"保存失败" toView:nil];
+        [AnimationHelper show:NSLocalizedString(@"SAVE_FAILED", nil) InView:self];
     } else {
         MJPhoto *photo = _photos[_currentPhotoIndex];
         photo.save = YES;
         _saveImageBtn.enabled = NO;
-//        [MBProgressHUD showSuccess:@"成功保存到相册" toView:nil];
+        [AnimationHelper show:NSLocalizedString(@"SAVE_SUCCESS", nil) InView:self];
     }
 }
 
