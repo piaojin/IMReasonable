@@ -6,6 +6,8 @@
 //  Copyright © 2015年 Reasonable. All rights reserved.
 //
 
+#define ERROR_999 -999//当异步加载取消返回。当它执行取消操作上加载资源时，Web 工具包框架委托将收到此错误
+
 #import "PJNetWorkHelper.h"
 #import "SpreadMailModel.h"
 #import "EmailDetailViewController.h"
@@ -98,7 +100,7 @@
     }
 //    [AnimationHelper removeHUD];
     self.navigationItem.title=NSLocalizedString(@"FAILED_TO_LOAD", nil);
-    if([PJNetWorkHelper isNetWorkAvailable]){
+    if([PJNetWorkHelper isNetWorkAvailable]&&error.code!=ERROR_999){
         
         [AnimationHelper show:NSLocalizedString(@"FAILED_TO_LOAD", nil) InView:self.view];
     }

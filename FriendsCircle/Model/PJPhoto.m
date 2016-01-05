@@ -1,13 +1,14 @@
 //
-//  MJPhoto.m
+//  PJPhoto.m
+//  IMReasonable
 //
-//  Created by mj on 13-3-4.
-//  Copyright (c) 2013年 itcast. All rights reserved.
+//  Created by 翁金闪 on 15/12/22.
+//  Copyright © 2015年 Reasonable. All rights reserved.
+//
 
-#import <QuartzCore/QuartzCore.h>
-#import "MJPhoto.h"
+#import "PJPhoto.h"
 
-@implementation MJPhoto
+@implementation PJPhoto
 
 #pragma mark 截图
 - (UIImage *)capture:(UIView *)view
@@ -24,16 +25,7 @@
     _srcImageView = srcImageView;
     _placeholder = srcImageView.image;
     if (srcImageView.clipsToBounds) {
-        
-        //原_capture = [self capture:srcImageView];
-        //飘金修改
-        if(!self.iscapture){
-            
-            _capture = [self capture:srcImageView];
-        }else{
-            
-         _capture=srcImageView.image;
-        }
+        _capture = [self capture:srcImageView];
     }
 }
 

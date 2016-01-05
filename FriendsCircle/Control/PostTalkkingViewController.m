@@ -6,10 +6,11 @@
 //  Copyright © 2015年 Reasonable. All rights reserved.
 //
 
-#import "PJImageBrowserController.h"
+#import "PJImageBrowser.h"
 #import "PJButton.h"
 #import "PostTalkkingViewController.h"
 #import "PJTextView.h"
+#import "AppDelegate.h"
 
 #define MARGEN_X 8
 #define MARGEN_Y 8
@@ -17,7 +18,7 @@
 #define ADDPHOTO_COUNT 4
 #define ROW_COUNT 2
 
-@interface PostTalkkingViewController()
+@interface PostTalkkingViewController()<PJImageBrowserDelegate>
 
 @property (weak, nonatomic)UIButton *addPhoto;
 @property(weak,nonatomic) PJTextView *talkContent;
@@ -59,6 +60,9 @@
 -(void)viewDidLoad{
     
     [super viewDidLoad];
+    //禁止横屏
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = NO;
     [self initController];
     [self initView];
 }
@@ -86,32 +90,24 @@
             [addPhoto setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
             [addPhoto setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
             [self.view addSubview:addPhoto];
+            addPhoto.hidden=i==0&&p==0?false:true;
             addPhoto.frame=CGRectMake(i*self.addPhotoWidth+(i+1)*MARGEN_X, self.maxYoftalkContent+p*self.addPhotoWidth+((p+1)*MARGEN_Y), self.addPhotoWidth, self.addPhotoWidth);
-            [self.addPhotoButtonArray setValue:addPhoto forKey:[NSString stringWithFormat:@"%d",self.buttonCount]];
+            [self.addPhotoButtonArray addObject:addPhoto];
             addPhoto.tag=self.buttonCount;
             addPhoto.index=self.buttonCount;
             self.buttonCount++;
             [addPhoto addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
+            addPhoto.imageView.contentMode=UIViewContentModeScaleAspectFit;
         }
     }
 }
-
-//-(void)addButton{
-//    UIButton *addPhoto=[[UIButton alloc] init];
-//    [addPhoto setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
-//    [addPhoto setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
-//    [self.view addSubview:addPhoto];
-//    addPhoto.frame=CGRectMake(self.index_x*self.addPhotoWidth+(self.index_x+1)*MARGEN_X, self.maxYoftalkContent+self.index_y*self.addPhotoWidth+(self.index_y+1)*MARGEN_Y, self.addPhotoWidth, self.addPhotoWidth);
-//    [addPhoto addTarget:self action:@selector(addPhoto:) forControlEvents:UIControlEventTouchUpInside];
-//    self.currentAddPhotoButton=addPhoto;
-//}
 
 -(void)send{
     
 }
 
 -(void)cancel{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)addPhoto:(id)button{
@@ -119,14 +115,56 @@
     if(tempbutton.hasAddPhoto){
         
         //已经添加完图片
-        PJImageBrowserController *pjImageBrowserController=[PJImageBrowserController getInstanceWithImageArray:self.addPhotoArray AndCurrentIndex:0];
-        [self.navigationController pushViewController:pjImageBrowserController animated:YES];
+        PJImageBrowser *pjImageBrowser=[[PJImageBrowser alloc] initWithImageArray:self.addPhotoArray AndCurrentIndex:tempbutton.tag];
+        pjImageBrowser.pjimageBrowserDelegate=self;
+        [self.navigationController pushViewController:pjImageBrowser animated:YES];
     }else{
         
         //未添加图片
         self.currentAddPhotoButton=button;
         [self imagefromwhere];
     }
+}
+
+#pragma 删除图片方法回调
+-(void)deletePhoto:(PJImageBrowser *)pjimageBrowser AtIndex:(NSInteger)index{
+    [self.addPhotoArray removeAllObjects];
+    self.addPhotoArray=[pjimageBrowser.imageArray mutableCopy];
+    [self updateAddPhotoButtonView];
+}
+
+//刷新添加图片按钮界面
+-(void)updateAddPhotoButtonView{
+    for(PJButton *pjButton in self.addPhotoButtonArray){
+        [pjButton setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
+        [pjButton setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
+        pjButton.hidden=true;
+        pjButton.hasAddPhoto=false;
+    }
+    for(int i=0;i<self.addPhotoArray.count;i++){
+        PJButton *pjButton=self.addPhotoButtonArray[i];
+        pjButton.hidden=false;
+        [pjButton setTalkkingImage:self.addPhotoArray[i]];
+        int tempindex=i+1;
+        if(tempindex<self.buttonCount){
+            
+         ((PJButton *)self.addPhotoButtonArray[tempindex]).hidden=false;
+        }
+    }
+    //在图片浏览器的时候把图片全删除了
+    if(self.addPhotoArray.count==0){
+        
+        PJButton *pjButton=self.addPhotoButtonArray[0];
+        [pjButton setImage:[UIImage imageNamed:@"addpic_unfocused"] forState:UIControlStateNormal];
+        [pjButton setImage:[UIImage imageNamed:@"addpic_focused"] forState:UIControlStateHighlighted];
+        pjButton.hidden=false;
+        pjButton.hasAddPhoto=false;
+    }
+}
+
+//每次从图片浏览器返回也刷新界面
+-(void)back:(PJImageBrowser *)pjimageBrowser{
+    [self updateAddPhotoButtonView];
 }
 
 #pragma mark -图片源函数
@@ -193,6 +231,11 @@
 
     [self.currentAddPhotoButton setTalkkingImage:image];
     [self.addPhotoArray addObject:image];
+    if(self.currentAddPhotoButton.index+1<self.buttonCount){
+        
+        self.currentAddPhotoButton=self.addPhotoButtonArray[self.currentAddPhotoButton.index+1];
+        self.currentAddPhotoButton.hidden=false;
+    }
     
     /* 此处info 有六个值
      * UIImagePickerControllerMediaType; // an NSString UTTypeImage)
@@ -204,6 +247,11 @@
      * UIImagePickerControllerMediaMetadata    // an NSDictionary containing metadata from a captured photo
      */
     // 保存图片至本地，方法见下文
+}
+
+-(void)dealloc{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = YES;
 }
 
 @end

@@ -6,10 +6,12 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"DELETE"="delete";
+"DELETE_THIS_PHOTO"="Delete this picture?";
 "SAVE_FAILED"="Save failed";
 "SAVE_SUCCESS"="Save success";
 "FAILED_TO_LOAD"="Failed to load";
-"LOAD_COMPLETION"="Load completion";
+"LOAD_COMPLETION"="Loadded";
 "LOADING"="Loading";
 "SUBMISSION_FAILURE"="Submission failure";
 "RELOAD"="reload";
@@ -45,7 +47,7 @@
 
 //通讯录
 "INVITE_ALL_FRIENDS_COMPLETE"="Invite all friends complete";
-"lbinvitation"="Invitation All";
+"lbinvitation"="Invite";
 "lbissureinvitation"="Invite all friends";
 /////////////////////////////////////////////////////////////////////////////////
 //ALl

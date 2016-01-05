@@ -97,16 +97,16 @@
 
 //#define  IMMESSAGE           @"IMMESSAGE"
 
-//发送邮件的账号
-#define LOGINEMAIL @"804488815@qq.com"
-#define PASSWORD @"804488815"
-#define FROM @"804488815@qq.com"
-#define FROMNAME @"rspread"
+//发送邮件的账号(发送邀请邮件，该账号的发送量有限，没有发送量了要去找啊沃添加发送量)
+#define LOGINEMAIL @"TalkKing@reasonables.com"
+#define PASSWORD @"talkking12#"
+#define FROM @"TalkKing@reasonables.com"
+#define FROMNAME @"思齐Spread"
 //存放所有talkking用户的spread账号
-#define RESPREAD_EMAIL @"804488815@qq.com"
-#define RESPREAD_PASSWORD @"804488815"
+#define RESPREAD_EMAIL @"TalkKing@reasonables.com"
+#define RESPREAD_PASSWORD @"talkking12#"
 //联系人列表
-#define CONTACTS @"piaojin6"
+#define CONTACTS @"talkkingusers"
 //是否填写了邮箱
 #define HAS_FILL_OUT_EMAIL @"has_fill_out_email"
 //用户填写的spread邮箱
@@ -135,6 +135,9 @@
 //发送邮箱邀请的参数格式
 #define SEND_EMAIL_INVITATION_PARAM @"LoginEmail=%@&Password=%@&From=%@&FromName=%@&To=%@&Subject=%@&Body=%@"
 #define WSDL_URL @"http://service.rspread.com/service.asmx"
+
+//http://servicetig.talk-king.net/AllUserFile/jid(用户的jid)/SmallImage/图片 聊天记录中小图的地址
+//http://servicetig.talk-king.net/AllUserFile/jid(用户的jid)/Image/图片 聊天记录中原图的地址
 
 #define IMReasonableAPP     @"http://servicetig.talk-king.net/IMReasonable.svc/"  //http://service.talk-king.net/IMReasonable.svc/
 #define IMReasonableAPPImagePath     @"http://servicetig.talk-king.net/"

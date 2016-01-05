@@ -10,6 +10,9 @@
 
 #define CELL_HEIGTH 186
 #define OFFSET 20
+#define TIME_H 50//时间的高度
+#define VOICE_H 76//语音高度(对方发的)
+#define VOICE_H_M 56//我发的语音高度
 
 #import "WeChatTableViewCell.h"
 #import "MessageContent.h"
@@ -267,7 +270,7 @@
     CGSize timeSize = [self.messagemode.content boundingRectWithSize:CGSizeMake(MAXFLOAT, 20) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
     CGFloat width = timeSize.width < 100 ? 100 : timeSize.width;
 
-    CGRect rect = CGRectMake((_ScreenWidth - width) / 2, 0, width, timeSize.height);
+    CGRect rect = CGRectMake((_ScreenWidth - width) / 2, (TIME_H-timeSize.height)/2, width, timeSize.height);
     _timeAndTips = [[UILabel alloc] initWithFrame:rect];
     _timeAndTips.backgroundColor = [UIColor colorWithRed:232.0 / 255 green:225.0 / 255 blue:215.0 / 255 alpha:1];
     _timeAndTips.textAlignment = NSTextAlignmentCenter;
@@ -287,15 +290,16 @@
 - (void)dealwithVoice
 {
     if (self.messagemode.isFromMe) {
-        _voiceContent.frame = CGRectMake(_ScreenWidth - USERPHOTOOFFSET - 120 - 5, 15, 120, 40);
+        _voiceContent.frame = CGRectMake(_ScreenWidth - USERPHOTOOFFSET - 120 - 5, (VOICE_H-40)/2, 120, 40);
         if ([_messagemode.isNeedSend isEqualToString:@"0"] && [_messagemode.isReceived isEqualToString:@"0"]) {
             reSend = [[UIImageView alloc] init];
             [self setGesRec];
-            reSend.frame = CGRectMake(_voiceContent.frame.origin.x - 25, _voiceContent.frame.size.height - 20, 20, 20);
+            reSend.frame = CGRectMake(_voiceContent.frame.origin.x - 25, (VOICE_H-20)/2, 20, 20);
         }
     }
     else {
-        _voiceContent.frame = CGRectMake(USERPHOTOOFFSET + 5, 15, 120, 40);
+        _voiceContent.frame = CGRectMake(USERPHOTOOFFSET + 5, (VOICE_H-40)/2, 120, 40);
+//        _voiceContent.frame=_voiceContent.voiceframe;
     }
 
     [_voiceContent setMessagemode:self.messagemode isNeedName:isRoom];
@@ -398,7 +402,7 @@
     CGFloat cellheight = 0;
     switch (messagemode.type) {
     case MessageTypeTime: { //当要显示时间
-        cellheight = 26;
+        cellheight = TIME_H;
     } break;
     case MessageTypePicture: { //图片消息
         return [WeChatTableViewCell getPictureHeight:messagemode];
@@ -407,7 +411,7 @@
         cellheight = 20;
     } break;
     case MessageTypeVoice: { //声音消息
-        cellheight = 45;
+        cellheight = messagemode.isFromMe?VOICE_H_M:VOICE_H;
     } break;
     case MessageTypeText: { //文本消息
         cellheight = [WeChatTableViewCell getTextHeight:messagemode isNeedName:isName];
@@ -418,8 +422,6 @@
     }
     return cellheight;
 }
-
-
 
 + (CGFloat)getPictureHeight:(MessageModel*)messagemode
 {
@@ -457,7 +459,7 @@
 
 - (void)touchPictureContent:(UIImageView*)imgV MessageModle:(MessageModel*)modle
 {
-    [self.delegate touchPictureContent:modle tableviewcell:self];
+    [self.delegate touchPictureContent:modle tableviewcell:self   ImageView:imgV];
 }
 - (void)dealloc
 {

@@ -30,7 +30,7 @@
 
 @optional   //加上该字段意味着不实现代理方法也不会报警告
 -(void)touchMessageContent:(NSString *)content withType:(TouchContentType)type;
--(void)touchPictureContent:(MessageModel*)mod tableviewcell:(UITableViewCell*)cell;
+-(void)touchPictureContent:(MessageModel*)mod tableviewcell:(UITableViewCell*)cell ImageView:(UIImageView *)imageView;
 -(void)reSendMessage:(MessageModel*)message;
 -(void)acDeteleMessage:(MessageModel*)message;
 -(void)acForwardMessage:(MessageModel*)message;

@@ -45,21 +45,6 @@ NSInteger nickNameSort(id user1, id user2, void *context){
              ];
 }
 
-//-(NSMutableArray *)letterNameArray{
-//    if(_letterNameArray==nil){
-//        
-//        NSMutableArray *tempLetterArray=[NSMutableArray array];
-//        _letterNameArray=[ChineseString LetterSortArray:self.localNameArray];
-//        for(NSArray * temparray in _letterNameArray){
-//            for(NSString *name in temparray){
-//                [tempLetterArray addObject:name];
-//            }
-//        }
-//        _letterNameArray=tempLetterArray;
-//    }
-//    return _letterNameArray;
-//}
-
 -(NSMutableArray *)localNameArray{
     if(_localNameArray==nil){
         
@@ -105,7 +90,6 @@ NSInteger nickNameSort(id user1, id user2, void *context){
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    NSLog(@"SelectUserViewController");
     [super viewWillAppear:NO];
     if (self.flag) {
         [self dismissViewControllerAnimated:NO completion:nil];
@@ -116,21 +100,16 @@ NSInteger nickNameSort(id user1, id user2, void *context){
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //self.isGroup=YES;
     if (self.isGroup) {
         self.tableview.allowsMultipleSelectionDuringEditing=YES;
         self.tableview.editing=YES;
     }
     
     self.tableview.tableFooterView=[[UIView alloc]init];
-    
-
-  //  [self.view setBackgroundColor:[UIColor redColor]];
+    self.tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self initNavbutton];
-   // chatuserlist=[[NSMutableArray alloc] init];
     [self initData];
     [self initControl];
-    // Do any additional setup after loading the view.
 }
 
 - (void) initData
@@ -172,17 +151,12 @@ NSInteger nickNameSort(id user1, id user2, void *context){
 - (AppDelegate *)appDelegate
 {
     AppDelegate *delegate =  (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    //   delegate.chatHelerpDelegate = self;
-    //    delegate.authloginDelegate=self;
-    //     delegate.internetConnectDelegate=self;
     return delegate;
 }
 - (void)initControl
 {
-   // self.tableview  =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT)];
     self.tableview .delegate=self;
     self.tableview .dataSource=self;
-   // [self.view addSubview:self.tableview ];
     
 }
 

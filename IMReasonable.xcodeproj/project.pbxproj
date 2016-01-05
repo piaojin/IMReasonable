@@ -32,7 +32,6 @@
 		18B908A61A81FFB000E6B02D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B908A51A81FFAF00E6B02D /* MessageUI.framework */; };
 		18CE61C31A677B1900E45D36 /* CountryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18CE61C21A677B1900E45D36 /* CountryList.plist */; };
 		CA10F0401C19599800D65086 /* PJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA10F03F1C19599800D65086 /* PJButton.m */; settings = {ASSET_TAGS = (); }; };
-		CA10F0471C19649600D65086 /* PJImageBrowserController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA10F0451C19649600D65086 /* PJImageBrowserController.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5A81BCCB58400DA4ED7 /* ContactsTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5AD1BCD0F8600DA4ED7 /* PJBaseHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5AC1BCD0F8600DA4ED7 /* PJBaseHttpTool.m */; settings = {ASSET_TAGS = (); }; };
 		CA64A5B31BCD126200DA4ED7 /* PJSendInviteHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = CA64A5B21BCD126200DA4ED7 /* PJSendInviteHttpTool.m */; settings = {ASSET_TAGS = (); }; };
@@ -124,7 +123,6 @@
 		CAB0DACE1BB2B6A600518F0F /* WallPaperViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DACD1BB2B6A600518F0F /* WallPaperViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAD11BB2B6B800518F0F /* WallpaperCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAD01BB2B6B800518F0F /* WallpaperCollectionViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		CAB0DAD71BB2B6F300518F0F /* SpreadMailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DAD61BB2B6F300518F0F /* SpreadMailViewController.m */; settings = {ASSET_TAGS = (); }; };
-		CAB0DAD91BB2B70400518F0F /* MailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CAB0DAD81BB2B70400518F0F /* MailTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CAB0DADC1BB2B70D00518F0F /* MailTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB0DADB1BB2B70D00518F0F /* MailTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
 		CAB992D81BB392CE00661AB7 /* SetterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB992D71BB392CE00661AB7 /* SetterViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAB992DC1BB3933400661AB7 /* SelectUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB992DB1BB3933400661AB7 /* SelectUserViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -584,6 +582,9 @@
 		CAB997B61BB3A8B900661AB7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B11BB3A8B900661AB7 /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAB997BA1BB3A8D000661AB7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B91BB3A8D000661AB7 /* MainViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAE272891BCF516800D619D8 /* SendEmailInvitationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */; settings = {ASSET_TAGS = (); }; };
+		CAEA3B171C28124A00CCE840 /* PJImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEA3B161C28124A00CCE840 /* PJImageView.m */; settings = {ASSET_TAGS = (); }; };
+		CAEA3B1A1C2812B600CCE840 /* PJImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEA3B191C2812B600CCE840 /* PJImageBrowser.m */; settings = {ASSET_TAGS = (); }; };
+		CAEA3B1D1C29303D00CCE840 /* PJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CAEA3B1C1C29303D00CCE840 /* PJPhoto.m */; settings = {ASSET_TAGS = (); }; };
 		CAF687CC1BF34E25000128F7 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF687C91BF34E25000128F7 /* ChineseString.m */; settings = {ASSET_TAGS = (); }; };
 		CAF687CD1BF34E25000128F7 /* pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF687CA1BF34E25000128F7 /* pinyin.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
@@ -639,8 +640,6 @@
 		18CE61C21A677B1900E45D36 /* CountryList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CountryList.plist; sourceTree = "<group>"; };
 		CA10F03E1C19599800D65086 /* PJButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJButton.h; path = FriendsCircle/View/PJButton.h; sourceTree = SOURCE_ROOT; };
 		CA10F03F1C19599800D65086 /* PJButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJButton.m; path = FriendsCircle/View/PJButton.m; sourceTree = SOURCE_ROOT; };
-		CA10F0441C19649600D65086 /* PJImageBrowserController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJImageBrowserController.h; path = FriendsCircle/Control/PJImageBrowserController.h; sourceTree = SOURCE_ROOT; };
-		CA10F0451C19649600D65086 /* PJImageBrowserController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJImageBrowserController.m; path = FriendsCircle/Control/PJImageBrowserController.m; sourceTree = SOURCE_ROOT; };
 		CA64A5A61BCCB58400DA4ED7 /* ContactsTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContactsTool.h; path = Main/Tools/ContactsTool.h; sourceTree = "<group>"; };
 		CA64A5A71BCCB58400DA4ED7 /* ContactsTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContactsTool.m; path = Main/Tools/ContactsTool.m; sourceTree = "<group>"; };
 		CA64A5AB1BCD0F8600DA4ED7 /* PJBaseHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJBaseHttpTool.h; path = Main/Tools/PJBaseHttpTool.h; sourceTree = "<group>"; };
@@ -815,7 +814,6 @@
 		CAB0DAD01BB2B6B800518F0F /* WallpaperCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WallpaperCollectionViewCell.m; path = Wallpaper/View/Cell/WallpaperCollectionViewCell.m; sourceTree = SOURCE_ROOT; };
 		CAB0DAD51BB2B6F300518F0F /* SpreadMailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpreadMailViewController.h; path = SpreadMail/Control/SpreadMailViewController.h; sourceTree = SOURCE_ROOT; };
 		CAB0DAD61BB2B6F300518F0F /* SpreadMailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpreadMailViewController.m; path = SpreadMail/Control/SpreadMailViewController.m; sourceTree = SOURCE_ROOT; };
-		CAB0DAD81BB2B70400518F0F /* MailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MailTableViewCell.xib; path = SpreadMail/View/Xibs/MailTableViewCell.xib; sourceTree = SOURCE_ROOT; };
 		CAB0DADA1BB2B70D00518F0F /* MailTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MailTableViewCell.h; path = SpreadMail/View/Cells/MailTableViewCell.h; sourceTree = SOURCE_ROOT; };
 		CAB0DADB1BB2B70D00518F0F /* MailTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MailTableViewCell.m; path = SpreadMail/View/Cells/MailTableViewCell.m; sourceTree = SOURCE_ROOT; };
 		CAB992D61BB392CE00661AB7 /* SetterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetterViewController.h; path = Me/Control/SetterViewController.h; sourceTree = "<group>"; };
@@ -1536,6 +1534,12 @@
 		CAB997B91BB3A8D000661AB7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Main/Control/MainViewController.m; sourceTree = "<group>"; };
 		CAE272871BCF516800D619D8 /* SendEmailInvitationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendEmailInvitationEntity.h; path = Main/Model/SendEmailInvitationEntity.h; sourceTree = "<group>"; };
 		CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendEmailInvitationEntity.m; path = Main/Model/SendEmailInvitationEntity.m; sourceTree = "<group>"; };
+		CAEA3B151C28124A00CCE840 /* PJImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJImageView.h; path = FriendsCircle/View/PJImageView.h; sourceTree = SOURCE_ROOT; };
+		CAEA3B161C28124A00CCE840 /* PJImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJImageView.m; path = FriendsCircle/View/PJImageView.m; sourceTree = SOURCE_ROOT; };
+		CAEA3B181C2812B600CCE840 /* PJImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJImageBrowser.h; path = FriendsCircle/Control/PJImageBrowser.h; sourceTree = SOURCE_ROOT; };
+		CAEA3B191C2812B600CCE840 /* PJImageBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJImageBrowser.m; path = FriendsCircle/Control/PJImageBrowser.m; sourceTree = SOURCE_ROOT; };
+		CAEA3B1B1C29303D00CCE840 /* PJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJPhoto.h; path = FriendsCircle/Model/PJPhoto.h; sourceTree = SOURCE_ROOT; };
+		CAEA3B1C1C29303D00CCE840 /* PJPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJPhoto.m; path = FriendsCircle/Model/PJPhoto.m; sourceTree = SOURCE_ROOT; };
 		CAF687C81BF34E25000128F7 /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseString.h; path = Main/Tools/ChineseString.h; sourceTree = "<group>"; };
 		CAF687C91BF34E25000128F7 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseString.m; path = Main/Tools/ChineseString.m; sourceTree = "<group>"; };
 		CAF687CA1BF34E25000128F7 /* pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pinyin.m; path = Main/Tools/pinyin.m; sourceTree = "<group>"; };
@@ -3200,6 +3204,13 @@
 			path = Control;
 			sourceTree = "<group>";
 		};
+		CA05C91B1C23F5D200CF3656 /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = xibs;
+			sourceTree = "<group>";
+		};
 		CA64A5B41BCD18C500DA4ED7 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -3517,6 +3528,7 @@
 		CAB0DA621BB2832800518F0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CA05C91B1C23F5D200CF3656 /* xibs */,
 				CAB0DA9E1BB29A7200518F0F /* Cells */,
 			);
 			name = View;
@@ -3670,10 +3682,16 @@
 		CAB0DA741BB28DFF00518F0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CAEA3B181C2812B600CCE840 /* PJImageBrowser.h */,
+				CAEA3B191C2812B600CCE840 /* PJImageBrowser.m */,
+				CAEA3B151C28124A00CCE840 /* PJImageView.h */,
+				CAEA3B161C28124A00CCE840 /* PJImageView.m */,
 				CAAA3FE51C0ED66B003D4A12 /* PJTextView.h */,
 				CAAA3FE61C0ED66B003D4A12 /* PJTextView.m */,
 				CA10F03E1C19599800D65086 /* PJButton.h */,
 				CA10F03F1C19599800D65086 /* PJButton.m */,
+				CAEA3B1B1C29303D00CCE840 /* PJPhoto.h */,
+				CAEA3B1C1C29303D00CCE840 /* PJPhoto.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3685,8 +3703,6 @@
 				CAAA3FD61C0D95C6003D4A12 /* FriendsCircleViewController.m */,
 				CAAA3FD81C0D9FDE003D4A12 /* PostTalkkingViewController.h */,
 				CAAA3FD91C0D9FDE003D4A12 /* PostTalkkingViewController.m */,
-				CA10F0441C19649600D65086 /* PJImageBrowserController.h */,
-				CA10F0451C19649600D65086 /* PJImageBrowserController.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -4037,7 +4053,6 @@
 			isa = PBXGroup;
 			children = (
 				CA9C97FE1BF990D50050323F /* SpreadEmailPreviewCell.xib */,
-				CAB0DAD81BB2B70400518F0F /* MailTableViewCell.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -4294,7 +4309,6 @@
 				CAB9976D1BB3A35500661AB7 /* Expression_63@2x.png in Resources */,
 				CAB997451BB3A35500661AB7 /* Expression_23@2x.png in Resources */,
 				CAB997431BB3A35500661AB7 /* Expression_21@2x.png in Resources */,
-				CAB0DAD91BB2B70400518F0F /* MailTableViewCell.xib in Resources */,
 				CAB9941A1BB3988900661AB7 /* wp_31.jpg in Resources */,
 				CAB993AE1BB397F600661AB7 /* CheckSingleDark@2x.png in Resources */,
 				CAB994081BB3988900661AB7 /* wp_13.jpg in Resources */,
@@ -4646,6 +4660,7 @@
 				CAB9967E1BB3A28400661AB7 /* ASIInputStream.m in Sources */,
 				CAB0DAC51BB2B67600518F0F /* AddGroupUserTableViewCell.m in Sources */,
 				CAB997A71BB3A3C300661AB7 /* RichTextImageRun.m in Sources */,
+				CAEA3B1A1C2812B600CCE840 /* PJImageBrowser.m in Sources */,
 				CAB994581BB39B3B00661AB7 /* XMPPDeprecatedPlainAuthentication.m in Sources */,
 				CAB996C51BB3A33F00661AB7 /* TQRichTextView.m in Sources */,
 				CA9C98201BFC733D0050323F /* NSObject+MJKeyValue.m in Sources */,
@@ -4692,6 +4707,7 @@
 				CAB9967B1BB3A28400661AB7 /* ASIDownloadCache.m in Sources */,
 				CA821F9F1BD88EAB0072F7DA /* UIColor+Hex.m in Sources */,
 				CAB997A51BB3A3C300661AB7 /* RichTextBaseRun.m in Sources */,
+				CAEA3B1D1C29303D00CCE840 /* PJPhoto.m in Sources */,
 				CAB995AC1BB3A01900661AB7 /* XMPPMessageArchiving.xcdatamodeld in Sources */,
 				CA10F0401C19599800D65086 /* PJButton.m in Sources */,
 				CAB996941BB3A2B600661AB7 /* ASICloudFilesContainerXMLParserDelegate.m in Sources */,
@@ -4718,7 +4734,6 @@
 				CAB995B31BB3A09900661AB7 /* XMPPvCardAvatarModule.m in Sources */,
 				CAB996171BB3A21100661AB7 /* MJRefreshFooter.m in Sources */,
 				CAB9931E1BB3950200661AB7 /* WeChatTableViewCell.m in Sources */,
-				CA10F0471C19649600D65086 /* PJImageBrowserController.m in Sources */,
 				CAB9944D1BB39A9900661AB7 /* Tool.m in Sources */,
 				CA9C981F1BFC733D0050323F /* NSObject+MJCoding.m in Sources */,
 				CAB9936D1BB395CF00661AB7 /* BorderView.m in Sources */,
@@ -4785,6 +4800,7 @@
 				CA9C981E1BFC733D0050323F /* NSObject+MJClass.m in Sources */,
 				CAB992E61BB393BF00661AB7 /* ChatUserTableViewCell.m in Sources */,
 				CA82203B1BDA15970072F7DA /* MJPhotoLoadingView.m in Sources */,
+				CAEA3B171C28124A00CCE840 /* PJImageView.m in Sources */,
 				CA8220381BDA15970072F7DA /* MJPhoto.m in Sources */,
 				CAB993711BB395E600661AB7 /* IMMessage.m in Sources */,
 				CA9C98211BFC733D0050323F /* NSObject+MJProperty.m in Sources */,
@@ -4969,8 +4985,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /usr/lib/libxml2.dylib;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /usr/lib/libxml2.dylib;
@@ -4996,7 +5012,7 @@
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1d56311-dc78-419c-91db-d683545a2bd4";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Debug;
@@ -5007,8 +5023,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /usr/lib/libxml2.dylib;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /usr/lib/libxml2.dylib;
@@ -5035,7 +5051,7 @@
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1d56311-dc78-419c-91db-d683545a2bd4";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Release;

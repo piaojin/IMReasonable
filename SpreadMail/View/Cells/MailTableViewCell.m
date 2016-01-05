@@ -27,6 +27,7 @@
 @property (weak, nonatomic) UILabel *emailCount;
 @property (weak, nonatomic) UIImageView *emailImage;
 
+
 @end
 
 @implementation MailTableViewCell
@@ -100,26 +101,26 @@
         
         //邮件标题
         UILabel *spreadTitle=[[UILabel alloc] initWithFrame:CGRectMake(71 , 3, 150*ratioW, 27)];
-        [self addSubview:spreadTitle];
+        [self.contentView addSubview:spreadTitle];
         self.spreadTitle=spreadTitle;
         self.spreadTitle.font=[UIFont systemFontOfSize:17];
         self.spreadTitle.textColor=[UIColor blackColor];
         //发件人即邮件标题
         UILabel *sendName=[[UILabel alloc] initWithFrame:CGRectMake(71 , 32, 205*ratioW, 30)];
-        [self addSubview:sendName];
+        [self.contentView addSubview:sendName];
         self.sendName=sendName;
         self.sendName.font=[UIFont systemFontOfSize:14];
         self.sendName.textColor=[UIColor grayColor];
         //发送时间
         UILabel *sendTime=[[UILabel alloc] initWithFrame:CGRectMake(SCREENWIDTH-80*ratioW-10, 0, 80*ratioW, 21)];
-        [self addSubview:sendTime];
+        [self.contentView addSubview:sendTime];
         self.sendTime=sendTime;
         self.sendTime.font=[UIFont systemFontOfSize:11];
         self.sendTime.textColor=[UIColor grayColor];
         self.sendTime.textAlignment=NSTextAlignmentRight;
         //新邮件数量
         UILabel *emailCount=[[UILabel alloc] initWithFrame:CGRectMake(283*ratioW , 35, 26, 26)];
-        [self addSubview:emailCount];
+        [self.contentView addSubview:emailCount];
         self.emailCount=emailCount;
         self.emailCount.font=[UIFont systemFontOfSize:14];
         self.emailCount.textColor=[UIColor grayColor];
@@ -131,7 +132,7 @@
         self.emailCount.hidden=YES;
         //邮件图标
         UIImageView *emailImage=[[UIImageView alloc] initWithFrame:CGRectMake(8, 7, 50, 50)];
-        [self addSubview:emailImage];
+        [self.contentView addSubview:emailImage];
         self.emailImage=emailImage;
         self.emailImage.layer.masksToBounds = YES;
         self.emailImage.layer.cornerRadius = 25;

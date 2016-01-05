@@ -43,7 +43,10 @@ typedef enum {
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = NO;
+    
     [self initData];
     [self initControl];
     self.nav.title = NSLocalizedString(@"lbFphone", nil);
@@ -406,6 +409,13 @@ typedef enum {
     NSLog(@"SendSmsResult:%@", dict);
 
     NSString* code = [dict objectForKey:@"SendSmsCodeResult"];
+    /**
+     *  如果测试时短信发送次数过多不能发送了这边直接设置成true即可
+     *
+     *  @param isEqualToString:code]
+     *
+     *  @return
+     */
     //[SEND_SMS_SUC isEqualToString:code]
     if ([SEND_SMS_SUC isEqualToString:code]) {
         [HUD removeFromSuperview];
@@ -466,4 +476,10 @@ typedef enum {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)dealloc{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = YES;
+}
+
 @end

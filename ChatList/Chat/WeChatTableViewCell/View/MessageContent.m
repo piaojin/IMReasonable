@@ -32,7 +32,6 @@
         _txtContent.font = [UIFont systemFontOfSize:MESSAGECONNECTSIZE];
         _txtContent.lineSpace = 2.0f;
         _txtContent.backgroundColor = [UIColor clearColor];
-       
         
         
         [self addSubview:_txtContent];

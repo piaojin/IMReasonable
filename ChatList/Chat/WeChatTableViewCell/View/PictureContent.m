@@ -51,6 +51,7 @@
 
 
 
+
 - (void)setMessagemode:(MessageModel *)messagemode isNeedName:(BOOL)isName
 {
     _messagemode=messagemode;
@@ -116,7 +117,9 @@
         [_imageview sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:[UIImage imageNamed:@"loading"] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             _imageview.image=[self cutImage:image];
         }];
-        _stateview.frame=CGRectMake(self.frame.size.width-30, self.frame.size.height-15, 25, 10);
+//        _stateview.frame=CGRectMake(self.frame.size.width-30, self.frame.size.height-15, 25, 10);
+        _stateview.frame=CGRectMake(CGRectGetMaxX(_imageview.frame)-25,CGRectGetMaxY(_imageview.frame)-15 ,25 ,10 );
+        
     }
 }
 

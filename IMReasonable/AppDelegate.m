@@ -24,7 +24,8 @@
 {
 
     NSLog(@"%@", launchOptions);
-
+    
+    self.allowRotation=true;
     UIApplication* app = [UIApplication sharedApplication];
     NSString* docpath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/%@", docpath, @"voice"] withIntermediateDirectories:YES attributes:nil error:nil];
@@ -166,6 +167,14 @@
     NSLog(@"applicationWillTerminate");
     // [self goOffline];
     // [self teardownStream];
+}
+
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    if(self.allowRotation){
+        
+        return UIInterfaceOrientationMaskAll;
+    }
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

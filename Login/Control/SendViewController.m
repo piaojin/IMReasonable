@@ -30,6 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = NO;
+    
     [XMPPDao sharedXMPPManager].authloginDelegate = self;
     smscount = 0;
     index = 0;
@@ -592,6 +596,11 @@
 {
     PJLog(@"%u", result);
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(void)dealloc{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = YES;
 }
 
 @end

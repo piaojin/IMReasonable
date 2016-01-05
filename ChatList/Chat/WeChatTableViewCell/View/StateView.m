@@ -20,6 +20,7 @@
         self.time.backgroundColor=[UIColor clearColor];
         self.time.font=[UIFont systemFontOfSize:9];
         self.time.textColor=[UIColor grayColor];
+        self.time.contentMode=UIViewContentModeLeft;
         
         [self addSubview:self.time];
         

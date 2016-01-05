@@ -1,12 +1,15 @@
 //
-//  MJPhoto.h
+//  PJPhoto.h
+//  IMReasonable
 //
-//  Created by mj on 13-3-4.
-//  Copyright (c) 2013年 itcast. All rights reserved.
+//  Created by 翁金闪 on 15/12/22.
+//  Copyright © 2015年 Reasonable. All rights reserved.
+//
 
 #import <Foundation/Foundation.h>
 
-@interface MJPhoto : NSObject
+@interface PJPhoto : NSObject
+
 @property (nonatomic, strong) NSURL *url;
 @property (nonatomic, strong) UIImage *image; // 完整的图片
 
@@ -19,6 +22,5 @@
 // 是否已经保存到相册
 @property (nonatomic, assign) BOOL save;
 @property (nonatomic, assign) int index; // 索引
-//飘金添加，是否截图
-@property(nonatomic,assign)BOOL iscapture;
+
 @end

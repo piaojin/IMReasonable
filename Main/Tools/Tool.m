@@ -77,6 +77,19 @@
     return image;
 }
 
++ (UIImage *)imageWithColor:(UIColor *)color AndRect:(CGRect)rect{
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 //删除文件夹及文件夹下的文件
 +(void)removeVoiceAndImg{
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

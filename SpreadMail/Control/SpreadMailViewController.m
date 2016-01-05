@@ -143,6 +143,7 @@
     // 设置颜色
     _tableview.header.textColor = [UIColor grayColor];
     
+    _tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_tableview];
     _tableview.separatorStyle=UITableViewCellAccessoryNone;
     UIView *footerView=[[UIView alloc] init];

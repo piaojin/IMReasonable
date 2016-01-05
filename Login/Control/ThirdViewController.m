@@ -30,6 +30,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = NO;
+    
     self.hidesBottomBarWhenPushed=YES;
     self.emailPrompt.text=NSLocalizedString(@"EMAIL_PROMPT", nil);
     self.txtName.placeholder=NSLocalizedString(@"REQUIRED", nil);
@@ -412,7 +416,6 @@
                         [Tool alert:NSLocalizedString(@"LOGIN_ERROR", nil)];
                     }];
             });
-            [self goNext];
         }else if(![Tool isBlankString:inputemail]&&![Tool isValidateEmail:inputemail]){
             
             [defaults setBool:NO forKey:HAS_FILL_OUT_EMAIL];
@@ -423,9 +426,8 @@
             [defaults setObject:date forKey:LAST_DATE_OF_EMAIL_PROMPT];
             [defaults setBool:NO forKey:HAS_FILL_OUT_EMAIL];
             [defaults synchronize];
-        }
-        
             [self goNext];
+        }
     }
     else {
 
@@ -449,9 +451,16 @@
     
     self.navigationItem.title = NSLocalizedString(@"lbTStile", nil);
     if (!self.isSetting) {
+        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate.allowRotation = YES;
         MainViewController* mainview = [[MainViewController alloc] init];
         [self presentViewController:mainview animated:YES completion:nil];
     }
+}
+
+-(void)dealloc{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = YES;
 }
 
 @end

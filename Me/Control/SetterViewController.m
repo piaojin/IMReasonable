@@ -88,7 +88,7 @@
 - (void)initViewControl{
 
     self.edgesForExtendedLayout = UIRectEdgeNone ;
-    _tableview =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT-49-64)];
+    _tableview =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT)];
     _tableview.delegate=self;
     _tableview.dataSource=self;
     //退出按钮
@@ -102,6 +102,7 @@
     _tableview.tableFooterView = footerButton;
 //    _tableview.tableFooterView = [[UIView alloc]init];//设置不要显示多余的行;
     
+    _tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_tableview];
 }
 

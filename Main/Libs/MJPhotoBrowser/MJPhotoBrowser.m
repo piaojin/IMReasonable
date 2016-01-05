@@ -10,6 +10,7 @@
 #import "SDWebImageManager+MJ.h"
 #import "MJPhotoView.h"
 #import "MJPhotoToolbar.h"
+#import "AppDelegate.h"
 
 #define kPadding 10
 #define kPhotoViewTagOffset 1000
@@ -28,9 +29,25 @@
     // 一开始的状态栏
     BOOL _statusBarHiddenInited;
 }
+
+//飘金添加横竖屏
+@property(nonatomic,assign)int currentOrientation;
+
 @end
 
 @implementation MJPhotoBrowser
+
+-(BOOL)shouldAutorotate{
+    return NO;
+}
+
+-(BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation{
+    return NO;
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 #pragma mark - Lifecycle
 - (void)loadView
@@ -39,6 +56,15 @@
     // 隐藏状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.view = [[UIView alloc] init];
+//    int currentOrientation=[[UIDevice currentDevice] orientation];
+//    CGRect mainFrame=[UIScreen mainScreen].bounds;
+//    if(currentOrientation==UIDeviceOrientationLandscapeRight||currentOrientation==UIDeviceOrientationLandscapeLeft){
+//        
+//        self.view.frame=CGRectMake(mainFrame.origin.y, mainFrame.origin.x, mainFrame.size.height, mainFrame.size.width);
+//    }else{
+//        
+//        self.view.frame = [UIScreen mainScreen].bounds;
+//    }
     self.view.frame = [UIScreen mainScreen].bounds;
 	self.view.backgroundColor = [UIColor blackColor];
 }
@@ -46,6 +72,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    //注册横竖屏通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
+    self.currentOrientation=[[UIDevice currentDevice] orientation];
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    appDelegate.allowRotation = NO;
     
     // 1.创建UIScrollView
     [self createScrollView];
@@ -60,7 +92,7 @@
     UIWindow *window = [UIApplication sharedApplication].keyWindow;
     [window addSubview:self.view];
     [window.rootViewController addChildViewController:self];
-
+    
     if (_currentPhotoIndex == 0) {
         [self showPhotos];
     }
@@ -265,4 +297,50 @@
 	[self showPhotos];
     [self updateTollbarState];
 }
+
+-(void)doRotateAction:(NSNotification *)notification{
+    int orientation=[((UIDevice *)notification.object) orientation];
+    CGRect mainFrame=[UIScreen mainScreen].bounds;
+    if (_currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+        ) {
+        NSUInteger tempCurrentPhotoIndex=_currentPhotoIndex;
+        self.view.frame = mainFrame;//这句话执行后_currentPhotoIndex会为0
+        [self updateScrollView:tempCurrentPhotoIndex];
+        [self updateToolBarFrame];
+        //当前图片
+        MJPhotoView *pj=((MJPhotoView *)[_visiblePhotoViews allObjects][0]);
+        if(pj){
+            
+         [pj updatePhotoFrame];
+        }
+        //从横屏切换到竖屏时当前的图片会黑掉
+        if(orientation==UIDeviceOrientationPortrait){
+            
+            [self showPhotoViewAtIndex:(int)_currentPhotoIndex];
+        }
+        _currentOrientation=orientation;
+    }
+}
+
+//飘金添加(横竖屏后更新scrollView的frame)
+-(void)updateScrollView:(CGFloat)index{
+    CGRect frame = self.view.bounds;
+    frame.origin.x -= kPadding;
+    frame.size.width += (2 * kPadding);
+    _photoScrollView.contentSize = CGSizeMake(frame.size.width * _photos.count, 0);
+    _photoScrollView.contentOffset = CGPointMake(index * frame.size.width, 0);
+}
+
+//飘金添加
+-(void)updateToolBarFrame{
+    CGFloat barHeight = 44;
+    CGFloat barY = self.view.frame.size.height - barHeight;
+    _toolbar.frame = CGRectMake(0, barY, self.view.frame.size.width, barHeight);
+    [self updateTollbarState];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
 @end

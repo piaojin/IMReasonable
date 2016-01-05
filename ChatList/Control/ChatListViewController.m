@@ -26,6 +26,8 @@
 #import "AnimationHelper.h"
 #import "ContactsTool.h"
 #import "SCLAlertView.H"
+#import "MJPhoto.h"
+#import "MJPhotoBrowser.h"
 
 @interface ChatListViewController () {
     UITableView* tableview;
@@ -43,8 +45,11 @@
     UISearchDisplayController* searchDisplayController;
 }
 
+//当前屏幕的方向
+@property(nonatomic,assign)int currentOrientation;
+
 //邮箱
-@property(nonatomic,strong)MailTableViewCell *eMailCell;
+@property (nonatomic, strong) MailTableViewCell* eMailCell;
 //邀请按钮
 @property (nonatomic, strong) UIButton* inviteButton;
 //提示语
@@ -56,22 +61,24 @@
 @implementation ChatListViewController
 
 //判断是否弹出邮箱填写提示框
--(void)showFillEmail{
-    NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
-    BOOL enableEmailPrompt=[userdefault boolForKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
-    if(enableEmailPrompt){
-        
-        BOOL has_fill_out_email=[userdefault boolForKey:HAS_FILL_OUT_EMAIL];
-        if(!has_fill_out_email){
-            
-            NSString *last_date_of_email_prompt=[userdefault stringForKey:LAST_DATE_OF_EMAIL_PROMPT];
-            if([Tool intervalSinceNow:@"2015-12-1"]>=INTERVAL_OF_EMAIL_PROMPT){
-                
+- (void)showFillEmail
+{
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    BOOL enableEmailPrompt = [userdefault boolForKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
+    if (enableEmailPrompt) {
+
+        BOOL has_fill_out_email = [userdefault boolForKey:HAS_FILL_OUT_EMAIL];
+        if (!has_fill_out_email) {
+
+            NSString* last_date_of_email_prompt = [userdefault stringForKey:LAST_DATE_OF_EMAIL_PROMPT];
+            if ([Tool intervalSinceNow:last_date_of_email_prompt] >= INTERVAL_OF_EMAIL_PROMPT) {
+
                 //没有填写邮箱，提示填写邮箱
                 [self show];
-            }else if([Tool isBlankString:last_date_of_email_prompt]){
-                
-                NSString *currentDate=[Tool GetDate:@"yyyy-hh-dd"];
+            }
+            else if ([Tool isBlankString:last_date_of_email_prompt]) {
+
+                NSString* currentDate = [Tool GetDate:@"yyyy-hh-dd"];
                 [userdefault setObject:currentDate forKey:LAST_DATE_OF_EMAIL_PROMPT];
                 [userdefault synchronize];
             }
@@ -80,71 +87,80 @@
 }
 
 //显示编辑邮箱对话框
--(void)show{
-     NSUserDefaults *userdefault=[NSUserDefaults standardUserDefaults];
-    SCLAlertView *alert = [[SCLAlertView alloc] init];
-    __weak typeof(SCLAlertView) *weakAlert = alert;
-    alert.hideAlert=NO;
-    alert.editing=YES;
+- (void)show
+{
+    NSUserDefaults* userdefault = [NSUserDefaults standardUserDefaults];
+    SCLAlertView* alert = [[SCLAlertView alloc] init];
+    __weak typeof(SCLAlertView)* weakAlert = alert;
+    alert.hideAlert = NO;
+    alert.editing = YES;
     [alert setShouldDismissOnTapOutside:NO];
     alert.shouldDismissOnTapOutside = YES;
     alert.hideAnimationType = SlideOutToBottom;
     alert.showAnimationType = SlideInFromTop;
-    UITextField *textField = [alert addTextField:@"edit email"];
-    [alert addButton:NSLocalizedString(@"btnDone", nil) actionBlock:^{
-        NSString *email=textField.text;
-        if([Tool isBlankString:email]){
-            
-            [AnimationHelper show:NSLocalizedString(@"EMAIL_CANNOT_EMPTY", nil) InView:self.view];
-        }else if([Tool isValidateEmail:email]){
-            
-            [AnimationHelper showHUD:@"load......"];
-            //提交邮箱
-            NSString* phone = [[[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
-            NSString* param = [NSString stringWithFormat:ADD_EMAIL_PARAM, RESPREAD_EMAIL, RESPREAD_PASSWORD, email, phone, [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], CONTACTS];
-            dispatch_async(dispatch_get_global_queue(0, 0), ^{
-                [RespreadSoapTool Soap:WSDL_URL
-                             WithParam:param
-                               success:^(id success) {
-                                   
-                                   [userdefault setBool:YES forKey:HAS_FILL_OUT_EMAIL];
-                                   //保存用户填写的邮箱
-                                   [userdefault setObject:email forKey:USER_SPREAD_EMAIL];
-                                   [userdefault setObject:email forKey:MyEmail];
-                                   [userdefault setBool:NO forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
-                                   [userdefault synchronize];
-                                   [AnimationHelper removeHUD];
-                                   [weakAlert hideView];
-                               }
-                               failure:^(NSError* error) {
-                                   [userdefault setObject:[Tool GetDate:@"yyyy-hh-dd"] forKey:LAST_DATE_OF_EMAIL_PROMPT];
-                                   [userdefault setBool:NO forKey:HAS_FILL_OUT_EMAIL];
-                                   [userdefault synchronize];
-                                   [AnimationHelper removeHUD];
-                                   [Tool alert:NSLocalizedString(@"SUBMISSION_FAILURE", nil)];
-                               }];
-            });
-        }else{
-            
-            [AnimationHelper show:NSLocalizedString(@"EMAIL_PROMPT_ERROR", nil) InView:self.view];
-        }
-    }];
-    [alert addButton:NSLocalizedString(@"NO_LONGER_TIPS", nil) actionBlock:^{
-        [userdefault setBool:NO forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
-        [userdefault synchronize];
-    }];
-    [alert addButton:NSLocalizedString(@"LATER", nil) actionBlock:^{
-        NSString *currentDate=[Tool GetDate:@"yyyy-hh-dd"];
-        [userdefault setObject:currentDate forKey:LAST_DATE_OF_EMAIL_PROMPT];
-        [userdefault synchronize];
-    }];
+    UITextField* textField = [alert addTextField:@"edit email"];
+    [alert addButton:NSLocalizedString(@"btnDone", nil)
+         actionBlock:^{
+             NSString* email = textField.text;
+             if ([Tool isBlankString:email]) {
+
+                 [AnimationHelper show:NSLocalizedString(@"EMAIL_CANNOT_EMPTY", nil) InView:self.view];
+             }
+             else if ([Tool isValidateEmail:email]) {
+
+                 [AnimationHelper showHUD:@"load......"];
+                 //提交邮箱
+                 NSString* phone = [[[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
+                 NSString* param = [NSString stringWithFormat:ADD_EMAIL_PARAM, RESPREAD_EMAIL, RESPREAD_PASSWORD, email, phone, [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], [Tool getDateWithFormatString:@"yyyy-MM-ddThh:mm:ss"], CONTACTS];
+                 dispatch_async(dispatch_get_global_queue(0, 0), ^{
+                     [RespreadSoapTool Soap:WSDL_URL
+                         WithParam:param
+                         success:^(id success) {
+
+                             [userdefault setBool:YES forKey:HAS_FILL_OUT_EMAIL];
+                             //保存用户填写的邮箱
+                             [userdefault setObject:email forKey:USER_SPREAD_EMAIL];
+                             [userdefault setObject:email forKey:MyEmail];
+                             [userdefault setBool:NO forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
+                             [userdefault synchronize];
+                             [AnimationHelper removeHUD];
+                             [weakAlert hideView];
+                         }
+                         failure:^(NSError* error) {
+                             [userdefault setObject:[Tool GetDate:@"yyyy-hh-dd"] forKey:LAST_DATE_OF_EMAIL_PROMPT];
+                             [userdefault setBool:NO forKey:HAS_FILL_OUT_EMAIL];
+                             [userdefault synchronize];
+                             [AnimationHelper removeHUD];
+                             [Tool alert:NSLocalizedString(@"SUBMISSION_FAILURE", nil)];
+                         }];
+                 });
+             }
+             else {
+
+                 [AnimationHelper show:NSLocalizedString(@"EMAIL_PROMPT_ERROR", nil) InView:self.view];
+             }
+         }];
+    [alert addButton:NSLocalizedString(@"NO_LONGER_TIPS", nil)
+         actionBlock:^{
+             [userdefault setBool:NO forKey:ENABLE_FILL_OUT_EMAIL_PROMPT];
+             [userdefault synchronize];
+             [weakAlert hideView];
+         }];
+    [alert addButton:NSLocalizedString(@"LATER", nil)
+         actionBlock:^{
+             NSString* currentDate = [Tool GetDate:@"yyyy-hh-dd"];
+             [userdefault setObject:currentDate forKey:LAST_DATE_OF_EMAIL_PROMPT];
+             [userdefault synchronize];
+             [weakAlert hideView];
+         }];
     [alert showEdit:self title:nil subTitle:NSLocalizedString(@"EMAIL_PROMPT", nil) closeButtonTitle:NSLocalizedString(@"lbTCancle", nil) duration:0.0f];
 }
 
--(MailTableViewCell *)eMailCell{
-    if(_eMailCell==nil){
-        
-        _eMailCell=[[MailTableViewCell alloc] init];
+- (MailTableViewCell*)eMailCell
+{
+    if (_eMailCell == nil) {
+
+        _eMailCell = [[MailTableViewCell alloc] init];
     }
     return _eMailCell;
 }
@@ -241,8 +257,12 @@
                                              selector:@selector(localUserChange:)
                                                  name:@"CONNECTSCHANGE"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(doRotateAction:)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil];
     [self showFillEmail];
-//    [self show];
+    //    [self show];
 }
 
 - (void)localUserChange:(NSNotification*)nt
@@ -314,16 +334,43 @@
 
     [self initData];
 }
+
+//图片浏览器
+- (void)ImageBrowser:(NSArray*)messageModelArray WithShowIndex:(NSInteger)index
+{
+
+    NSMutableArray* photoarray = [NSMutableArray array];
+    for (MessageModel* photoModel in messageModelArray) {
+        NSString* imagePath = [photoModel.content stringByReplacingOccurrencesOfString:@"Small" withString:@""];
+        NSLog(@"%@", imagePath);
+        NSString* imageURL = [Tool Append:IMReasonableAPPImagePath witnstring:imagePath];
+        UIImage* image = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:photoModel.content]];
+        NSLog(@"%@", [Tool getFilePathFromDoc:photoModel.content]);
+        MJPhoto* photo = [[MJPhoto alloc] init];
+        photo.url = [NSURL URLWithString:imageURL];
+        photo.image = image;
+        [photoarray addObject:photo];
+    }
+    MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = index; // 弹出相册时显示的第一张图片是？
+    browser.photos = photoarray; // 设置所有的图片
+    [browser show];
+}
+
 //联系人点击
 - (void)userinterface:(UIButton*)btn
 {
     NSLog(@"用户头像被点击");
-
-    [[XMPPDao sharedXMPPManager] getAllMyRoom];
-
-    NSString* jidstr = [[[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
-    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbclvuser", nil) message:jidstr delegate:self cancelButtonTitle:nil otherButtonTitles:NSLocalizedString(@"lbclvok", nil), nil];
-    [alert show];
+    NSString* imagename = [[NSUserDefaults standardUserDefaults] objectForKey:XMPPMYFACE];
+    UIImage* tempimg = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:imagename]];
+    NSMutableArray* photoarray = [NSMutableArray array];
+    MJPhoto* photo = [[MJPhoto alloc] init];
+    photo.image = tempimg;
+    [photoarray addObject:photo];
+    MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
+    browser.currentPhotoIndex = 0; // 弹出相册时显示的第一张图片是？
+    browser.photos = photoarray; // 设置所有的图片
+    [browser show];
 }
 
 #pragma mark -创建导航栏上得按钮
@@ -372,8 +419,9 @@
 - (void)initControl
 {
 
+    self.currentOrientation=[[UIDevice currentDevice] orientation];
     self.edgesForExtendedLayout = UIRectEdgeNone;
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT - 49 - 64)];
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT)];
     tableview.delegate = self;
     tableview.dataSource = self;
     // 添加搜索栏
@@ -390,6 +438,8 @@
     ref.tintColor = [UIColor grayColor];
     ref.attributedTitle = [[NSAttributedString alloc] initWithString:NSLocalizedString(@"msgRef", nil)];
     [ref addTarget:self action:@selector(RefreshViewControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
+    tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+    
     [tableview addSubview:ref];
 
     tableview.tableFooterView = [[UIView alloc] init]; //设置不要显示多余的行;
@@ -421,94 +471,17 @@
 //免费邀请好友按钮点击事件
 - (void)Invite
 {
-    UIActionSheet* inviteSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"INVITE_FRIENDS", nil)
-                                                             delegate:(id)self
-                                                    cancelButtonTitle:NSLocalizedString(@"lbsuvcancel", nil)
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:NSLocalizedString(@"INVITE_MANY_PEOPLE", nil), NSLocalizedString(@"INVITE_ALL_PEOPLE", nil),
-                                                    nil];
-    [inviteSheet showInView:[UIApplication sharedApplication].keyWindow];
-}
+    if (![PJNetWorkHelper isNetWorkAvailable]) {
 
-- (void)InvitationFriendsForHeightSys
-{
-    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"lbinvitation", nil)
-                                                                             message:NSLocalizedString(@"lbissureinvitation", nil)
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle", nil)
-                                                        style:UIAlertActionStyleCancel
-                                                      handler:^(UIAlertAction* _Nonnull action){
-
-                                                      }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"btnDone", nil)
-                                                        style:UIAlertActionStyleDefault
-                                                      handler:^(UIAlertAction* _Nonnull action) {
-                                                          //确定群邀
-
-                                                          [self didInvitationAllFriends];
-                                                      }]];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
-- (void)InvitationFriends
-{
-    UIAlertView* myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbinvitation", nil) message:NSLocalizedString(@"lbissureinvitation", nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btnDone", nil) otherButtonTitles:NSLocalizedString(@"lbTCancle", nil), nil];
-    myAlertView.tag=INVITE+1;
-    [myAlertView show];
-}
-
-#pragma mark -uialertview代理
-- (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-    //确定群邀
-    if (buttonIndex == INVITE&&alertView.tag==INVITE+1) {
-
-        [self didInvitationAllFriends];
+        [PJNetWorkHelper NoNetWork];
     }
-}
+    else {
 
-//发送群邀
-- (void)didInvitationAllFriends
-{
-    [AnimationHelper show:NSLocalizedString(@"START_INVITE", nil) InView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
-    [ContactsTool DidInviteAllFriends:[ContactsTool AllPhoneAndEmail]];
-}
-
-- (void)actionSheet:(UIActionSheet*)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    //邀请sheet
-    switch (buttonIndex) {
-    case INVITE_MANY_PEOPLE: {
-        if (![PJNetWorkHelper isNetWorkAvailable]) {
-
-            [PJNetWorkHelper NoNetWork];
-        }
-        else {
-
-            [AnimationHelper showHUD:LOADING];
-            InviteAllFriendsController* inviteAllFriendsController = [[InviteAllFriendsController alloc] init];
-            UINavigationController* nvisecond = [[UINavigationController alloc] init];
-            [nvisecond addChildViewController:inviteAllFriendsController];
-            [self presentViewController:nvisecond animated:YES completion:nil];
-        }
-    } break;
-    case INVITE_ALL:
-        if (![PJNetWorkHelper isNetWorkAvailable]) {
-
-            [PJNetWorkHelper NoNetWork];
-        }
-        else {
-
-            if (iOS(8)) {
-
-                [self InvitationFriendsForHeightSys];
-            }
-            else {
-
-                [self InvitationFriends];
-            }
-        }
-        break;
+        [AnimationHelper showHUD:LOADING];
+        InviteAllFriendsController* inviteAllFriendsController = [[InviteAllFriendsController alloc] init];
+        UINavigationController* nvisecond = [[UINavigationController alloc] init];
+        [nvisecond addChildViewController:inviteAllFriendsController];
+        [self presentViewController:nvisecond animated:YES completion:nil];
     }
 }
 
@@ -562,36 +535,37 @@
     IMChatListModle* temp = [self.chatuserlist objectAtIndex:[indexPath row]];
     static NSString* CellIdentifier = @"ChatListCell";
 
-    if([temp.messagebody.type isEqualToString:EMAIL]){
-        
-        self.eMailCell.chatListModle=temp;
-        _eMailCell.tag=MessageTypeEmail;
+    if ([temp.messagebody.type isEqualToString:EMAIL]) {
+
+        self.eMailCell=[[MailTableViewCell alloc] init];
+        self.eMailCell.chatListModle = temp;
+        _eMailCell.tag = MessageTypeEmail;
         return _eMailCell;
-    }else{
-        
+    }
+    else {
+
         //从缓存中获取
         ChatListTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
+
         //如果还未缓存过
         if (cell == nil) {
-            cell = [[ChatListTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                                reuseIdentifier:CellIdentifier];
-            
+            cell = [[ChatListTableViewCell alloc] init];
+
             //去除分割线左边出现的空格
             if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
                 [cell setSeparatorInset:UIEdgeInsetsZero];
             }
-            
+
             if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
                 [cell setLayoutMargins:UIEdgeInsetsZero];
             }
         }
         cell.backgroundColor = [UIColor clearColor];
-        
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
+
         UIImage* tempimg = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:temp.faceurl]];
-        
+
         NSString* path = [Tool Append:IMReasonableAPPImagePath witnstring:temp.faceurl];
         NSString* defaultphoto = @"default";
         if ([temp.isRoom isEqualToString:@"1"]) {
@@ -600,9 +574,9 @@
         else {
             cell.messagecount.backgroundColor = [UIColor colorWithRed:0 green:0.47 blue:1 alpha:1];
         }
-        
+
         [cell.userphoto sd_setImageWithURL:[NSURL URLWithString:path] placeholderImage:tempimg ? tempimg : [UIImage imageNamed:defaultphoto]]; //@"default"]];
-        
+
         cell.username.text = temp.localname ? temp.localname : [[temp.jidstr componentsSeparatedByString:@"@"] objectAtIndex:0];
         NSString* msg = temp.messagebody.body;
         if ([temp.messagebody.type isEqualToString:@"img"] || [temp.messagebody.type isEqualToString:@"locimg"]) {
@@ -625,7 +599,7 @@
             cell.messagecount.hidden = YES;
         }
         if (_inviteButton != nil) {
-            
+
             [_inviteButton removeFromSuperview];
             [_backImageView removeFromSuperview];
         }
@@ -633,25 +607,23 @@
     }
 }
 
-
-
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
 
     IMChatListModle* temp = [_chatuserlist objectAtIndex:[indexPath row]];
 
-    if([tableView cellForRowAtIndexPath:indexPath].tag==MessageTypeEmail){
-        
-        SpreadMailViewController *spreadMailViewControl=[[SpreadMailViewController alloc] init];
-        spreadMailViewControl.hidesBottomBarWhenPushed=YES;
+    if ([tableView cellForRowAtIndexPath:indexPath].tag == MessageTypeEmail) {
+
+        SpreadMailViewController* spreadMailViewControl = [[SpreadMailViewController alloc] init];
+        spreadMailViewControl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:spreadMailViewControl animated:YES];
     }
-//    if ([temp.accouttype isEqualToString:@"9999"]) {
-//        SpreadMailViewController* spmail = [[SpreadMailViewController alloc] init];
-//        spmail.from = temp;
-//        spmail.hidesBottomBarWhenPushed = YES;
-//        [self.navigationController pushViewController:spmail animated:NO];
-//    }
+    //    if ([temp.accouttype isEqualToString:@"9999"]) {
+    //        SpreadMailViewController* spmail = [[SpreadMailViewController alloc] init];
+    //        spmail.from = temp;
+    //        spmail.hidesBottomBarWhenPushed = YES;
+    //        [self.navigationController pushViewController:spmail animated:NO];
+    //    }
     else {
 
         [searchDisplayController.searchBar resignFirstResponder];
@@ -714,8 +686,8 @@
 #pragma mark -ChatHelperdelegate
 - (void)receiveNewMessage:(IMMessage*)message isFwd:(BOOL)isfwd
 {
-    NSLog(@"message:%@",message);
-    NSLog(@"messageType:%@",message.type);
+    NSLog(@"message:%@", message);
+    NSLog(@"messageType:%@", message.type);
     [self initData];
     dispatch_async(dispatch_get_main_queue(), ^{
         [tableview reloadData];
@@ -800,10 +772,19 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:RELOAD_CACHE object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:RELOAD_CHETLIST object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CHANGEITEM" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CONNECTSCHANGE" object:nil];
+}
+
+-(void)doRotateAction:(NSNotification *)notification{
+    int orientation=[((UIDevice *)notification.object) orientation];
+    if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+        ) {
+        [tableview reloadData];
+    }
 }
 
 @end

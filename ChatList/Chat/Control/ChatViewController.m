@@ -33,6 +33,16 @@
 #import "UIImageView+WebCache.h"
 
 #define ALLUSERFILE @"AllUserFile"
+#define SMALLIMAGE @"SmallImage"
+#define IMAGE @"Image"
+#define LINEKEYBOARDHEIGHT 76//键盘的高度
+
+@interface ChatViewController()
+
+//当前屏幕的方向
+@property(nonatomic,assign)int currentOrientation;
+
+@end
 
 @implementation ChatViewController {
     //页面需要的控件
@@ -70,6 +80,8 @@
     myjidstr = [[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID];
     pagenumber = 1;
 
+    //注册横竖屏通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(doRotateAction:) name:UIDeviceOrientationDidChangeNotification object:nil];
     //    //初始化界面需要的控件
     [self initViewControl];
     //是否是通过转发信息跳转进来的
@@ -93,7 +105,7 @@
                 
                 //转发别人的图片
                 UIImageView *imageView=[[UIImageView alloc] initWithImage:image];
-                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMReasonableAPPImagePath,imageURL]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMReasonableAPPImagePath,[imageURL stringByReplacingOccurrencesOfString:SMALLIMAGE withString:IMAGE]]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     if(image!=nil){
                         
                         [self didSendImage:image];
@@ -199,7 +211,7 @@
 //初始化界面控件
 - (void)initViewControl
 {
-    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 49)];
+    tableview = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-LINEKEYBOARDHEIGHT)];
     tableview.dataSource = self;
     tableview.delegate = self;
 
@@ -209,6 +221,7 @@
     //    NSString* chatwallpaper = [NSString stringWithFormat:@"wp_%@.jpg", [[NSUserDefaults standardUserDefaults] stringForKey:CHATWALLPAPER]];
     //    tableview.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:chatwallpaper]];
 
+    tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tableview];
 
     //  [tableview addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(initData:)];
@@ -246,6 +259,7 @@
         [self initKeyboard];
     }
 }
+
 //初始化化键盘
 - (void)initKeyboard
 {
@@ -350,6 +364,7 @@
 // 初始化导航栏
 - (void)initNav
 {
+    self.currentOrientation=[[UIDevice currentDevice] orientation];
     NSString* fromjidstr = self.from.localname ? self.from.localname : [[self.from.jidstr componentsSeparatedByString:@"@"] objectAtIndex:0];
     NSString* temptitle;
     if (isRoom && rommusercount > 1) {
@@ -671,7 +686,7 @@
                 [subView removeFromSuperview];
             }
         }
-        
+    
         [cell setMessagemode:mode isNeedName:isRoom];
         return cell;
 }
@@ -934,6 +949,7 @@
 //
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 #pragma mark -ChatHelegate代理实现
@@ -983,12 +999,6 @@
     //
 }
 
-//#pragma mark-InternetConnectDelegate实现
-//- (void) isConnectToInternet:(BOOL) isConnet
-//{
-//    [self initNav];
-//}
-
 #pragma mark -Cell协议
 - (void)touchMessageContent:(NSString*)content withType:(TouchContentType)type
 {
@@ -998,7 +1008,7 @@
 }
 
 //点击图片事件
-- (void)touchPictureContent:(MessageModel*)modle tableviewcell:(UITableViewCell*)cell
+- (void)touchPictureContent:(MessageModel*)modle tableviewcell:(UITableViewCell*)cell ImageView:(UIImageView *)imageView
 {
 
     [key hideKeyboard];
@@ -1009,13 +1019,13 @@
     NSArray* arrayPre = [temp filteredArrayUsingPredicate:pre];
     //被点击的图片的位置
     NSInteger index = [arrayPre indexOfObject:modle];
-    //    ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
-    //    [self.navigationController pushViewController:imgShow animated:NO];
-    [self ImageBrowser:arrayPre WithShowIndex:index];
+//        ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
+//        [self.navigationController pushViewController:imgShow animated:NO];
+    [self ImageBrowser:arrayPre WithShowIndex:index ImageView:imageView];
 }
 
 //图片浏览器
-- (void)ImageBrowser:(NSArray*)messageModelArray WithShowIndex:(NSInteger)index
+- (void)ImageBrowser:(NSArray*)messageModelArray WithShowIndex:(NSInteger)index ImageView:(UIImageView *)imageView
 {
 
     NSMutableArray* photoarray = [NSMutableArray array];
@@ -1028,6 +1038,8 @@
         MJPhoto* photo = [[MJPhoto alloc] init];
         photo.url = [NSURL URLWithString:imageURL];
         photo.image = image;
+        photo.iscapture=YES;
+        photo.srcImageView=imageView;
         [photoarray addObject:photo];
     }
     MJPhotoBrowser* browser = [[MJPhotoBrowser alloc] init];
@@ -1171,6 +1183,18 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+-(void)doRotateAction:(NSNotification *)notification{
+    int orientation=[((UIDevice *)notification.object) orientation];
+    if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+        ) {
+        self.currentOrientation=orientation;
+        [key hideKeyboard];
+        [tableview reloadData];
+        [key removeFromSuperview];
+        [self initKeyboard];
+    }
 }
 
 @end

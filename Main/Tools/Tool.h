@@ -12,6 +12,7 @@
 +(NSString *)getDateWithFormatString:(NSString *)dateString;
 +(NSDictionary *)JsonStrngToDictionary:(NSString *)json;
 + (UIImage *)imageWithColor:(UIColor *)color;
++ (UIImage *)imageWithColor:(UIColor *)color AndRect:(CGRect)rect;
 +(void)removeVoiceAndImg;
 + (id)StringTojosn:(NSString *)stringdata;
 + (NSString *) GetDate:(NSString *) femate;

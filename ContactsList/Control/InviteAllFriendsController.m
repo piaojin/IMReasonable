@@ -10,10 +10,12 @@
 #import "ContactsTool.h"
 #import "InviteAllFriendsController.h"
 #import "AnimationHelper.h"
+#import "UIColor+Hex.h"
 
 #define INVITECELL @"UITableViewCell"
+#define INVITEALL_BUTTON_H 56//一键邀请按钮大小
 
-@interface InviteAllFriendsController ()
+@interface InviteAllFriendsController ()<UIAlertViewDelegate>
 //所有非talkking用户
 @property(nonatomic,copy)NSArray* personArray;
 @end
@@ -48,6 +50,38 @@
     //显示左边的checkbox
     self.tableView.allowsMultipleSelectionDuringEditing = YES;
     self.tableView.editing = YES;
+    //添加一键邀请所有按钮
+    UIButton * inviteAllButton=[[UIButton alloc] init];
+    [inviteAllButton setTitle:NSLocalizedString(@"INVITE_ALL_PEOPLE", nil) forState:UIControlStateNormal];
+    [inviteAllButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [inviteAllButton setBackgroundImage:[Tool imageWithColor:[UIColor colorWithHexString:@"#00ccff"]AndRect:CGRectMake(0, 0, SCREENWIDTH, INVITEALL_BUTTON_H)] forState:UIControlStateNormal];
+    [inviteAllButton setBackgroundImage:[Tool imageWithColor:[UIColor colorWithHexString:@"#0099ff"] AndRect:CGRectMake(0, 0, SCREENWIDTH, INVITEALL_BUTTON_H)] forState:UIControlStateNormal];
+    inviteAllButton.frame=CGRectMake(0, 0, SCREENWIDTH, INVITEALL_BUTTON_H);
+    [inviteAllButton addTarget:self action:@selector(InviteAllFriends) forControlEvents:UIControlEventTouchUpInside];
+    [self.tableView setTableHeaderView:inviteAllButton];
+    self.tableView.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
+}
+
+//一键邀请所有好友
+-(void)InviteAllFriends{
+    UIAlertView* myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbinvitation",nil) message:NSLocalizedString(@"lbissureinvitation",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btnDone",nil) otherButtonTitles:NSLocalizedString(@"lbTCancle",nil), nil];
+    [myAlertView show];
+}
+
+#pragma mark -uialertview代理
+- (void)alertView:(UIAlertView*)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    //确定群邀
+    if(buttonIndex==INVITE){
+        
+        [self didInvitationAllFriends];
+    }
+}
+
+//发送群邀
+-(void)didInvitationAllFriends{
+    [AnimationHelper show:NSLocalizedString(@"START_INVITE",nil) InView:[UIApplication sharedApplication].keyWindow.rootViewController.view];
+    [ContactsTool DidInviteAllFriends:[ContactsTool AllPhoneAndEmail]];
 }
 
 - (void)initNav
@@ -136,6 +170,7 @@
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    
     UITableViewCell* cell=[tableView dequeueReusableCellWithIdentifier:INVITECELL];
     if(cell==nil){
         

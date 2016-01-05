@@ -7,6 +7,7 @@
 //
 
 #import "UUProgressHUD.h"
+#import "AppDelegate.h"
 
 @interface UUProgressHUD ()
 {
@@ -29,9 +30,12 @@
     static dispatch_once_t once;
     static UUProgressHUD *sharedView;
     dispatch_once(&once, ^ {
-        sharedView = [[UUProgressHUD alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//        appDelegate.allowRotation = NO;
+        sharedView = [[UUProgressHUD alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT)];
         sharedView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.5];
     });
+    sharedView.autoresizesSubviews=YES;
     return sharedView;
 }
 
@@ -40,52 +44,62 @@
 }
 
 - (void)show {
+    CGRect mainRect=[[UIScreen mainScreen] bounds];
     dispatch_async(dispatch_get_main_queue(), ^{
         if(!self.superview)
             [self.overlayWindow addSubview:self];
         
         if (!centerLabel){
-            centerLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 40)];
+            centerLabel = [[UILabel alloc]initWithFrame:CGRectMake((mainRect.size.width-150)/2, (mainRect.size.height-40)/2, 150, 40)];
             centerLabel.backgroundColor = [UIColor clearColor];
+            centerLabel.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         }
         
+        [self addSubview:centerLabel];
+        centerLabel.center=self.center;
+        centerLabel.text = @"0";
+        centerLabel.textAlignment = NSTextAlignmentCenter;
+        centerLabel.font = [UIFont systemFontOfSize:30];
+        centerLabel.textColor = [UIColor yellowColor];
+        
         if (!self.subTitleLabel){
-            self.subTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
+            self.subTitleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 50, 150, 20)];
             self.subTitleLabel.backgroundColor = [UIColor clearColor];
         }
         if (!self.titleLabel){
-            self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 20)];
+            self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, -30, 150, 20)];
             self.titleLabel.backgroundColor = [UIColor clearColor];
         }
         if (!edgeImageView)
             edgeImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"Chat_record_circle"]];
         
-        self.subTitleLabel.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2 + 30);
         self.subTitleLabel.text = @"Slide up to cancel";
         self.subTitleLabel.textAlignment = NSTextAlignmentCenter;
         self.subTitleLabel.font = [UIFont boldSystemFontOfSize:14];
         self.subTitleLabel.textColor = [UIColor whiteColor];
         
-        self.titleLabel.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2 - 30);
         self.titleLabel.text = @"Time";
         self.titleLabel.textAlignment = NSTextAlignmentCenter;
         self.titleLabel.font = [UIFont boldSystemFontOfSize:18];
         self.titleLabel.textColor = [UIColor whiteColor];
         
-        centerLabel.center = CGPointMake([[UIScreen mainScreen] bounds].size.width/2,[[UIScreen mainScreen] bounds].size.height/2);
-        centerLabel.text = @"0";
-        centerLabel.textAlignment = NSTextAlignmentCenter;
-        centerLabel.font = [UIFont systemFontOfSize:30];
-        centerLabel.textColor = [UIColor yellowColor];
 
         
         edgeImageView.frame = CGRectMake(0, 0, 154, 154);
         edgeImageView.center = centerLabel.center;
+        int currentOrientation=[[UIDevice currentDevice] orientation];
+        if(currentOrientation==UIDeviceOrientationLandscapeLeft){
+            
+            centerLabel.transform=CGAffineTransformMakeRotation(M_PI/2);
+        }else if(currentOrientation==UIDeviceOrientationLandscapeRight){
+            
+            centerLabel.transform=CGAffineTransformMakeRotation((M_PI+M_PI/2));
+        }
         [self addSubview:edgeImageView];
-        [self addSubview:centerLabel];
-        [self addSubview:self.subTitleLabel];
-        [self addSubview:self.titleLabel];
+        [centerLabel addSubview:self.subTitleLabel];
+        [centerLabel addSubview:self.titleLabel];
 
+        
         if (myTimer)
             [myTimer invalidate];
         myTimer = nil;
@@ -168,6 +182,7 @@
                          }
                          completion:^(BOOL finished){
                              if(self.alpha == 0) {
+                                 NSLog(@"%f,%f",centerLabel.frame.origin.x,centerLabel.frame.origin.y);
                                  [centerLabel removeFromSuperview];
                                  centerLabel = nil;
                                  [edgeImageView removeFromSuperview];
@@ -185,20 +200,24 @@
                                          *stop = YES;
                                      }
                                  }];
+                                 [overlayWindow removeFromSuperview];
                              }
                          }];
     });
 }
 
 - (UIWindow *)overlayWindow {
-    if(!overlayWindow) {
-        overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-        overlayWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        overlayWindow.userInteractionEnabled = NO;
-        [overlayWindow makeKeyAndVisible];
-    }
+    overlayWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    overlayWindow.autoresizesSubviews=YES;
+    overlayWindow.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    overlayWindow.userInteractionEnabled = NO;
+    [overlayWindow makeKeyAndVisible];
     return overlayWindow;
 }
 
+-(void)dealloc{
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    appDelegate.allowRotation = YES;
+}
 
 @end

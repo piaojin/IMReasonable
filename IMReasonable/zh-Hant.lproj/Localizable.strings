@@ -6,6 +6,8 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"DELETE"="刪除";
+"DELETE_THIS_PHOTO"="要刪除這張照片嗎?";
 "SAVE_FAILED"="保存失敗";
 "SAVE_SUCCESS"="保存成功";
 "FAILED_TO_LOAD"="加載失敗";

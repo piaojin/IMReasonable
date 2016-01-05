@@ -83,7 +83,13 @@
     // 更新页码
     _indexLabel.text = [NSString stringWithFormat:@"%d / %d", _currentPhotoIndex + 1, _photos.count];
     
-    MJPhoto *photo = _photos[_currentPhotoIndex];
+    MJPhoto *photo;
+    //飘金添加
+    if(_currentPhotoIndex<_photos.count){
+        
+        photo = _photos[_currentPhotoIndex];
+    }
+    //
     // 按钮
     _saveImageBtn.enabled = photo.image != nil && !photo.save;
 }

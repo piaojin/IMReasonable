@@ -6,6 +6,8 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+#define VOICE_TXT_H 53//语音和文本的高度
+
 #import "WeChatKeyBoard.h"
 #import "DetailKeyBoard.h"
 #import "MBProgressHUD.h"
@@ -13,7 +15,7 @@
 
 #define _ScreenWidth  [[UIScreen mainScreen] bounds].size.width
 #define _ScreenHeight  [[UIScreen mainScreen] bounds].size.height
-#define _lineKeyboardHeight 49
+#define _lineKeyboardHeight 76
 #define _WeChatKeyBoardHeight 280
 #define _DetailKeyBoardHeight 200
 
@@ -94,14 +96,28 @@
              CGFloat spacewidth=_ScreenWidth/10;//把输入工具栏10等分咯
         
         
-            _txtorvoice=[[UIButton alloc ]initWithFrame:CGRectMake(10, 7, spacewidth, 35)];
+            _txtorvoice=[[UIButton alloc ]init];
             [_txtorvoice setImage:[UIImage imageNamed:@"ToolViewInputVoice.png"] forState:UIControlStateNormal];
             [_txtorvoice setImage:[UIImage imageNamed:@"ToolViewInputText.png"] forState:UIControlStateSelected];
             [_txtorvoice addTarget:self action:@selector(btnSelect:) forControlEvents:UIControlEventTouchUpInside];
             _txtorvoice.selected=NO;
             _txtorvoice.tag=TXTORVOICE;
         
-            _voice=[[UIButton alloc ]initWithFrame:CGRectMake(20+spacewidth, 7, spacewidth*6, 35)];
+        _txtorvoice.imageView.contentMode=UIViewContentModeScaleAspectFit;
+        int txtorvoice_x=10;
+        int txtorvoice_w=spacewidth;
+        int txtorvoice_h=36;
+        int txtorvoice_y=(_lineKeyboardHeight-txtorvoice_h)/2;
+        NSLog(@"%f",self.frame.size.height);
+        _txtorvoice.frame=CGRectMake(txtorvoice_x, txtorvoice_y, txtorvoice_w, txtorvoice_h);
+        
+            _voice=[[UIButton alloc ]init];
+        int voice_x=20+spacewidth;
+        int voice_w=spacewidth*6;
+        int voice_h=VOICE_TXT_H;
+        int voice_y=(_lineKeyboardHeight-voice_h)/2;
+        _voice.frame=CGRectMake(voice_x, voice_y, voice_w, voice_h);
+        
             _voice.layer.cornerRadius = 4.5;
             _voice.layer.borderWidth = 1.5;
 
@@ -114,10 +130,6 @@
             [_voice setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             [_voice setTitleColor:[UIColor grayColor] forState:UIControlStateSelected];
         
-//            [_voice addTarget:self action:@selector(handleSwipeToUp:) forControlEvents:UIControlEventTouchDragExit];
-//           [_voice addTarget:self action:@selector(handleSwipeTouchDown:) forControlEvents:UIControlEventTouchDown];
-//           [_voice addTarget:self action:@selector(handleSwipeTouchupinside:) forControlEvents:UIControlEventTouchUpInside];
-        
         [_voice addTarget:self action:@selector(beginRecordVoice:) forControlEvents:UIControlEventTouchDown];
         [_voice  addTarget:self action:@selector(endRecordVoice:) forControlEvents:UIControlEventTouchUpInside];
         [_voice addTarget:self action:@selector(cancelRecordVoice:) forControlEvents:UIControlEventTouchUpOutside | UIControlEventTouchCancel];
@@ -127,7 +139,7 @@
             _voice.hidden=YES;
         
         
-        _txt= [[UITextView alloc] initWithFrame:CGRectMake(20+spacewidth, 7, spacewidth*6, 35)];
+        _txt= [[UITextView alloc] init];
         _txt.layer.borderColor = [UIColor grayColor].CGColor;
         _txt.layer.borderWidth =1.0;
         _txt.layer.cornerRadius =5.0;
@@ -136,22 +148,28 @@
         _txt.returnKeyType=UIReturnKeySend;
         _txt.textColor=[UIColor  blackColor];
         _txt.delegate=self;
-
-//            _txt=[[UITextField alloc] initWithFrame:CGRectMake(20+spacewidth, 7, spacewidth*6, 35)];
-//            _txt.borderStyle=UITextBorderStyleRoundedRect;
-//            _txt.font=[UIFont systemFontOfSize:11];
-//            _txt.returnKeyType=UIReturnKeySend;
-//            _txt.textColor=[UIColor  blackColor];
-//            _txt.delegate=self;
         
-        _face=[[UIButton alloc ]initWithFrame:CGRectMake(20+spacewidth*7, 7, spacewidth, 35)];
+        int txt_x=20+spacewidth;
+        int txt_w=spacewidth*6;
+        int txt_h=VOICE_TXT_H;
+        int txt_y=(_lineKeyboardHeight-voice_h)/2;
+        _txt.frame=CGRectMake(txt_x,txt_y,txt_w,txt_h);
+        
+        _face=[[UIButton alloc ]init];
         [_face setImage:[UIImage imageNamed:@"ToolViewEmotion.png"] forState:UIControlStateNormal];
         [_face setImage:[UIImage imageNamed:@"ToolViewEmotion.png"] forState:UIControlStateSelected];
         [_face addTarget:self action:@selector(btnSelect:) forControlEvents:UIControlEventTouchUpInside];
         _face.tag=FASE;
         
         
-        _more=[[UIButton alloc ]initWithFrame:CGRectMake(20+spacewidth*8, 7, _ScreenWidth-20-spacewidth*8, 35)];
+        int face_x=20+spacewidth*7;
+        int face_w=spacewidth;
+        int face_h=36;
+        int face_y=(_lineKeyboardHeight-face_h)/2;
+        _face.frame=CGRectMake(face_x, face_y, face_w, face_h);
+        
+        
+        _more=[[UIButton alloc ]init];
         UIEdgeInsets insets = UIEdgeInsetsMake(0 , (_more.frame.size.width-spacewidth)/2-5, 0, (_more.frame.size.width-spacewidth)/2+5);
         [_more setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black.png"] forState:UIControlStateNormal];
         [_more setImage:[UIImage imageNamed:@"TypeSelectorBtn_Black.png"] forState:UIControlStateSelected];
@@ -161,7 +179,14 @@
        
        
         
-        _detailkeyboard=[[DetailKeyBoard alloc] initWithFrame:CGRectMake(0,49, _ScreenWidth, _DetailKeyBoardHeight)];
+        int more_x=20+spacewidth*8;
+        int more_w=_ScreenWidth-20-spacewidth*8;
+        int more_h=36;
+        int more_y=(_lineKeyboardHeight-more_h)/2;
+        _more.frame=CGRectMake(more_x, more_y, more_w, more_h);
+        
+        
+        _detailkeyboard=[[DetailKeyBoard alloc] initWithFrame:CGRectMake(0,_lineKeyboardHeight, _ScreenWidth, _DetailKeyBoardHeight)];
         _detailkeyboard.hidden=YES;
         [_detailkeyboard ChoiceViewShow:0];
         _detailkeyboard.detailKeyBoardDelegate=self;
@@ -176,19 +201,8 @@
 
         [self addSubview:_detailkeyboard];
         [self bringSubviewToFront:_detailkeyboard];
-        
-        
-        
-        
-        
-      
-        
-        
     }
-    
-  
     return self;
-
 }
 
 
@@ -201,46 +215,10 @@
 }
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 {
-//    CGPoint btnPointInA = [_txtorvoice convertPoint:point fromView:self];
-//    if ([_txtorvoice pointInside:btnPointInA withEvent:event]) {
-//        return _txtorvoice;
-//    }
-//    
-//    CGPoint btnPointInB = [_txt convertPoint:point fromView:self];
-//    if ([_txt pointInside:btnPointInB withEvent:event]) {
-//        return _txt;
-//    }
-//    
-//    CGPoint btnPointInC = [_face convertPoint:point fromView:self];
-//    if ([_face pointInside:btnPointInC withEvent:event]) {
-//        return _face;
-//    }
-//    
-//    CGPoint btnPointInD = [_more convertPoint:point fromView:self];
-//    if ([_more pointInside:btnPointInD withEvent:event]) {
-//        return _more;
-//    }
-//    
-//    CGPoint btnPointInE = [_voice convertPoint:point fromView:self];
-//    if ([_voice pointInside:btnPointInE withEvent:event]) {
-//        return _voice;
-//    }
-//    CGPoint btnPointInF = [_detailkeyboard convertPoint:point fromView:self];
-//    if ([_detailkeyboard pointInside:btnPointInF withEvent:event]) {
-//        return _detailkeyboard;
-//    }
-//    
-////    CGPoint btnPointInE = [_voice convertPoint:point fromView:self];
-////    if ([_voice pointInside:btnPointInE withEvent:event]) {
-////        return _voice;
-////    }
-//    
-//   
-
    return [super hitTest:point withEvent:event];
-    //return nil;
-    
 }
+
+//切换语音与文字
 - (void)btnSelect:(UIButton *) btn
 {
     switch (btn.tag)
@@ -402,107 +380,6 @@
 
 }
 
-//- (void)handleSwipeToUp:(UIButton*)btn{
-// 
-//    NSLog(@"录音取消");
-//   
-//    _voice.backgroundColor=[UIColor whiteColor];
-//    _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"KeyBord/mic_0"]];
-//      _hud.labelText = @"已取消录音";
-//    
-//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//        
-//        [[LVRecordTool sharedRecordTool] stopRecording];
-//        [[LVRecordTool sharedRecordTool] destructionRecordingFile];
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            [_hud hide:YES afterDelay:0];
-//             _hud.labelText = @"手指上划，取消发送";
-//            
-//        });
-//    });
-//}
-//
-//- (void)handleSwipeTouchDown:(UIButton *)btn{
-//  
-//    [self performSelector:@selector(delayMethod) withObject:nil afterDelay:0.5f];
-//}
-//
-//- (void)handleSwipeTouchupinside:(UIButton *)btn{
-//    NSLog(@"录音结束");
-//    
-// 
-//    _voice.backgroundColor=[UIColor whiteColor];
-//    _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"KeyBord/mic_0"]];
-//    
-//    double currentTime = [LVRecordTool sharedRecordTool].recorder.currentTime;
-//    NSLog(@"%lf", currentTime);
-//    if (currentTime < 2) {
-//        
-//        
-//          _hud.labelText = @"说话时间太短";
-//           [_hud hide:YES afterDelay:1.5];
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//            
-//            [[LVRecordTool sharedRecordTool] stopRecording];
-//            [[LVRecordTool sharedRecordTool] destructionRecordingFile];
-//        });
-//    } else {
-//        
-//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
-//            
-//            [[LVRecordTool sharedRecordTool] stopRecording];
-//            dispatch_async(dispatch_get_main_queue(), ^{
-//                _hud.labelText = @"手指上划，取消发送";
-//                [_hud hide:YES];
-//            });
-//        });
-//        
-//        // 已成功录音
-//        NSLog(@"已成功录音");
-//    }
-//
-//    
-//}
-//- (void)delayMethod{
-//    NSLog(@"录音开始");
-//    _voice.backgroundColor=[UIColor lightGrayColor]; //更改按住说话时的控件外观
-//    
-//    [[LVRecordTool sharedRecordTool] startRecording]; //开始录音
-//    
-//    //设置提示的显示样式并显示出来
-//    _hud = [[MBProgressHUD alloc] initWithView:self.window];
-//    [self.window addSubview:_hud];
-//    _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"KeyBord/mic_0"]];
-//    _hud.mode = MBProgressHUDModeCustomView;
-//    _hud.delegate = self;
-//    _hud.labelText = @"手指上划，取消发送";
-//    _hud.labelFont=[UIFont systemFontOfSize:10];
-//    [_hud show:YES];
-//    
-//}
-//
-//#pragma mark-录音的代理方法
-//- (void)recordTool:(LVRecordTool *)recordTool didstartRecoring:(int)no {
-//    
-//    
-//    dispatch_async(dispatch_get_main_queue(), ^{
-//         NSString *imageName = [NSString stringWithFormat:@"mic_%d", no];
-//        _hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[NSString stringWithFormat:@"KeyBord/%@",imageName]]];
-//        _hud.labelText = @"手指上划，取消发送";
-//        
-//    });
-//  
-//}
-//
-//- (void)recordToolSendVoicePath:(NSString *)voicepath voiceLenth:(double)time
-//{
-//    [self.delegate sendVoiceContent:voicepath voicelenth:time];
-//    
-//}
-
-
-
 - (void)keyboardWillChangeFrame:(NSNotification *)notification
 {
     
@@ -532,11 +409,7 @@
                 [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
                 
             }];
-            
-            
         }
-        
-
     }else{
         CGFloat yOffset = endKeyboardRect.origin.y - beginKeyboardRect.origin.y;
         CGRect inputFieldRect = self.frame;
@@ -557,17 +430,7 @@
             [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
             
         }];
-
-    
     }
-  
-    
-    
-
-    
-    
-    
-    
 }
 
 -(void)scroll:(CGFloat)offset
@@ -581,20 +444,6 @@
           [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
     }];
 }
-
-
-
-//- (BOOL)textFieldShouldReturn:(UITextField *)textField
-//{
-//
-//    [self.delegate sendTextContent:textField.text];
-//    [textField resignFirstResponder];
-//    textField.text=@"";
-//    return YES;
-//}
-
-
-
 
 -(void)hideKeyboard{ //做键盘取消的操作
     [_txt resignFirstResponder];
@@ -636,14 +485,14 @@
         
     
         
-         [textView resignFirstResponder];
+//         [textView resignFirstResponder];
          textView.text=@"";
         
         [self.delegate sendTextContent:str];
         
         CGFloat spacewidth=_ScreenWidth/10;//把输入工具栏10等分咯
         CGRect tempA=CGRectMake(0,0, _ScreenWidth, _lineKeyboardHeight);
-        CGRect tempB=CGRectMake(20+spacewidth, 7, spacewidth*6, 35);
+        CGRect tempB=CGRectMake(20+spacewidth, 7, spacewidth*6, VOICE_TXT_H);
         _linekeyboard.frame=tempA;
         _txt.frame=tempB;
 

@@ -1,4 +1,4 @@
-//
+ //
 //  IMReasonableDao.m
 //  IMReasonable
 //
@@ -581,9 +581,10 @@
     [dateformatter autorelease];
     
    NSString *  myjidstr=[[NSUserDefaults standardUserDefaults] stringForKey:XMPPREASONABLEJID];
-    
+    int count=0;
     while ([rs next]){
-        
+        count++;
+        NSLog(@"%d",count);
         MessageModel * temp=[[MessageModel alloc] init];
         temp.ID=[rs stringForColumn:@"msgID"];
         NSString * tojidstr=[rs stringForColumn:@"to"];
@@ -693,7 +694,7 @@
 {
     
     NSMutableArray* chatuserlist=[[NSMutableArray alloc] init];
-    NSString * sql=@"select * from User where isRoom=\"0\" and ( isimrea=\"1\"  or isloc=\"1\") order by [update] desc";
+    NSString * sql=@"select * from User where isRoom=\"0\" and ( isimrea=\"1\"  or isloc=\"1\") and (jidstr is not null) order by [update] desc";
     
     FMResultSet *rs=[FMDBDao executeQuery:sql];
     

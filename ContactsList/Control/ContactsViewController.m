@@ -48,7 +48,7 @@
                                              selector:@selector(localUserChange:)
                                                  name:@"CONNECTSCHANGE"
                                                object:nil];
-
+    
     //chatuserlist=[[NSMutableArray alloc] init];
     
     [self initData];
@@ -125,42 +125,21 @@
     [contactsRightBarButton setAction:@selector(Invitation)];
     contactsRightBarButton.title=NSLocalizedString(@"lbinvitation",nil);
     self.navigationItem.rightBarButtonItem=contactsRightBarButton;
-    
-    
-//    UIBarButtonItem * right=[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addpeople:)];
-//    self.navigationItem.rightBarButtonItem=right;
 }
 
-//群邀
+//群邀 
 -(void)Invitation{
-    UIActionSheet* inviteSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"INVITE_FRIENDS", nil)
-                                                            delegate:(id)self
-                                                   cancelButtonTitle:NSLocalizedString(@"lbsuvcancel", nil)
-                                              destructiveButtonTitle:nil
-                                                   otherButtonTitles:NSLocalizedString(@"INVITE_MANY_PEOPLE", nil),NSLocalizedString(@"INVITE_ALL_PEOPLE", nil),
-                                 nil];
-    inviteSheet.tag=INVITE_SHEET;
-    [inviteSheet showInView:[UIApplication sharedApplication].keyWindow];
-}
-
--(void)InvitationFriendsForHeightSys{
-    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"lbinvitation",nil)
-                                                                             message:NSLocalizedString(@"lbissureinvitation",nil) preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+    if(![PJNetWorkHelper isNetWorkAvailable]){
         
+        [PJNetWorkHelper NoNetWork];
+    }else{
         
-    }]];
-    [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"btnDone",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        //确定群邀
-        
-        [self didInvitationAllFriends];
-    }]];
-    [self presentViewController:alertController animated:YES completion:nil];
-}
-
--(void)InvitationFriends{
-    UIAlertView* myAlertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"lbinvitation",nil) message:NSLocalizedString(@"lbissureinvitation",nil) delegate:self cancelButtonTitle:NSLocalizedString(@"btnDone",nil) otherButtonTitles:NSLocalizedString(@"lbTCancle",nil), nil];
-    [myAlertView show];
+        [AnimationHelper showHUD:LOADING];
+        InviteAllFriendsController *inviteAllFriendsController=[[InviteAllFriendsController alloc] init];
+        UINavigationController * nvisecond=[[UINavigationController alloc] init];
+        [nvisecond addChildViewController:inviteAllFriendsController];
+        [self presentViewController:nvisecond animated:YES completion:nil];
+    }
 }
 
 #pragma mark -uialertview代理
@@ -208,27 +187,6 @@
     NSMutableArray * alluser=[IMReasonableDao getAllUser];
     
     [[XMPPDao sharedXMPPManager] checkUser:alluser];
-//    NSString* phone= [[[[NSUserDefaults standardUserDefaults] objectForKey:XMPPREASONABLEJID] componentsSeparatedByString:@"@"] objectAtIndex:0];
-//    
-//    NSURL *url = [NSURL URLWithString:  [Tool Append:IMReasonableAPP witnstring:@"CheckByArr"]];
-//    NSString * Apikey= IMReasonableAPPKey;
-//    NSDictionary *sendsms = [[NSDictionary alloc] initWithObjectsAndKeys:Apikey, @"apikey",phone,@"ownphone",alluser,@"userarr", nil];
-//    NSDictionary *sendsmsD = [[NSDictionary alloc] initWithObjectsAndKeys:sendsms, @"checkdata", nil];
-//    if ([NSJSONSerialization isValidJSONObject:sendsmsD])
-//    {
-//        NSError *error;
-//        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendsmsD options:NSJSONWritingPrettyPrinted error: &error];
-//        NSMutableData *tempJsonData = [NSMutableData dataWithData:jsonData];
-//        ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
-//        [request addRequestHeader:@"Content-Type" value:@"application/json; encoding=utf-8"];
-//        [request addRequestHeader:@"Accept" value:@"application/json"];
-//        [request setRequestMethod:@"POST"];
-//        [request setPostBody:tempJsonData];
-//        [request setDelegate:self];
-//        [request setDidFinishSelector:@selector(checkUserArrSuc:)];
-//        [request setDidFailSelector:@selector(checkUserArrFaied:)];
-//        [request startAsynchronous];
-//    }
 }
 
 - (void) checkUserArrSuc:(ASIHTTPRequest *) req{
@@ -343,7 +301,7 @@
 - (void)initControl
 {
      self.edgesForExtendedLayout = UIRectEdgeNone ;
-    tableview =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT-49-64)];
+    tableview =[[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT)];
     tableview.delegate=self;
     tableview.dataSource=self;
     tableview.tableFooterView = [[UIView alloc]init];//设置不要显示多余的行;
@@ -370,7 +328,7 @@
     [tableview addSubview:ref];
     //tableview.backgroundColor=[UIColor greenColor];
     
-    
+    tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tableview];
     
 }
@@ -457,8 +415,7 @@
      ChatUserTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil)
     {
-        cell = [[ChatUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                            reuseIdentifier:CellIdentifier];
+        cell = [[ChatUserTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
         if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
             [cell setSeparatorInset:UIEdgeInsetsMake(0,0,0,0)];
@@ -480,13 +437,16 @@
     cell.device.text= [temp.state isEqualToString:@"available"]?temp.device:@"";
     cell.invite.hidden=YES;
     cell.invite.tag=[indexPath row];
-        
+    
     if (![temp.isloc isEqual:@"1"]) {//显示邀请
             cell.invite.hidden=NO;
         [cell.invite addTarget:self action:@selector(inviteUser:) forControlEvents:UIControlEventTouchUpInside];
     }else{
        cell.invite.hidden=YES;
     }
+    
+        
+    cell.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     return cell;
     }
     
@@ -613,43 +573,6 @@
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //邀请sheet
-    if(actionSheet.tag==INVITE_SHEET){
-        
-        switch (buttonIndex)
-        {
-            case INVITE_MANY_PEOPLE:
-            {
-                if(![PJNetWorkHelper isNetWorkAvailable]){
-                    
-                    [PJNetWorkHelper NoNetWork];
-                }else{
-                    
-                    [AnimationHelper showHUD:LOADING];
-                    InviteAllFriendsController *inviteAllFriendsController=[[InviteAllFriendsController alloc] init];
-                    UINavigationController * nvisecond=[[UINavigationController alloc] init];
-                    [nvisecond addChildViewController:inviteAllFriendsController];
-                    [self presentViewController:nvisecond animated:YES completion:nil];
-                }
-            }
-                break;
-            case INVITE_ALL:
-                if(![PJNetWorkHelper isNetWorkAvailable]){
-                    
-                    [PJNetWorkHelper NoNetWork];
-                }else{
-                    
-                    if(iOS(8)){
-                        
-                        [self InvitationFriendsForHeightSys];
-                    }else{
-                        
-                        [self InvitationFriends];
-                    }
-                }
-                break;
-        }
-    }else{
         
         switch (buttonIndex)
         {
@@ -663,7 +586,6 @@
                 // 取消 不需要做任何操作
                 break;
         }
-    }
 }
 
 - (NSString *)getSMSContent{

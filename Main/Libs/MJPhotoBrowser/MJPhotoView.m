@@ -139,6 +139,7 @@
     [self adjustFrame];
 }
 
+//设置图片显示比例
 #pragma mark 调整frame
 - (void)adjustFrame
 {
@@ -148,6 +149,13 @@
     CGSize boundsSize = self.bounds.size;
     CGFloat boundsWidth = boundsSize.width;
     CGFloat boundsHeight = boundsSize.height;
+    
+    int currentOrientation=[[UIDevice currentDevice] orientation];
+    if(currentOrientation==UIDeviceOrientationLandscapeRight||currentOrientation==UIDeviceOrientationLandscapeLeft){
+        
+        boundsWidth=boundsSize.height;
+        boundsHeight=boundsSize.width;
+    }
     
     CGSize imageSize = _imageView.image.size;
     CGFloat imageWidth = imageSize.width;
@@ -172,6 +180,7 @@
     if(screenSize.size.height>=imageSize.height&&screenSize.size.width>=imageSize.width){
         
        imageFrame = CGRectMake(0, 0, imageSize.width,imageSize.height);
+        
     }else{
         
 //       imageFrame = CGRectMake(0, 0, imageSize.width*minScale, imageSize.height*minScale);
@@ -200,6 +209,22 @@
         }];
     } else {
         _imageView.frame = imageFrame;
+    }
+    //图片小于屏幕的大小
+    if(screenSize.size.height>=imageSize.height&&screenSize.size.width>=imageSize.width){
+        
+        //飘金添加
+        _imageView.frame=CGRectMake((self.frame.size.width-imageFrame.size.width)/2, imageFrame.origin.y, imageFrame.size.width, imageFrame.size.height);
+    }
+    
+    if(currentOrientation==UIDeviceOrientationLandscapeRight||currentOrientation==UIDeviceOrientationLandscapeLeft){
+        
+        [self updatePhotoFrame];
+    }
+    //飘金添加横屏缩放时图片还是比屏幕大的情况
+    if((currentOrientation==UIDeviceOrientationFaceUp||currentOrientation==UIDeviceOrientationFaceDown)&&(imageFrame.size.width>=boundsWidth||imageFrame.size.height>=boundsHeight)){
+        
+        [self updatePhotoFrame];
     }
 }
 
@@ -258,6 +283,7 @@
     _imageView.contentMode = UIViewContentModeScaleToFill;
 }
 
+//双击放大图片
 - (void)handleDoubleTap:(UITapGestureRecognizer *)tap {
     _doubleTap = YES;
     
@@ -274,4 +300,15 @@
     // 取消请求
     [_imageView setImageWithURL:[NSURL URLWithString:@"file:///abc"]];
 }
+
+//飘金添加,横屏的时候调整图片的frame
+-(void)updatePhotoFrame{
+    CGRect mainRect=[[UIScreen mainScreen] bounds];
+    CGRect tempImageRect=_imageView.frame;
+    _imageView.frame=CGRectMake(0, 0, tempImageRect.size.width*mainRect.size.height/tempImageRect.size.height, mainRect.size.height);
+    UIWindow *window = [UIApplication sharedApplication].keyWindow;
+    _imageView.center=window.center;
+    self.contentSize=CGSizeMake(_imageView.frame.size.width, _imageView.frame.size.height);
+}
+
 @end

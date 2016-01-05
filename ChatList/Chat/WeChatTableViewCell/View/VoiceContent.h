@@ -11,6 +11,8 @@
 #import "UUAVAudioPlayer.h"
 
 @interface VoiceContent : UIView<UUAVAudioPlayerDelegate>
+
+@property(nonatomic,assign)CGRect voiceframe;
 @property (nonatomic,retain) UIImageView * backgroundImage;
 @property (nonatomic,retain) MessageModel * messagemode;
 - (void)setMessagemode:(MessageModel *)messagemode isNeedName:(BOOL)isName;

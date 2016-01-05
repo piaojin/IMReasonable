@@ -26,6 +26,9 @@
         XMPPDao * xmppManager;
        UIWindow *window;
 }
+
+@property(nonatomic,assign)BOOL allowRotation;
+
 @property (strong, nonatomic) UIWindow *window;
 @property  NSTimer * time;
 @property (nonatomic, strong) Reachability * reachability;

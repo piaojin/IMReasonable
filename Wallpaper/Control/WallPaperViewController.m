@@ -8,6 +8,7 @@
 
 #import "WallPaperViewController.h"
 #import "WallpaperCollectionViewCell.h"
+#import "AppDelegate.h"
 
 @interface WallPaperViewController ()
 {
@@ -23,6 +24,10 @@
 #pragma mark--ViewControl 生命周期
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = NO;
+    
     [self initViewControl];
     [self initData];
     [self initNav];
@@ -137,6 +142,11 @@
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     return UIEdgeInsetsMake(5, 5, 5, 5);
+}
+
+-(void)dealloc{
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate.allowRotation = YES;
 }
 
 @end
