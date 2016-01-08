@@ -6,6 +6,7 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+#import "PJImageDetailController.h"
 #import "SpreadMailModel.h"
 #import "MailTableViewCell.h"
 #import "MessageModel.h"
@@ -37,14 +38,17 @@
 #define IMAGE @"Image"
 #define LINEKEYBOARDHEIGHT 76//键盘的高度
 
-@interface ChatViewController()
+@interface ChatViewController()<PJsendImageDelegate>
 
+//判断键盘是否已经显示
+@property(nonatomic,assign)BOOL isKeyBoradVisible;
 //当前屏幕的方向
 @property(nonatomic,assign)int currentOrientation;
 
 @end
 
 @implementation ChatViewController {
+    
     //页面需要的控件
     WeChatKeyBoard* key;
     UITableView* tableview;
@@ -100,7 +104,7 @@
                 
                 //从本地加载图片
                 image=[UIImage imageWithContentsOfFile:FULLPATHTOFILE(imageURL)];
-                [self didSendImage:image];
+                [self didSendImage:image AndIsOriginal:true];
             }else if([imageURL rangeOfString:ALLUSERFILE].length>0){
                 
                 //转发别人的图片
@@ -108,7 +112,7 @@
                 [imageView sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",IMReasonableAPPImagePath,[imageURL stringByReplacingOccurrencesOfString:SMALLIMAGE withString:IMAGE]]] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     if(image!=nil){
                         
-                        [self didSendImage:image];
+                        [self didSendImage:image AndIsOriginal:true];
                     }
                 }];
             }
@@ -832,8 +836,17 @@
 }
 
 //发送图片
--(void)didSendImage:(UIImage *)image{
-    NSData* dataimg = UIImageJPEGRepresentation(image, 0.01);
+-(void)didSendImage:(UIImage *)image AndIsOriginal:(BOOL)isOriginal{
+    NSData* dataimg;
+    if(isOriginal){
+        
+        //发送原图
+        dataimg=UIImageJPEGRepresentation(image, 1);
+    }else{
+        
+        //发送压缩图
+        dataimg=UIImageJPEGRepresentation(image, 0.01);
+    }
     
     //缓存到本地  针对图片这一块设计的
     NSString* filename = [Tool GetOnlyString];
@@ -889,7 +902,12 @@
                                completion:^{
                                }];
     UIImage* image = [Tool fixOrientation:[info objectForKey:UIImagePickerControllerOriginalImage]];
-    [self didSendImage:image];
+    PJImageDetailController *pjimageDetailController=[[PJImageDetailController alloc] initWithImage:image AndImageDic:info];
+//    UINavigationController *na=[[UINavigationController alloc] init];
+//    [na addChildViewController:pjimageDetailController];
+    [self.navigationController pushViewController:pjimageDetailController animated:YES];
+    pjimageDetailController.pjsendImageDelegate=self;
+//    [self didSendImage:image];
 }
 
 
@@ -1194,7 +1212,12 @@
         [tableview reloadData];
         [key removeFromSuperview];
         [self initKeyboard];
+        NSLog(@"x:%f,y:%f,w:%f,h:%f",key.frame.origin.x,key.frame.origin.y,key.frame.size.width,key.frame.size.height);
     }
+}
+
+-(void)PJsendImage:(UIImage *)image AndIsOriginal:(BOOL)isOriginal{
+    [self didSendImage:image AndIsOriginal:isOriginal];
 }
 
 @end

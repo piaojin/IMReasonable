@@ -2,7 +2,7 @@
 //  PJImageView.m
 //  IMReasonable
 //
-//  Created by 翁金闪 on 15/12/21.
+//  Created by 翁金闪  on 15/12/21.
 //  Copyright © 2015年 Reasonable. All rights reserved.
 //
 
@@ -11,14 +11,16 @@
 #import "PJImageBrowser.h"
 
 #define MAXIMUMZOOMSCALE 2.0//图片最大放大倍数
-#define MINIMUMZOOMSCALE 0.5//图片最大缩小倍数
+#define MINIMUMZOOMSCALE 1.0//图片最大缩小倍数
+#define SCREENWIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREENWIHEIGHT [UIScreen mainScreen].bounds.size.height
 
 @interface PJImageView()<UIScrollViewDelegate>
 
-@property(nonatomic,assign)BOOL doubleTap;
 @property(nonatomic,strong)UIImageView *imageView;
 //是否隐藏导航栏
 @property(nonatomic,assign)BOOL hideBar;
+@property(nonatomic,assign)CGRect tempFrame;
 
 @end
 
@@ -28,11 +30,11 @@
     // 2.添加图片
         _imageView.contentMode=UIViewContentModeScaleAspectFit;
         [self addSubview:_imageView];
-        
-        // 设置frame
-        CGRect tempFrame=[self adjustFrame:_imageView];
-        _imageView.frame=CGRectMake(0, tempFrame.origin.y, tempFrame.size.width, tempFrame.size.height);
     
+    CGRect rectStatus = [[UIApplication sharedApplication] statusBarFrame];
+        // 设置frame
+        _tempFrame=[self adjustFrame:_imageView];
+    _imageView.frame=CGRectMake(_tempFrame.origin.x, ((SCREENWIHEIGHT-_tempFrame.size.height)/2)-rectStatus.size.height, _tempFrame.size.width, _tempFrame.size.height);
     // 3.设置其他属性
     self.contentSize = CGSizeMake(SCREENWIDTH, 0);
     self.pagingEnabled = YES;
@@ -71,7 +73,7 @@
     //图片小于屏幕的大小
     if(screenSize.size.height>=imageSize.height&&screenSize.size.width>=imageSize.width){
         
-        imageFrame = CGRectMake(0, 0, imageSize.width,imageSize.height);
+        imageFrame = CGRectMake((SCREENWIDTH-imageSize.width)/2, 0, imageSize.width,imageSize.height);
         
     }else{
         
@@ -116,14 +118,12 @@
 - (void)handleSingleTap:(UITapGestureRecognizer*)singleTap
 {
     [self hideBar:!_hideBar];
-    self.doubleTap = NO;
     [self setZoomScale:self.minimumZoomScale animated:YES];
 }
 
 -(void)handleDoubleTap:(UITapGestureRecognizer *)doubleTap{
     [self hideBar:YES];
     _hideBar=YES;
-    self.doubleTap=YES;
     CGPoint touchPoint = [doubleTap locationInView:self];
     if (self.zoomScale == self.maximumZoomScale) {
         [self setZoomScale:self.minimumZoomScale animated:YES];

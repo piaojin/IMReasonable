@@ -136,7 +136,7 @@
         self.emailImage=emailImage;
         self.emailImage.layer.masksToBounds = YES;
         self.emailImage.layer.cornerRadius = 25;
-        [self.emailImage setImage:[UIImage imageNamed:@"spread_email"]];
+        [self.emailImage setImage:[UIImage imageNamed:@"email_100px"]];
     }
     return self;
 }
