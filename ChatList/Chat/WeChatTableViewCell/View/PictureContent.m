@@ -13,6 +13,7 @@
 #import "UUImageAvatarBrowser.h"
 #import "UIImageView+WebCache.h"
 
+#define CUT @"cut"
 
 @implementation PictureContent
 {
@@ -70,24 +71,34 @@
     self.backgroundImage.frame=rect;
     if (messagemode.isFromMe) {
         
-        //要显示的图片
-        UIImage * tempimg=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:messagemode.content]];
-        _imageview.image=[self cutImage:tempimg];
-        
-        //聊天背景图片(气泡)
-        UIImage *bubble =[UIImage imageNamed:@"BubbleOutgoing"] ;
-        CGFloat top =10; // 顶端盖高度
-        CGFloat left = bubble.size.width/2 ; // 底端盖高度
-        CGFloat bottom = bubble.size.height - top + 1; // 左端盖宽度
-        CGFloat right = bubble.size.width - left - 1; // 右端盖宽度
-        UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
-        self.backgroundImage.image=[bubble resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
-        
-        _imageview.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
-        _stateview.frame=CGRectMake(_imageview.frame.size.width-45, _imageview.frame.size.height-10, 45, 10);
-        
-        
-        
+        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+            //聊天背景图片(气泡)
+            UIImage *bubble =[UIImage imageNamed:@"BubbleOutgoing"] ;
+            CGFloat top =10; // 顶端盖高度
+            CGFloat left = bubble.size.width/2 ; // 底端盖高度
+            CGFloat bottom = bubble.size.height - top + 1; // 左端盖宽度
+            CGFloat right = bubble.size.width - left - 1; // 右端盖宽度
+            UIEdgeInsets insets = UIEdgeInsetsMake(top, left, bottom, right);
+            /**
+             *  自己发送的图片在聊天列表显示的不是原图，而是裁剪后的图片，裁剪后的图片会保存到本地，没有裁剪则去裁剪并保存，裁剪后的图片名称为原图的名称前面加"cut_"
+             */
+            //要显示的图片
+            UIImage * tempimg=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:[NSString stringWithFormat:@"%@_%@",CUT,messagemode.content]]];
+            if(!tempimg){
+                
+                tempimg=[UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:messagemode.content]];
+                tempimg=[self cutImage:tempimg];
+                [Tool saveImageToDoc:[NSString stringWithFormat:@"%@_%@",CUT,messagemode.content] image:tempimg];
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _imageview.image=tempimg;
+                
+                self.backgroundImage.image=[bubble resizableImageWithCapInsets:insets resizingMode:UIImageResizingModeStretch];
+                
+                _imageview.frame=CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+                _stateview.frame=CGRectMake(_imageview.frame.size.width-45, _imageview.frame.size.height-10, 45, 10);
+            });
+        });
     }else{
         
         //设置背景气泡
@@ -108,7 +119,6 @@
             offset=2;
             
         }
-        
         //设置聊天的内容
         _imageview.frame=CGRectMake(0, OFFSET, self.frame.size.width, self.frame.size.height);
         _username.frame=CGRectMake(MARGEN, 0, self.frame.size.width-MARGEN, offset); //设置显示用户的名字
@@ -138,7 +148,6 @@
         x=0;
         y=(heigth-width)/2;
         c=width;
-        
     }
     return [self getImageFromImage:image subImageSize:CGSizeMake(c, c) subImageRect:CGRectMake(x, y, c, c)];
 }
@@ -159,6 +168,6 @@
 
 - (void)fangda:(id)sender{
     [self.delegate touchPictureContent:_imageview MessageModle:_messagemode];
-
 }
+
 @end

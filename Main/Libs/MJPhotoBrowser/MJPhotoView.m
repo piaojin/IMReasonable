@@ -183,7 +183,6 @@
         
     }else{
         
-//       imageFrame = CGRectMake(0, 0, imageSize.width*minScale, imageSize.height*minScale);
        imageFrame = CGRectMake(0, 0, boundsWidth, imageHeight * boundsWidth / imageWidth);
     }
     // 内容尺寸
@@ -218,11 +217,6 @@
     }
     
     if(currentOrientation==UIDeviceOrientationLandscapeRight||currentOrientation==UIDeviceOrientationLandscapeLeft){
-        
-        [self updatePhotoFrame];
-    }
-    //飘金添加横屏缩放时图片还是比屏幕大的情况
-    if((currentOrientation==UIDeviceOrientationFaceUp||currentOrientation==UIDeviceOrientationFaceDown)&&(imageFrame.size.width>=boundsWidth||imageFrame.size.height>=boundsHeight)){
         
         [self updatePhotoFrame];
     }

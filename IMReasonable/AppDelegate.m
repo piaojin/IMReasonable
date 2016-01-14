@@ -25,7 +25,6 @@
 
     NSLog(@"%@", launchOptions);
     
-    self.allowRotation=true;
     UIApplication* app = [UIApplication sharedApplication];
     NSString* docpath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
     [[NSFileManager defaultManager] createDirectoryAtPath:[NSString stringWithFormat:@"%@/%@", docpath, @"voice"] withIntermediateDirectories:YES attributes:nil error:nil];
@@ -36,7 +35,7 @@
                                                                                                 | UIRemoteNotificationTypeAlert)
                                                                                  categories:nil];
         [app registerUserNotificationSettings:settings];
-        //[app registerForRemoteNotifications];
+//        [app registerForRemoteNotifications];
     }
     else { //ios7
         [app registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge
@@ -65,6 +64,12 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    /**
+     *  setting可以在此处加载
+     */
+    BOOL allowLandscape=[defaults boolForKey:ALLOW_LANDSCAPE];
+    self.allowRotation=allowLandscape;
+    self.openAnimation=[defaults boolForKey:OPEN_ANIMATION];
     bool isFirst = [defaults boolForKey:@"FIRSTLOGIN"];
     NSString* myJID = [defaults stringForKey:XMPPREASONABLEJID];
     NSString* myPassword = [defaults stringForKey:XMPPREASONABLEPWD];
@@ -160,7 +165,6 @@
     // [self connect];
     //  [self goOnline];
 }
-
 - (void)applicationWillTerminate:(UIApplication*)application
 {
     // DDLogVerbose(@"%@: %@", THIS_FILE, THIS_METHOD);
@@ -168,7 +172,7 @@
     // [self goOffline];
     // [self teardownStream];
 }
-
+//禁止横竖屏
 -(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
     if(self.allowRotation){
         

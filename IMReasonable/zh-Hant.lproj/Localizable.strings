@@ -6,6 +6,13 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"OPEN_ANIMATION"="開啟動畫";
+"COUNTING"="計算中...";
+"VOICE_HAS_DELETED"="語音已被刪除";
+"ALLOW_LANDSCAPE"="允許橫屏";
+"SETTING"="設置";
+"ORIGINAL"="原圖";
+"SEND"="發送";
 "DELETE"="刪除";
 "DELETE_THIS_PHOTO"="要刪除這張照片嗎?";
 "SAVE_FAILED"="保存失敗";
@@ -31,7 +38,7 @@
 "GO_AND_INVITE_FRIENDS"="快去邀請好友吧!";
 "BACK_CHATLIST"="返回齊聊";
 "SAVE_TO_ALBUM"="成功保存到相冊!";
-"CLEAR_PROMPT"="聊天記錄將會被刪除";
+"CLEAR_PROMPT"="語音聊天記錄將會被刪除";
 "CLEAR_DATA"="清除數據";
 "SEND_SMS_FAILD"="短信驗證超過30分鐘或登錄次數大於3";
 "SIGN_OUT"="退出";

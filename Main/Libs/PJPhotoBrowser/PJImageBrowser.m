@@ -72,7 +72,7 @@
 }
 
 -(void)updateTitle{
-    self.indexStr=[NSString stringWithFormat:@"%d/%lu",self.currentIndex+1,(unsigned long)self.pjimageViewArray.count];
+    self.indexStr=[NSString stringWithFormat:@"%ld/%lu",self.currentIndex+1,(unsigned long)self.pjimageViewArray.count];
     self.navigationItem.title=self.indexStr;
 }
 

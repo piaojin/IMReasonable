@@ -13,16 +13,40 @@
 #import "IMMessage.h"
 #import "ASIFormDataRequest.h"
 
+@interface XMPPDao()
+
+//没有网络时用于定时重连的定时器
+@property(nonatomic,strong)NSTimer *timer;
+//重连定时器是否开启了
+@property(nonatomic,assign)BOOL hasStartTimer;
+
+@end
+
 @implementation XMPPDao {
 
     NSString* deleteUser;
 }
+
 static NSMutableArray* allRoom;
 
 @synthesize xmppStream;
 @synthesize xmppReconnect;
 @synthesize isConnectInternet;
 @synthesize isReg;
+
+-(NSTimer *)timer{
+    if(!_timer){
+        
+        _timer=[NSTimer  timerWithTimeInterval:6.0 target:self selector:@selector(repeatConnect:)userInfo:nil repeats:YES];
+        [[NSRunLoop  currentRunLoop] addTimer:_timer forMode:NSDefaultRunLoopMode];
+    }
+    return _timer;
+}
+
+-(void)repeatConnect:(NSTimer *)timer{
+    [self connect];
+    NSLog(@"repeatConnect");
+}
 
 + (XMPPDao*)sharedXMPPManager
 {
@@ -142,6 +166,13 @@ static NSMutableArray* allRoom;
 
     if (![xmppStream isDisconnected]) { //如果连接上就返回
         NSLog(@"已连接请直接上线");
+        if(_timer){
+            
+            [_timer invalidate];
+            _timer=nil;
+            self.hasStartTimer=false;
+            NSLog(@"重新连上，定时器关闭");
+        }
         [self goOnline];
         return YES;
     }
@@ -214,7 +245,13 @@ static NSMutableArray* allRoom;
 
     if (!isXmppConnected) {
         NSLog(@"连接出错");
-        [self connect];
+
+        if(!self.hasStartTimer){
+            
+            [self.timer fire];
+            self.hasStartTimer=true;
+        }
+//        [self connect];
     }
 }
 

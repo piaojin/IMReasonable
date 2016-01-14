@@ -6,6 +6,13 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"OPEN_ANIMATION"="Open animation";
+"COUNTING"="Counting...";
+"VOICE_HAS_DELETED"="Voice has deleted";
+"ALLOW_LANDSCAPE"="Allow landscape";
+"SETTING"="Setting";
+"ORIGINAL"="Original";
+"SEND"="Send";
 "DELETE"="delete";
 "DELETE_THIS_PHOTO"="Delete this picture?";
 "SAVE_FAILED"="Save failed";
@@ -31,7 +38,7 @@
 "GO_AND_INVITE_FRIENDS"="invite your friends!";
 "BACK_CHATLIST"="back chatlist";
 "SAVE_TO_ALBUM" = "successfully saved to the album!";
-"CLEAR_PROMPT"="Chat records will be deleted";
+"CLEAR_PROMPT"="Voice chat records will be deleted";
 "CLEAR_DATA"="clear data";
 "SEND_SMS_FAILD"="SMS verification for more than 30 minutes or more than 3 times the number of log";
 "SIGN_OUT"="Sign out";

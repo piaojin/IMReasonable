@@ -73,7 +73,7 @@
     int sendImage_w=36;
     int sendImage_h=4*footer_h/5;
     sendImage.frame=CGRectMake(SCREENWIDTH-sendImage_w-MARGEN,(footer.frame.size.height-sendImage_h)/2 ,sendImage_w ,sendImage_h );
-    [sendImage setTitle:@"发送" forState:UIControlStateNormal];
+    [sendImage setTitle:NSLocalizedString(@"SEND", nil) forState:UIControlStateNormal];
     [sendImage setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
     [sendImage setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
     [self.original addTarget:self action:@selector(OriginalImage:) forControlEvents:UIControlEventValueChanged];
@@ -137,10 +137,10 @@
     NSString *str;
     if(imageSize>=1024){
         
-        str=[NSString stringWithFormat:@"原图(%0.2fMB)",imageSize/1024];
+        str=[NSString stringWithFormat:@"%@(%0.2fMB)",NSLocalizedString(@"ORIGINAL", nil),imageSize/1024];
     }else{
         
-        str=[NSString stringWithFormat:@"原图(%0.1fK)",imageSize];
+        str=[NSString stringWithFormat:@"%@(%0.1fK)",NSLocalizedString(@"ORIGINAL", nil),imageSize];
     }
     self.imageSizeLabel.text=str;
 }

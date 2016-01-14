@@ -30,8 +30,6 @@
     static dispatch_once_t once;
     static UUProgressHUD *sharedView;
     dispatch_once(&once, ^ {
-//        AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//        appDelegate.allowRotation = NO;
         sharedView = [[UUProgressHUD alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENWIHEIGHT)];
         sharedView.backgroundColor = [[UIColor blackColor]colorWithAlphaComponent:0.5];
     });
@@ -117,9 +115,10 @@
                          }
                          completion:^(BOOL finished){
                          }];
-        [self setNeedsDisplay];
+//        [self setNeedsDisplay];
     });
 }
+
 -(void) startAnimation
 {
     angle -= 3;
@@ -182,7 +181,6 @@
                          }
                          completion:^(BOOL finished){
                              if(self.alpha == 0) {
-                                 NSLog(@"%f,%f",centerLabel.frame.origin.x,centerLabel.frame.origin.y);
                                  [centerLabel removeFromSuperview];
                                  centerLabel = nil;
                                  [edgeImageView removeFromSuperview];
@@ -213,11 +211,6 @@
     overlayWindow.userInteractionEnabled = NO;
     [overlayWindow makeKeyAndVisible];
     return overlayWindow;
-}
-
--(void)dealloc{
-//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//    appDelegate.allowRotation = YES;
 }
 
 @end

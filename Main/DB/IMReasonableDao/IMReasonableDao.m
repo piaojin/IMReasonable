@@ -27,7 +27,7 @@
     }
 }
 
-
+//删除所有的聊天记录
 +(BOOL)clearAllChatMessage:(NSString *)myjidstr{
     NSString *sql=[NSString stringWithFormat:@"delete from Message where ([from]=\"%@\" or [to]=\"%@\")",myjidstr,myjidstr];
     NSLog(@"%@",sql);
@@ -88,6 +88,7 @@
 {
      [FMDBDao executeUpdate:@"update [User] set [device]=\"\",[state]=\"unavailable\""];
 }
+
 +(NSString *)GetUserLocalNameByjidstr:(NSString *)jidstr
 {
  
@@ -99,6 +100,7 @@
        
         }
     [rs close];
+    rs=nil;
     return localname;
 }
 
@@ -169,6 +171,7 @@
             }
         }
         [rs close];
+        rs=nil;
     
         NSString * messageID=[IMReasonableDao getUserLastMessageId:jibstr withTojidstr:tojidstr];
     
@@ -409,8 +412,8 @@
       
         [tempuser autorelease];
     }
-    rs=nil;
     [rs close];
+    rs=nil;
     [chatuserlist autorelease];
     return chatuserlist;
 }
@@ -981,6 +984,8 @@
         [dict autorelease];
         
     }
+    [rs close];
+    rs=nil;
     [messagelist autorelease];
     return messagelist;
 }
@@ -1047,8 +1052,9 @@
         [temp autorelease];
         
     }
+    [rs close];
+    rs=nil;
     [oneRoomUserlist autorelease];
-    
     return oneRoomUserlist;
 }
 
@@ -1124,6 +1130,8 @@
     while ([rs next]){
       count=[rs intForColumn:@"usercount"];
     }
+    [rs close];
+    rs=nil;
     return count;
 }
 
@@ -1142,4 +1150,5 @@
     flag=[FMDBDao executeUpdate:sql];
     return flag;
 }
+
 @end

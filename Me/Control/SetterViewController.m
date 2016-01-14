@@ -6,6 +6,9 @@
 //  Copyright (c) 2015年 Reasonable. All rights reserved.
 //
 
+
+#import "SettingViewController.h"
+
 #import "IMReasonableDao.h"
 #import "SetterViewController.h"
 #import "XMPPDao.h"
@@ -13,6 +16,7 @@
 #import "WallPaperViewController.h"
 #import "UIColor+Hex.h"
 #import "FirstViewController.h"
+#import "AppDelegate.H"
 
 #define CLEAR 0//确定清除数据
 
@@ -24,34 +28,32 @@
     UITableView * _tableview;
     
     NSMutableArray *_datalist;
-    NSString * _docSize;
 
 }
+
+@property(nonatomic,copy)NSString *docSize;
 
 @end
 
 @implementation SetterViewController
 
--(void)reloadCache:(NSNotification *)notification{
-    _docSize =[Tool getDocSize];
-    [_tableview reloadData];
-    NSLog(@"reloadCache");
+-(NSString *)docSize{
+    if(!_docSize){
+        
+        [self updateCache];
+    }
+    return _docSize;
 }
 
 - (void)viewDidLoad {
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadCache:)
-                                                 name:RELOAD_CACHE
-                                               object:nil];
+
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadtableview)
                                                  name:@"NETCHANGE"
                                                object:nil];
     
 
-    _docSize =[Tool getDocSize];
-   
     [super viewDidLoad];
     [self initViewControl];
     [self initNav];
@@ -66,7 +68,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [_tableview reloadData];
-    // [XMPPDao sharedXMPPManager].internetConnectDelegate=self;
 }
 
 - (void)initNav{
@@ -76,12 +77,13 @@
 
 - (void)initData{
  
+    NSArray * section5=[[NSArray alloc] initWithObjects:@"SETTING", nil];
     NSArray * section0=[[NSArray alloc] initWithObjects:@"CLEAR_DATA", nil];
     NSArray * section1=[[NSArray alloc] initWithObjects:@"lbsabout", nil];
     NSArray * section2=[[NSArray alloc] initWithObjects:@"lbsprofile", @"lbwallpaper",nil];
     NSArray * section3=[[NSArray alloc] initWithObjects:@"lbsnetstate", nil];
     NSArray * section4=[[NSArray alloc] initWithObjects:@"lbsusage", nil];
-    _datalist=[[NSMutableArray alloc] initWithObjects:section1,section2,section3,section4, section0,nil];
+    _datalist=[[NSMutableArray alloc] initWithObjects:section1,section2,section3,section4, section0,section5,nil];
 
 }
 
@@ -100,8 +102,7 @@
     [footerButton setBackgroundImage:[UIImage imageNamed:@"red_1"] forState:UIControlStateNormal];
     [footerButton setBackgroundImage:[UIImage imageNamed:@"red_2"] forState:UIControlStateHighlighted];
     _tableview.tableFooterView = footerButton;
-//    _tableview.tableFooterView = [[UIView alloc]init];//设置不要显示多余的行;
-    
+
     _tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_tableview];
 }
@@ -152,7 +153,6 @@
         cell= [tableView dequeueReusableCellWithIdentifier:@"NETWORK"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"NETWORK"];
-           // cell.selectionStyle=UITableViewCellAccessoryNone;
         }
         if ([XMPPDao sharedXMPPManager].isConnectInternet) {
             cell.detailTextLabel.text=NSLocalizedString(@"lbsnetstateconnect",nil);
@@ -171,7 +171,7 @@
         
         if(indexPath.section==3){
             
-            cell.detailTextLabel.text=_docSize;
+            cell.detailTextLabel.text=self.docSize<=0?NSLocalizedString(@"COUNTING", nil):self.docSize;
         }else{
             
             cell.accessoryType=UITableViewCellAccessoryDisclosureIndicator;
@@ -195,15 +195,14 @@
     
 }
 
-//发出清除数据通知更新聊天列表
--(void)PostReLoadChatListNotification{
-    NSUserDefaults* defaults=[NSUserDefaults standardUserDefaults];
-    NSString* myJID = [defaults stringForKey:XMPPREASONABLEJID];
-    dispatch_sync(dispatch_get_global_queue(0, 0), ^{
-        if([IMReasonableDao clearAllChatMessage:myJID]){
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:RELOAD_CHETLIST object:nil];
-        }
+//删除缓存
+-(void)deleteCache{
+    __block __weak typeof(self) piaojin = self;
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+       [Tool removeVoiceAndImg];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [piaojin updateCache];
+        });
     });
 }
 
@@ -214,7 +213,7 @@
                                                                                  message:NSLocalizedString(@"CLEAR_PROMPT",nil) preferredStyle:UIAlertControllerStyleAlert];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"btnDone",nil) style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             
-                [self PostReLoadChatListNotification];
+                [self deleteCache];
         }]];
         [alertController addAction:[UIAlertAction actionWithTitle:NSLocalizedString(@"lbTCancle",nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
             
@@ -231,7 +230,7 @@
 -(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex{
     if(buttonIndex==CLEAR){
         
-        [self PostReLoadChatListNotification];
+        [self deleteCache];
     }
 }
 
@@ -263,25 +262,48 @@
         [self ClearAlert];
     }
     
+    //设置
+    else if(section==5){
+        
+        SettingViewController *setting=[[SettingViewController alloc] init];
+        setting.hidesBottomBarWhenPushed=YES;
+        [self.navigationController pushViewController:setting animated:YES];
+    }
+    
 }
-
-
-//#pragma mark-网络代理
-//
-////- (void)isConnectToInternet:(BOOL)isConnet{
-////    [_tableview reloadData];
-////}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-
+//获取缓存的大小
+-(void)updateCache{
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        _docSize =[Tool getDocSize];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSIndexPath *index=[NSIndexPath indexPathForRow:0 inSection:3];
+            ((UITableViewCell *)[_tableview cellForRowAtIndexPath:index]).detailTextLabel.text=_docSize;
+        });
+    });
+}
 
 -(void)dealloc{
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"NETCHANGE" object:nil];
 }
+
+//cell加载时的动画效果
+- (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.openAnimation) {
+
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+        [UIView animateWithDuration:0.5 animations:^{
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        }];
+    }
+}
+
 @end

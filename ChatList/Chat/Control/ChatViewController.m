@@ -27,7 +27,7 @@
 #import "UUImageAvatarBrowser.h"
 #import "SelectUserViewController.h"
 
-#import "ImgShowViewController.h"
+
 
 #import "MJPhotoBrowser.h"
 #import "MJPhoto.h"
@@ -228,7 +228,7 @@
     tableview.autoresizingMask=UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tableview];
 
-    //  [tableview addLegendHeaderWithRefreshingTarget:self refreshingAction:@selector(initData:)];
+    
     __block __weak typeof(self) tmpSelf = self;
     [tableview addLegendHeaderWithRefreshingBlock:^() {
         [tmpSelf initData:NO];
@@ -941,12 +941,6 @@
 
 - (void)WeChatKeyBoardY:(CGFloat)y
 {
-    //tableview.header.hidden=YES;
-    //    double offset=self.view.frame.size.height-(tableview.frame.origin.y+tableview.contentSize.height+(self.view.frame.size.height-key.frame.origin.y));
-    //    if (offset<0) {
-    //        tableview.contentOffset=CGPointMake(0, -offset);
-    //
-    //    }
     [self goLastMessage];
 }
 
@@ -964,10 +958,10 @@
         [IMReasonableDao setMessageRead:fromjidstr needactive:YES];
     }
 }
-//
+
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark -ChatHelegate代理实现
@@ -987,13 +981,10 @@
 }
 - (void)isSuccSendMessage:(IMMessage*)tempmeseage issuc:(BOOL)flag
 {
-    //if (!flag) {//成功后更新消息为发送出去的
-    //        [IMReasonableDao updatesendstate:tempmeseage.ID];
-    // [self initData:YES];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [self initData:YES];
     });
-    //  }
 }
 
 #pragma mark -AuthloginDelegate
@@ -1037,8 +1028,6 @@
     NSArray* arrayPre = [temp filteredArrayUsingPredicate:pre];
     //被点击的图片的位置
     NSInteger index = [arrayPre indexOfObject:modle];
-//        ImgShowViewController* imgShow = [[ImgShowViewController alloc] initWithSourceData:arrayPre withIndex:index];
-//        [self.navigationController pushViewController:imgShow animated:NO];
     [self ImageBrowser:arrayPre WithShowIndex:index ImageView:imageView];
 }
 
@@ -1170,7 +1159,6 @@
 - (void)acForwardMessage:(MessageModel*)message
 {
     NSLog(@"转发");
-    // SelectUserViewController * selectview=[[SelectUserViewController alloc] init];
     SelectUserViewController* selectview = [[SelectUserViewController alloc] initWithNibName:@"SelectUserViewController" bundle:nil];
     selectview.messageModel=message;
     selectview.flag = false;
@@ -1204,20 +1192,43 @@
 }
 
 -(void)doRotateAction:(NSNotification *)notification{
-    int orientation=[((UIDevice *)notification.object) orientation];
-    if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
-        ) {
-        self.currentOrientation=orientation;
-        [key hideKeyboard];
-        [tableview reloadData];
-        [key removeFromSuperview];
-        [self initKeyboard];
-        NSLog(@"x:%f,y:%f,w:%f,h:%f",key.frame.origin.x,key.frame.origin.y,key.frame.size.width,key.frame.size.height);
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.allowRotation){
+        
+        int orientation=[((UIDevice *)notification.object) orientation];
+        if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+            ) {
+            self.currentOrientation=orientation;
+            [key hideKeyboard];
+            [tableview reloadData];
+            [key removeFromSuperview];
+            [self initKeyboard];
+        }
     }
 }
 
 -(void)PJsendImage:(UIImage *)image AndIsOriginal:(BOOL)isOriginal{
     [self didSendImage:image AndIsOriginal:isOriginal];
+}
+
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.openAnimation) {
+        
+        // 从锚点位置出发，逆时针绕 Y 和 Z 坐标轴旋转90度
+        CATransform3D transform3D = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 1.0);
+        // 定义 cell 的初始状态
+        cell.alpha = 0.0;
+        cell.layer.transform = transform3D;
+        cell.layer.anchorPoint = CGPointMake(0.0, 0.5); // 设置锚点位置；默认为中心点(0.5, 0.5)
+        [UIView animateWithDuration:0.6 animations:^{
+            cell.alpha = 1.0;
+            cell.layer.transform = CATransform3DIdentity;
+            CGRect rect = cell.frame;
+            rect.origin.x = 0.0;
+            cell.frame = rect;
+        }];
+    }
 }
 
 @end

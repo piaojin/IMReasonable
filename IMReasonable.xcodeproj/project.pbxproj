@@ -32,6 +32,8 @@
 		18B908A61A81FFB000E6B02D /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B908A51A81FFAF00E6B02D /* MessageUI.framework */; };
 		18CE61C31A677B1900E45D36 /* CountryList.plist in Resources */ = {isa = PBXBuildFile; fileRef = 18CE61C21A677B1900E45D36 /* CountryList.plist */; };
 		CA10F0401C19599800D65086 /* PJButton.m in Sources */ = {isa = PBXBuildFile; fileRef = CA10F03F1C19599800D65086 /* PJButton.m */; };
+		CA11E91E1C43B78800937095 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA11E91D1C43B78800937095 /* SettingViewController.m */; };
+		CA11E9211C44A01000937095 /* SettingWithSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA11E9201C44A01000937095 /* SettingWithSwitchCell.m */; };
 		CA4BA5141C3D2D5700862E64 /* PJImageBrowser.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4BA50F1C3D2D5600862E64 /* PJImageBrowser.m */; };
 		CA4BA5151C3D2D5700862E64 /* PJImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4BA5111C3D2D5700862E64 /* PJImageView.m */; };
 		CA4BA5161C3D2D5700862E64 /* PJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = CA4BA5131C3D2D5700862E64 /* PJPhoto.m */; };
@@ -419,8 +421,6 @@
 		CAB995EF1BB3A1B500661AB7 /* XMPPMessage+XEP_0308.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB995EE1BB3A1B500661AB7 /* XMPPMessage+XEP_0308.m */; };
 		CAB995F21BB3A1BD00661AB7 /* XMPPMessage+XEP_0333.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB995F11BB3A1BD00661AB7 /* XMPPMessage+XEP_0333.m */; };
 		CAB995F51BB3A1C700661AB7 /* NSXMLElement+XEP_0335.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB995F41BB3A1C700661AB7 /* NSXMLElement+XEP_0335.m */; };
-		CAB995FA1BB3A1F600661AB7 /* ImgShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB995F71BB3A1F600661AB7 /* ImgShowViewController.m */; };
-		CAB995FB1BB3A1F600661AB7 /* MRImgShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB995F91BB3A1F600661AB7 /* MRImgShowView.m */; };
 		CAB996141BB3A21100661AB7 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = CAB995FC1BB3A21000661AB7 /* MJRefresh.bundle */; };
 		CAB996151BB3A21100661AB7 /* MJRefreshComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB995FF1BB3A21000661AB7 /* MJRefreshComponent.m */; };
 		CAB996161BB3A21100661AB7 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB996011BB3A21000661AB7 /* MJRefreshConst.m */; };
@@ -587,6 +587,7 @@
 		CAB997B61BB3A8B900661AB7 /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B11BB3A8B900661AB7 /* Message.m */; };
 		CAB997BA1BB3A8D000661AB7 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAB997B91BB3A8D000661AB7 /* MainViewController.m */; };
 		CAE272891BCF516800D619D8 /* SendEmailInvitationEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */; };
+		CAEF9CB61C44F584009E980C /* no_voice.png in Resources */ = {isa = PBXBuildFile; fileRef = CAEF9CB51C44F584009E980C /* no_voice.png */; };
 		CAF687CC1BF34E25000128F7 /* ChineseString.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF687C91BF34E25000128F7 /* ChineseString.m */; };
 		CAF687CD1BF34E25000128F7 /* pinyin.m in Sources */ = {isa = PBXBuildFile; fileRef = CAF687CA1BF34E25000128F7 /* pinyin.m */; };
 /* End PBXBuildFile section */
@@ -642,6 +643,10 @@
 		18CE61C21A677B1900E45D36 /* CountryList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CountryList.plist; sourceTree = "<group>"; };
 		CA10F03E1C19599800D65086 /* PJButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJButton.h; path = FriendsCircle/View/PJButton.h; sourceTree = SOURCE_ROOT; };
 		CA10F03F1C19599800D65086 /* PJButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJButton.m; path = FriendsCircle/View/PJButton.m; sourceTree = SOURCE_ROOT; };
+		CA11E91C1C43B78800937095 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = Me/Control/SettingViewController.h; sourceTree = "<group>"; };
+		CA11E91D1C43B78800937095 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewController.m; path = Me/Control/SettingViewController.m; sourceTree = "<group>"; };
+		CA11E91F1C44A01000937095 /* SettingWithSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingWithSwitchCell.h; path = Me/View/SettingWithSwitchCell.h; sourceTree = "<group>"; };
+		CA11E9201C44A01000937095 /* SettingWithSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingWithSwitchCell.m; path = Me/View/SettingWithSwitchCell.m; sourceTree = "<group>"; };
 		CA4BA50E1C3D2D5600862E64 /* PJImageBrowser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJImageBrowser.h; path = Main/Libs/PJPhotoBrowser/PJImageBrowser.h; sourceTree = "<group>"; };
 		CA4BA50F1C3D2D5600862E64 /* PJImageBrowser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PJImageBrowser.m; path = Main/Libs/PJPhotoBrowser/PJImageBrowser.m; sourceTree = "<group>"; };
 		CA4BA5101C3D2D5700862E64 /* PJImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PJImageView.h; path = Main/Libs/PJPhotoBrowser/PJImageView.h; sourceTree = "<group>"; };
@@ -1310,10 +1315,6 @@
 		CAB995F11BB3A1BD00661AB7 /* XMPPMessage+XEP_0333.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "XMPPMessage+XEP_0333.m"; path = "Main/Libs/XMPP/Extensions/XEP-0333/XMPPMessage+XEP_0333.m"; sourceTree = SOURCE_ROOT; };
 		CAB995F31BB3A1C700661AB7 /* NSXMLElement+XEP_0335.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSXMLElement+XEP_0335.h"; path = "Main/Libs/XMPP/Extensions/XEP-0335/NSXMLElement+XEP_0335.h"; sourceTree = SOURCE_ROOT; };
 		CAB995F41BB3A1C700661AB7 /* NSXMLElement+XEP_0335.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSXMLElement+XEP_0335.m"; path = "Main/Libs/XMPP/Extensions/XEP-0335/NSXMLElement+XEP_0335.m"; sourceTree = SOURCE_ROOT; };
-		CAB995F61BB3A1F600661AB7 /* ImgShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImgShowViewController.h; path = Main/Libs/MRImgShowView/ImgShowViewController.h; sourceTree = SOURCE_ROOT; };
-		CAB995F71BB3A1F600661AB7 /* ImgShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImgShowViewController.m; path = Main/Libs/MRImgShowView/ImgShowViewController.m; sourceTree = SOURCE_ROOT; };
-		CAB995F81BB3A1F600661AB7 /* MRImgShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MRImgShowView.h; path = Main/Libs/MRImgShowView/MRImgShowView.h; sourceTree = SOURCE_ROOT; };
-		CAB995F91BB3A1F600661AB7 /* MRImgShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MRImgShowView.m; path = Main/Libs/MRImgShowView/MRImgShowView.m; sourceTree = SOURCE_ROOT; };
 		CAB995FC1BB3A21000661AB7 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = MJRefresh.bundle; path = Main/Libs/MJRefresh/MJRefresh.bundle; sourceTree = SOURCE_ROOT; };
 		CAB995FD1BB3A21000661AB7 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJRefresh.h; path = Main/Libs/MJRefresh/MJRefresh.h; sourceTree = SOURCE_ROOT; };
 		CAB995FE1BB3A21000661AB7 /* MJRefreshComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MJRefreshComponent.h; path = Main/Libs/MJRefresh/MJRefreshComponent.h; sourceTree = SOURCE_ROOT; };
@@ -1545,6 +1546,7 @@
 		CAB997B91BB3A8D000661AB7 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Main/Control/MainViewController.m; sourceTree = "<group>"; };
 		CAE272871BCF516800D619D8 /* SendEmailInvitationEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendEmailInvitationEntity.h; path = Main/Model/SendEmailInvitationEntity.h; sourceTree = "<group>"; };
 		CAE272881BCF516800D619D8 /* SendEmailInvitationEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendEmailInvitationEntity.m; path = Main/Model/SendEmailInvitationEntity.m; sourceTree = "<group>"; };
+		CAEF9CB51C44F584009E980C /* no_voice.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = no_voice.png; path = Main/Resources/Image/no_voice.png; sourceTree = SOURCE_ROOT; };
 		CAF687C81BF34E25000128F7 /* ChineseString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChineseString.h; path = Main/Tools/ChineseString.h; sourceTree = "<group>"; };
 		CAF687C91BF34E25000128F7 /* ChineseString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ChineseString.m; path = Main/Tools/ChineseString.m; sourceTree = "<group>"; };
 		CAF687CA1BF34E25000128F7 /* pinyin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = pinyin.m; path = Main/Tools/pinyin.m; sourceTree = "<group>"; };
@@ -2686,6 +2688,7 @@
 		181120BB1A1EDE1B00762075 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				CAEF9CB51C44F584009E980C /* no_voice.png */,
 				CA9A1CEE1C3BD646008B725D /* email_100px.png */,
 				CAAA3FE11C0EA8B2003D4A12 /* addpic_focused.png */,
 				CAAA3FE21C0EA8B2003D4A12 /* addpic_unfocused.png */,
@@ -3176,18 +3179,6 @@
 			path = Class/MJRefresh;
 			sourceTree = "<group>";
 		};
-		18EBAC521B841FF2002FF1DE /* MRImgShowView */ = {
-			isa = PBXGroup;
-			children = (
-				CAB995F61BB3A1F600661AB7 /* ImgShowViewController.h */,
-				CAB995F71BB3A1F600661AB7 /* ImgShowViewController.m */,
-				CAB995F81BB3A1F600661AB7 /* MRImgShowView.h */,
-				CAB995F91BB3A1F600661AB7 /* MRImgShowView.m */,
-			);
-			name = MRImgShowView;
-			path = Class/MRImgShowView;
-			sourceTree = "<group>";
-		};
 		18EBAC5D1B846810002FF1DE /* FriendsCircle */ = {
 			isa = PBXGroup;
 			children = (
@@ -3431,7 +3422,6 @@
 				CAE0109C1BD10AF0000470B3 /* MJPhotoBrowser */,
 				CA64A5B41BCD18C500DA4ED7 /* AFNetworking */,
 				18111F521A1EDE1B00762075 /* XMPP */,
-				18EBAC521B841FF2002FF1DE /* MRImgShowView */,
 				18E1DA251B2AEF52008FF12C /* MJRefresh */,
 				18CB2EE11A2EB9380005316F /* SDWebImage */,
 				18414ED21A248A4900994AEA /* fmdb */,
@@ -3497,6 +3487,8 @@
 		CAB0DA5B1BB2829B00518F0F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				CA11E91F1C44A01000937095 /* SettingWithSwitchCell.h */,
+				CA11E9201C44A01000937095 /* SettingWithSwitchCell.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -3506,6 +3498,8 @@
 			children = (
 				CAB992D61BB392CE00661AB7 /* SetterViewController.h */,
 				CAB992D71BB392CE00661AB7 /* SetterViewController.m */,
+				CA11E91C1C43B78800937095 /* SettingViewController.h */,
+				CA11E91D1C43B78800937095 /* SettingViewController.m */,
 			);
 			name = Control;
 			sourceTree = "<group>";
@@ -4316,6 +4310,7 @@
 				CAB997361BB3A35500661AB7 /* Expression_8@2x.png in Resources */,
 				CAB9977E1BB3A35500661AB7 /* Expression_80@2x.png in Resources */,
 				CAB9940C1BB3988900661AB7 /* wp_17.jpg in Resources */,
+				CAEF9CB61C44F584009E980C /* no_voice.png in Resources */,
 				CAB993431BB3956F00661AB7 /* chat_animation2.png in Resources */,
 				CAB997471BB3A35500661AB7 /* Expression_25@2x.png in Resources */,
 				CAB997961BB3A35500661AB7 /* Expression_104@2x.png in Resources */,
@@ -4594,6 +4589,7 @@
 				CAB996191BB3A21100661AB7 /* MJRefreshGifHeader.m in Sources */,
 				CAB996971BB3A2B600661AB7 /* ASICloudFilesRequest.m in Sources */,
 				CA82203A1BDA15970072F7DA /* MJPhotoBrowser.m in Sources */,
+				CA11E9211C44A01000937095 /* SettingWithSwitchCell.m in Sources */,
 				CAB9948C1BB39BDB00661AB7 /* XMPPPresence.m in Sources */,
 				CAB0DACB1BB2B68A00518F0F /* OneRoomUser.m in Sources */,
 				CAB996601BB3A25900661AB7 /* FMDatabaseAdditions.m in Sources */,
@@ -4603,7 +4599,6 @@
 				CAB994521BB39B2100661AB7 /* XMPPAnonymousAuthentication.m in Sources */,
 				CAB995751BB39F5400661AB7 /* XMPPIQ+XEP_0060.m in Sources */,
 				CAB9952E1BB39E8E00661AB7 /* XMPPRoomMessageCoreDataStorageObject.m in Sources */,
-				CAB995FB1BB3A1F600661AB7 /* MRImgShowView.m in Sources */,
 				CAB995061BB39E1100661AB7 /* XMPPSystemInputActivityMonitor.m in Sources */,
 				CA64A5CD1BCD190000DA4ED7 /* AFURLConnectionOperation.m in Sources */,
 				CAB9948A1BB39BDB00661AB7 /* XMPPModule.m in Sources */,
@@ -4766,6 +4761,7 @@
 				CA64A5B31BCD126200DA4ED7 /* PJSendInviteHttpTool.m in Sources */,
 				CAB995221BB39E7400661AB7 /* XMPPMessage+XEP0045.m in Sources */,
 				CAB995641BB39F0900661AB7 /* XMPPvCardTempAdr.m in Sources */,
+				CA11E91E1C43B78800937095 /* SettingViewController.m in Sources */,
 				CAB994C31BB39C7600661AB7 /* NSString+DDXML.m in Sources */,
 				CAB9967F1BB3A28400661AB7 /* ASINetworkQueue.m in Sources */,
 				CAB993591BB3958E00661AB7 /* NSDate+Utils.m in Sources */,
@@ -4784,7 +4780,6 @@
 				CA9A089D1C05A84D007EB565 /* RespreadSoapTool.m in Sources */,
 				CAB996C31BB3A33F00661AB7 /* TQRichTextRunEmoji.m in Sources */,
 				CAB995EC1BB3A1AC00661AB7 /* NSXMLElement+XEP_0297.m in Sources */,
-				CAB995FA1BB3A1F600661AB7 /* ImgShowViewController.m in Sources */,
 				CAB9949C1BB39BFC00661AB7 /* DDList.m in Sources */,
 				CAB996821BB3A2AA00661AB7 /* ASIWebPageRequest.m in Sources */,
 				CAF687CC1BF34E25000128F7 /* ChineseString.m in Sources */,
@@ -5003,8 +4998,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /usr/lib/libxml2.dylib;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /usr/lib/libxml2.dylib;
@@ -5030,7 +5025,7 @@
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1d56311-dc78-419c-91db-d683545a2bd4";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Debug;
@@ -5041,8 +5036,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = /usr/lib/libxml2.dylib;
 				"FRAMEWORK_SEARCH_PATHS[arch=*]" = /usr/lib/libxml2.dylib;
@@ -5069,7 +5064,7 @@
 				"OTHER_LDFLAGS[arch=*]" = "-lxml2";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.rspread.IMReasonable;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "d1d56311-dc78-419c-91db-d683545a2bd4";
 				"USER_HEADER_SEARCH_PATHS[arch=*]" = "$(SDKROOT)/usr/include/libxml2";
 			};
 			name = Release;

@@ -25,6 +25,8 @@
 - (id)init:(UIViewController *) viewcontrol;
 -(void)setText:(NSString *)txt;
 -(NSString *)getText;
+- (void)cancelRecordVoice:(UIButton *)button;
+
 @end
 
 //键盘协议

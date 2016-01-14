@@ -6,6 +6,13 @@
   Copyright (c) 2014年 Reasonable. All rights reserved.
 */
 
+"OPEN_ANIMATION"="开启动画";
+"COUNTING"="计算中...";
+"VOICE_HAS_DELETED"="语音已被删除";
+"ALLOW_LANDSCAPE"="允许横屏";
+"SETTING"="设置";
+"ORIGINAL"="原图";
+"SEND"="发送";
 "DELETE"="删除";
 "DELETE_THIS_PHOTO"="要删除这张照片吗?";
 "SAVE_FAILED"="保存失败";
@@ -31,7 +38,7 @@
 "GO_AND_INVITE_FRIENDS"="快去邀请好友吧!";
 "BACK_CHATLIST"="返回齐聊";
 "SAVE_TO_ALBUM"="成功保存到相册!";
-"CLEAR_PROMPT"="聊天记录将会被删除";
+"CLEAR_PROMPT"="语音聊天记录将会被删除";
 "CLEAR_DATA"="清除数据";
 "SEND_SMS_FAILD"="短信验证超过30分钟或登录次数大于3";
 "SIGN_OUT"="退出";

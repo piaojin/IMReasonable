@@ -42,6 +42,11 @@
 #define PJLog(...)
 #endif
 
+//是否允许横屏
+#define ALLOW_LANDSCAPE @"ALLOW_LANDSCAPE"
+//是否开启动画
+#define OPEN_ANIMATION @"OPEN_ANIMATION"
+
 //重新加载缓存
 #define RELOAD_CACHE @"RELOAD_CACHE"
 //重新加载聊天列表数据

@@ -11,6 +11,7 @@
 #import "InviteAllFriendsController.h"
 #import "AnimationHelper.h"
 #import "UIColor+Hex.h"
+#import "AppDelegate.h"
 
 #define INVITECELL @"UITableViewCell"
 #define INVITEALL_BUTTON_H 56//一键邀请按钮大小
@@ -145,7 +146,7 @@
 
 - (void)cancel
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -191,6 +192,27 @@
     cell.textLabel.text = per.name;
     cell.textLabel.lineBreakMode=NSLineBreakByTruncatingTail;
     return cell;
+}
+
+//cell加载时的动画效果
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.openAnimation) {
+        
+        // 从锚点位置出发，逆时针绕 Y 和 Z 坐标轴旋转90度
+        CATransform3D transform3D = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 1.0);
+        // 定义 cell 的初始状态
+        cell.alpha = 0.0;
+        cell.layer.transform = transform3D;
+        cell.layer.anchorPoint = CGPointMake(0.0, 0.5); // 设置锚点位置；默认为中心点(0.5, 0.5)
+        [UIView animateWithDuration:0.6 animations:^{
+            cell.alpha = 1.0;
+            cell.layer.transform = CATransform3DIdentity;
+            CGRect rect = cell.frame;
+            rect.origin.x = 0.0;
+            cell.frame = rect;
+        }];
+    }
 }
 
 @end

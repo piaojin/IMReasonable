@@ -215,23 +215,6 @@
     return _chatuserlist;
 }
 
-//收到清除数据后的通知
-- (void)reloadData:(NSNotification*)notification
-{
-    for (IMChatListModle* model in self.chatuserlist) {
-
-        [IMReasonableDao updateNotShow:model.jidstr];
-    }
-    [_chatuserlist removeAllObjects];
-    [tableview reloadData];
-    [Tool removeVoiceAndImg];
-    [[NSNotificationCenter defaultCenter] postNotificationName:RELOAD_CACHE object:nil];
-    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
-    [self.view addSubview:self.backImageView];
-    [self.view addSubview:self.inviteButton];
-    NSLog(@"reloadData");
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -241,13 +224,7 @@
     [self initData];
     [self initControl];
 
-    if ([self respondsToSelector:@selector(reloadData:)]) {
 
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(reloadData:)
-                                                     name:RELOAD_CHETLIST
-                                                   object:nil];
-    }
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(changeItem)
                                                  name:@"CHANGEITEM"
@@ -298,27 +275,27 @@
         self.chatuserlist = [IMReasonableDao getChatlistModle];
         [self getfilterData];
 
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIView* tempview = [self.view viewWithTag:9999];
-            if (self.chatuserlist.count) {
-
-                tempview.hidden = YES;
-            }
-            else {
-                tempview.hidden = NO;
-            }
-            [tableview reloadData];
-        });
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            UIView* tempview = [self.view viewWithTag:9999];
+//            if (self.chatuserlist.count) {
+//
+//                tempview.hidden = YES;
+//            }
+//            else {
+//                tempview.hidden = NO;
+//            }
+//            [tableview reloadData];
+//        });
 
     });
-    UIView* tempview = [self.view viewWithTag:9999];
-    if (self.chatuserlist.count) {
-
-        tempview.hidden = YES;
-    }
-    else {
-        tempview.hidden = NO;
-    }
+//    UIView* tempview = [self.view viewWithTag:9999];
+//    if (self.chatuserlist.count) {
+//
+//        tempview.hidden = YES;
+//    }
+//    else {
+//        tempview.hidden = NO;
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -540,6 +517,7 @@
         self.eMailCell=[[MailTableViewCell alloc] init];
         self.eMailCell.chatListModle = temp;
         _eMailCell.tag = MessageTypeEmail;
+        _eMailCell.selectionStyle=UITableViewCellSelectionStyleNone;
         return _eMailCell;
     }
     else {
@@ -609,7 +587,6 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-
     IMChatListModle* temp = [_chatuserlist objectAtIndex:[indexPath row]];
 
     if ([tableView cellForRowAtIndexPath:indexPath].tag == MessageTypeEmail) {
@@ -618,12 +595,6 @@
         spreadMailViewControl.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:spreadMailViewControl animated:YES];
     }
-    //    if ([temp.accouttype isEqualToString:@"9999"]) {
-    //        SpreadMailViewController* spmail = [[SpreadMailViewController alloc] init];
-    //        spmail.from = temp;
-    //        spmail.hidesBottomBarWhenPushed = YES;
-    //        [self.navigationController pushViewController:spmail animated:NO];
-    //    }
     else {
 
         [searchDisplayController.searchBar resignFirstResponder];
@@ -680,6 +651,11 @@
                 }
             }
         }
+    }
+    if(!_chatuserlist||_chatuserlist.count==0){
+        
+        [self.view addSubview:self.backImageView];
+        [self.view addSubview:self.inviteButton];
     }
 }
 
@@ -772,18 +748,40 @@
 
 - (void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:RELOAD_CACHE object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:RELOAD_CHETLIST object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CHANGEITEM" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"CONNECTSCHANGE" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(void)doRotateAction:(NSNotification *)notification{
-    int orientation=[((UIDevice *)notification.object) orientation];
-    if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
-        ) {
-        [tableview reloadData];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.allowRotation){
+        
+        int orientation=[((UIDevice *)notification.object) orientation];
+        if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+            ) {
+            [tableview reloadData];
+        }
+   
+    }
+}
+
+//cell加载时的动画效果
+-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.openAnimation) {
+        
+        // 从锚点位置出发，逆时针绕 Y 和 Z 坐标轴旋转90度
+        CATransform3D transform3D = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 1.0);
+        // 定义 cell 的初始状态
+        cell.alpha = 0.0;
+        cell.layer.transform = transform3D;
+        cell.layer.anchorPoint = CGPointMake(0.0, 0.5); // 设置锚点位置；默认为中心点(0.5, 0.5)
+        [UIView animateWithDuration:0.6 animations:^{
+            cell.alpha = 1.0;
+            cell.layer.transform = CATransform3DIdentity;
+            CGRect rect = cell.frame;
+            rect.origin.x = 0.0;
+            cell.frame = rect;
+        }];
     }
 }
 

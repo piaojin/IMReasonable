@@ -28,6 +28,7 @@
 }
 
 @property(nonatomic,assign)BOOL allowRotation;
+@property(nonatomic,assign)bool openAnimation;
 
 @property (strong, nonatomic) UIWindow *window;
 @property  NSTimer * time;

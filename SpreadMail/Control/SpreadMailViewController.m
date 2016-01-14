@@ -274,7 +274,7 @@
     message.date=[Tool getDisplayTime:message.date];
     [self.emailArray addObject:message];
     NSString *emailJson=message.body;
-    SpreadMailModel *model=[SpreadMailModel mj_objectWithKeyValues:[emailJson stringByReplacingOccurrencesOfString:@"'" withString:@"\""]];
+//    SpreadMailModel *model=[SpreadMailModel mj_objectWithKeyValues:[emailJson stringByReplacingOccurrencesOfString:@"'" withString:@"\""]];
     [self.tableview reloadData];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
             [IMReasonableDao setMessageRead:message.from needactive:YES];

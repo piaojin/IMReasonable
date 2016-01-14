@@ -71,7 +71,6 @@
     if (self) {
        
         
-        
         _isFaceAndMore=false;
          _MP3 = [[Mp3Recorder alloc]initWithDelegate:self];
         
@@ -424,16 +423,16 @@
                 
             }
             
-            inputFieldRect.origin.y += yOffset;
-            if(inputFieldRect.origin.y+_lineKeyboardHeight>=SCREENWIHEIGHT){
-                
-                inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
-            }
+//            inputFieldRect.origin.y += yOffset;
+//            if(inputFieldRect.origin.y+_lineKeyboardHeight>=SCREENWIHEIGHT){
+//                
+//                inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
+//            }
+            inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
             NSLog(@"K----%f",inputFieldRect.origin.y);
             
             [UIView animateWithDuration:duration animations:^{
                 self.frame = inputFieldRect;
-                
                 
                 [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
                 

@@ -9,11 +9,13 @@
 #import "VoiceContent.h"
 #import "UUAVAudioPlayer.h"
 #import "StateView.h"
+#import "AnimationHelper.h"
 
 @interface VoiceContent()
 
 @property(nonatomic,weak)UILabel *from;
 @property(nonatomic,weak)UILabel *line;
+@property(nonatomic,assign)BOOL hasVoice;
 
 @end
 
@@ -35,6 +37,7 @@
     self=[super init];
     
     if (self) {
+        
         self.backgroundImage=[[UIImageView alloc] init];
         [self addSubview:self.backgroundImage];
         _voicetime = [[UILabel alloc]initWithFrame:CGRectMake(0, 5, 70, 30)];
@@ -43,9 +46,9 @@
         _voiceAm = [[UIImageView alloc]initWithFrame:CGRectMake(80, 5, 20, 20)];
         _voiceAm.image = [UIImage imageNamed:@"chat_animation_white3"];
         _voiceAm.animationImages = [NSArray arrayWithObjects:
-                                      [UIImage imageNamed:@"chat_animation_white1"],
-                                      [UIImage imageNamed:@"chat_animation_white2"],
-                                      [UIImage imageNamed:@"chat_animation_white3"],nil];
+                                    [UIImage imageNamed:@"chat_animation_white1"],
+                                    [UIImage imageNamed:@"chat_animation_white2"],
+                                    [UIImage imageNamed:@"chat_animation_white3"],nil];
         _voiceAm.animationDuration = 1;
         _voiceAm.animationRepeatCount = 0;
         _voiceload = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
@@ -94,19 +97,22 @@
 
 - (void)voiceClick:(UITapGestureRecognizer *)tap{
     
-    audio = [UUAVAudioPlayer sharedInstance];
-    audio.delegate =self;
-
-    
-    if(!audio.player.isPlaying){
-        NSLog(@"-----%@",audio.player.isPlaying?@"yes":@"no");
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"VoicePlayHasInterrupt" object:nil];
-        [audio playSongWithUrl:self.messagemode.voicepath];
+    if(self.hasVoice){
+        
+        audio = [UUAVAudioPlayer sharedInstance];
+        audio.delegate =self;
+        
+        
+        if(!audio.player.isPlaying){
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"VoicePlayHasInterrupt" object:nil];
+            [audio playSongWithUrl:self.messagemode.voicepath];
+        }else{
+            [self UUAVAudioPlayerDidFinishPlay];
+        }
     }else{
-        [self UUAVAudioPlayerDidFinishPlay];
+        
+        [AnimationHelper show:NSLocalizedString(@"VOICE_HAS_DELETED", nil) InView:[UIApplication sharedApplication].keyWindow];
     }
-
-    NSLog(@"ada");
 }
 
 - (void)UUAVAudioPlayerBeiginLoadVoice
@@ -217,6 +223,15 @@
         self.voiceframe=rect;
         _stateview.frame=CGRectMake(self.voiceframe.size.width-15-15,_stateview.frame.origin.y ,_stateview.frame.size.width ,_stateview.frame.size.height );
                 
+    }
+    NSFileManager *fileManager=[NSFileManager defaultManager];
+    if([fileManager fileExistsAtPath:[Tool getVoicePath:self.messagemode.voicepath] isDirectory:false]){
+        
+        self.hasVoice=true;
+    }else{
+        
+        self.hasVoice=false;
+        _voiceAm.image = [UIImage imageNamed:@"no_voice"];
     }
 }
 

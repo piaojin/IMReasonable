@@ -18,6 +18,8 @@
 
 @interface MJPhotoBrowser () <MJPhotoViewDelegate>
 {
+    //飘金添加,当前显示的图片imageView
+    MJPhotoView *_currentImageView;
     // 滚动的view
 	UIScrollView *_photoScrollView;
     // 所有的图片view
@@ -56,15 +58,6 @@
     // 隐藏状态栏
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
     self.view = [[UIView alloc] init];
-//    int currentOrientation=[[UIDevice currentDevice] orientation];
-//    CGRect mainFrame=[UIScreen mainScreen].bounds;
-//    if(currentOrientation==UIDeviceOrientationLandscapeRight||currentOrientation==UIDeviceOrientationLandscapeLeft){
-//        
-//        self.view.frame=CGRectMake(mainFrame.origin.y, mainFrame.origin.x, mainFrame.size.height, mainFrame.size.width);
-//    }else{
-//        
-//        self.view.frame = [UIScreen mainScreen].bounds;
-//    }
     self.view.frame = [UIScreen mainScreen].bounds;
 	self.view.backgroundColor = [UIColor blackColor];
 }
@@ -245,6 +238,8 @@
     photoView.frame = photoViewFrame;
     photoView.photo = photo;
     
+    _currentImageView=photoView;
+    
     [_visiblePhotoViews addObject:photoView];
     [_photoScrollView addSubview:photoView];
     
@@ -299,26 +294,24 @@
 }
 
 -(void)doRotateAction:(NSNotification *)notification{
-    int orientation=[((UIDevice *)notification.object) orientation];
-    CGRect mainFrame=[UIScreen mainScreen].bounds;
-    if (_currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
-        ) {
-        NSUInteger tempCurrentPhotoIndex=_currentPhotoIndex;
-        self.view.frame = mainFrame;//这句话执行后_currentPhotoIndex会为0
-        [self updateScrollView:tempCurrentPhotoIndex];
-        [self updateToolBarFrame];
-        //当前图片
-        MJPhotoView *pj=((MJPhotoView *)[_visiblePhotoViews allObjects][0]);
-        if(pj){
-            
-         [pj updatePhotoFrame];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if(appDelegate.allowRotation){
+        
+        int orientation=[((UIDevice *)notification.object) orientation];
+        CGRect mainFrame=[UIScreen mainScreen].bounds;
+        if (_currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+            ) {
+            NSUInteger tempCurrentPhotoIndex=_currentPhotoIndex;
+            self.view.frame = mainFrame;//这句话执行后_currentPhotoIndex会为0
+            [self updateScrollView:tempCurrentPhotoIndex];
+            [self updateToolBarFrame];
+            /**
+             *   旋转后图片会变黑，所以要移除重新显示
+             */
+            [_currentImageView removeFromSuperview];
+            [self showPhotoViewAtIndex:(int)tempCurrentPhotoIndex];
+            _currentOrientation=orientation;
         }
-        //从横屏切换到竖屏时当前的图片会黑掉
-        if(orientation==UIDeviceOrientationPortrait){
-            
-            [self showPhotoViewAtIndex:(int)_currentPhotoIndex];
-        }
-        _currentOrientation=orientation;
     }
 }
 
@@ -340,7 +333,7 @@
 }
 
 -(void)dealloc{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
