@@ -45,6 +45,12 @@
     UISearchDisplayController* searchDisplayController;
 }
 
+
+//在开启动画的前提下如果有新消息到来不需要执行动画效果，只当滑动聊天记录时才执行动画
+@property(nonatomic,assign)BOOL suspendAnimation;
+//配合suspendAnimation使用，当前可见的cell数量
+@property(nonatomic,assign)int currentVisibleCellCount;
+
 //当前屏幕的方向
 @property(nonatomic,assign)int currentOrientation;
 
@@ -309,7 +315,12 @@
 {
     [super viewDidAppear:animated];
 
-    [self initData];
+//    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+//        [self initData];
+//        dispatch_async(dispatch_get_main_queue(),^{
+//            [tableview reloadData];
+//        });
+//    });
 }
 
 //图片浏览器
@@ -517,7 +528,15 @@
         self.eMailCell=[[MailTableViewCell alloc] init];
         self.eMailCell.chatListModle = temp;
         _eMailCell.tag = MessageTypeEmail;
-        _eMailCell.selectionStyle=UITableViewCellSelectionStyleNone;
+        _eMailCell.selectionStyle=UITableViewCellSelectionStyleGray;
+        //去除分割线左边出现的空格
+        if ([_eMailCell respondsToSelector:@selector(setSeparatorInset:)]) {
+            [_eMailCell setSeparatorInset:UIEdgeInsetsZero];
+        }
+        
+        if ([_eMailCell respondsToSelector:@selector(setLayoutMargins:)]) {
+            [_eMailCell setLayoutMargins:UIEdgeInsetsZero];
+        }
         return _eMailCell;
     }
     else {
@@ -540,7 +559,7 @@
         }
         cell.backgroundColor = [UIColor clearColor];
 
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
 
         UIImage* tempimg = [UIImage imageWithContentsOfFile:[Tool getFilePathFromDoc:temp.faceurl]];
 
@@ -587,6 +606,7 @@
 
 - (void)tableView:(UITableView*)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     IMChatListModle* temp = [_chatuserlist objectAtIndex:[indexPath row]];
 
     if ([tableView cellForRowAtIndexPath:indexPath].tag == MessageTypeEmail) {
@@ -664,9 +684,12 @@
 {
     NSLog(@"message:%@", message);
     NSLog(@"messageType:%@", message.type);
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
     [self initData];
+    });
     dispatch_async(dispatch_get_main_queue(), ^{
-        [tableview reloadData];
+//        self.suspendAnimation=true;
+//        [tableview reloadData];
         if (_inviteButton != nil) {
 
             [_inviteButton removeFromSuperview];
@@ -705,7 +728,10 @@
     }
     else {
         _chatuserlist = [IMReasonableDao getChatlistModle];
-        [tableview reloadData];
+        self.suspendAnimation=true;
+        dispatch_async(dispatch_get_main_queue(), ^{
+              [tableview reloadData];
+        });
     }
 }
 
@@ -759,6 +785,7 @@
         if (self.currentOrientation!=orientation&&(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
             ) {
             [tableview reloadData];
+            self.currentOrientation=orientation;
         }
    
     }
@@ -766,8 +793,9 @@
 
 //cell加载时的动画效果
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
+
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (appDelegate.openAnimation) {
+    if (appDelegate.openAnimation&&!self.suspendAnimation) {
         
         // 从锚点位置出发，逆时针绕 Y 和 Z 坐标轴旋转90度
         CATransform3D transform3D = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 1.0);
@@ -782,6 +810,14 @@
             rect.origin.x = 0.0;
             cell.frame = rect;
         }];
+    }else{
+        
+        self.currentVisibleCellCount++;
+        if(self.currentVisibleCellCount>=[tableView indexPathsForVisibleRows].count){
+            
+            self.suspendAnimation=false;
+            self.currentVisibleCellCount=0;
+        }
     }
 }
 

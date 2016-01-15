@@ -90,7 +90,7 @@
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    [self initData];
+//    [self initData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -760,6 +760,7 @@
                 ABPersonViewController * personViewController = [[ABPersonViewController alloc]init];
                 [personViewController setDisplayedPerson:person];
                 personViewController.allowsEditing =NO;
+                personViewController.hidesBottomBarWhenPushed=YES;
                 [self.navigationController pushViewController:personViewController animated:YES];
             }
     }

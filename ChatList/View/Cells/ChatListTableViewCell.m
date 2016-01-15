@@ -16,6 +16,11 @@
     self=[super initWithFrame:frame];
     if(self){
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(hideMessageCount)
+                                                     name:@"HIDEMESSAGECOUNT"
+                                                   object:nil];
+        
         self.userphoto=[[UIImageView alloc]initWithFrame:CGRectMake(8, 7, 50, 50)];
         self.userphoto.layer.masksToBounds = YES;
         self.userphoto.layer.cornerRadius = 25;
@@ -115,6 +120,15 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+-(void)hideMessageCount{
+    self.messagecount.hidden=YES;
+}
+
+-(void)dealloc{
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

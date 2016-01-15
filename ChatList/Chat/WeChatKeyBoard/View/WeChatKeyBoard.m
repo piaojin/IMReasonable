@@ -384,8 +384,16 @@
 
 - (void)keyboardWillChangeFrame:(NSNotification *)notification
 {
-    
-        
+//    NSDictionary *info = [notification userInfo];
+//    
+//        CGRect endKeyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+//    CGRect inputFieldRect = self.frame;
+//    inputFieldRect.origin.y=SCREENWIHEIGHT-endKeyboardRect.size.height-_lineKeyboardHeight;
+//                    [UIView animateWithDuration:0.3 animations:^{
+//                        self.frame = inputFieldRect;
+//                        [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
+//    
+//                    }];
         NSDictionary *info = [notification userInfo];
         CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
         CGRect beginKeyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
@@ -423,12 +431,12 @@
                 
             }
             
-//            inputFieldRect.origin.y += yOffset;
-//            if(inputFieldRect.origin.y+_lineKeyboardHeight>=SCREENWIHEIGHT){
+            inputFieldRect.origin.y += yOffset;
+//            if(SCREENWIHEIGHT-inputFieldRect.origin.y+SCREENWIHEIGHT-_lineKeyboardHeight>=SCREENWIHEIGHT){
 //                
 //                inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
 //            }
-            inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
+//            inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
             NSLog(@"K----%f",inputFieldRect.origin.y);
             
             [UIView animateWithDuration:duration animations:^{

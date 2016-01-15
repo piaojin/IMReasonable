@@ -44,6 +44,10 @@
 @property(nonatomic,assign)BOOL isKeyBoradVisible;
 //当前屏幕的方向
 @property(nonatomic,assign)int currentOrientation;
+//在开启动画的前提下如果有新消息到来不需要执行动画效果，只当滑动聊天记录时才执行动画
+@property(nonatomic,assign)BOOL suspendAnimation;
+//配合suspendAnimation使用，当前可见的cell数量
+@property(nonatomic,assign)int currentVisibleCellCount;
 
 @end
 
@@ -144,7 +148,7 @@
 {
     [super viewWillAppear:animated];
     [self setDelegate];
-    [tableview reloadData];
+//    [tableview reloadData];
 }
 
 
@@ -648,7 +652,7 @@
 - (void)goLastMessage
 {
 
-    PJLog(@"%@", NSStringFromCGRect(key.frame));
+//    PJLog(@"%@", NSStringFromCGRect(key.frame));
 
     double offset = self.view.frame.size.height - (tableview.frame.origin.y + tableview.contentSize.height + (self.view.frame.size.height - key.frame.origin.y));
     if (offset < 0) {
@@ -784,6 +788,7 @@
                     [IMReasonableDao saveMessage2:myjidstr to:self.from.jidstr body:str type:type date:time voicelenth:lenth msgID:msgID]; //纯入本地数据库
 
                     //dispatch_async(dispatch_get_main_queue(), ^{
+                    self.suspendAnimation=true;
                     [self initData:YES];
                     //});
                     //[self initData:YES];
@@ -941,6 +946,15 @@
 
 - (void)WeChatKeyBoardY:(CGFloat)y
 {
+//    CGRect inputFieldRect = key.frame;
+//    if(SCREENWIHEIGHT-y+SCREENWIHEIGHT-LINEKEYBOARDHEIGHT>=SCREENWIHEIGHT){
+//        
+//        y=SCREENWIHEIGHT-LINEKEYBOARDHEIGHT;
+//    }
+//    inputFieldRect.origin.y=y;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        key.frame = inputFieldRect;
+//    }];
     [self goLastMessage];
 }
 
@@ -961,6 +975,7 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"HIDEMESSAGECOUNT" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -969,6 +984,7 @@
 {
     NSLog(@"message:%@",message);
     if ([message.from isEqualToString:self.from.jidstr]) {
+        self.suspendAnimation=true;
         [self initData:YES];
     }
 }
@@ -1213,7 +1229,7 @@
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath{
     AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (appDelegate.openAnimation) {
+    if (appDelegate.openAnimation&&!self.suspendAnimation) {
         
         // 从锚点位置出发，逆时针绕 Y 和 Z 坐标轴旋转90度
         CATransform3D transform3D = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 1.0);
@@ -1228,7 +1244,31 @@
             rect.origin.x = 0.0;
             cell.frame = rect;
         }];
+    }else{
+        
+        self.currentVisibleCellCount++;
+        if(self.currentVisibleCellCount>=[tableView indexPathsForVisibleRows].count){
+            
+            self.suspendAnimation=false;
+            self.currentVisibleCellCount=0;
+        }
     }
+//    if (appDelegate.openAnimation) {
+//        
+//        // 从锚点位置出发，逆时针绕 Y 和 Z 坐标轴旋转90度
+//        CATransform3D transform3D = CATransform3DMakeRotation(M_PI_2, 0.0, 1.0, 1.0);
+//        // 定义 cell 的初始状态
+//        cell.alpha = 0.0;
+//        cell.layer.transform = transform3D;
+//        cell.layer.anchorPoint = CGPointMake(0.0, 0.5); // 设置锚点位置；默认为中心点(0.5, 0.5)
+//        [UIView animateWithDuration:0.6 animations:^{
+//            cell.alpha = 1.0;
+//            cell.layer.transform = CATransform3DIdentity;
+//            CGRect rect = cell.frame;
+//            rect.origin.x = 0.0;
+//            cell.frame = rect;
+//        }];
+//    }
 }
 
 @end

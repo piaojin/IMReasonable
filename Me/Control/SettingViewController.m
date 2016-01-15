@@ -8,6 +8,7 @@
 
 #import "SettingWithSwitchCell.h"
 #import "SettingViewController.h"
+#import "AppDelegate.h"
 
 #define CELL_H 56
 #define SWITCH_BUTTON 0
@@ -86,8 +87,42 @@ typedef enum{
         
         cell = [[SettingWithSwitchCell alloc] initWithType:type AndStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
     }
+    //去除分割线左边出现的空格
+    if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
+        [cell setSeparatorInset:UIEdgeInsetsZero];
+    }
+    
+    if ([cell respondsToSelector:@selector(setLayoutMargins:)]) {
+        [cell setLayoutMargins:UIEdgeInsetsZero];
+    }
     cell.textLabel.text=self.settersArray[indexPath.row];
+    cell.accessoryType=UITableViewCellAccessoryNone;
     return cell;
+}
+
+- (void)viewDidLayoutSubviews
+{
+    //去除分割线左边出现的空格
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
+    
+    if ([self.tableView respondsToSelector:@selector(setLayoutMargins:)]) {
+        [self.tableView setLayoutMargins:UIEdgeInsetsMake(0, 0, 0, 0)];
+    }
+}
+
+//cell加载时的动画效果
+- (void)tableView:(UITableView*)tableView willDisplayCell:(UITableViewCell*)cell forRowAtIndexPath:(NSIndexPath*)indexPath
+{
+    AppDelegate* appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.openAnimation) {
+        
+        cell.layer.transform = CATransform3DMakeScale(0.1, 0.1, 1);
+        [UIView animateWithDuration:0.5 animations:^{
+            cell.layer.transform = CATransform3DMakeScale(1, 1, 1);
+        }];
+    }
 }
 
 @end
