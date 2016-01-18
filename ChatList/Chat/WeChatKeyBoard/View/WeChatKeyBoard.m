@@ -85,7 +85,7 @@
      //   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWasShown:) name:UIKeyboardDidShowNotification object:nil];
         
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
         _isFaceAndMore=false;
         _linekeyboard=[[UIView alloc] initWithFrame:CGRectMake(0,0, _ScreenWidth, _lineKeyboardHeight)];
         _linekeyboard.backgroundColor=[UIColor whiteColor];
@@ -265,8 +265,8 @@
               [_detailkeyboard ChoiceViewShow:0];
             
             if (_isFaceAndMore) {//已经是表情或者跟多的情况下拉 就直接切换显示的内容
-              
             }else{
+                self.hidekey=false;
                 [_txt resignFirstResponder];
                 _detailkeyboard.hidden=NO;
               [self scroll:-_DetailKeyBoardHeight];
@@ -290,6 +290,7 @@
             
             if (_isFaceAndMore) {
             }else{
+                self.hidekey=false;
                 [_txt resignFirstResponder];
                 _detailkeyboard.hidden=NO;
                 [self scroll:-_DetailKeyBoardHeight];
@@ -382,72 +383,86 @@
 
 }
 
-- (void)keyboardWillChangeFrame:(NSNotification *)notification
+- (void)keyboardWillChangeFrame:(NSNotification*)notification
 {
-//    NSDictionary *info = [notification userInfo];
-//    
-//        CGRect endKeyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
-//    CGRect inputFieldRect = self.frame;
-//    inputFieldRect.origin.y=SCREENWIHEIGHT-endKeyboardRect.size.height-_lineKeyboardHeight;
-//                    [UIView animateWithDuration:0.3 animations:^{
-//                        self.frame = inputFieldRect;
-//                        [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
-//    
-//                    }];
-        NSDictionary *info = [notification userInfo];
-        CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
-        CGRect beginKeyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-        CGRect endKeyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    self.hidekey=false;
+    NSDictionary* info = [notification userInfo];
+    CGFloat duration = [[info objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    CGRect beginKeyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    CGRect endKeyboardRect = [[info objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+
+    if (duration<=0) {
         
-        if (endKeyboardRect.origin.y<beginKeyboardRect.origin.y) {
-            if (endKeyboardRect.origin.y<self.frame.origin.y+_lineKeyboardHeight) {
-                
-                
-                CGFloat yOffset = endKeyboardRect.origin.y - beginKeyboardRect.origin.y;
-                
-                
-                CGRect inputFieldRect = self.frame;
-                
-                if (_isFaceAndMore) {
-                    yOffset+=_DetailKeyBoardHeight;
-                    _detailkeyboard.hidden=YES;
-                    _isFaceAndMore=false;
-                    
-                }
-                inputFieldRect.origin.y += yOffset;
-                [UIView animateWithDuration:duration animations:^{
-                    self.frame = inputFieldRect;
-                    [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
-                    
-                }];
-            }
-        }else{
+        duration=0.5;
+    }
+
+    if (endKeyboardRect.origin.y < beginKeyboardRect.origin.y) {
+        if (endKeyboardRect.origin.y < self.frame.origin.y + _lineKeyboardHeight) {
+
             CGFloat yOffset = endKeyboardRect.origin.y - beginKeyboardRect.origin.y;
+
             CGRect inputFieldRect = self.frame;
+
             if (_isFaceAndMore) {
-                yOffset+=_DetailKeyBoardHeight;
-                _detailkeyboard.hidden=YES;
-                _isFaceAndMore=false;
-                
+                yOffset += _DetailKeyBoardHeight;
+                _detailkeyboard.hidden = YES;
+                _isFaceAndMore = false;
             }
-            
             inputFieldRect.origin.y += yOffset;
-//            if(SCREENWIHEIGHT-inputFieldRect.origin.y+SCREENWIHEIGHT-_lineKeyboardHeight>=SCREENWIHEIGHT){
-//                
-//                inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
-//            }
-//            inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
-            NSLog(@"K----%f",inputFieldRect.origin.y);
-            
+            if(inputFieldRect.origin.y>SCREENWIHEIGHT-endKeyboardRect.size.height){
+                
+                inputFieldRect.origin.y=SCREENWIHEIGHT-endKeyboardRect.size.height-_lineKeyboardHeight;
+            }
             [UIView animateWithDuration:duration animations:^{
                 self.frame = inputFieldRect;
-                
                 [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
-                
+
             }];
         }
-    
+    }
+    else {
+        CGFloat yOffset = endKeyboardRect.origin.y - beginKeyboardRect.origin.y;
+        CGRect inputFieldRect = self.frame;
+        if (_isFaceAndMore) {
+            yOffset += _DetailKeyBoardHeight;
+            _detailkeyboard.hidden = YES;
+            _isFaceAndMore = false;
+        }
+
+        inputFieldRect.origin.y += yOffset;
+        //            if(SCREENWIHEIGHT-inputFieldRect.origin.y+SCREENWIHEIGHT-_lineKeyboardHeight>=SCREENWIHEIGHT){
+        //
+        //                inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
+        //            }
+        //            inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
+        NSLog(@"K----%f", inputFieldRect.origin.y);
+        if(inputFieldRect.origin.y>SCREENWIHEIGHT-endKeyboardRect.size.height){
+            
+            inputFieldRect.origin.y=SCREENWIHEIGHT-endKeyboardRect.size.height-_lineKeyboardHeight;
+        }
+        [UIView animateWithDuration:duration animations:^{
+            self.frame = inputFieldRect;
+
+            [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
+
+        }];
+    }
 }
+
+-(void)keyboardWillHide:(NSNotification *)notification{
+    CGRect inputFieldRect = self.frame;
+    if(!_isFaceAndMore){
+        
+        inputFieldRect.origin.y=SCREENWIHEIGHT-_lineKeyboardHeight;
+        [UIView animateWithDuration:0.2 animations:^{
+            [self hideKeyboard];
+            _isFaceAndMore=false;
+            self.frame = inputFieldRect;
+            [self.delegate WeChatKeyBoardY:0];
+        }];
+    }
+}
+
 
 -(void)scroll:(CGFloat)offset
 {
@@ -457,7 +472,7 @@
      NSLog(@"F----%f",inputFieldRect.origin.y);
     [UIView animateWithDuration:0.6 animations:^{
         self.frame = inputFieldRect;
-          [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
+        [self.delegate WeChatKeyBoardY:inputFieldRect.origin.y];
     }];
 }
 
@@ -469,6 +484,7 @@
         
     }
     _isFaceAndMore=false;
+    self.hidekey=true;
 }
 
 -(void)setText:(NSString *)txt{
@@ -566,7 +582,7 @@
    [self.delegate choiceFuction:funid];
 }
 -(void)dealloc{
-     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 

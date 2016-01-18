@@ -18,6 +18,10 @@
 
 
 @interface WeChatKeyBoard : UIView<UITextFieldDelegate,UITextViewDelegate,DetailKeyBoardDelegate,LVRecordToolDelegate,Mp3RecorderDelegate>
+
+
+@property(nonatomic,assign)BOOL hidekey;
+
 @property(nonatomic,retain) UIColor * wechatkeyboard;
 @property (nonatomic,weak) id<WeChatKeyBoardDelegate> delegate;
 

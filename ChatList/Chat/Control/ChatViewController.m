@@ -946,16 +946,16 @@
 
 - (void)WeChatKeyBoardY:(CGFloat)y
 {
-//    CGRect inputFieldRect = key.frame;
-//    if(SCREENWIHEIGHT-y+SCREENWIHEIGHT-LINEKEYBOARDHEIGHT>=SCREENWIHEIGHT){
-//        
-//        y=SCREENWIHEIGHT-LINEKEYBOARDHEIGHT;
-//    }
-//    inputFieldRect.origin.y=y;
-//    [UIView animateWithDuration:0.3 animations:^{
-//        key.frame = inputFieldRect;
-//    }];
-    [self goLastMessage];
+    if(y==0){
+        
+        [UIView animateWithDuration:0.5
+                         animations:^{
+                             tableview.contentOffset = CGPointMake(0, 0);
+                         }];
+    }else{
+        
+        [self goLastMessage];
+    }
 }
 
 #pragma mark -视图快移出

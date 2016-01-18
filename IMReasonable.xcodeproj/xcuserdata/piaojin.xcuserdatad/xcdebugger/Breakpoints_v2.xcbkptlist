@@ -1844,55 +1844,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1060"
-            endingLineNumber = "1060"
-            landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1057"
-            endingLineNumber = "1057"
-            landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1063"
-            endingLineNumber = "1063"
-            landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1070"
@@ -1908,11 +1860,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1071"
-            endingLineNumber = "1071"
+            startingLineNumber = "1067"
+            endingLineNumber = "1067"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1924,11 +1876,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1072"
-            endingLineNumber = "1072"
+            startingLineNumber = "1073"
+            endingLineNumber = "1073"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1940,11 +1892,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1043"
-            endingLineNumber = "1043"
+            startingLineNumber = "1080"
+            endingLineNumber = "1080"
+            landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474803818.117887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1081"
+            endingLineNumber = "1081"
+            landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474803818.117887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1082"
+            endingLineNumber = "1082"
+            landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474803818.117887"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1053"
+            endingLineNumber = "1053"
             landmarkName = "-touchPictureContent:tableviewcell:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1956,11 +1956,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1045"
-            endingLineNumber = "1045"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
             landmarkName = "-touchPictureContent:tableviewcell:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1972,11 +1972,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1048"
-            endingLineNumber = "1048"
+            startingLineNumber = "1058"
+            endingLineNumber = "1058"
             landmarkName = "-touchPictureContent:tableviewcell:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1988,11 +1988,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1052"
-            endingLineNumber = "1052"
+            startingLineNumber = "1062"
+            endingLineNumber = "1062"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3235,11 +3235,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "986"
-            endingLineNumber = "986"
+            startingLineNumber = "996"
+            endingLineNumber = "996"
             landmarkName = "-receiveNewMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7167,11 +7167,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1059"
-            endingLineNumber = "1059"
+            startingLineNumber = "1069"
+            endingLineNumber = "1069"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7183,11 +7183,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1061"
-            endingLineNumber = "1061"
+            startingLineNumber = "1071"
+            endingLineNumber = "1071"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7199,11 +7199,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1062"
-            endingLineNumber = "1062"
+            startingLineNumber = "1072"
+            endingLineNumber = "1072"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7215,11 +7215,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1064"
-            endingLineNumber = "1064"
+            startingLineNumber = "1074"
+            endingLineNumber = "1074"
             landmarkName = "-ImageBrowser:WithShowIndex:ImageView:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7599,11 +7599,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1226"
-            endingLineNumber = "1226"
+            startingLineNumber = "1236"
+            endingLineNumber = "1236"
             landmarkName = "-PJsendImage:AndIsOriginal:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7615,11 +7615,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1224"
-            endingLineNumber = "1224"
+            startingLineNumber = "1234"
+            endingLineNumber = "1234"
             landmarkName = "-doRotateAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -7839,11 +7839,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1228"
-            endingLineNumber = "1228"
+            startingLineNumber = "1238"
+            endingLineNumber = "1238"
             landmarkName = "-PJsendImage:AndIsOriginal:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8318,11 +8318,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1211"
-            endingLineNumber = "1211"
+            startingLineNumber = "1221"
+            endingLineNumber = "1221"
             landmarkName = "-doRotateAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8334,11 +8334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1219"
-            endingLineNumber = "1219"
+            startingLineNumber = "1229"
+            endingLineNumber = "1229"
             landmarkName = "-doRotateAction:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8958,11 +8958,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChatList/Chat/Control/ChatViewController.m"
-            timestampString = "474549036.010132"
+            timestampString = "474803818.117887"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "988"
-            endingLineNumber = "988"
+            startingLineNumber = "998"
+            endingLineNumber = "998"
             landmarkName = "-receiveNewMessage:isFwd:"
             landmarkType = "5">
          </BreakpointContent>
@@ -8980,6 +8980,421 @@
             startingLineNumber = "655"
             endingLineNumber = "655"
             landmarkName = "-goLastMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "-keyboardWillHide:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474792041.302906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
+            landmarkName = "-btnSelect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
+            landmarkName = "-keyboardWillHide:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "394"
+            endingLineNumber = "394"
+            landmarkName = "-keyboardWillChangeFrame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "443"
+            endingLineNumber = "443"
+            landmarkName = "-keyboardWillChangeFrame:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WeChatKeyBoard keyboardWillChangeFrame:]"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474801396.066682"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "441"
+                  endingLineNumber = "441"
+                  offsetFromSymbolStart = "1858">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[WeChatKeyBoard keyboardWillChangeFrame:]_block_invoke202"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474801396.067022"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "442"
+                  endingLineNumber = "442"
+                  offsetFromSymbolStart = "10">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474803518.868939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "482"
+            endingLineNumber = "482"
+            landmarkName = "-hideKeyboard"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
+            landmarkName = "-keyboardWillChangeFrame:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WeChatKeyBoard keyboardWillChangeFrame:]"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474801396.069122"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "414"
+                  endingLineNumber = "414"
+                  offsetFromSymbolStart = "1122">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__42-[WeChatKeyBoard keyboardWillChangeFrame:]_block_invoke"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474801396.06933"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "415"
+                  endingLineNumber = "415"
+                  offsetFromSymbolStart = "10">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "291"
+            endingLineNumber = "291"
+            landmarkName = "-btnSelect:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "409"
+            endingLineNumber = "409"
+            landmarkName = "-keyboardWillChangeFrame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474802371.668653"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "429"
+            endingLineNumber = "429"
+            landmarkName = "-keyboardWillChangeFrame:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474803518.868939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "476"
+            endingLineNumber = "476"
+            landmarkName = "-scroll:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__25-[WeChatKeyBoard scroll:]_block_invoke"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474802372.968999"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "475"
+                  endingLineNumber = "475"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_213"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474802372.969277"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_214"
+                  moduleName = "IMReasonable"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/piaojin/Desktop/IMReasonable/ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+                  timestampString = "474802372.969473"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "10">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474803518.868939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "-scroll:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474803518.868939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "478"
+            endingLineNumber = "478"
+            landmarkName = "-hideKeyboard"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474803518.868939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
+            landmarkName = "-scroll:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/WeChatKeyBoard/View/WeChatKeyBoard.m"
+            timestampString = "474803518.868939"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "468"
+            endingLineNumber = "468"
+            landmarkName = "-scroll:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474801773.181414"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "666"
+            endingLineNumber = "666"
+            landmarkName = "-goLastMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474801830.374711"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "657"
+            endingLineNumber = "657"
+            landmarkName = "-goLastMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474801841.082194"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
+            landmarkName = "-goLastMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChatList/Chat/Control/ChatViewController.m"
+            timestampString = "474803784.51171"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "949"
+            endingLineNumber = "949"
+            landmarkName = "-WeChatKeyBoardY:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
